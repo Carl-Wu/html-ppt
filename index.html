@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>中国好数据·数据智能体（Data Agent）AI应用实战 · 决赛汇报</title>
+  <meta name="description" content="中国好数据·数据智能体（Data Agent）AI应用实战 · 决赛汇报" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/styles/theme.css" />
+</head>
+<body>
+  <!-- Persistent WebGL stage (fluid nebula + ambient particles + per-page 3D features) -->
+  <canvas id="stage"></canvas>
+  <div class="grid-overlay" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <!-- Boot loader -->
+  <div id="boot" class="boot">
+    <div class="boot-core">
+      <div class="boot-ring"></div>
+      <div class="boot-ring r2"></div>
+      <div class="boot-dot"></div>
+    </div>
+    <div class="boot-label">金融租赁数据合规治理与决策赋能 · 方案汇报</div>
+    <div class="boot-bar"><span id="bootFill"></span></div>
+  </div>
+
+  <!-- HUD cockpit overlay -->
+  <header class="hud-top">
+    <div class="hud-brand">
+      <span class="hud-glyph"></span>
+      <span class="hud-name">AI&nbsp;DATA&nbsp;AGENT&nbsp;SYSTEM</span>
+    </div>
+    <div class="hud-center" id="hudCrumb"><span class="hud-dot"></span><span id="hudSection">前言</span></div>
+    <div class="hud-right">
+      <span class="hud-time" id="hudClock">--:--:--</span>
+      <button id="btnAuto" class="hud-btn" title="自动播放发布会模式">AUTO</button>
+      <button id="btnFull" class="hud-btn" title="全屏">⤢</button>
+    </div>
+  </header>
+
+  <!-- Progress + section rail -->
+  <div class="hud-rail" id="hudRail"></div>
+  <div class="hud-progress"><span id="progressFill"></span></div>
+
+  <!-- Swiper deck (8 pages injected by main.js) -->
+  <main id="deck" class="deck"></main>
+
+  <!-- Nav hints -->
+  <footer class="hud-bottom">
+    <div class="hint"><kbd>Scroll</kbd><kbd>↑↓</kbd> 切换页面</div>
+    <div class="hint" id="pageIndex">01 / 08</div>
+    <div class="hint"><kbd>Space</kbd> 自动播放</div>
+  </footer>
+
+  <!-- Agent detail modal -->
+  <div id="agentModal" class="agent-modal" aria-hidden="true">
+    <div class="agent-modal-backdrop"></div>
+    <div class="agent-modal-card" role="dialog" aria-modal="true"></div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

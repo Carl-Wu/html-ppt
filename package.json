@@ -1,0 +1,22 @@
+{
+  "name": "ai-data-agent-web3d",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "AI驱动的数据治理与决策智能体 Web3D 发布会系统",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "echarts": "^5.5.0",
+    "gsap": "^3.12.5",
+    "matter-js": "^0.20.0",
+    "swiper": "^11.1.14",
+    "three": "^0.160.1"
+  },
+  "devDependencies": {
+    "vite": "^5.4.10"
+  }
+}

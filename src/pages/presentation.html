@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>金融租赁数据合规治理与决策赋能 — AI数据合规治理与决策平台解决方案</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<style>
+/* ============ RESET & BASE ============ */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0A192F;
+  --bg2:#0d2342;
+  --accent:#00D4FF;
+  --accent2:#7B61FF;
+  --accent3:#00FFC8;
+  --text:#CCD6F6;
+  --white:#FFFFFF;
+  --red:#FF4D6D;
+  --orange:#FF8C42;
+  --yellow:#FFD23F;
+  --card-bg:rgba(17,34,64,0.55);
+  --card-border:rgba(0,212,255,0.25);
+  --glow:0 0 20px rgba(0,212,255,0.35);
+}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;color:var(--text);-webkit-font-smoothing:antialiased}
+body{background:radial-gradient(ellipse at 50% 0%,#0d2a4f 0%,#0A192F 55%,#06101f 100%)}
+
+/* ============ BACKGROUND CANVAS ============ */
+#bg-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.grid-overlay{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;
+  background-image:linear-gradient(rgba(0,212,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.04) 1px,transparent 1px);
+  background-size:50px 50px;mask-image:radial-gradient(ellipse at center,black 30%,transparent 80%)}
+
+/* ============ SLIDE SYSTEM ============ */
+.deck{position:relative;width:100vw;height:100vh;z-index:2}
+.slide{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;transform:translateX(70px) scale(0.98);
+  transition:opacity .6s cubic-bezier(.4,0,.2,1),transform .6s cubic-bezier(.4,0,.2,1);pointer-events:none;
+  display:flex;flex-direction:column;padding:3.2vh 5vw 5vh}
+.slide.active{opacity:1;transform:translateX(0) scale(1);pointer-events:auto}
+.slide.prev{transform:translateX(-70px) scale(0.98)}
+
+/* ============ TOP BAR ============ */
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:2vh;flex-shrink:0}
+.topbar .crumb{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--accent);letter-spacing:1px}
+.topbar .crumb .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent)}
+.topbar .brand{font-size:12px;color:rgba(204,214,246,0.5);letter-spacing:.5px}
+
+/* ============ TITLES ============ */
+.slide-title{font-size:clamp(32px,2.6vw,36px);font-weight:800;color:var(--white);line-height:1.3;margin-bottom:2.5vh;
+  position:relative;padding-left:18px}
+.slide-title::before{content:"";position:absolute;left:0;top:8%;height:84%;width:5px;border-radius:3px;
+  background:linear-gradient(180deg,var(--accent),var(--accent2));box-shadow:var(--glow)}
+.slide-title .hl{color:var(--accent)}
+.subtitle-tag{display:inline-block;font-size:12px;color:var(--accent3);border:1px solid rgba(0,255,200,0.3);
+  border-radius:20px;padding:3px 14px;margin-bottom:1vh;letter-spacing:1px}
+
+/* ============ GLASS CARDS ============ */
+.glass{background:var(--card-bg);border:1px solid var(--card-border);border-radius:14px;
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:18px 22px;position:relative;overflow:hidden}
+.glass::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:.6}
+.glass:hover{border-color:rgba(0,212,255,0.5);box-shadow:0 0 30px rgba(0,212,255,0.15)}
+
+/* ============ LAYOUT HELPERS ============ */
+.split{display:flex;gap:24px;flex:1;min-height:0}
+.col{flex:1;min-width:0;display:flex;flex-direction:column;gap:14px}
+.content-area{flex:1;min-height:0;display:flex;flex-direction:column}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+.grid4{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+
+/* ============ TEXT STYLES ============ */
+.lead{font-size:clamp(13px,1.15vw,16px);line-height:1.75;color:var(--text)}
+.lead b{color:var(--white)}
+.lead .em{color:var(--accent);font-weight:700}
+.bullet{display:flex;gap:10px;align-items:flex-start;font-size:clamp(12px,1vw,14px);line-height:1.7}
+.bullet .ico{color:var(--accent);flex-shrink:0;margin-top:2px}
+.label-pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 10px;border-radius:10px;letter-spacing:.5px}
+.section-head{font-size:clamp(13px,1.15vw,15px);font-weight:700;color:var(--accent);margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.section-head .num{font-size:11px;color:var(--accent2)}
+.mono{font-family:"SF Mono","Consolas","Courier New",monospace}
+
+/* ============ ANIMATIONS ============ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
+@keyframes slideRight{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:translateX(0)}}
+@keyframes glowPulse{0%,100%{box-shadow:0 0 15px rgba(0,212,255,0.2)}50%{box-shadow:0 0 35px rgba(0,212,255,0.5)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes flowDash{to{stroke-dashoffset:-20}}
+@keyframes spinSlow{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes pulseRing{0%{transform:scale(.8);opacity:.8}100%{transform:scale(2);opacity:0}}
+
+.slide.active .ai{animation:fadeUp .6s cubic-bezier(.4,0,.2,1) both}
+.slide.active .ai-fade{animation:fadeIn .8s ease both}
+.slide.active .ai-scale{animation:scaleIn .6s cubic-bezier(.34,1.56,.64,1) both}
+.slide.active .ai-right{animation:slideRight .6s ease both}
+
+/* ============ CHART CONTAINER ============ */
+.chart-box{width:100%;height:100%;min-height:200px}
+
+/* ============ COVER SLIDE ============ */
+.cover{align-items:center;justify-content:center;text-align:center}
+.cover .cover-title{font-size:clamp(30px,4.5vw,64px);font-weight:900;color:var(--white);line-height:1.2;
+  letter-spacing:2px;text-shadow:0 0 30px rgba(0,212,255,0.4);margin-bottom:14px}
+.cover .cover-sub{font-size:clamp(16px,2vw,26px);font-weight:600;
+  background:linear-gradient(90deg,var(--accent),var(--accent3),var(--accent2));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:30px}
+.cover .cover-meta{font-size:clamp(12px,1.1vw,15px);line-height:2;color:rgba(204,214,246,0.7)}
+.cover .deco-line{width:240px;height:2px;margin:20px auto;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent)}
+
+/* ============ TIMELINE (PAGE 2) ============ */
+.tl-wrap{display:flex;flex-direction:column;gap:0;flex:1;justify-content:center;max-width:680px;margin:0 auto;width:100%}
+.tl-item{display:flex;align-items:center;gap:20px;padding:14px 0;position:relative}
+.tl-node{width:16px;height:16px;border-radius:50%;background:var(--bg);border:2px solid var(--accent);
+  flex-shrink:0;position:relative;z-index:2}
+.tl-item.active .tl-node{background:var(--accent);box-shadow:0 0 18px var(--accent)}
+.tl-line{position:absolute;left:7px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--accent),transparent)}
+.tl-item:first-child .tl-line{top:50%}
+.tl-item:last-child .tl-line{bottom:50%}
+.tl-text{font-size:clamp(14px,1.3vw,18px);color:var(--text);font-weight:600}
+.tl-num{font-size:13px;color:var(--accent);font-weight:800;margin-right:6px}
+
+/* ============ PAIN POINT LIST ============ */
+.pp-item{display:flex;gap:12px;align-items:flex-start;padding:11px 16px;border-radius:10px;
+  background:rgba(255,77,109,0.06);border-left:3px solid var(--red);margin-bottom:8px}
+.pp-num{width:26px;height:26px;border-radius:7px;background:rgba(255,77,109,0.15);color:var(--red);
+  font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pp-body{font-size:clamp(11px,.95vw,13px);line-height:1.6}
+.pp-body b{color:var(--white)}
+
+/* ============ NAV ============ */
+.nav-arrow{position:fixed;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;
+  background:rgba(17,34,64,0.6);border:1px solid var(--card-border);color:var(--accent);font-size:22px;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:50;
+  backdrop-filter:blur(8px);transition:all .25s;user-select:none}
+.nav-arrow:hover{background:rgba(0,212,255,0.15);box-shadow:var(--glow)}
+.nav-arrow.left{left:18px}.nav-arrow.right{right:18px}
+.pager{position:fixed;bottom:18px;right:24px;z-index:50;font-size:13px;color:rgba(204,214,246,0.6);
+  display:flex;align-items:center;gap:8px;letter-spacing:1px}
+.pager .cur{color:var(--accent);font-weight:700;font-size:16px}
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));
+  z-index:60;transition:width .5s ease}
+.dots{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:50}
+.dots .d{width:7px;height:7px;border-radius:50%;background:rgba(204,214,246,0.25);cursor:pointer;transition:all .3s}
+.dots .d.active{background:var(--accent);width:22px;border-radius:4px;box-shadow:0 0 8px var(--accent)}
+.fs-btn{position:fixed;top:18px;right:20px;width:36px;height:36px;border-radius:8px;
+  background:rgba(17,34,64,0.6);border:1px solid var(--card-border);color:var(--accent);font-size:16px;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:50;backdrop-filter:blur(8px)}
+
+/* ============ ARCHITECTURE LAYERS ============ */
+.arch-layer{display:flex;align-items:center;gap:14px;padding:14px 22px;border-radius:12px;
+  background:var(--card-bg);border:1px solid var(--card-border);position:relative;margin-bottom:10px;
+  transition:all .4s}
+.arch-layer .layer-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;
+  font-size:20px;flex-shrink:0}
+.arch-layer .layer-title{font-weight:700;color:var(--white);font-size:clamp(13px,1.1vw,15px)}
+.arch-layer .layer-desc{font-size:clamp(11px,.9vw,12px);color:var(--text);margin-top:2px;line-height:1.5}
+
+/* ============ FLOW NODES ============ */
+.flow-h{display:flex;align-items:center;gap:0;flex-wrap:wrap;justify-content:center}
+.flow-node{text-align:center;padding:12px 14px;border-radius:12px;background:var(--card-bg);
+  border:1px solid var(--card-border);min-width:90px;position:relative}
+.flow-node .fn-ico{font-size:22px;margin-bottom:4px}
+.flow-node .fn-txt{font-size:11px;font-weight:600;color:var(--white);line-height:1.3}
+.flow-arrow{color:var(--accent);font-size:18px;padding:0 4px}
+
+/* ============ METRIC CARD ============ */
+.metric{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  padding:14px;border-radius:12px;background:var(--card-bg);border:1px solid var(--card-border)}
+.metric .m-val{font-size:clamp(20px,2.2vw,30px);font-weight:900;color:var(--accent3);font-family:"SF Mono",monospace}
+.metric .m-lbl{font-size:11px;color:var(--text);margin-top:4px;line-height:1.4}
+
+/* ============ TABLE ============ */
+.tbl{width:100%;border-collapse:collapse;font-size:clamp(11px,.85vw,13px)}
+.tbl th{background:rgba(0,212,255,0.1);color:var(--accent);font-weight:700;padding:10px 12px;text-align:left;
+  border-bottom:1px solid var(--card-border)}
+.tbl td{padding:9px 12px;border-bottom:1px solid rgba(204,214,246,0.08);color:var(--text);line-height:1.5}
+.tbl tr:hover td{background:rgba(0,212,255,0.04)}
+.tbl .gain{color:var(--accent3);font-weight:700}
+
+/* ============ INNOVATION CARDS ============ */
+.innov-card{padding:22px;border-radius:14px;background:var(--card-bg);border:1px solid var(--card-border);
+  position:relative;overflow:hidden;transition:all .4s}
+.innov-card:hover{transform:translateY(-6px);border-color:var(--accent);box-shadow:0 10px 40px rgba(0,212,255,0.2)}
+.innov-card .tag{display:inline-block;font-size:10px;padding:2px 10px;border-radius:8px;margin-bottom:10px;letter-spacing:1px}
+.innov-card h4{color:var(--white);font-size:clamp(14px,1.2vw,17px);margin-bottom:8px}
+.innov-card p{font-size:clamp(11px,.9vw,12.5px);line-height:1.65;color:var(--text)}
+.innov-card .ic-num{position:absolute;top:8px;right:14px;font-size:42px;font-weight:900;color:rgba(0,212,255,0.08)}
+
+/* ============ RING FLOW ============ */
+.ring-wrap{position:relative;width:100%;flex:1;display:flex;align-items:center;justify-content:center}
+.ring-center{position:absolute;text-align:center;z-index:5}
+.ring-item{position:absolute;width:130px;text-align:center}
+
+/* ============ WARNING LEVELS ============ */
+.warn-level{display:flex;align-items:center;gap:14px;padding:14px 18px;border-radius:12px;margin-bottom:10px}
+.warn-level .wl-ico{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.warn-level .wl-txt b{color:var(--white);font-size:13px}
+.warn-level .wl-txt span{font-size:11px;color:var(--text);display:block;margin-top:2px}
+
+/* ============ END SLIDE ============ */
+.end-slide{align-items:center;justify-content:center;text-align:center}
+.end-title{font-size:clamp(32px,5vw,68px);font-weight:900;color:var(--white);letter-spacing:6px;
+  text-shadow:0 0 40px rgba(0,212,255,0.5);margin-bottom:20px}
+.end-sub{font-size:clamp(14px,1.5vw,20px);color:var(--accent3);margin-bottom:30px}
+
+/* ============ MISC ============ */
+.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(0,212,255,0.3),transparent);margin:10px 0}
+.tag-blue{background:rgba(0,212,255,0.12);color:var(--accent)}
+.tag-purple{background:rgba(123,97,255,0.15);color:var(--accent2)}
+.tag-green{background:rgba(0,255,200,0.12);color:var(--accent3)}
+.tag-red{background:rgba(255,77,109,0.12);color:var(--red)}
+.center{align-items:center;justify-content:center}
+.tri-arch{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+.scroll-hint{position:fixed;bottom:50px;left:50%;transform:translateX(-50%);font-size:11px;color:rgba(204,214,246,0.4);z-index:40}
+@media(max-width:900px){.split{flex-direction:column}.grid2,.grid3,.grid4{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<canvas id="bg-canvas"></canvas>
+<div class="grid-overlay"></div>
+<div class="progress-bar" id="progressBar" style="width:0"></div>
+
+<div class="deck" id="deck">
+
+<!-- ====== SLIDE 1: COVER ====== -->
+<section class="slide cover active" data-slide="1">
+  <div class="ai-fade" style="animation-delay:.3s">
+    <div style="font-size:13px;color:var(--accent);letter-spacing:4px;margin-bottom:18px">DAMA中国 · "好数据"数据智能体AI应用实战大赛 · 决赛汇报</div>
+  </div>
+  <h1 class="cover-title ai" style="animation-delay:.5s">金融租赁数据合规治理与决策赋能</h1>
+  <div class="cover-sub ai" style="animation-delay:.8s">AI 数据合规治理与决策平台解决方案</div>
+  <div class="deco-line ai-fade" style="animation-delay:1s"></div>
+  <div class="cover-meta ai" style="animation-delay:1.2s">
+    参赛单位：北京亿信华辰软件有限责任公司<br>
+    汇报部门：金融业务创新中心
+  </div>
+</section>
+
+<!-- ====== SLIDE 2: OUTLINE ====== -->
+<section class="slide" data-slide="2">
+  <div class="topbar"><div class="crumb"><span class="dot"></span>汇报大纲</div><div class="brand">OUTLINE</div></div>
+  <h2 class="slide-title ai">汇报<span class="hl">大纲</span></h2>
+  <div class="content-area center">
+    <div class="tl-wrap">
+      <div class="tl-item ai" style="animation-delay:.2s"><div class="tl-line"></div><div class="tl-node"></div><div class="tl-text"><span class="tl-num">01</span>问题定义与痛点分析</div></div>
+      <div class="tl-item ai" style="animation-delay:.4s"><div class="tl-line"></div><div class="tl-node"></div><div class="tl-text"><span class="tl-num">02</span>整体解决方案思路</div></div>
+      <div class="tl-item ai" style="animation-delay:.6s"><div class="tl-line"></div><div class="tl-node"></div><div class="tl-text"><span class="tl-num">03</span>技术路线与架构实现</div></div>
+      <div class="tl-item ai" style="animation-delay:.8s"><div class="tl-line"></div><div class="tl-node"></div><div class="tl-text"><span class="tl-num">04</span>实施效果与价值评估</div></div>
+      <div class="tl-item ai" style="animation-delay:1s"><div class="tl-line"></div><div class="tl-node"></div><div class="tl-text"><span class="tl-num">05</span>核心创新点总结</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SLIDE 3: INDUSTRY BACKGROUND ====== -->
+<section class="slide" data-slide="3">
+  <div class="topbar"><div class="crumb"><span class="dot"></span>问题定义 · 行业背景</div><div class="brand">01</div></div>
+  <h2 class="slide-title ai">强监管 + 广业务，金融租赁数据治理面临<span class="hl">双重压力</span></h2>
+  <div class="split">
+    <div class="col">
+      <div class="glass ai" style="animation-delay:.2s">
+        <div class="section-head"><span class="label-pill tag-red">监管端</span>合规要求持续升级</div>
+        <p class="lead">国家金融监管总局监管口径<b>动态更新</b>，报送品类、数据维度持续扩容，人工核对模式已无法适配监管迭代速度，<span class="em">合规问责风险高企</span>。</p>
+      </div>
+      <div class="glass ai" style="animation-delay:.4s">
+        <div class="section-head"><span class="label-pill tag-blue">业务端</span>数据复杂度指数级增长</div>
+        <p class="lead">全国性金融租赁企业业务辐射全球，覆盖<b>直租、售后回租、转租赁</b>等多元业态，多系统林立，结构化与非结构化数据深度交织。</p>
+      </div>
+      <div class="glass ai" style="animation-delay:.6s">
+        <div class="section-head"><span class="label-pill tag-purple">现状端</span>传统治理模式全面承压</div>
+        <p class="lead">人工驱动的治理模式存在<b>效率低、差错高、响应慢</b>等先天缺陷，已成为制约业务发展与合规保障的核心瓶颈。</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="glass ai" style="animation-delay:.3s;flex:0 0 45%">
+        <div class="section-head">六大核心数据源分布（数据孤岛）</div>
+        <div id="chart3a" class="chart-box" style="height:190px"></div>
+      </div>
+      <div class="glass ai" style="animation-delay:.5s;flex:1">
+        <div class="section-head">金融租赁核心监管政策时间轴</div>
+        <div id="chart3b" class="chart-box" style="height:200px"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SLIDE 4: FIVE PAIN POINTS ====== -->
+<section class="slide" data-slide="4">
+  <div class="topbar"><div class="crumb"><span class="dot"></span>问题定义 · 痛点拆解</div><div class="brand">01</div></div>
+  <h2 class="slide-title ai">传统治理模式的<span class="hl">五大核心痛点</span></h2>
+  <div class="split">
+    <div class="col" style="flex:1.1">
+      <div class="pp-item ai" style="animation-delay:.15s"><div class="pp-num">1</div><div class="pp-body"><b>数据孤岛严重，整合效率低下</b>：多系统数据割裂，非结构化数据难以解析利用，人工跨系统取数周期长、差错率高。</div></div>
+      <div class="pp-item ai" style="animation-delay:.3s"><div class="pp-num">2</div><div class="pp-body"><b>监管口径繁杂，人工核对易错</b>：报送标准多且更新快，人工口径对齐一致性差，易因口径冲突导致监管退回。</div></div>
+      <div class="pp-item ai" style="animation-delay:.45s"><div class="pp-num">3</div><div class="pp-body"><b>质量排查滞后，风险前置不足</b>：数据质量问题依赖事后人工排查，问题发现晚、溯源难，合格率难以稳定保障。</div></div>
+      <div class="pp-item ai" style="animation-delay:.6s"><div class="pp-num">4</div><div class="pp-body"><b>风险归因困难，研判依赖经验</b>：风险识别依赖人工经验，溯源深度不足，风险评级主观性强、标准不统一。</div></div>
+      <div class="pp-item ai" style="animation-delay:.75s"><div class="pp-num">5</div><div class="pp-body"><b>决策支撑低效，输出周期漫长</b>：经营分析、风险报告依赖人工编制，输出周期长，无法支撑实时精准决策。</div></div>
+    </div>
+    <div class="col" style="flex:.9">
+      <div class="glass ai-scale" style="animation-delay:.4s;flex:1">
+        <div class="section-head">传统人工模式能力雷达</div>
+        <div id="chart4" class="chart-box" style="height:100%"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SLIDE 5: QUANTIFIED IMPACT ====== -->
+<section class="slide" data-slide="5">
+  <div class="topbar"><div class="crumb"><span class="dot"></span>问题定义 · 量化影响</div><div class="brand">01</div></div>
+  <h2 class="slide-title ai">传统模式的量化负面影响：<span class="hl">高成本、高风险、低效率</span></h2>
+  <div class="grid4" style="margin-bottom:14px">
+    <div class="glass ai" style="animation-delay:.1s;padding:12px 16px"><div style="font-size:11px;color:var(--red)">效率损失</div><div class="lead" style="font-size:13px;margin-top:4px">单月全链路治理人力 <b>>22人天</b>，报送准备 <b>>15天</b></div></div>
+    <div class="glass ai" style="animation-delay:.2s;padding:12px 16px"><div style="font-size:11px;color:var(--orange)">成本高企</div><div class="lead" style="font-size:13px;margin-top:4px">年均整改成本 <b>超百万元</b></div></div>
+    <div class="glass ai" style="animation-delay:.3s;padding:12px 16px"><div style="font-size:11px;color:var(--yellow)">风险隐患</div><div class="lead" style="font-size:13px;margin-top:4px">质量问题检出滞后 <b>7天</b>，风险识别滞后 <b>10天</b></div></div>
+    <div class="glass ai" style="animation-delay:.4s;padding:12px 16px"><div style="font-size:11px;color:var(--accent2)">能力瓶颈</div><div class="lead" style="font-size:13px;margin-top:4px">治理强依赖人员经验，流动即<b>能力断层</b></div></div>
+  </div>
+  <div class="split" style="flex:1">
+    <div class="glass ai" style="animation-delay:.3s">
+      <div class="section-head">五大治理环节人工处理周期（天）</div>
+      <div id="chart5a" class="chart-box"></div>
+    </div>
+    <div class="glass ai" style="animation-delay:.5s">
+      <div class="section-head">单月数据治理人力成本分布</div>
+      <div id="chart5b" class="chart-box"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SLIDE 6: CORE CONCEPT ====== -->
+<section class="slide" data-slide="6">
+  <div class="topbar"><div class="crumb"><span class="dot"></span>方案思路 · 核心理念</div><div class="brand">02</div></div>
+  <h2 class="slide-title ai">打造金融租赁专属<span class="hl">AI数据合规治理与决策平台</span></h2>
+  <div class="split">
+    <div class="col" style="flex:1">
+      <div class="glass ai" style="animation-delay:.2s">
+        <p class="lead">以亿信华辰<b>睿治智能数据治理平台</b>为底座，融合<b>金融租赁行业大模型</b>与<b>亿信智问（ChatBI）</b>，构建全链路 AI 数据合规治理与决策平台，实现从 <span class="em">"人工驱动"</span> 到 <span class="em">"AI智能驱动"</span> 的治理模式升级。</p>
+      </div>
+      <div class="glass ai" style="animation-delay:.4s">
+        <div class="section-head"><span class="label-pill tag-blue">底座支撑</span></div>
+        <p class="lead" style="font-size:13px">睿治平台承载全量数据治理能力，保障流程合规、执行稳定</p>
+      </div>
+      <div class="glass ai" style="animation-delay:.55s">
+        <div class="section-head"><span class="label-pill tag-purple">知识赋能</span></div>
+        <p class="lead" style="font-size:13px">金融租赁行业大模型注入监管政策、行业标准、业务规则</p>
+      </div>
+      <div class="glass ai" style="animation-delay:.7s">
+        <div class="section-head"><span class="label-pill tag-green">交互升级</span></div>
+        <p class="lead" style="font-size:13px">亿信智问提供对话式交互与智能分析能力，降低使用门槛</p>
+      </div>
+    </div>
+    <div class="col" style="flex:1">
+      <div class="glass ai-scale" style="animation-delay:.3s;flex:1;display:flex;align-items:center;justify-content:center">
+        <div id="triArch" style="width:100%;height:100%;min-height:340px"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SLIDE 7: OVERALL ARCHITECTURE ====== -->
+<section class="slide" data-slide="7">
+  <div class="topbar"><div class="crumb"><span class="dot"></span>技术架构 · 总览</div><div class="brand">03</div></div>
+  <h2 class="slide-title ai"><span class="hl">1+N+三层引擎+1底座</span> 整体架构</h2>
+  <div class="content-area" style="flex-direction:row;gap:24px">
+    <div class="col" style="flex:.7;justify-content:center">
+      <p class="lead ai" style="animation-delay:.2s">采用"1个统一智能门户 + N个核心业务应用 + 三层智能体引擎 + 1个数据治理底座"的分层架构，完整覆盖数据治理与决策赋能全场景。</p>
+      <div class="divider"></div>
+      <div class="ai" style="animation-delay:.4s"><b style="color:var(--accent3)">1</b> 统一智能门户：分级权限门户，全场景自然语言交互</div>
+      <div class="ai" style="animation-delay:.5s"><b style="color:var(--accent3)">N</b> 核心业务应用：5大赛题核心模块，全场景覆盖</div>
+      <div class="ai" style="animation-delay:.6s"><b style="color:var(--accent3)">3</b> 三层智能体引擎：编排层、协同层、工具调用层</div>
+      <div class="ai" style="animation-delay:.7s"><b style="color:var(--accent3)">1</b> 数据治理底座：多源异构数据融合，承载全量治理能力</div>
+    </div>
+    <div class="col" style="flex:1;justify-content:center;gap:10px">
+      <div class="arch-layer ai-right" style="animation-delay:.3s"><div class="layer-icon" style="background:rgba(0,255,200,0.12);color:var(--accent3)">⬡</div><div><div class="layer-title">统一智能门户</div><div class="layer-desc">分级权限 · 自然语言交互 · 统一入口</div></div></div>
+      <div class="ai-fade" style="text-align:center;color:var(--accent);font-size:16px;animation-delay:.4s">↑</div>
+      <div class="arch-layer ai-right" style="animation-delay:.45s"><div class="layer-icon" style="background:rgba(0,212,255,0.12);color:var(--accent)">▣</div><div><div class="layer-title">N 个核心业务应用</div><div class="layer-desc">合规治理 · 数据融合 · 质量管控 · 风险评估 · 决策分析</div></div></div>
+      <div class="ai-fade" style="text-align:center;color:var(--accent);font-size:16px;animation-delay:.55s">↑</div>
+      <div class="arch-layer ai-right" style="animation-delay:.6s"><div class="layer-icon" style="background:rgba(123,97,255,0.15);color:var(--accent2)">◈</div><div><div class="layer-title">三层智能体引擎</div><div class="layer-desc">编排层 · 协同层 · 工具调用层</div></div></div>
+      <div class="ai-fade" style="text-align:center;color:var(--accent);font-size:16px;animation-delay:.7s">↑</div>
+      <div class="arch-layer ai-right" style="animation-delay:.75s"><div class="layer-icon" style="background:rgba(0,255,200,0.12);color:var(--accent3)">⬢</div><div><div class="layer-title">数据治理底座</div><div class="layer-desc">睿治平台 · 多源异构数据融合 · 全量治理能力</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SLIDE 8: AGENT WORKFLOW ====== -->
+<section class="slide" data-slide="8">
+  <div class="topbar"><div class="crumb"><span class="dot"></span>技术架构 · 闭环工作流</div><div class="brand">03</div></div>
+  <h2 class="slide-title ai">标准化Agent运行机制：<span class="hl">全链路闭环、人机协同、持续进化</span></h2>
+  <div class="content-area center">
+    <div class="flow-h" style="margin-bottom:30px">
+      <div class="flow-node ai" style="animation-delay:.15s"><div class="fn-ico">📥</div><div class="fn-txt">任务接收</div></div>
+      <div class="flow-arrow ai-fade" style="animation-delay:.2s">→</div>
+      <div class="flow-node ai" style="animation-delay:.25s"><div class="fn-ico">🔍</div><div class="fn-txt">知识检索</div></div>
+      <div class="flow-arrow ai-fade" style="animation-delay:.3s">→</div>
+      <div class="flow-node ai" style="animation-delay:.35s"><div class="fn-ico">🧠</div><div class="fn-txt">推理规划</div></div>
+      <div class="flow-arrow ai-fade" style="animation-delay:.4s">→</div>
+      <div class="flow-node ai" style="animation-delay:.45s"><div class="fn-ico">⚙️</div><div class="fn-txt">工具调用</div></div>
+      <div class="flow-arrow ai-fade" style="animation-delay:.5s">→</div>
+      <div class="flow-node ai" style="animation-delay:.55s"><div class="fn-ico">📤</div><div class="fn-txt">结果输出</div></div>
+      <div class="flow-arrow ai-fade" style="animation-delay:.6s">→</div>
+      <div class="flow-node ai" style="animation-delay:.65s"><div class="fn-ico">✅</div><div class="fn-txt">人工确认</div></div>
+      <div class="flow-arrow ai-fade" style="animation-delay:.7s">→</div>
+      <div class="flow-node ai" style="animation-delay:.75s;border-color:var(--accent3);box-shadow:0 0 20px rgba(0,255,200,0.3)"><div class="fn-ico">🔄</div><div class="fn-txt" style="color:var(--accent3)">持续学习</div></div>
+    </div>
+    <div class="grid3" style="max-width:900px;width:100%" >
+      <div class="glass ai" style="animation-delay:.9s;padding:14px"><div class="section-head" style="font-size:13px">全链路闭环</div><p class="lead" style="font-size:12px">7步标准化流程，覆盖从需求接收到反馈迭代全链路</p></div>
+      <div class="glass ai" style="animation-delay:1s;padding:14px"><div class="section-head" style="font-size:13px">人机协同</div><p class="lead" style="font-size:12px">关键节点支持人工审核修正，保障安全合规</p></div>
+      <div class="glass ai" style="animation-delay:1.1s;padding:14px"><div class="section-head" style="font-size:13px">持续进化</div><p class="lead" style="font-size:12px">基于反馈优化模型，自主迭代，越用越智能</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SLIDE 9: COMPLIANCE AGENT ====== -->
+<section class="slide" data-slide="9">
+  <div class="topbar"><div class="crumb"><span class="dot"></span>核心应用 · AI合规治理Agent</div><div class="brand">04</div></div>
+  <h2 class="slide-title ai">AI合规治理Agent：<span class="hl">自动构建合规标准与治理体系</span></h2>
+  <div class="split">
+    <div class="col">
+      <div class="glass ai" style="animation-delay:.2s"><div class="section-head"><span class="label-pill tag-red">对应痛点</span></div><p class="lead" style="font-size:13px">监管口径繁杂、人工核对易错、标准更新滞后</p></div>
+      <div class="glass ai" style="animation-delay:.35s"><div class="section-head"><span class="label-pill tag-blue">核心任务</span></div><p class="lead" style="font-size:13px">自主学习监管政策，智能梳理数据标准，自动构建合规口径库、质量规则库</p></div>
+      <div class="glass ai" style="animation-delay:.5s"><div class="section-head"><span class="label-pill tag-purple">核心能力</span></div><p class="lead" style="font-size:13px">政策自动解析 · 标准智能生成 · 口径自动映射 · 规则动态更新</p></div>
+      <div class="glass ai" style="animation-delay:.65s"><div class="section-head"><span class="label-pill tag-green">评分点</span></div><p class="lead" style="font-size:13px">合规标准适配精准度 · 监管规则全覆盖能力</p></div>
+    </div>
+    <div class="col">
+      <div class="glass ai" style="animation-delay:.3s;flex:0 0 38%">
+        <div class="section-head">Agent专属工作流</div>
+        <div class="flow-h" style="flex-wrap:wrap;gap:8px;justify-content:flex-start;margin-top:8px">
+          <div class="flow-node" style="min-width:auto;padding:6px 10px"><div class="fn-txt" style="font-size:10px">📚监管政策库</div></div><span class="flow-arrow" style="font-size:14px">→</span>
+          <div class="flow-node" style="min-width:auto;padding:6px 10px"><div class="fn-txt" style="font-size:10px">🔗标准映射</div></div><span class="flow-arrow" style="font-size:14px">→</span>
+          <div class="flow-node" style="min-width:auto;padding:6px 10px"><div class="fn-txt" style="font-size:10px">📋合规口径库</div></div>
+        </div>
+      </div>
+      <div class="glass ai" style="animation-delay:.5s;flex:1">
+        <div class="section-head">合规规则库分层架构</div>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:8px">
+          <div style="padding:9px 14px;border-radius:8px;background:rgba(255,77,109,0.1);border-left:3px solid var(--red);font-size:12px"><b style="color:var(--white)">监管政策层</b> — 国家金融监管总局法规、银保监规章</div>
+          <div style="padding:9px 14px;border-radius:8px;background:rgba(255,140,66,0.1);border-left:3px solid var(--orange);font-size:12px"><b style="color:var(--white)">行业标准层</b> — 租赁行业数据规范、报送标准</div>
+          <div style="padding:9px 14px;border-radius:8px;background:rgba(255,210,63,0.1);border-left:3px solid var(--yellow);font-size:12px"><b style="color:var(--white)">企业口径层</b> — 企业内部业务定义、映射规则</div>
+          <div style="padding:9px 14px;border-radius:8px;background:rgba(0,255,200,0.1);border-left:3px solid var(--accent3);font-size:12px"><b style="color:var(--white)">质量规则层</b> — 校验规则、阈值标准、预警逻辑</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SLIDE 10: DATA FUSION AGENT ====== -->
+<section class="slide" data-slide="10">
+  <div class="topbar"><div class="crumb"><span class="dot"></span>核心应用 · AI数据融合Agent</div><div class="brand">04</div></div>
+  <h2 class="slide-title ai">AI数据融合Agent：<span class="hl">对话式多源数据智能整合</span></h2>
+  <div class="split">
+    <div class="col">
+      <div class="glass ai" style="animation-delay:.2s"><div class="section-head"><span class="label-pill tag-red">对应痛点</span></div><p class="lead" style="font-size:13px">多系统数据孤岛、非结构化数据难利用、人工ETL效率低</p></div>
+      <div class="glass ai" style="animation-delay:.35s"><div class="section-head"><span class="label-pill tag-blue">核心任务</span></div><p class="lead" style="font-size:13px">自动接入多源数据，智能解析非结构化内容，AI驱动ETL自动化</p></div>
+      <div class="glass ai" style="animation-delay:.5s"><div class="section-head"><span class="label-pill tag-purple">核心能力</span></div><p class="lead" style="font-size:13px">多源一键接入 · 非结构化智能解析 · 字段语义自动映射 · ETL流程自动生成</p></div>
+      <div class="glass ai" style="animation-delay:.65s"><div class="section-head"><span class="label-pill tag-green">评分点</span></div><p class="lead" style="font-size:13px">非结构化解析准确率 · 数据融合效率 · ETL自动化程度</p></div>
+    </div>
+    <div class="col">
+      <div class="glass ai" style="animation-delay:.3s;flex:1;display:flex;align-items:center">
+        <div style="display:flex;align-items:center;justify-content:space-between;width:100%;gap:10px">
+          <div style="display:flex;flex-direction:column;gap:8px;flex:1">
+            <div class="flow-node" style="min-width:auto"><div class="fn-ico">💻</div><div class="fn-txt">业务系统</div></div>
+            <div class="flow-node" style="min-width:auto"><div class="fn-ico">📄</div><div class="fn-txt">合同文档</div></div>
+            <div class="flow-node" style="min-width:auto"><div class="fn-ico">✉️</div><div class="fn-txt">函件</div></div>
+            <div class="flow-node" style="min-width:auto"><div class="fn-ico">📊</div><div class="fn-txt">报表</div></div>
+          </div>
+          <div style="font-size:24px;color:var(--accent)">⇉</div>
+          <div style="flex:1;text-align:center;padding:16px 8px;border-radius:12px;background:rgba(0,212,255,0.08);border:1px solid var(--accent)">
+            <div style="font-size:30px">🤖</div><div style="font-size:12px;font-weight:700;color:var(--accent);margin-top:4px">AI数据融合<br>Agent</div>
+            <div style="font-size:10px;color:var(--text);margin-top:6px;line-height:1.4">语义解析<br>字段映射<br>ETL生成</div>
+          </div>
+          <div style="font-size:24px;color:var(--accent3)">⇉</div>
+          <div style="flex:1;text-align:center;padding:16px 8px;border-radius:12px;background:rgba(0,255,200,0.08);border:1px solid var(--accent3)">
+            <div style="font-size:30px">🗄️</div><div style="font-size:12px;font-weight:700;color:var(--accent3);margin-top:4px">统一标准化<br>数据仓库</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SLIDE 11: DATA QUALITY AGENT ====== -->
+<section class="slide" data-slide="11">
+  <div class="topbar"><div class="crumb"><span class="dot"></span>核心应用 · AI数据质量Agent</div><div class="brand">04</div></div>
+  <h2 class="slide-title ai">AI数据质量Agent：<span class="hl">全域数据智能体检管控</span></h2>
+  <div class="split">
+    <div class="col">
+      <div class="glass ai" style="animation-delay:.2s"><div class="section-head"><span class="label-pill tag-red">对应痛点</span></div><p class="lead" style="font-size:13px">质量排查滞后、规则覆盖不全、问题溯源困难</p></div>
+      <div class="glass ai" style="animation-delay:.35s"><div class="section-head"><span class="label-pill tag-blue">核心任务</span></div><p class="lead" style="font-size:13px">实时监测全域数据质量，智能识别异常，自动定位源头、分级预警与修复</p></div>
+      <div class="glass ai" style="animation-delay:.5s"><div class="section-head"><span class="label-pill tag-purple">核心能力</span></div><p class="lead" style="font-size:13px">全域一键体检 · 业务规则自动生成 · 异常分级预警 · 常规问题自动修复</p></div>
+      <div class="glass ai" style="animation-delay:.65s"><div class="section-head"><span class="label-pill tag-green">评分点</span></div><p class="lead" style="font-size:13px">检出准确率 · 前置预警 · 智能修复 · 合格率提升</p></div>
+    </div>
+    <div class="col">
+      <div class="glass ai" style="animation-delay:.3s;flex:1">
+        <div class="section-head">质量分级预警机制</div>
+        <div style="margin-top:12px">
+          <div class="warn-level ai" style="animation-delay:.5s;border:1px solid rgba(255,210,63,0.3);background:rgba(255,210,63,0.06)">
+            <div class="wl-ico" style="background:rgba(255,210,63,0.15);color:var(--yellow)">⚠</div>
+            <div class="wl-txt"><b>黄色预警 · 常规问题</b><span>触发：字段缺失、格式偏差等常规质量问题 → 自动修复</span></div>
+          </div>
+          <div class="warn-level ai" style="animation-delay:.65s;border:1px solid rgba(255,140,66,0.3);background:rgba(255,140,66,0.06)">
+            <div class="wl-ico" style="background:rgba(255,140,66,0.15);color:var(--orange)">◆</div>
+            <div class="wl-txt"><b>橙色预警 · 中度异常</b><span>触发：跨表不一致、逻辑冲突等 → 定位源头并推送处理</span></div>
+          </div>
+          <div class="warn-level ai" style="animation-delay:.8s;border:1px solid rgba(255,77,109,0.3);background:rgba(255,77,109,0.06)">
+            <div class="wl-ico" style="background:rgba(255,77,109,0.15);color:var(--red)">■</div>
+            <div class="wl-txt"><b>红色预警 · 重大风险</b><span>触发：合规违规、关键指标异常等 → 即时阻断并升级上报</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SLIDE 12: RISK ASSESSMENT AGENT ====== -->
+<section class="slide" data-slide="12">
+  <div class="topbar"><div class="crumb"><span class="dot"></span>核心应用 · AI风险评估Agent</div><div class="brand">04</div></div>
+  <h2 class="slide-title ai">AI风险评估Agent：<span class="hl">资产地图与智能风险归因</span></h2>
+  <div class="split">
+    <div class="col">
+      <div class="glass ai" style="animation-delay:.2s"><div class="section-head"><span class="label-pill tag-red">对应痛点</span></div><p class="lead" style="font-size:13px">资产盘点效率低、风险识别靠经验、归因分析深度不足</p></div>
+      <div class="glass ai" style="animation-delay:.35s"><div class="section-head"><span class="label-pill tag-blue">核心任务</span></div><p class="lead" style="font-size:13px">自动构建数据资产地图，智能资产分级，识别业务与合规风险，自动归因溯源</p></div>
+      <div class="glass ai" style="animation-delay:.5s"><div class="section-head"><span class="label-pill tag-purple">核心能力</span></div><p class="lead" style="font-size:13px">资产自动盘点 · 智能分级分类 · 风险智能识别 · 多维度归因分析</p></div>
+      <div class="glass ai" style="animation-delay:.65s"><div class="section-head"><span class="label-pill tag-green">评分点</span></div><p class="lead" style="font-size:13px">资产可视化 · 风险识别准确率 · 归因深度 · 评级科学性</p></div>
+    </div>
+    <div class="col">
+      <div class="glass ai-scale" style="animation-delay:.3s;flex:1">
+        <div class="section-head">数据资产地图 · 血缘关联与风险热力</div>
+        <div id="chart12" class="chart-box" style="height:100%"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ====== SLIDE 13: DECISION ANALYSIS AGENT ====== -->
+<section class="slide" data-slide="13">
+  <div class="topbar"><div class="crumb"><span class="dot"></span>核心应用 · AI决策分析Agent</div><div class="brand">04</div></div>
+  <h2 class="slide-title ai">AI决策分析Agent：<span class="hl">经营决策智能赋能</span></h2>
+  <div class="split">
+    <div class="col">
+      <div class="glass ai" style="animation-delay:.2s"><div class="section-head"><span class="label-pill tag-red">对应痛点</span></div><p class="lead" style="font-size:13px">报告编制慢、决策主观性强、响应不及时</p></div>
+      <div class="glass ai" style="animation-delay:.35s"><div class="section-head"><span class="label-pill tag-blue">核心任务</span></div><p class="lead" style="font-size:13px">实时分析经营与监管数据，自动生成分析报表，输出决策建议</p></div>
+      <div class="glass ai" style="animation-delay:.5s"><div class="section-head"><span class="label-pill tag-purple">核心能力</span></div><p class="lead" style="font-size:13px">对话式自助分析 · 报告自动生成 · 业务波动智能归因 · 决策建议智能输出</p></div>
+      <div class="glass ai" style="animation-delay:.65s"><div class="section-head"><span class="label-pill tag-green">评分点</span></div><p class="lead" style="font-size:13px">决策支撑精准度 · 报告专业性 · 业务赋能价值 · 防控智能化</p></div>
+    </div>
+    <div class="col">
+      <div class="glass ai" style="animation-delay:.3s;flex:1;display:flex;align-items:center;justify-content:center">
+        <div style="display:flex;align-items:center;justify-content:space-around;width:100%;gap:6px">
+          <div style="text-align:center;flex:1"><div class="ai" style="font-size:34px;animation-delay:.5s">💬</div><div style="font-size:11px;color:var(--white);font-weight:600;margin-top:6px">自然语言提问</div><div style="font-size:10px;color:var(--text);margin-top:2px">"本月资产质量如何？"</div></div>
+          <div class="ai-fade" style="font-size:20px;color:var(--accent);animation-delay:.55s">→</div>
+          <div style="text-align:center;flex:1"><div class="ai" style="font-size:34px;animation-delay:.6s">📈</div><div style="font-size:11px;color:var(--white);font-weight:600;margin-top:6px">图表生成</div><div style="font-size:10px;color:var(--text);margin-top:2px">智能可视化</div></div>
+          <div class="ai-fade" style="font-size:20px;color:var(--accent);animation-delay:.65s">→</div>
+          <div style="text-align:center;flex:1"><div class="ai" style="font-size:34px;animation-delay:.7s">📑</div><div style="font-size:11px;color:var(--white);font-weight:600;margin-top:6px">报告输出</div><div style="font-size:10px;color:var(--text);margin-top:2px">专业报告秒级生成</div></div>
+          <div class="ai-fade" style="font-size:20px;color:var(--accent3);animation-delay:.75s">→</div>
+          <div style="text-align:center;flex:1"><div class="ai" style="font-size:34px;animation-delay:.8s">🎯</div><div style="font-size:11px;color:var(--accent3);font-weight:600;margin-top:6px">决策建议</div><div style="font-size:10px;color:var(--text);margin-top:2px">智能输出策略</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SLIDE 14: TECH STACK & PRODUCT MATRIX ====== -->
+<section class="slide" data-slide="14">
+  <div class="topbar"><div class="crumb"><span class="dot"></span>技术实现 · 技术栈</div><div class="brand">03</div></div>
+  <h2 class="slide-title ai">全栈自研技术体系，<span class="hl">三大产品深度协同</span></h2>
+  <div class="split">
+    <div class="col" style="flex:1.2">
+      <table class="tbl ai" style="animation-delay:.2s">
+        <thead><tr><th>架构层级</th><th>核心载体</th><th>能力说明</th></tr></thead>
+        <tbody>
+          <tr><td><span class="label-pill tag-green">交互分析层</span></td><td><b style="color:var(--white)">亿信智问 ChatBI</b></td><td>自然语言交互、智能问答、自动图表、报告编制</td></tr>
+          <tr><td><span class="label-pill tag-blue">AI引擎层</span></td><td><b style="color:var(--white)">金融租赁行业大模型</b></td><td>领域知识注入、语义理解、推理规划</td></tr>
+          <tr><td><span class="label-pill tag-purple">治理底座层</span></td><td><b style="color:var(--white)">睿治智能数据治理平台</b></td><td>全链路治理工具集、流程落地、合规追溯</td></tr>
+          <tr><td><span class="label-pill tag-red">核心AI技术</span></td><td><b style="color:var(--white)">/</b></td><td>RAG · Planner · Workflow · Memory · Tool Calling</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col" style="flex:.8;gap:8px;justify-content:center">
+      <div class="arch-layer ai-right" style="animation-delay:.35s"><div class="layer-icon" style="background:rgba(0,255,200,0.12);color:var(--accent3)">④</div><div><div class="layer-title">交互分析层</div><div class="layer-desc">亿信智问 · 自然语言交互</div></div></div>
+      <div class="ai-fade" style="text-align:center;color:var(--accent);font-size:14px;animation-delay:.45s">↑</div>
+      <div class="arch-layer ai-right" style="animation-delay:.5s"><div class="layer-icon" style="background:rgba(0,212,255,0.12);color:var(--accent)">③</div><div><div class="layer-title">AI引擎层</div><div class="layer-desc">行业大模型 · 推理规划</div></div></div>
+      <div class="ai-fade" style="text-align:center;color:var(--accent);font-size:14px;animation-delay:.6s">↑</div>
+      <div class="arch-layer ai-right" style="animation-delay:.65s"><div class="layer-icon" style="background:rgba(123,97,255,0.15);color:var(--accent2)">②</div><div><div class="layer-title">治理底座层</div><div class="layer-desc">睿治平台 · 全量治理工具</div></div></div>
+      <div class="ai-fade" style="text-align:center;color:var(--accent);font-size:14px;animation-delay:.75s">↑</div>
+      <div class="arch-layer ai-right" style="animation-delay:.8s"><div class="layer-icon" style="background:rgba(255,77,109,0.12);color:var(--red)">①</div><div><div class="layer-title">核心AI技术</div><div class="layer-desc">RAG · Planner · Workflow · Memory · Tool Calling</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SLIDE 15: THREE-LAYER ENGINE ====== -->
+<section class="slide" data-slide="15">
+  <div class="topbar"><div class="crumb"><span class="dot"></span>技术实现 · 智能体引擎</div><div class="brand">03</div></div>
+  <h2 class="slide-title ai">三层智能体引擎：实现任务从需求到执行的<span class="hl">精准落地</span></h2>
+  <div class="content-area center">
+    <div style="width:100%;max-width:920px;display:flex;flex-direction:column;gap:14px">
+      <div class="glass ai-right" style="animation-delay:.2s;display:flex;align-items:center;gap:18px">
+        <div style="width:46px;height:46px;border-radius:12px;background:rgba(0,212,255,0.12);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🧩</div>
+        <div style="flex:1"><div style="font-weight:700;color:var(--white);font-size:15px">智能体编排层 <span style="font-size:11px;color:var(--accent2)">(Planner + Workflow)</span></div><p class="lead" style="font-size:13px;margin-top:4px">复杂任务拆解、执行路径规划与流程编排，将自然语言需求转化为可执行的多Agent协同任务流。</p></div>
+      </div>
+      <div class="ai-fade" style="text-align:center;font-size:18px;color:var(--accent);animation-delay:.35s">↓</div>
+      <div class="glass ai-right" style="animation-delay:.4s;display:flex;align-items:center;gap:18px">
+        <div style="width:46px;height:46px;border-radius:12px;background:rgba(123,97,255,0.15);color:var(--accent2);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🤝</div>
+        <div style="flex:1"><div style="font-weight:700;color:var(--white);font-size:15px">Agent协同层 <span style="font-size:11px;color:var(--accent2)">(Memory + RAG)</span></div><p class="lead" style="font-size:13px;margin-top:4px">内置5大专业场景Agent，具备会话记忆、领域知识检索能力，保障执行专业性与上下文连贯性。</p></div>
+      </div>
+      <div class="ai-fade" style="text-align:center;font-size:18px;color:var(--accent);animation-delay:.55s">↓</div>
+      <div class="glass ai-right" style="animation-delay:.6s;display:flex;align-items:center;gap:18px">
+        <div style="width:46px;height:46px;border-radius:12px;background:rgba(0,255,200,0.12);color:var(--accent3);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🔧</div>
+        <div style="flex:1"><div style="font-weight:700;color:var(--white);font-size:15px">工具调用层 <span style="font-size:11px;color:var(--accent2)">(Tool Calling)</span></div><p class="lead" style="font-size:13px;margin-top:4px">封装全量数据治理工具、分析组件，实现Agent与底层能力无缝对接，精准安全执行数据操作。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SLIDE 16: DATA FLOW LOOP ====== -->
+<section class="slide" data-slide="16">
+  <div class="topbar"><div class="crumb"><span class="dot"></span>技术实现 · 数据流转</div><div class="brand">03</div></div>
+  <h2 class="slide-title ai">全链路数据闭环流转，实现从<span class="hl">数据到价值</span>的落地</h2>
+  <div class="content-area center">
+    <div style="display:flex;align-items:center;justify-content:space-around;width:100%;max-width:1000px;gap:10px;flex-wrap:wrap">
+      <div class="flow-node ai" style="animation-delay:.2s;min-width:140px;padding:16px"><div class="fn-ico" style="font-size:28px">🔌</div><div class="fn-txt" style="font-size:13px">数据接入</div><div style="font-size:10px;color:var(--text);margin-top:4px">多源统一接入</div></div>
+      <div class="flow-arrow ai-fade" style="animation-delay:.3s">→</div>
+      <div class="flow-node ai" style="animation-delay:.35s;min-width:140px;padding:16px"><div class="fn-ico" style="font-size:28px">⚙️</div><div class="fn-txt" style="font-size:13px">数据治理</div><div style="font-size:10px;color:var(--text);margin-top:4px">5大Agent协同</div></div>
+      <div class="flow-arrow ai-fade" style="animation-delay:.45s">→</div>
+      <div class="flow-node ai" style="animation-delay:.5s;min-width:140px;padding:16px"><div class="fn-ico" style="font-size:28px">💎</div><div class="fn-txt" style="font-size:13px">资产沉淀</div><div style="font-size:10px;color:var(--text);margin-top:4px">标准化资产</div></div>
+      <div class="flow-arrow ai-fade" style="animation-delay:.6s">→</div>
+      <div class="flow-node ai" style="animation-delay:.65s;min-width:140px;padding:16px"><div class="fn-ico" style="font-size:28px">📊</div><div class="fn-txt" style="font-size:13px">价值输出</div><div style="font-size:10px;color:var(--text);margin-top:4px">分析·报告·决策</div></div>
+      <div class="flow-arrow ai-fade" style="animation-delay:.75s">→</div>
+      <div class="flow-node ai" style="animation-delay:.85s;min-width:140px;padding:16px;border-color:var(--accent3);box-shadow:0 0 20px rgba(0,255,200,0.25)"><div class="fn-ico" style="font-size:28px">🔄</div><div class="fn-txt" style="font-size:13px;color:var(--accent3)">反馈迭代</div><div style="font-size:10px;color:var(--text);margin-top:4px">反向优化规则模型</div></div>
+    </div>
+    <div class="ai-fade" style="margin-top:30px;display:flex;align-items:center;gap:12px;color:var(--accent);animation-delay:1s">
+      <span style="font-size:20px">↺</span><span style="font-size:13px">闭环持续运转 · 数据资产越用越完善 · 治理能力越用越智能</span>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SLIDE 17: PRODUCT INTEGRATION ====== -->
+<section class="slide" data-slide="17">
+  <div class="topbar"><div class="crumb"><span class="dot"></span>技术实现 · 深度融合</div><div class="brand">03</div></div>
+  <h2 class="slide-title ai">绝非简单叠加，而是<span class="hl">能力一体化的深度融合</span></h2>
+  <div class="split">
+    <div class="col" style="flex:1">
+      <div class="glass ai" style="animation-delay:.2s"><div class="section-head"><span class="label-pill tag-blue">睿治平台</span>能力执行底座</div><p class="lead" style="font-size:13px">提供标准化治理工具集，保障过程<b>合规可追溯</b></p></div>
+      <div class="glass ai" style="animation-delay:.4s"><div class="section-head"><span class="label-pill tag-purple">行业大模型</span>专业智能大脑</div><p class="lead" style="font-size:13px">提供领域知识与推理能力，驱动<b>智能化决策</b></p></div>
+      <div class="glass ai" style="animation-delay:.6s"><div class="section-head"><span class="label-pill tag-green">亿信智问</span>统一交互入口</div><p class="lead" style="font-size:13px">承接自然语言交互与BI分析报告能力，<b>降低使用门槛</b></p></div>
+    </div>
+    <div class="col" style="flex:1">
+      <div class="glass ai-scale" style="animation-delay:.3s;flex:1;display:flex;align-items:center;justify-content:center">
+        <div id="chart17" class="chart-box" style="height:100%"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SLIDE 18: CORE METRICS ====== -->
+<section class="slide" data-slide="18">
+  <div class="topbar"><div class="crumb"><span class="dot"></span>实施效果 · 技术指标</div><div class="brand">04</div></div>
+  <h2 class="slide-title ai">核心技术指标全面提升，<span class="hl">治理质量与效率双突破</span></h2>
+  <div class="grid3" style="margin-bottom:14px">
+    <div class="metric ai-scale" style="animation-delay:.1s"><div class="m-val" data-count="92" data-suffix="%">0</div><div class="m-lbl">非结构化解析准确率</div></div>
+    <div class="metric ai-scale" style="animation-delay:.2s"><div class="m-val" data-count="90" data-suffix="%">0</div><div class="m-lbl">合规标准适配精准度</div></div>
+    <div class="metric ai-scale" style="animation-delay:.3s"><div class="m-val" data-count="95" data-suffix="%">0</div><div class="m-lbl">质量问题检出准确率</div></div>
+    <div class="metric ai-scale" style="animation-delay:.4s"><div class="m-val" data-count="88" data-suffix="%">0</div><div class="m-lbl">风险识别准确率</div></div>
+    <div class="metric ai-scale" style="animation-delay:.5s"><div class="m-val" data-count="85" data-suffix="%">0</div><div class="m-lbl">ETL流程自动化率</div></div>
+    <div class="metric ai-scale" style="animation-delay:.6s"><div class="m-val" data-count="98" data-suffix="%">0</div><div class="m-lbl">监管报送合格率 82%→</div></div>
+  </div>
+  <div class="glass ai" style="animation-delay:.5s;flex:1">
+    <div class="section-head">传统人工模式 vs AI智能体模式 · 六项核心指标对比</div>
+    <div id="chart18" class="chart-box"></div>
+  </div>
+</section>
+
+<!-- ====== SLIDE 19: EFFICIENCY DETAIL ====== -->
+<section class="slide" data-slide="19">
+  <div class="topbar"><div class="crumb"><span class="dot"></span>实施效果 · 效率提升</div><div class="brand">04</div></div>
+  <h2 class="slide-title ai">全场景治理效率大幅跃升，<span class="hl">人力依赖显著降低</span></h2>
+  <div class="split">
+    <div class="col" style="flex:1.1">
+      <table class="tbl ai" style="animation-delay:.2s">
+        <thead><tr><th>Agent场景</th><th>传统人工</th><th>AI智能体</th><th>提升</th></tr></thead>
+        <tbody>
+          <tr><td>元数据补录</td><td>1000字段/6天</td><td>10分钟+1天核验</td><td class="gain">6倍</td></tr>
+          <tr><td>数据标准建标</td><td>1000标准/8人天</td><td>1天初稿</td><td class="gain">7倍</td></tr>
+          <tr><td>数据标准落标</td><td>5000字段/1人月</td><td>3天语义匹配</td><td class="gain">6倍</td></tr>
+          <tr><td>数据模型设计</td><td>20实体/2天</td><td>2小时生成</td><td class="gain">7倍</td></tr>
+          <tr><td>数据质量探查</td><td>7天/3类规则</td><td>1天/600+规则</td><td class="gain">6倍</td></tr>
+          <tr><td>质量规则配置</td><td>100条/8天</td><td>1天自动生成</td><td class="gain">7倍</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col" style="flex:.9">
+      <div class="glass ai" style="animation-delay:.4s;flex:1">
+        <div class="section-head">各场景效率提升倍数</div>
+        <div id="chart19" class="chart-box"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SLIDE 20: ROI ====== -->
+<section class="slide" data-slide="20">
+  <div class="topbar"><div class="crumb"><span class="dot"></span>实施效果 · 商业价值</div><div class="brand">04</div></div>
+  <h2 class="slide-title ai">显著的商业价值与可观的<span class="hl">投资回报</span></h2>
+  <div class="split">
+    <div class="col">
+      <div class="glass ai" style="animation-delay:.2s"><div class="section-head"><span class="label-pill tag-green">人力成本节约</span></div><p class="lead" style="font-size:13px">单月治理人力从<b>22人天降至5人天</b>，年成本节约超<span class="em">60%</span></p></div>
+      <div class="glass ai" style="animation-delay:.4s"><div class="section-head"><span class="label-pill tag-red">合规风险成本</span></div><p class="lead" style="font-size:13px">监管整改处罚风险降低<span class="em">90%以上</span>，避免巨额合规损失</p></div>
+      <div class="glass ai" style="animation-delay:.6s"><div class="section-head"><span class="label-pill tag-blue">业务效率收益</span></div><p class="lead" style="font-size:13px">报送周期15天→3天，经营报告7天→<b>4小时</b></p></div>
+    </div>
+    <div class="col">
+      <div class="glass ai" style="animation-delay:.3s;flex:1">
+        <div class="section-head">ROI累计收益曲线</div>
+        <div id="chart20" class="chart-box"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SLIDE 21: BUSINESS VALUE ====== -->
+<section class="slide" data-slide="21">
+  <div class="topbar"><div class="crumb"><span class="dot"></span>实施效果 · 价值落地</div><div class="brand">04</div></div>
+  <h2 class="slide-title ai">四大维度价值落地，全面赋能<span class="hl">金融租赁业务发展</span></h2>
+  <div class="content-area">
+    <div class="grid4" style="flex:1">
+      <div class="glass ai" style="animation-delay:.2s;display:flex;flex-direction:column;justify-content:center"><div style="font-size:32px;margin-bottom:8px">🛡️</div><div style="font-weight:700;color:var(--accent3);font-size:15px;margin-bottom:6px">监管合规价值</div><p class="lead" style="font-size:12px">规则自动同步、报送自动校验，降低报送压力，保障及时准确</p></div>
+      <div class="glass ai" style="animation-delay:.35s;display:flex;flex-direction:column;justify-content:center"><div style="font-size:32px;margin-bottom:8px">🏛️</div><div style="font-weight:700;color:var(--accent);font-size:15px;margin-bottom:6px">数据治理价值</div><p class="lead" style="font-size:12px">全域统一资产体系，数据质量全面提升，孤岛彻底打通</p></div>
+      <div class="glass ai" style="animation-delay:.5s;display:flex;flex-direction:column;justify-content:center"><div style="font-size:32px;margin-bottom:8px">⚠️</div><div style="font-weight:700;color:var(--accent2);font-size:15px;margin-bottom:6px">风险管控价值</div><p class="lead" style="font-size:12px">从事后追溯转向事前预警，响应速度提升 <b style="color:var(--accent3)">80%</b></p></div>
+      <div class="glass ai" style="animation-delay:.65s;display:flex;flex-direction:column;justify-content:center"><div style="font-size:32px;margin-bottom:8px">📈</div><div style="font-weight:700;color:var(--white);font-size:15px;margin-bottom:6px">经营决策价值</div><p class="lead" style="font-size:12px">数据实时可查、报告秒级生成，支撑快速精准决策</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SLIDE 22: INNOVATIONS ====== -->
+<section class="slide" data-slide="22">
+  <div class="topbar"><div class="crumb"><span class="dot"></span>核心创新 · 总结</div><div class="brand">05</div></div>
+  <h2 class="slide-title ai">三大核心创新，打造<span class="hl">行业领先的治理智能体</span></h2>
+  <div class="content-area">
+    <div class="grid3" style="flex:1">
+      <div class="innov-card ai-right" style="animation-delay:.2s"><div class="ic-num">01</div><span class="label-pill tag-blue">技术创新</span><h4 style="margin-top:10px">三位一体融合架构</h4><p>治理底座 + 行业大模型 + 对话BI深度融合，打破单一产品边界，实现<b style="color:var(--white)">专业+智能+易用</b>兼顾。</p></div>
+      <div class="innov-card ai-right" style="animation-delay:.4s"><div class="ic-num">02</div><span class="label-pill tag-purple">应用创新</span><h4 style="margin-top:10px">五维Agent协同治理体系</h4><p>针对金融租赁打造5大专业Agent，跨Agent协同作业，精准匹配行业监管要求。</p></div>
+      <div class="innov-card ai-right" style="animation-delay:.6s"><div class="ic-num">03</div><span class="label-pill tag-green">模式创新</span><h4 style="margin-top:10px">闭环式持续进化机制</h4><p>AI执行—人工确认—反馈学习—能力迭代闭环，系统<b style="color:var(--white)">越用越智能</b>，适配监管动态更新。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SLIDE 23: SUMMARY & OUTLOOK ====== -->
+<section class="slide" data-slide="23">
+  <div class="topbar"><div class="crumb"><span class="dot"></span>总结与展望</div><div class="brand">05</div></div>
+  <h2 class="slide-title ai">总结与<span class="hl">展望</span></h2>
+  <div class="split">
+    <div class="col">
+      <div class="glass ai" style="animation-delay:.2s;flex:1;display:flex;flex-direction:column;justify-content:center">
+        <div class="section-head"><span class="label-pill tag-blue">方案总结</span></div>
+        <p class="lead">本方案精准锚定金融租赁数据治理核心痛点，依托亿信华辰全栈数据产品能力，打造行业专属<b>AI治理决策智能体</b>，实现五大场景全面智能化升级，兼顾<span class="em">监管合规要求</span>与<span class="em">经营决策效能</span>。</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="glass ai" style="animation-delay:.35s;display:flex;align-items:center;gap:14px"><div style="width:34px;height:34px;border-radius:50%;background:rgba(0,255,200,0.12);color:var(--accent3);display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0">1</div><div><b style="color:var(--white);font-size:13px">深化行业知识沉淀</b><div class="lead" style="font-size:12px">拓展更多细分业务场景智能应用</div></div></div>
+      <div class="glass ai" style="animation-delay:.5s;display:flex;align-items:center;gap:14px"><div style="width:34px;height:34px;border-radius:50%;background:rgba(123,97,255,0.15);color:var(--accent2);display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0">2</div><div><b style="color:var(--white);font-size:13px">探索多模态数据治理</b><div class="lead" style="font-size:12px">覆盖影像、音频等更多数据类型</div></div></div>
+      <div class="glass ai" style="animation-delay:.65s;display:flex;align-items:center;gap:14px"><div style="width:34px;height:34px;border-radius:50%;background:rgba(0,212,255,0.12);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0">3</div><div><b style="color:var(--white);font-size:13px">打造行业标杆</b><div class="lead" style="font-size:12px">助力更多租赁企业实现数字化转型</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SLIDE 24: THANK YOU ====== -->
+<section class="slide end-slide cover" data-slide="24">
+  <div class="ai-scale" style="animation-delay:.3s;font-size:60px;margin-bottom:10px">🙏</div>
+  <h1 class="end-title ai" style="animation-delay:.5s">感谢聆听</h1>
+  <div class="end-sub ai" style="animation-delay:.8s">敬请指正</div>
+  <div class="deco-line ai-fade" style="animation-delay:1s"></div>
+  <div class="cover-meta ai" style="animation-delay:1.2s">
+    感谢 DAMA中国 提供交流展示平台<br>
+    <b style="color:var(--accent)">北京亿信华辰软件有限责任公司</b>
+  </div>
+</section>
+
+</div><!-- /deck -->
+
+<!-- NAV UI -->
+<div class="nav-arrow left" id="prevBtn" title="上一页">‹</div>
+<div class="nav-arrow right" id="nextBtn" title="下一页">›</div>
+<div class="dots" id="dots"></div>
+<div class="pager"><span class="cur" id="curPage">1</span> / <span id="totalPage">24</span></div>
+<div class="fs-btn" id="fsBtn" title="全屏">⛶</div>
+<div class="scroll-hint" id="scrollHint">← → 翻页 · 滚轮 / 触屏滑动 · F全屏</div>
+
+<script>
+/* ============================================================
+   1. THREE.JS 粒子背景 — 数据节点连线星空
+   ============================================================ */
+let scene, camera, renderer, particles, lines, particleGroup;
+let bgAnimating = true;
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function initThree(){
+  const canvas = document.getElementById('bg-canvas');
+  renderer = new THREE.WebGLRenderer({canvas, alpha:true, antialias:true});
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera(70, window.innerWidth/window.innerHeight, 1, 1000);
+  camera.position.z = 280;
+
+  particleGroup = new THREE.Group();
+  scene.add(particleGroup);
+
+  // 粒子数量根据屏幕与性能动态调整
+  const isMobile = window.innerWidth < 768;
+  const COUNT = reducedMotion ? 60 : (isMobile ? 90 : 160);
+  const SPREAD = 600;
+
+  const geo = new THREE.BufferGeometry();
+  const positions = new Float32Array(COUNT*3);
+  const pColors = new Float32Array(COUNT*3);
+  const palette = [
+    [0.0, 0.83, 1.0],   // #00D4FF
+    [0.48, 0.38, 1.0],  // #7B61FF
+    [0.0, 1.0, 0.78],   // #00FFC8
+    [0.8, 0.84, 0.96]   // #CCD6F6
+  ];
+
+  for(let i=0;i<COUNT;i++){
+    positions[i*3]   = (Math.random()-0.5)*SPREAD;
+    positions[i*3+1] = (Math.random()-0.5)*SPREAD*0.7;
+    positions[i*3+2] = (Math.random()-0.5)*SPREAD*0.5;
+    const c = palette[Math.floor(Math.random()*palette.length)];
+    pColors[i*3]=c[0]; pColors[i*3+1]=c[1]; pColors[i*3+2]=c[2];
+  }
+  geo.setAttribute('position', new THREE.BufferAttribute(positions,3));
+  geo.setAttribute('color', new THREE.BufferAttribute(pColors,3));
+
+  const mat = new THREE.PointsMaterial({
+    size: 3.2, vertexColors:true, transparent:true, opacity:0.85,
+    blending: THREE.AdditiveBlending, depthWrite:false,
+    map: makeCircleTexture()
+  });
+  particles = new THREE.Points(geo, mat);
+  particleGroup.add(particles);
+
+  // 连线
+  const lineGeo = new THREE.BufferGeometry();
+  const linePositions = new Float32Array(COUNT*COUNT*6);
+  lineGeo.setAttribute('position', new THREE.BufferAttribute(linePositions,3));
+  const lineMat = new THREE.LineBasicMaterial({color:0x00D4FF, transparent:true, opacity:0.12, blending:THREE.AdditiveBlending});
+  lines = new THREE.LineSegments(lineGeo, lineMat);
+  particleGroup.add(lines);
+
+  window.addEventListener('resize', onResize);
+  animateThree();
+}
+
+function makeCircleTexture(){
+  const c = document.createElement('canvas');
+  c.width = c.height = 64;
+  const ctx = c.getContext('2d');
+  const g = ctx.createRadialGradient(32,32,0,32,32,32);
+  g.addColorStop(0,'rgba(255,255,255,1)');
+  g.addColorStop(0.4,'rgba(255,255,255,0.6)');
+  g.addColorStop(1,'rgba(255,255,255,0)');
+  ctx.fillStyle = g;
+  ctx.fillRect(0,0,64,64);
+  const tex = new THREE.CanvasTexture(c);
+  return tex;
+}
+
+function updateLines(){
+  const pos = particles.geometry.attributes.position.array;
+  const lpos = lines.geometry.attributes.position.array;
+  const MAX = 130; // 连线最大距离
+  let idx = 0;
+  const count = pos.length/3;
+  for(let i=0;i<count;i++){
+    for(let j=i+1;j<count;j++){
+      const dx = pos[i*3]-pos[j*3];
+      const dy = pos[i*3+1]-pos[j*3+1];
+      const dz = pos[i*3+2]-pos[j*3+2];
+      const d = Math.sqrt(dx*dx+dy*dy+dz*dz);
+      if(d < MAX){
+        lpos[idx*3]   = pos[i*3];
+        lpos[idx*3+1] = pos[i*3+1];
+        lpos[idx*3+2] = pos[i*3+2];
+        lpos[idx*3+3] = pos[j*3];
+        lpos[idx*3+4] = pos[j*3+1];
+        lpos[idx*3+5] = pos[j*3+2];
+        idx++;
+      }
+    }
+  }
+  lines.geometry.setDrawRange(0, idx*2);
+  lines.geometry.attributes.position.needsUpdate = true;
+}
+
+let frameCount = 0;
+function animateThree(){
+  if(!bgAnimating) return;
+  requestAnimationFrame(animateThree);
+  frameCount++;
+  if(particles){
+    particles.rotation.y += 0.0006;
+    particles.rotation.x += 0.0002;
+    // 轻微呼吸位移
+    const pos = particles.geometry.attributes.position.array;
+    const count = pos.length/3;
+    for(let i=0;i<count;i++){
+      pos[i*3+1] += Math.sin(frameCount*0.01 + i)*0.06;
+    }
+    particles.geometry.attributes.position.needsUpdate = true;
+    // 每隔几帧更新连线以节省性能
+    if(frameCount % 3 === 0) updateLines();
+  }
+  renderer.render(scene, camera);
+}
+
+function onResize(){
+  camera.aspect = window.innerWidth/window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  // 重新resize所有echarts
+  Object.values(chartInstances).forEach(ec => { if(ec) ec.resize(); });
+}
+
+/* ============================================================
+   2. 翻页导航系统
+   ============================================================ */
+const slides = document.querySelectorAll('.slide');
+const totalSlides = slides.length;
+let currentSlide = 0;
+let isTransitioning = false;
+const chartInstances = {};
+
+document.getElementById('totalPage').textContent = totalSlides;
+
+// 生成底部圆点
+const dotsWrap = document.getElementById('dots');
+for(let i=0;i<totalSlides;i++){
+  const d = document.createElement('div');
+  d.className = 'd' + (i===0?' active':'');
+  d.addEventListener('click', ()=> goToSlide(i));
+  dotsWrap.appendChild(d);
+}
+
+function goToSlide(index){
+  if(index < 0 || index >= totalSlides || index === currentSlide || isTransitioning) return;
+  isTransitioning = true;
+  const dir = index > currentSlide ? 1 : -1;
+
+  slides[currentSlide].classList.remove('active');
+  slides[currentSlide].classList.add(dir > 0 ? 'prev' : '');
+
+  // 清除旧的prev标记
+  slides.forEach(s => { if(s !== slides[index]) s.classList.remove('prev'); });
+
+  currentSlide = index;
+  slides[currentSlide].classList.remove('prev');
+  slides[currentSlide].classList.add('active');
+
+  // 更新UI
+  document.getElementById('curPage').textContent = currentSlide + 1;
+  document.getElementById('progressBar').style.width = ((currentSlide+1)/totalSlides*100) + '%';
+  document.querySelectorAll('.dots .d').forEach((d,i)=> d.classList.toggle('active', i===currentSlide));
+
+  // 隐藏首屏滚动提示
+  if(currentSlide > 0) document.getElementById('scrollHint').style.opacity = '0';
+
+  // 初始化该页图表与计数器
+  setTimeout(()=> {
+    initSlideAssets(currentSlide);
+    isTransitioning = false;
+  }, 300);
+}
+
+function nextSlide(){ goToSlide(currentSlide + 1); }
+function prevSlide(){ goToSlide(currentSlide - 1); }
+
+document.getElementById('nextBtn').addEventListener('click', nextSlide);
+document.getElementById('prevBtn').addEventListener('click', prevSlide);
+
+// 键盘
+document.addEventListener('keydown', (e)=>{
+  if(e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); nextSlide(); }
+  else if(e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prevSlide(); }
+  else if(e.key === 'Home') goToSlide(0);
+  else if(e.key === 'End') goToSlide(totalSlides-1);
+  else if(e.key === 'f' || e.key === 'F') toggleFullscreen();
+});
+
+// 滚轮翻页（节流）
+let wheelLock = false;
+document.addEventListener('wheel', (e)=>{
+  if(wheelLock) return;
+  if(Math.abs(e.deltaY) < 25 && Math.abs(e.deltaX) < 25) return;
+  wheelLock = true;
+  setTimeout(()=> wheelLock = false, 800);
+  if(e.deltaY > 0 || e.deltaX > 0) nextSlide();
+  else prevSlide();
+}, {passive:true});
+
+// 触屏滑动
+let touchStartX = 0, touchStartY = 0;
+document.addEventListener('touchstart', (e)=>{
+  touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
+}, {passive:true});
+document.addEventListener('touchend', (e)=>{
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  const dy = e.changedTouches[0].clientY - touchStartY;
+  if(Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)){
+    if(dx < 0) nextSlide(); else prevSlide();
+  }
+}, {passive:true});
+
+// 全屏
+function toggleFullscreen(){
+  if(!document.fullscreenElement){
+    (document.documentElement.requestFullscreen||document.documentElement.webkitRequestFullscreen||function(){}).call(document.documentElement);
+  } else {
+    (document.exitFullscreen||document.webkitExitFullscreen||function(){}).call(document);
+  }
+}
+document.getElementById('fsBtn').addEventListener('click', toggleFullscreen);
+
+/* ============================================================
+   3. 数字滚动计数动效
+   ============================================================ */
+function animateCounter(el){
+  const target = parseFloat(el.dataset.count);
+  const suffix = el.dataset.suffix || '';
+  const dur = 1400;
+  const start = performance.now();
+  function tick(now){
+    const t = Math.min((now-start)/dur, 1);
+    const eased = 1 - Math.pow(1-t, 3);
+    const val = Math.round(target * eased);
+    el.textContent = val + suffix;
+    if(t < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+/* ============================================================
+   4. ECharts 通用主题配置
+   ============================================================ */
+const EC = {
+  textColor: '#CCD6F6',
+  axisColor: 'rgba(204,214,246,0.4)',
+  accent: '#00D4FF',
+  accent2: '#7B61FF',
+  accent3: '#00FFC8',
+  red: '#FF4D6D',
+  orange: '#FF8C42',
+  yellow: '#FFD23F',
+  gridColor: 'rgba(204,214,246,0.08)',
+  baseGrid(){ return { top:30, right:20, bottom:30, left:50, containLabel:true }; },
+  baseAxis(){
+    return {
+      axisLine:{lineStyle:{color:this.axisColor}},
+      axisLabel:{color:this.textColor, fontSize:11},
+      splitLine:{lineStyle:{color:this.gridColor}}
+    };
+  }
+};
+
+/* ============================================================
+   5. 各页图表初始化（懒加载）
+   ============================================================ */
+const initializedSlides = new Set();
+
+function initSlideAssets(slideIndex){
+  // 计数器
+  const slide = slides[slideIndex];
+  slide.querySelectorAll('[data-count]').forEach(el=>{
+    if(!el.dataset.counted){ el.dataset.counted = '1'; animateCounter(el); }
+  });
+
+  if(initializedSlides.has(slideIndex)) return;
+  initializedSlides.add(slideIndex);
+
+  const s = slideIndex + 1;
+  switch(s){
+    case 3: initChart3(); break;
+    case 4: initChart4(); break;
+    case 5: initChart5(); break;
+    case 6: initTriArch(); break;
+    case 12: initChart12(); break;
+    case 17: initChart17(); break;
+    case 18: initChart18(); break;
+    case 19: initChart19(); break;
+    case 20: initChart20(); break;
+  }
+}
+
+/* ---- 第3页：数据源分布 + 监管时间轴 ---- */
+function initChart3(){
+  // 3a 数据源散点（孤岛示意）
+  const c3a = echarts.init(document.getElementById('chart3a'));
+  chartInstances['3a'] = c3a;
+  const sources = ['业务系统','财务系统','风控系统','监管系统','合同文档','外部数据'];
+  const pts = sources.map((n,i)=>({
+    name:n, value:[ (i%3)*120-120, Math.floor(i/3)*120-60, 40+i*5 ],
+    itemStyle:{color:[EC.accent,EC.accent2,EC.accent3,EC.red,EC.orange,EC.yellow][i]}
+  }));
+  c3a.setOption({
+    grid:{top:10,right:10,bottom:10,left:10},
+    xAxis:{show:false,min:-200,max:200},
+    yAxis:{show:false,min:-150,max:150},
+    series:[{
+      type:'scatter', symbolSize:d=>d[2], data:pts,
+      label:{show:true,formatter:p=>p.data.name,position:'bottom',color:EC.textColor,fontSize:10},
+      animationDelay:i=>i*120
+    }]
+  });
+  // 添加红色虚线分隔（孤岛）
+  c3a.setOption({graphic:[
+    {type:'line',shape:{x1:0,y1:30,x2:0,y2:120},style:{stroke:EC.red,lineDash:[4,4],opacity:.5},left:'center',top:'center'}
+  ]});
+
+  // 3b 监管政策时间轴
+  const c3b = echarts.init(document.getElementById('chart3b'));
+  chartInstances['3b'] = c3b;
+  const policies = [
+    {name:'融资租赁公司监督管理暂行办法', year:'2020'},
+    {name:'金融租赁公司管理办法', year:'2023'},
+    {name:'监管报送维度扩容', year:'2024'},
+    {name:'数据治理合规强化', year:'2025'},
+    {name:'监管口径动态更新', year:'2026'}
+  ];
+  c3b.setOption({
+    grid:{top:20,right:30,bottom:40,left:20,containLabel:true},
+    xAxis:{type:'category', data:policies.map(p=>p.year), ...EC.baseAxis(), axisTick:{show:false}, splitLine:{show:false}},
+    yAxis:{show:false},
+    series:[{
+      type:'line', data:policies.map((p,i)=>50), symbol:'circle', symbolSize:14,
+      lineStyle:{color:EC.accent,width:2},
+      itemStyle:{color:EC.accent, borderColor:'#fff', borderWidth:2, shadowBlur:10, shadowColor:EC.accent},
+      label:{show:true,position:'top',formatter:p=>policies[p.dataIndex].name, color:EC.textColor, fontSize:9, width:80, overflow:'break', lineHeight:13},
+      animationDelay:i=>i*200
+    }]
+  });
+}
+
+/* ---- 第4页：雷达图 ---- */
+function initChart4(){
+  const c = echarts.init(document.getElementById('chart4'));
+  chartInstances['4'] = c;
+  c.setOption({
+    radar:{
+      indicator:[
+        {name:'数据整合',max:100},
+        {name:'口径合规',max:100},
+        {name:'质量管控',max:100},
+        {name:'风险识别',max:100},
+        {name:'决策支撑',max:100}
+      ],
+      radius:'62%', center:['50%','52%'],
+      axisName:{color:EC.textColor,fontSize:11},
+      splitLine:{lineStyle:{color:'rgba(204,214,246,0.15)'}},
+      splitArea:{areaStyle:{color:['rgba(255,77,109,0.02)','rgba(255,77,109,0.05)']}},
+      axisLine:{lineStyle:{color:'rgba(204,214,246,0.15)'}}
+    },
+    series:[{
+      type:'radar',
+      data:[{value:[35,30,28,25,22], name:'传统人工模式'}],
+      areaStyle:{color:'rgba(255,77,109,0.25)'},
+      lineStyle:{color:EC.red,width:2},
+      itemStyle:{color:EC.red},
+      animationDuration:1600
+    }]
+  });
+}
+
+/* ---- 第5页：柱状图 + 饼图 ---- */
+function initChart5(){
+  const c5a = echarts.init(document.getElementById('chart5a'));
+  chartInstances['5a'] = c5a;
+  c5a.setOption({
+    grid:EC.baseGrid(),
+    xAxis:{type:'category', data:['元数据补录','标准建标','质量探查','模型设计','规则配置'], ...EC.baseAxis(), axisLabel:{...EC.baseAxis().axisLabel, fontSize:10, rotate:0}},
+    yAxis:{type:'value', ...EC.baseAxis(), name:'天'},
+    series:[{
+      type:'bar', data:[6,8,7,2,8],
+      itemStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:EC.red},{offset:1,color:'rgba(255,77,109,0.2)'}]), borderRadius:[4,4,0,0]},
+      label:{show:true,position:'top',color:EC.textColor,fontSize:11},
+      barWidth:'45%',
+      animationDelay:i=>i*150
+    }]
+  });
+
+  const c5b = echarts.init(document.getElementById('chart5b'));
+  chartInstances['5b'] = c5b;
+  c5b.setOption({
+    legend:{bottom:0, textStyle:{color:EC.textColor,fontSize:9}, itemWidth:10, itemHeight:10},
+    series:[{
+      type:'pie', radius:['38%','65%'], center:['50%','45%'],
+      data:[
+        {value:32,name:'标准建标',itemStyle:{color:EC.red}},
+        {value:28,name:'规则配置',itemStyle:{color:EC.orange}},
+        {value:22,name:'质量探查',itemStyle:{color:EC.yellow}},
+        {value:12,name:'元数据补录',itemStyle:{color:EC.accent2}},
+        {value:6,name:'模型设计',itemStyle:{color:EC.accent3}}
+      ],
+      label:{color:EC.textColor,fontSize:10},
+      itemStyle:{borderColor:'#0A192F',borderWidth:2},
+      animationType:'scale', animationDelay:i=>i*150
+    }]
+  });
+}
+
+/* ---- 第6页：三角支撑架构（CSS/SVG绘制） ---- */
+function initTriArch(){
+  const box = document.getElementById('triArch');
+  const cx=50, cy=52, r=32;
+  const top=[50, cy-r], bl=[cx-r*0.866, cy+r*0.5], br=[cx+r*0.866, cy+r*0.5];
+  box.innerHTML = `
+  <svg viewBox="0 0 100 100" style="width:100%;height:100%;max-height:380px">
+    <defs>
+      <linearGradient id="tg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#00D4FF" stop-opacity="0.15"/>
+        <stop offset="1" stop-color="#7B61FF" stop-opacity="0.15"/>
+      </linearGradient>
+      <filter id="glow6"><feGaussianBlur stdDeviation="1.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs>
+    <polygon points="${top[0]},${top[1]} ${bl[0]},${bl[1]} ${br[0]},${br[1]}" fill="url(#tg)" stroke="#00D4FF" stroke-width="0.4" stroke-opacity="0.5"/>
+    <line x1="50" y1="52" x2="${top[0]}" y2="${top[1]}" stroke="#00D4FF" stroke-width="0.3" stroke-dasharray="1.5" opacity="0.6"><animate attributeName="stroke-dashoffset" from="0" to="-10" dur="2s" repeatCount="indefinite"/></line>
+    <line x1="50" y1="52" x2="${bl[0]}" y2="${bl[1]}" stroke="#7B61FF" stroke-width="0.3" stroke-dasharray="1.5" opacity="0.6"><animate attributeName="stroke-dashoffset" from="0" to="-10" dur="2s" repeatCount="indefinite"/></line>
+    <line x1="50" y1="52" x2="${br[0]}" y2="${br[1]}" stroke="#00FFC8" stroke-width="0.3" stroke-dasharray="1.5" opacity="0.6"><animate attributeName="stroke-dashoffset" from="0" to="-10" dur="2s" repeatCount="indefinite"/></line>
+    <!-- 中心智能体 -->
+    <circle cx="50" cy="52" r="6" fill="rgba(0,212,255,0.2)" stroke="#00D4FF" stroke-width="0.5" filter="url(#glow6)"><animate attributeName="r" values="6;7;6" dur="2.5s" repeatCount="indefinite"/></circle>
+    <text x="50" y="50.5" text-anchor="middle" fill="#fff" font-size="2.6" font-weight="bold">智能体</text>
+    <text x="50" y="54" text-anchor="middle" fill="#CCD6F6" font-size="1.8">引擎</text>
+    <!-- 三个顶点 -->
+    <circle cx="${top[0]}" cy="${top[1]}" r="7" fill="rgba(0,212,255,0.12)" stroke="#00D4FF" stroke-width="0.5" filter="url(#glow6)"/>
+    <text x="${top[0]}" y="${top[1]-1}" text-anchor="middle" fill="#fff" font-size="2.4" font-weight="bold">睿治平台</text>
+    <text x="${top[0]}" y="${top[1]+1.8}" text-anchor="middle" fill="#00D4FF" font-size="1.7">底座支撑</text>
+    <circle cx="${bl[0]}" cy="${bl[1]}" r="7" fill="rgba(123,97,255,0.12)" stroke="#7B61FF" stroke-width="0.5" filter="url(#glow6)"/>
+    <text x="${bl[0]}" y="${bl[1]-1}" text-anchor="middle" fill="#fff" font-size="2.4" font-weight="bold">行业大模型</text>
+    <text x="${bl[0]}" y="${bl[1]+1.8}" text-anchor="middle" fill="#7B61FF" font-size="1.7">知识赋能</text>
+    <circle cx="${br[0]}" cy="${br[1]}" r="7" fill="rgba(0,255,200,0.12)" stroke="#00FFC8" stroke-width="0.5" filter="url(#glow6)"/>
+    <text x="${br[0]}" y="${br[1]-1}" text-anchor="middle" fill="#fff" font-size="2.4" font-weight="bold">亿信智问</text>
+    <text x="${br[0]}" y="${br[1]+1.8}" text-anchor="middle" fill="#00FFC8" font-size="1.7">交互升级</text>
+  </svg>`;
+}
+
+/* ---- 第12页：数据资产地图关系图 ---- */
+function initChart12(){
+  const c = echarts.init(document.getElementById('chart12'));
+  chartInstances['12'] = c;
+  const nodes = [
+    {name:'资产中心',category:0,symbolSize:50,itemStyle:{color:EC.accent}},
+    {name:'租赁合同库',category:1,symbolSize:32},{name:'客户主数据',category:1,symbolSize:30},
+    {name:'风控指标',category:2,symbolSize:28},{name:'财务台账',category:1,symbolSize:30},
+    {name:'监管报送',category:3,symbolSize:26},{name:'资产分级',category:2,symbolSize:28},
+    {name:'血缘追溯',category:3,symbolSize:24},{name:'风险预警区',category:3,symbolSize:30,itemStyle:{color:EC.red}},
+    {name:'外部数据',category:2,symbolSize:24},{name:'合同文档',category:1,symbolSize:26},
+    {name:'估值模型',category:2,symbolSize:24}
+  ];
+  const links = nodes.slice(1).map(n=>({source:'资产中心',target:n.name}));
+  links.push({source:'租赁合同库',target:'客户主数据'},{source:'风控指标',target:'风险预警区'},{source:'财务台账',target:'监管报送'},{source:'资产分级',target:'估值模型'},{source:'合同文档',target:'租赁合同库'});
+  c.setOption({
+    tooltip:{},
+    legend:{data:['核心','业务数据','风控资产','风险/血缘'],textStyle:{color:EC.textColor,fontSize:10},bottom:0,itemWidth:10,itemHeight:10},
+    series:[{
+      type:'graph', layout:'force', roam:true,
+      force:{repulsion:120, edgeLength:60},
+      categories:[{name:'核心'},{name:'业务数据'},{name:'风控资产'},{name:'风险/血缘'}],
+      data:nodes, links:links,
+      lineStyle:{color:'rgba(0,212,255,0.3)',width:1,curveness:0.1},
+      label:{show:true,color:EC.textColor,fontSize:9},
+      emphasis:{lineStyle:{width:3,color:EC.accent}},
+      animationDuration:1500, animationDelay:i=>i*100
+    }]
+  });
+}
+
+/* ---- 第17页：中心辐射图 ---- */
+function initChart17(){
+  const c = echarts.init(document.getElementById('chart17'));
+  chartInstances['17'] = c;
+  c.setOption({
+    tooltip:{},
+    series:[{
+      type:'graph', layout:'force', roam:false,
+      force:{repulsion:200, edgeLength:[60,100], gravity:0.15},
+      data:[
+        {name:'智能体引擎',symbolSize:60,itemStyle:{color:EC.accent},label:{color:'#fff',fontWeight:'bold',fontSize:12}},
+        {name:'睿治平台',symbolSize:42,itemStyle:{color:EC.accent}},
+        {name:'行业大模型',symbolSize:42,itemStyle:{color:EC.accent2}},
+        {name:'亿信智问',symbolSize:42,itemStyle:{color:EC.accent3}},
+        {name:'合规治理',symbolSize:26,itemStyle:{color:EC.red},category:1},
+        {name:'数据融合',symbolSize:26,itemStyle:{color:EC.orange},category:1},
+        {name:'质量管控',symbolSize:26,itemStyle:{color:EC.yellow},category:1},
+        {name:'风险评估',symbolSize:26,itemStyle:{color:EC.accent2},category:1},
+        {name:'决策分析',symbolSize:26,itemStyle:{color:EC.accent3},category:1}
+      ],
+      links:[
+        {source:'智能体引擎',target:'睿治平台'},{source:'智能体引擎',target:'行业大模型'},{source:'智能体引擎',target:'亿信智问'},
+        {source:'睿治平台',target:'合规治理'},{source:'睿治平台',target:'数据融合'},{source:'睿治平台',target:'质量管控'},
+        {source:'行业大模型',target:'风险评估'},{source:'行业大模型',target:'决策分析'},
+        {source:'亿信智问',target:'决策分析'},{source:'亿信智问',target:'合规治理'}
+      ],
+      lineStyle:{color:'rgba(0,212,255,0.35)',width:1.5,curveness:0.15},
+      label:{show:true,color:EC.textColor,fontSize:10},
+      animationDuration:1500, animationDelay:i=>i*120
+    }]
+  });
+}
+
+/* ---- 第18页：分组柱状图 ---- */
+function initChart18(){
+  const c = echarts.init(document.getElementById('chart18'));
+  chartInstances['18'] = c;
+  c.setOption({
+    legend:{data:['传统人工','AI智能体'],textStyle:{color:EC.textColor,fontSize:11},top:0},
+    grid:{top:35,right:20,bottom:40,left:45,containLabel:true},
+    xAxis:{type:'category',data:['非结构化解析','合规适配','质量检出','风险识别','ETL自动化','报送合格率'],...EC.baseAxis(),axisLabel:{...EC.baseAxis().axisLabel,fontSize:10,interval:0}},
+    yAxis:{type:'value',max:100,...EC.baseAxis(),name:'%'},
+    series:[
+      {name:'传统人工',type:'bar',data:[40,45,50,42,30,82],itemStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:EC.red},{offset:1,color:'rgba(255,77,109,0.2)'}]),borderRadius:[4,4,0,0]},barGap:'15%',animationDelay:i=>i*100},
+      {name:'AI智能体',type:'bar',data:[92,90,95,88,85,98],itemStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:EC.accent3},{offset:1,color:'rgba(0,255,200,0.2)'}]),borderRadius:[4,4,0,0]},label:{show:true,position:'top',color:EC.accent3,fontSize:9},animationDelay:i=>i*100+300}
+    ]
+  });
+}
+
+/* ---- 第19页：横向条形图 ---- */
+function initChart19(){
+  const c = echarts.init(document.getElementById('chart19'));
+  chartInstances['19'] = c;
+  c.setOption({
+    grid:{top:15,right:40,bottom:15,left:10,containLabel:true},
+    xAxis:{type:'value',max:8,...EC.baseAxis(),axisLabel:{...EC.baseAxis().axisLabel,fontSize:10}},
+    yAxis:{type:'category',data:['质量规则配置','标准建标','模型设计','标准落标','质量探查','元数据补录'],...EC.baseAxis(),axisLabel:{...EC.baseAxis().axisLabel,fontSize:10}},
+    series:[{
+      type:'bar', data:[7,7,7,6,6,6],
+      itemStyle:{color:new echarts.graphic.LinearGradient(1,0,0,0,[{offset:0,color:EC.accent3},{offset:1,color:'rgba(0,255,200,0.15)'}]),borderRadius:[0,4,4,0]},
+      label:{show:true,position:'right',formatter:p=>p.value+'倍',color:EC.accent3,fontSize:11,fontWeight:'bold'},
+      animationDuration:1200, animationDelay:i=>i*150
+    }]
+  });
+}
+
+/* ---- 第20页：ROI折线图 ---- */
+function initChart20(){
+  const c = echarts.init(document.getElementById('chart20'));
+  chartInstances['20'] = c;
+  const months = ['1月','2月','3月','4月','5月','6月','9月','12月','18月','24月','30月','36月'];
+  const cost = [-100,-130,-150,-160,-165,-168,-172,-175,-178,-180,-182,-185];
+  const gain = [-100,-70,-35,-5,30,60,130,210,300,400,500,610];
+  c.setOption({
+    legend:{data:['累计投入','累计收益'],textStyle:{color:EC.textColor,fontSize:11},top:0},
+    grid:{top:35,right:25,bottom:30,left:45,containLabel:true},
+    xAxis:{type:'category',data:months,...EC.baseAxis(),axisLabel:{...EC.baseAxis().axisLabel,fontSize:10}},
+    yAxis:{type:'value',...EC.baseAxis(),name:'万元',axisLabel:{...EC.baseAxis().axisLabel,fontSize:10}},
+    series:[
+      {name:'累计投入',type:'line',data:cost,smooth:true,symbol:'circle',symbolSize:6,lineStyle:{color:EC.red,width:2},itemStyle:{color:EC.red},animationDuration:1800},
+      {name:'累计收益',type:'line',data:gain,smooth:true,symbol:'circle',symbolSize:6,lineStyle:{color:EC.accent3,width:2.5},itemStyle:{color:EC.accent3},
+        areaStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'rgba(0,255,200,0.25)'},{offset:1,color:'rgba(0,255,200,0)'}])},
+        markPoint:{data:[{name:'6个月回本',coord:['6月',60],value:'回本'}],itemStyle:{color:EC.yellow},label:{color:'#0A192F',fontWeight:'bold',fontSize:10}},
+        markLine:{silent:true,data:[{yAxis:0,lineStyle:{color:EC.accent,type:'dashed',opacity:0.4}}]},
+        animationDuration:2200}
+    ]
+  });
+}
+
+/* ============================================================
+   6. 启动
+   ============================================================ */
+initThree();
+initSlideAssets(0);
+
+// 页面可见性 — 性能优化
+document.addEventListener('visibilitychange', ()=>{
+  if(document.hidden){
+    bgAnimating = false;
+  } else {
+    if(!bgAnimating){ bgAnimating = true; animateThree(); }
+  }
+});
+
+// 移除滚动提示（几秒后）
+setTimeout(()=>{ const h=document.getElementById('scrollHint'); if(h) h.style.opacity='0'; }, 6000);
+</script>
+</body>
+</html>
