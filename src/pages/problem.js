@@ -11,12 +11,12 @@ const CHALLENGES = [
 ];
 
 export default {
-  id:'problem', index:1, label:'问题定义与痛点分析',
+  id:'problem', index:2, label:'问题定义与痛点分析',
   html(){
     return `
     <div class="slide-inner problem">
       <div>
-        <div class="sec-tag" style="color:#FF3B6B;border-color:rgba(255,59,107,.5);background:rgba(255,59,107,.08)" data-reveal>02 / CHALLENGE</div>
+        <div class="sec-tag" style="color:#FF3B6B;border-color:rgba(255,59,107,.5);background:rgba(255,59,107,.08)" data-reveal>03 / CHALLENGE</div>
         <h2 class="slide-title" data-reveal>金融数据治理的<span class="hl" style="background:linear-gradient(90deg,#FF3B6B,#FF8C42);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">五大核心挑战</span></h2>
         <p class="slide-sub" data-reveal>传统治理体系正在崩溃 — 规则驱动、人工经验、事后发现，已无法承载金融租赁业务的高速演进</p>
       </div>

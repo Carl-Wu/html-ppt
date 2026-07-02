@@ -104,7 +104,7 @@ export class Router {
       Q:(s)=>this.sw.slides[i].querySelector(s),QA:(s)=>this.sw.slides[i].querySelectorAll(s),index:i});
     // HUD updates
     document.getElementById('hudSection').textContent = p.label;
-    document.getElementById('pageIndex').textContent = `${String(i+1).padStart(2,'0')} / 08`;
+    document.getElementById('pageIndex').textContent = `${String(i+1).padStart(2,'0')} / ${String(pages.length).padStart(2,'0')}`;
     document.getElementById('progressFill').style.width = `${((i)/(pages.length-1))*100}%`;
     document.querySelectorAll('.rail-item').forEach((el,ri)=>el.classList.toggle('active',ri===i));
   }

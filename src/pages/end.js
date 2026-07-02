@@ -5,13 +5,13 @@ import { makeAICore, makeDataStreams } from '../components/particles.js';
 import { buildClosedLoop } from '../core/agent-runtime.js';
 
 export default {
-  id:'end', index:7, label:'FUTURE',
+  id:'end', index:8, label:'FUTURE',
   html(){
     return `
     <div class="slide-inner end">
       <div class="end-loop" data-reveal></div>
       <div class="end-center">
-        <div class="sec-tag" data-reveal>08 / FUTURE</div>
+        <div class="sec-tag" data-reveal>09 / FUTURE</div>
         <h2 class="slide-title end-title" data-reveal>迈向 <span class="hl">AI 自治</span> 的数据治理新时代</h2>
         <p class="end-manifesto" data-reveal>
           <span>让数据<span class="hl">自己被理解</span></span>

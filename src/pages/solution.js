@@ -31,12 +31,12 @@ function layerTexture(layer){
 }
 
 export default {
-  id:'solution', index:2, label:'整体解决方案思路',
+  id:'solution', index:3, label:'整体解决方案思路',
   html(){
     return `
     <div class="slide-inner solution">
       <div>
-        <div class="sec-tag" data-reveal>03 / ARCHITECTURE</div>
+        <div class="sec-tag" data-reveal>04 / ARCHITECTURE</div>
         <h2 class="slide-title" data-reveal>AI 数据合规治理与决策平台<span class="hl">总体架构</span></h2>
         <p class="slide-sub" data-reveal>自上而下五层闭环 — 从统一门户到数据源层，AI Agent 编排层居中驱动，数据治理底座承托全局</p>
       </div>

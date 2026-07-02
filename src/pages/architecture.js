@@ -24,12 +24,12 @@ function nodeTexture(t,sub,c){
 }
 
 export default {
-  id:'architecture', index:4, label:'技术路线与架构',
+  id:'architecture', index:5, label:'技术路线与架构',
   html(){
     return `
     <div class="slide-inner arch">
       <div>
-        <div class="sec-tag" data-reveal>05 / TECH STACK</div>
+        <div class="sec-tag" data-reveal>06 / TECH STACK</div>
         <h2 class="slide-title" data-reveal>AI 驱动的数据治理<span class="hl">技术架构</span></h2>
         <p class="slide-sub" data-reveal>以行业大模型为中枢，Agent 编排层调度，ChatBI 智能分析，睿治平台治理底座，数据湖仓统一存储 — 自动环绕镜头展示</p>
       </div>
