@@ -17,11 +17,10 @@ export default {
     return `
     <div class="slide-inner toc">
       <div class="toc-head">
-        <div class="sec-tag" data-reveal>02 / OUTLINE</div>
         <h2 class="slide-title" data-reveal>汇报<span class="hl">大纲</span></h2>
-        <p class="slide-sub" data-reveal>五大模块构成完整闭环 — 从问题洞察到价值落地</p>
       </div>
       <div class="toc-body">
+        <div class="toc-list">
         <div class="toc-spine"><div class="toc-spine-fill"></div></div>
         ${OUTLINE.map((c,i)=>`
           <div class="toc-node" data-i="${i}" data-reveal>
@@ -38,6 +37,7 @@ export default {
               <div class="toc-card-arrow">→</div>
             </div>
           </div>`).join('')}
+        </div>
       </div>
     </div>`;
   },
@@ -48,8 +48,9 @@ export default {
       s.textContent=`
       .toc{gap:10px}
       .toc-head{display:flex;flex-direction:column;gap:4px}
-      .toc-body{position:relative;flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;padding-left:8px;min-height:0}
-      .toc-spine{position:absolute;left:31px;top:8px;bottom:8px;width:2px;
+      .toc-body{position:relative;flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:8px;min-height:0}
+      .toc-list{position:relative;width:100%;max-width:640px;display:flex;flex-direction:column;gap:8px}
+      .toc-spine{position:absolute;left:23px;top:8px;bottom:8px;width:2px;
         background:rgba(79,140,255,.1);border-radius:2px;overflow:hidden}
       .toc-spine-fill{position:absolute;left:0;top:0;width:100%;height:0;
         background:linear-gradient(180deg,#00F5FF,#4F8CFF,#7C4DFF);
@@ -61,13 +62,13 @@ export default {
       .toc-dot-ring{position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(79,140,255,.25);
         transition:all .4s}
       .toc-dot-ring::before{content:"";position:absolute;inset:6px;border-radius:50%;
-        background:rgba(79,140,255,.06);transition:all .4s}
+        background:var(--bg);transition:all .4s}
       .toc-node.lit .toc-dot-num{color:var(--accent);text-shadow:0 0 10px rgba(0,245,255,.7)}
       .toc-node.lit .toc-dot-ring{border-color:rgba(0,245,255,.55);box-shadow:0 0 18px rgba(0,245,255,.3)}
-      .toc-node.lit .toc-dot-ring::before{background:rgba(0,245,255,.15)}
+      .toc-node.lit .toc-dot-ring::before{background:#0A1428}
       .toc-node.active .toc-dot-ring{border-color:var(--accent);box-shadow:0 0 24px rgba(0,245,255,.5);
         animation:tocPulse 2s ease-in-out infinite}
-      .toc-node.active .toc-dot-ring::before{background:rgba(0,245,255,.25)}
+      .toc-node.active .toc-dot-ring::before{background:#0C2030}
       .toc-card{display:flex;align-items:center;gap:14px;padding:12px 18px;flex:1;max-width:560px;
         transition:all .35s;border:1px solid var(--line)}
       .toc-card-num{font-family:var(--f-en);font-size:20px;font-weight:900;color:var(--primary);
@@ -83,7 +84,7 @@ export default {
       .toc-node:hover .toc-dot-ring{border-color:rgba(0,245,255,.4)}
       @keyframes tocPulse{0%,100%{box-shadow:0 0 24px rgba(0,245,255,.5)}50%{box-shadow:0 0 36px rgba(0,245,255,.75)}}
       @media(max-width:768px){.toc-card{padding:10px 14px}.toc-card-t{font-size:14px}
-        .toc-dot{width:40px;height:40px}.toc-spine{left:27px}}`;
+        .toc-dot{width:40px;height:40px}.toc-spine{left:19px}}`;
       document.head.appendChild(s);
     }
     this._neural = makeNeuralField({count:36,spread:32});

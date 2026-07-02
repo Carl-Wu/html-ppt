@@ -11,7 +11,6 @@ import engine from './engine.js';
 
 import pages from '../pages/index.js';
 
-const SECTIONS = pages.map(p=>({id:p.id,label:p.label}));
 
 export class Router {
   constructor(){
@@ -57,23 +56,11 @@ export class Router {
       p.mount({engine,gsap,router:this,slideEl,Q:(s)=>slideEl.querySelector(s),QA:(s)=>slideEl.querySelectorAll(s),index:i});
     });
 
-    this._buildRail();
     this._bindEvents();
     this._startClock();
 
     // activate first page
     this._activate(0);
-  }
-
-  _buildRail(){
-    const rail = document.getElementById('hudRail');
-    rail.innerHTML = SECTIONS.map((s,i)=>`
-      <div class="rail-item${i===0?' active':''}" data-i="${i}">
-        <span class="rail-bar"></span><span class="rail-txt">${String(i+1).padStart(2,'0')} ${s.label}</span>
-      </div>`).join('');
-    rail.querySelectorAll('.rail-item').forEach(el=>{
-      el.addEventListener('click',()=>this.goTo(+el.dataset.i));
-    });
   }
 
   _bindEvents(){
@@ -106,7 +93,6 @@ export class Router {
     document.getElementById('hudSection').textContent = p.label;
     document.getElementById('pageIndex').textContent = `${String(i+1).padStart(2,'0')} / ${String(pages.length).padStart(2,'0')}`;
     document.getElementById('progressFill').style.width = `${((i)/(pages.length-1))*100}%`;
-    document.querySelectorAll('.rail-item').forEach((el,ri)=>el.classList.toggle('active',ri===i));
   }
   _deactivate(i){
     const p = pages[i]; if(!p) return;

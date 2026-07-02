@@ -8,7 +8,6 @@ export default {
     return `
     <div class="slide-inner effects">
       <div>
-        <div class="sec-tag" data-reveal>07 / IMPACT</div>
         <h2 class="slide-title" data-reveal>AI 智能体带来的<span class="hl">效率跃迁</span></h2>
         <p class="slide-sub" data-reveal>从天级到分钟级、从 T+7 到 T+0 — 数据治理全链路时效与人力成本实现数量级跃升</p>
       </div>

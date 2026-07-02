@@ -12,7 +12,6 @@ export default {
     <div class="slide-inner agents">
       <div class="agents-head">
         <div>
-          <div class="sec-tag" data-reveal>05 / AGENT SWARM</div>
           <h2 class="slide-title" data-reveal>五大 AI Agent<span class="hl">协同治理体系</span></h2>
           <p class="slide-sub" data-reveal>多 Agent 分工协作，覆盖合规、融合、质量、风险、决策全链路 — 点击卡片查看 Agent 详情与执行流程</p>
         </div>

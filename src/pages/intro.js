@@ -13,7 +13,6 @@ export default {
         <div class="intro-ring"></div>
       </div>
       <div class="intro-foot">
-        <div class="sec-tag" data-reveal>01 / COVER</div>
         <h1 class="slide-sub" data-reveal>DMAM    中国好数据·数据智能体（Data Agent）AI应用实战</h1>
         <p class="slide-sub" data-reveal>大模型 × 数据治理 × 数据分析 × 智能体 — 让金融数据合规治理从人工规则时代，迈向 AI Agent 自治时代，把数据分析，从经验驱动，转向AI Agent主动决策</p>
         <div class="intro-stats" data-reveal>
@@ -31,6 +30,7 @@ export default {
       style.textContent=`
       .intro{justify-content:space-between;padding-top:10vh}
       .intro-stage{position:relative;flex:1;display:grid;place-items:center;min-height:240px}
+      .intro-stage .slide-title{text-align:center;font-size:clamp(35.2px,3.74vw,50.6px)}
       .intro-coreword{font-family:var(--f-en);font-weight:900;letter-spacing:6px;font-size:clamp(30px,3.4vw,46px);
         background:linear-gradient(90deg,#00F5FF,#4F8CFF,#7C4DFF);-webkit-background-clip:text;background-clip:text;
         -webkit-text-fill-color:transparent;filter:drop-shadow(0 0 24px rgba(0,245,255,.55));position:relative;z-index:2}

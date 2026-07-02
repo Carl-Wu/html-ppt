@@ -16,7 +16,6 @@ export default {
     return `
     <div class="slide-inner inno">
       <div>
-        <div class="sec-tag" data-reveal>08 / INNOVATION</div>
         <h2 class="slide-title" data-reveal>三大<span class="hl">核心创新</span></h2>
         <p class="slide-sub" data-reveal>以 Agent 自治、大模型建标、治理决策闭环，重构金融数据治理的底层范式</p>
       </div>
