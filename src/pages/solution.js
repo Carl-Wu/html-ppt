@@ -37,7 +37,8 @@ const LAYERS = [
 ];
 
 function layerTexture(layer){
-  const w=1024,h=256,c=document.createElement('canvas');c.width=w;c.height=h;
+  // 贴图比例与 slab 面比例一致，避免文字拉伸失真
+  const w=1280,h=320,c=document.createElement('canvas');c.width=w;c.height=h;
   const x=c.getContext('2d');
   const g=x.createLinearGradient(0,0,w,h);
   g.addColorStop(0,'rgba(12,28,74,0.96)');g.addColorStop(1,'rgba(8,18,48,0.96)');
@@ -46,20 +47,20 @@ function layerTexture(layer){
   if(layer.core){
     const bg=x.createLinearGradient(0,0,w,0);
     bg.addColorStop(0,'#00F5FF');bg.addColorStop(0.5,'#7C4DFF');bg.addColorStop(1,'#22E0A1');
-    x.strokeStyle=bg;x.lineWidth=6;x.strokeRect(8,8,w-16,h-16);
-    x.shadowColor='#7C4DFF';x.shadowBlur=24;x.strokeRect(8,8,w-16,h-16);x.shadowBlur=0;
+    x.strokeStyle=bg;x.lineWidth=8;x.strokeRect(10,10,w-20,h-20);
+    x.shadowColor='#7C4DFF';x.shadowBlur=30;x.strokeRect(10,10,w-20,h-20);x.shadowBlur=0;
   }else{
-    x.strokeStyle=layer.c;x.lineWidth=4;x.strokeRect(6,6,w-12,h-12);
+    x.strokeStyle=layer.c;x.lineWidth=5;x.strokeRect(8,8,w-16,h-16);
   }
-  x.fillStyle=layer.c;x.font='900 64px Orbitron, sans-serif';x.textBaseline='top';
-  x.fillText(layer.n,40,40);
-  x.fillStyle='#FFFFFF';x.font='900 56px "Noto Sans SC", sans-serif';
-  x.fillText(layer.t,150,44);
-  x.fillStyle='#9FB2E8';x.font='400 30px "Noto Sans SC", sans-serif';
-  x.fillText(layer.sub,150,118);
+  x.fillStyle=layer.c;x.font='900 80px Orbitron, sans-serif';x.textBaseline='top';
+  x.fillText(layer.n,48,52);
+  x.fillStyle='#FFFFFF';x.font='900 72px "Noto Sans SC", sans-serif';
+  x.fillText(layer.t,200,56);
+  x.fillStyle='#9FB2E8';x.font='400 38px "Noto Sans SC", sans-serif';
+  x.fillText(layer.sub,200,150);
   // accent bar
-  x.fillStyle=layer.c;x.fillRect(40,196,w-80,6);
-  const tex=new THREE.CanvasTexture(c);tex.anisotropy=4;return tex;
+  x.fillStyle=layer.c;x.fillRect(48,248,w-96,8);
+  const tex=new THREE.CanvasTexture(c);tex.anisotropy=8;return tex;
 }
 
 export default {
@@ -102,23 +103,23 @@ export default {
       .sol-head{flex-shrink:0}
       .sol-head .slide-title{margin-bottom:4px}
       .sol-head .slide-sub{margin-bottom:0}
-      .sol-body{display:grid;grid-template-columns:2fr 3fr;gap:28px;flex:1;min-height:0;position:relative}
-      .sol-left{display:flex;flex-direction:column;gap:7px;min-height:0}
-      .sol-right{display:flex;flex-direction:column;gap:7px;min-height:0}
+      .sol-body{display:grid;grid-template-columns:2fr 3fr;gap:32px;flex:1;min-height:0;position:relative}
+      .sol-left{display:flex;flex-direction:column;gap:8px;min-height:0}
+      .sol-right{display:flex;flex-direction:column;gap:8px;min-height:0}
       .sol-sec-title{font-size:15px;font-weight:800;color:var(--text-bright);letter-spacing:1px;
-        padding-left:4px;border-left:3px solid #4F8CFF;flex-shrink:0}
-      .drv-item{display:flex;align-items:flex-start;gap:12px;padding:9px 13px;position:relative;overflow:hidden;flex:1;min-height:0}
-      .drv-num{font-family:var(--f-en);font-size:22px;font-weight:900;color:var(--ac);
-        text-shadow:0 0 12px var(--ac);min-width:30px;line-height:1.1}
+        padding-left:6px;border-left:3px solid #4F8CFF;flex-shrink:0}
+      .drv-item{display:flex;align-items:flex-start;gap:12px;padding:10px 14px;position:relative;overflow:hidden;flex:1;min-height:0}
+      .drv-num{font-family:var(--f-en);font-size:24px;font-weight:900;color:var(--ac);
+        text-shadow:0 0 12px var(--ac);min-width:32px;line-height:1.1}
       .drv-body{flex:1}
-      .drv-t{font-size:14px;font-weight:700;color:var(--text-bright)}
-      .drv-d{font-size:12px;color:var(--text-dim);margin-top:3px;line-height:1.45}
+      .drv-t{font-size:15px;font-weight:700;color:var(--text-bright)}
+      .drv-d{font-size:13px;color:var(--text-dim);margin-top:3px;line-height:1.5}
       .drv-bar{position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--ac);box-shadow:0 0 10px var(--ac)}
       .sol-tower-wrap{position:relative;border-radius:14px;overflow:hidden;flex:1;min-height:0;
         background:radial-gradient(circle at 50% 50%,rgba(79,140,255,.08),transparent 70%)}
       .sol-tower-slot{position:absolute;inset:0}
       .sol-hint{position:absolute;bottom:8px;left:0;right:0;text-align:center;
-        font-family:var(--f-mono);font-size:11px;color:var(--text-dim);letter-spacing:1px}
+        font-family:var(--f-mono);font-size:12px;color:var(--text-dim);letter-spacing:1px}
       @media(max-width:900px){.sol-body{grid-template-columns:1fr;grid-template-rows:auto 1fr}}`;
       document.head.appendChild(s);
     }
@@ -127,15 +128,16 @@ export default {
   activate(ctx){
     const Q=ctx.Q,QA=ctx.QA;
     engine.clearFeatures();
-    engine.camera.position.z = 24;
+    engine.camera.position.z = 27;
 
     const group=new THREE.Group();
-    group.position.x = 3.4;   // 推到右侧60%区域
+    // 居中于右侧60%区域：右侧区域中心 ≈ 屏幕中线右侧
+    group.position.x = 5.2;
     this.group=group;
     this.slabs=[];
     this.connectors=[];
 
-    const slabH=1.0, gap=1.25, slabW=7.4, slabD=2.6;
+    const slabW=10.5, slabH=2.0, slabD=3.2, gap=2.3;
     const totalH=LAYERS.length*slabH+(LAYERS.length-1)*gap;
     LAYERS.forEach((l,i)=>{
       const y = totalH/2 - i*(slabH+gap) - slabH/2;
@@ -158,31 +160,28 @@ export default {
         const startY=y-slabH/2;
         const endY=y-slabH/2-gap;
         const beamH=Math.abs(startY-endY);
-        // 半透明光柱
         const beamMat=new THREE.MeshBasicMaterial({
           color:new THREE.Color(l.c),transparent:true,opacity:0.0,side:THREE.DoubleSide,
           blending:THREE.AdditiveBlending,depthWrite:false
         });
-        const beam=new THREE.Mesh(new THREE.PlaneGeometry(0.12,beamH),beamMat);
+        const beam=new THREE.Mesh(new THREE.PlaneGeometry(0.16,beamH),beamMat);
         beam.position.set(0,(startY+endY)/2,slabD/2+0.05);
         group.add(beam);
-        // 下行三角箭头
         const arrowMat=new THREE.MeshBasicMaterial({
           color:new THREE.Color(l.c),transparent:true,opacity:0.0,side:THREE.DoubleSide,
           blending:THREE.AdditiveBlending,depthWrite:false
         });
-        const arrow=new THREE.Mesh(new THREE.ConeGeometry(0.22,0.4,4),arrowMat);
-        arrow.position.set(0,endY+0.2,slabD/2+0.05);
-        arrow.rotation.z=Math.PI; // 尖端朝下
+        const arrow=new THREE.Mesh(new THREE.ConeGeometry(0.3,0.55,4),arrowMat);
+        arrow.position.set(0,endY+0.28,slabD/2+0.05);
+        arrow.rotation.z=Math.PI;
         group.add(arrow);
-        // 流动光点（沿光柱向下移动）
         const dots=[];
         for(let k=0;k<3;k++){
           const dotMat=new THREE.MeshBasicMaterial({
             color:new THREE.Color(k%2?LAYERS[i+1].c:l.c),transparent:true,opacity:0.0,
             blending:THREE.AdditiveBlending,depthWrite:false
           });
-          const dot=new THREE.Mesh(new THREE.SphereGeometry(0.12,12,12),dotMat);
+          const dot=new THREE.Mesh(new THREE.SphereGeometry(0.16,12,12),dotMat);
           dot.position.set(0,startY,slabD/2+0.1);
           group.add(dot);
           dots.push({mesh:dot,mat:dotMat,startY,endY,phase:k/3});
@@ -209,7 +208,6 @@ export default {
       this._lightTl.to(s.mat,{opacity:1,emissiveIntensity:s.l.core?0.55:0.35,duration:0.5,ease:'power2.out'},i*0.22)
         .to(s.edges.material,{opacity:s.l.core?1.0:0.8,duration:0.4},i*0.22)
         .call(()=>{this._lit[i]=true;},null,i*0.22+0.45);
-      // 点亮对应连接器
       if(this.connectors[i]){
         const c=this.connectors[i];
         this._lightTl.to(c.beamMat,{opacity:0.5,duration:0.4},i*0.22+0.5)
@@ -231,9 +229,9 @@ export default {
   },
   update(dt,t){
     if(!this.group) return;
-    // 自动微旋 + 指针倾斜
-    this.group.rotation.y = Math.sin(t*0.2)*0.45 + (this.pointer?.x||0)*0.3;
-    this.group.rotation.x = (this.pointer?.y||0)*0.1;
+    // 轻微自动旋转（保持文字可读）+ 指针倾斜
+    this.group.rotation.y = Math.sin(t*0.15)*0.22 + (this.pointer?.x||0)*0.18;
+    this.group.rotation.x = (this.pointer?.y||0)*0.08;
 
     // 射线悬停
     let hoverIdx=-1;
@@ -261,7 +259,6 @@ export default {
         const fade=Math.sin(tt*Math.PI);
         d.mat.opacity = 0.9*fade;
       });
-      // 光柱呼吸
       c.beamMat.opacity = 0.4 + Math.sin(t*2+i)*0.12;
     });
   }
