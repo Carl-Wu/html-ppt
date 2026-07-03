@@ -1,5 +1,5 @@
 /* Page 4 — /solution 整体解决方案思路
-   左40%：核心驱动逻辑（4点）  右60%：CSS 3D 透视的四层架构 + 层间流光箭头 */
+   左40%：核心驱动逻辑（4点）  右60%：全息投影四层架构塔 */
 import { gsap } from '../core/gsap-controller.js';
 
 /* ---- 左侧：核心驱动逻辑 ---- */
@@ -22,16 +22,16 @@ const DRIVERS = [
 const LAYERS = [
   {n:'L1', t:'统一智能门户层',
    sub:'全岗位统一交互入口 · 分级权限管控 · 自然语言对话交互',
-   c:'#00F5FF'},
+   c:'#00F5FF', tag:'PORTAL'},
   {n:'L2', t:'N+场景智能体层',
    sub:'可扩展智能体矩阵 | 重点落地：合规治理、数据融合、质量管控、风险评估、决策分析',
-   c:'#4F8CFF'},
+   c:'#4F8CFF', tag:'AGENTS'},
   {n:'L3', t:'智能体引擎层',
    sub:'智能中枢 · 大模型知识增强 · 任务规划 · 知识检索 · 工作流编排 · 工具调用',
-   c:'#7C4DFF', core:true},
+   c:'#7C4DFF', tag:'CORE', core:true},
   {n:'L4', t:'全域数据治理底座层',
    sub:'全量数据承载执行载体 · 全链路治理能力 · 合规可追溯可审计',
-   c:'#22E0A1'},
+   c:'#22E0A1', tag:'BASE'},
 ];
 
 export default {
@@ -58,25 +58,35 @@ export default {
         </div>
         <div class="sol-right">
           <div class="sol-sec-title" data-reveal>四层递进式顶层架构</div>
-          <div class="sol-stage" data-reveal>
-            <div class="sol-tower">
+          <div class="holo-stage" data-reveal>
+            <div class="holo-grid"></div>
+            <div class="holo-tower">
               ${LAYERS.map((l,i)=>`
-              <div class="sol-layer ${l.core?'core':''}" style="--ac:${l.c}" data-layer="${i}">
-                <div class="sol-layer-inner">
-                  <div class="sol-ln">${l.n}</div>
-                  <div class="sol-lt">${l.t}</div>
-                  <div class="sol-ls">${l.sub}</div>
+              <div class="holo-layer ${l.core?'core':''}" style="--ac:${l.c}" data-layer="${i}">
+                <div class="holo-scan"></div>
+                <div class="holo-corner tl"></div><div class="holo-corner tr"></div>
+                <div class="holo-corner bl"></div><div class="holo-corner br"></div>
+                <div class="holo-panel">
+                  <div class="holo-ln">${l.n}</div>
+                  <div class="holo-lc">
+                    <div class="holo-lt">${l.t}</div>
+                    <div class="holo-ls">${l.sub}</div>
+                  </div>
+                  <div class="holo-tag">${l.tag}</div>
                 </div>
-                <div class="sol-lbar"></div>
+                <div class="holo-glow"></div>
               </div>
               ${i<LAYERS.length-1?`
-              <div class="sol-arrow" style="--ac:${l.c}" data-arrow="${i}">
-                <div class="sol-arrow-beam"></div>
-                <div class="sol-arrow-head"></div>
-                <div class="sol-flow"></div>
+              <div class="holo-conduit" style="--ac:${l.c}" data-conduit="${i}">
+                <div class="holo-beam"></div>
+                <div class="holo-particles">
+                  <span></span><span></span><span></span><span></span>
+                </div>
+                <div class="holo-arrow"></div>
               </div>`:''}`).join('')}
             </div>
-            <div class="sol-hint">悬停层级高亮 · 指令与数据自上而下流转</div>
+            <div class="holo-ring"></div>
+            <div class="holo-hint">悬停层级高亮 · 指令与数据自上而下流转</div>
           </div>
         </div>
       </div>
@@ -103,60 +113,111 @@ export default {
       .drv-d{font-size:13px;color:var(--text-dim);margin-top:3px;line-height:1.5}
       .drv-bar{position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--ac);box-shadow:0 0 10px var(--ac)}
 
-      /* 右侧 3D 透视舞台 */
-      .sol-stage{flex:1;min-height:0;position:relative;display:flex;align-items:center;justify-content:center;
-        perspective:1400px;perspective-origin:50% 45%;
-        background:radial-gradient(circle at 50% 50%,rgba(79,140,255,.08),transparent 70%);
+      /* ===== 全息投影舞台 ===== */
+      .holo-stage{flex:1;min-height:0;position:relative;display:flex;align-items:center;justify-content:center;
+        perspective:1600px;perspective-origin:50% 40%;
+        background:radial-gradient(ellipse at 50% 60%,rgba(79,140,255,.12),transparent 65%);
         border-radius:14px;overflow:hidden}
-      .sol-tower{transform-style:preserve-3d;transform:rotateX(8deg) rotateY(-14deg);
-        display:flex;flex-direction:column;align-items:center;
-        width:96%;max-width:560px;gap:0;transition:transform .4s ease}
-      .sol-layer{position:relative;width:100%;border-radius:12px;padding:14px 20px;
-        background:linear-gradient(135deg,rgba(18,30,66,.92),rgba(8,18,48,.92));
-        border:1px solid var(--ac);box-shadow:0 8px 30px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.06);
-        transform:translateZ(0);transition:transform .35s ease,box-shadow .35s ease;cursor:default;overflow:hidden}
-      .sol-layer::before{content:"";position:absolute;inset:0;border-radius:12px;pointer-events:none;
-        background:linear-gradient(120deg,transparent 30%,color-mix(in srgb,var(--ac) 14%,transparent) 50%,transparent 70%);
-        opacity:.6}
-      .sol-layer.core{border-width:2px;
-        border-image:linear-gradient(90deg,#00F5FF,#7C4DFF,#22E0A1) 1;
-        box-shadow:0 0 28px rgba(124,77,255,.45),0 8px 30px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.1)}
-      .sol-layer.core::after{content:"核心层";position:absolute;top:8px;right:14px;
-        font-family:var(--f-en);font-size:11px;font-weight:700;letter-spacing:1px;
-        color:#7C4DFF;text-shadow:0 0 8px #7C4DFF;
-        background:rgba(124,77,255,.15);padding:2px 8px;border-radius:4px;border:1px solid rgba(124,77,255,.4)}
-      .sol-layer:hover{transform:translateZ(18px) scale(1.02);
-        box-shadow:0 0 36px color-mix(in srgb,var(--ac) 55%,transparent),0 12px 40px rgba(0,0,0,.5)}
-      .sol-layer-inner{display:flex;align-items:center;gap:14px;position:relative;z-index:2}
-      .sol-ln{font-family:var(--f-en);font-size:26px;font-weight:900;color:var(--ac);
-        text-shadow:0 0 14px var(--ac);min-width:42px;flex-shrink:0}
-      .sol-lt{font-size:17px;font-weight:800;color:var(--text-bright);line-height:1.2}
-      .sol-ls{font-size:12.5px;color:var(--text-dim);margin-top:4px;line-height:1.4}
-      .sol-layer-inner > div:not(.sol-ln){flex:1;min-width:0}
-      .sol-lbar{position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--ac);box-shadow:0 0 12px var(--ac)}
+      /* 全息网格地面 */
+      .holo-grid{position:absolute;bottom:0;left:-20%;right:-20%;height:55%;
+        background-image:
+          linear-gradient(rgba(0,245,255,.18) 1px,transparent 1px),
+          linear-gradient(90deg,rgba(0,245,255,.18) 1px,transparent 1px);
+        background-size:38px 38px;
+        transform:rotateX(72deg);transform-origin:bottom center;
+        mask-image:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.7) 50%,transparent 100%);
+        -webkit-mask-image:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.7) 50%,transparent 100%);
+        animation:holoGridMove 6s linear infinite;pointer-events:none}
+      @keyframes holoGridMove{from{background-position:0 0}to{background-position:0 38px}}
+      /* 底部脉冲环 */
+      .holo-ring{position:absolute;bottom:8%;left:50%;width:60%;height:30px;
+        transform:translateX(-50%) rotateX(80deg);border-radius:50%;
+        border:1.5px solid rgba(0,245,255,.3);pointer-events:none;
+        box-shadow:0 0 24px rgba(0,245,255,.2),inset 0 0 24px rgba(0,245,255,.1);
+        animation:holoRingPulse 3s ease-in-out infinite}
+      @keyframes holoRingPulse{0%,100%{opacity:.4;transform:translateX(-50%) rotateX(80deg) scale(1)}
+        50%{opacity:.8;transform:translateX(-50%) rotateX(80deg) scale(1.08)}}
 
-      /* 层间流光箭头 */
-      .sol-arrow{position:relative;height:42px;width:100%;display:flex;flex-direction:column;align-items:center;
-        transform:translateZ(-2px)}
-      .sol-arrow-beam{width:3px;height:100%;background:linear-gradient(180deg,var(--ac),transparent);
-        opacity:.5;border-radius:2px}
-      .sol-arrow-head{width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;
-        border-top:9px solid var(--ac);margin-top:-2px;filter:drop-shadow(0 0 5px var(--ac))}
-      .sol-flow{position:absolute;left:50%;top:0;width:3px;height:14px;border-radius:2px;
+      .holo-tower{transform-style:preserve-3d;transform:rotateX(6deg) rotateY(-12deg);
+        display:flex;flex-direction:column;align-items:center;width:94%;max-width:540px;
+        position:relative;z-index:2;transition:transform .5s ease}
+      /* 单层全息面板 */
+      .holo-layer{position:relative;width:100%;border-radius:6px;padding:13px 18px;
+        background:linear-gradient(135deg,rgba(12,24,56,.85),rgba(6,14,40,.85));
+        border:1px solid var(--ac);
+        box-shadow:0 0 20px color-mix(in srgb,var(--ac) 30%,transparent),
+          inset 0 1px 0 rgba(255,255,255,.05),0 6px 24px rgba(0,0,0,.5);
+        transform:translateZ(0);transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s;
+        cursor:default;overflow:hidden;backdrop-filter:blur(4px)}
+      .holo-layer::before{content:"";position:absolute;inset:0;border-radius:6px;pointer-events:none;
+        background:repeating-linear-gradient(0deg,transparent 0,transparent 3px,
+          color-mix(in srgb,var(--ac) 6%,transparent) 3px,color-mix(in srgb,var(--ac) 6%,transparent) 4px);
+        opacity:.5}
+      /* 扫描线 */
+      .holo-scan{position:absolute;left:0;right:0;height:2px;
+        background:linear-gradient(90deg,transparent,var(--ac),transparent);
+        box-shadow:0 0 12px var(--ac);opacity:0;pointer-events:none;top:0}
+      .holo-layer.lit .holo-scan{animation:holoScan 2.4s linear infinite}
+      @keyframes holoScan{0%{top:0;opacity:0}10%{opacity:.9}90%{opacity:.9}100%{top:100%;opacity:0}}
+      /* 角标 */
+      .holo-corner{position:absolute;width:12px;height:12px;border-color:var(--ac);pointer-events:none}
+      .holo-corner.tl{top:3px;left:3px;border-top:2px solid;border-left:2px solid}
+      .holo-corner.tr{top:3px;right:3px;border-top:2px solid;border-right:2px solid}
+      .holo-corner.bl{bottom:3px;left:3px;border-bottom:2px solid;border-left:2px solid}
+      .holo-corner.br{bottom:3px;right:3px;border-bottom:2px solid;border-right:2px solid}
+      /* 核心层强调 */
+      .holo-layer.core{border-width:1.5px;
+        border-image:linear-gradient(90deg,#00F5FF,#7C4DFF,#22E0A1) 1;
+        box-shadow:0 0 32px rgba(124,77,255,.5),inset 0 1px 0 rgba(255,255,255,.08),0 6px 24px rgba(0,0,0,.5)}
+      .holo-layer.core .holo-glow{opacity:1}
+      .holo-glow{position:absolute;inset:-2px;border-radius:8px;pointer-events:none;opacity:0;
+        background:radial-gradient(ellipse at 50% 50%,color-mix(in srgb,var(--ac) 25%,transparent),transparent 70%);
+        transition:opacity .35s}
+      .holo-layer:hover{transform:translateZ(24px) scale(1.025);
+        box-shadow:0 0 40px color-mix(in srgb,var(--ac) 60%,transparent),0 10px 36px rgba(0,0,0,.6)}
+      .holo-layer:hover .holo-glow{opacity:1}
+      /* 面板内容 */
+      .holo-panel{display:flex;align-items:center;gap:14px;position:relative;z-index:2}
+      .holo-ln{font-family:var(--f-en);font-size:28px;font-weight:900;color:var(--ac);
+        text-shadow:0 0 16px var(--ac);min-width:46px;flex-shrink:0;
+        border-right:1px solid color-mix(in srgb,var(--ac) 40%,transparent);padding-right:14px}
+      .holo-lc{flex:1;min-width:0}
+      .holo-lt{font-size:17px;font-weight:800;color:var(--text-bright);line-height:1.2}
+      .holo-ls{font-size:12px;color:var(--text-dim);margin-top:4px;line-height:1.4}
+      .holo-tag{font-family:var(--f-en);font-size:10px;font-weight:700;letter-spacing:1.5px;
+        color:var(--ac);text-shadow:0 0 6px var(--ac);
+        background:color-mix(in srgb,var(--ac) 12%,transparent);
+        padding:3px 8px;border-radius:3px;border:1px solid color-mix(in srgb,var(--ac) 35%,transparent);
+        flex-shrink:0;align-self:flex-start;margin-top:2px}
+
+      /* 层间能量管道 */
+      .holo-conduit{position:relative;height:40px;width:100%;display:flex;flex-direction:column;align-items:center;
+        justify-content:center;transform:translateZ(-4px)}
+      .holo-beam{position:absolute;left:50%;top:0;bottom:0;width:2px;transform:translateX(-50%);
+        background:linear-gradient(180deg,var(--ac),color-mix(in srgb,var(--ac) 20%,transparent));
+        box-shadow:0 0 8px var(--ac);opacity:.4;border-radius:2px}
+      .holo-arrow{position:absolute;bottom:2px;left:50%;transform:translateX(-50%);
+        width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;
+        border-top:8px solid var(--ac);filter:drop-shadow(0 0 5px var(--ac))}
+      .holo-particles{position:absolute;left:50%;top:0;bottom:0;width:2px;transform:translateX(-50%)}
+      .holo-particles span{position:absolute;left:50%;width:4px;height:4px;border-radius:50%;
         background:var(--ac);box-shadow:0 0 8px var(--ac),0 0 16px var(--ac);
         transform:translateX(-50%);opacity:0}
-      .sol-arrow.active .sol-flow{animation:solFlowDown 1.6s linear infinite}
-      @keyframes solFlowDown{
-        0%{top:0;opacity:0}
-        15%{opacity:1}
-        85%{opacity:1}
-        100%{top:calc(100% - 14px);opacity:0}
+      .holo-conduit.active .holo-particles span:nth-child(1){animation:holoParticleDown 1.4s linear infinite}
+      .holo-conduit.active .holo-particles span:nth-child(2){animation:holoParticleDown 1.4s linear infinite .35s}
+      .holo-conduit.active .holo-particles span:nth-child(3){animation:holoParticleDown 1.4s linear infinite .7s}
+      .holo-conduit.active .holo-particles span:nth-child(4){animation:holoParticleDown 1.4s linear infinite 1.05s}
+      @keyframes holoParticleDown{
+        0%{top:0;opacity:0;transform:translateX(-50%) scale(.6)}
+        15%{opacity:1;transform:translateX(-50%) scale(1)}
+        85%{opacity:1;transform:translateX(-50%) scale(1)}
+        100%{top:100%;opacity:0;transform:translateX(-50%) scale(.6)}
       }
 
-      .sol-hint{position:absolute;bottom:8px;left:0;right:0;text-align:center;
-        font-family:var(--f-mono);font-size:11px;color:var(--text-dim);letter-spacing:1px}
+      .holo-hint{position:absolute;bottom:6px;left:0;right:0;text-align:center;
+        font-family:var(--f-mono);font-size:11px;color:var(--text-dim);letter-spacing:1px;z-index:3}
       @media(max-width:900px){.sol-body{grid-template-columns:1fr;grid-template-rows:auto 1fr}
-        .sol-tower{transform:rotateX(4deg) rotateY(-6deg)}}`;
+        .holo-tower{transform:rotateX(3deg) rotateY(-6deg)}}`;
       document.head.appendChild(s);
     }
     this._slideEl=ctx.slideEl;
@@ -167,16 +228,19 @@ export default {
     this._tl=gsap.timeline({delay:0.15});
     this._tl.from(Q('[data-reveal]'),{y:24,opacity:0,duration:0.65,stagger:0.05,ease:'power3.out'});
 
-    // 层卡片 3D 入场
-    const layers=QA('.sol-layer');
-    const arrows=QA('.sol-arrow');
+    // 全息面板 3D 入场
+    const layers=QA('.holo-layer');
+    const conduits=QA('.holo-conduit');
     if(layers.length){
-      this._tl.from(layers,{z:-120,opacity:0,duration:0.6,stagger:0.18,ease:'power3.out'},'-=0.3');
+      this._tl.from(layers,{z:-100,opacity:0,duration:0.6,stagger:0.2,ease:'power3.out'},'-=0.3');
+      layers.forEach((el,i)=>{
+        this._tl.call(()=>el.classList.add('lit'),null,'<'+(i*0.2+0.5));
+      });
     }
-    // 箭头依次激活流光
-    if(arrows.length){
-      arrows.forEach((a,i)=>{
-        this._tl.call(()=>a.classList.add('active'),null,'<'+(i*0.18+0.3));
+    // 能量管道依次激活
+    if(conduits.length){
+      conduits.forEach((c,i)=>{
+        this._tl.call(()=>c.classList.add('active'),null,'<'+(i*0.2+0.6));
       });
     }
   },
