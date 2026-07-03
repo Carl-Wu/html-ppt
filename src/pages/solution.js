@@ -86,7 +86,6 @@ export default {
               </div>`:''}`).join('')}
             </div>
             <div class="holo-ring"></div>
-            <div class="holo-hint">悬停层级高亮 · 指令与数据自上而下流转</div>
           </div>
         </div>
       </div>
@@ -173,9 +172,6 @@ export default {
       .holo-glow{position:absolute;inset:-2px;border-radius:8px;pointer-events:none;opacity:0;
         background:radial-gradient(ellipse at 50% 50%,color-mix(in srgb,var(--ac) 25%,transparent),transparent 70%);
         transition:opacity .35s}
-      .holo-layer:hover{transform:translateZ(24px) scale(1.025);
-        box-shadow:0 0 40px color-mix(in srgb,var(--ac) 60%,transparent),0 10px 36px rgba(0,0,0,.6)}
-      .holo-layer:hover .holo-glow{opacity:1}
       /* 面板内容 */
       .holo-panel{display:flex;align-items:center;gap:14px;position:relative;z-index:2}
       .holo-ln{font-family:var(--f-en);font-size:28px;font-weight:900;color:var(--ac);
@@ -214,8 +210,6 @@ export default {
         100%{top:100%;opacity:0;transform:translateX(-50%) scale(.6)}
       }
 
-      .holo-hint{position:absolute;bottom:6px;left:0;right:0;text-align:center;
-        font-family:var(--f-mono);font-size:11px;color:var(--text-dim);letter-spacing:1px;z-index:3}
       @media(max-width:900px){.sol-body{grid-template-columns:1fr;grid-template-rows:auto 1fr}
         .holo-tower{transform:rotateX(3deg) rotateY(-6deg)}}`;
       document.head.appendChild(s);
