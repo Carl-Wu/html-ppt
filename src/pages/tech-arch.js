@@ -139,14 +139,14 @@ export default {
         box-shadow:0 0 10px color-mix(in srgb,var(--ac) 50%,transparent)}
 
       .tconduit{position:relative;height:26px;width:100%;display:flex;flex-direction:column;align-items:center;overflow:visible;
-        justify-content:center;transform:translateZ(-3px);flex-shrink:0}
+        justify-content:center;transform:translateZ(-3px);flex-shrink:0;z-index:5}
       .tc-beam{position:absolute;left:50%;top:0;bottom:0;width:2px;transform:translateX(-50%);
         background:linear-gradient(180deg,var(--ac),color-mix(in srgb,var(--ac) 16%,transparent));
         box-shadow:0 0 8px var(--ac);opacity:.3;border-radius:2px}
-      .tc-arrow{position:absolute;bottom:1px;left:50%;transform:translateX(-50%);
+      .tc-arrow{position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);
         width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;
         border-top:7px solid var(--ac);filter:drop-shadow(0 0 5px var(--ac))}
-      .tc-down{position:absolute;left:50%;top:0;height:38px;width:2px;transform:translateX(-50%);overflow:visible}
+      .tc-down{position:absolute;left:50%;top:0;height:50px;width:2px;transform:translateX(-50%);overflow:visible}
       .tc-up{position:absolute;left:50%;top:0;height:26px;width:2px;transform:translateX(-50%);overflow:visible}
       .tc-down span,.tc-up span{position:absolute;left:50%;width:4px;height:4px;border-radius:50%;
         transform:translateX(-50%);opacity:0}
@@ -158,8 +158,8 @@ export default {
       .tconduit.active .tc-up span:nth-child(1){animation:taUp 2s linear infinite .3s}
       .tconduit.active .tc-up span:nth-child(2){animation:taUp 2s linear infinite 1.3s}
       @keyframes taDown{0%{top:-4px;opacity:0;transform:translateX(-50%) scale(.6)}
-        15%{opacity:1;transform:translateX(-50%) scale(1)}85%{opacity:1;transform:translateX(-50%) scale(1)}
-        100%{top:36px;opacity:0;transform:translateX(-50%) scale(.6)}}
+        15%{opacity:1;transform:translateX(-50%) scale(1)}90%{opacity:1;transform:translateX(-50%) scale(1)}
+        100%{top:48px;opacity:0;transform:translateX(-50%) scale(.6)}}
       @keyframes taUp{0%{top:100%;opacity:0;transform:translateX(-50%) scale(.6)}
         15%{opacity:.55;transform:translateX(-50%) scale(1)}85%{opacity:.55;transform:translateX(-50%) scale(1)}
         100%{top:0;opacity:0;transform:translateX(-50%) scale(.6)}}
