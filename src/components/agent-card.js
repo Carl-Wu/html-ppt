@@ -4,16 +4,16 @@
 import { gsap } from '../core/gsap-controller.js';
 
 export const AGENTS = [
-  {id:'compliance',name:'AI 合规治理 Agent',en:'COMPLIANCE',color:'#4F8CFF',icon:'⚖',
-   tag:'规则驱动 → Agent 驱动',
-   desc:'自动解析监管政策文件，构建并维护动态合规标准库，实时校验业务数据合规性。',
-   caps:['自动解析监管政策','构建合规标准库','实时合规校验','合规风险预警'],
-   flow:'政策入库 → 大模型解析 → 标准抽取 → 落标校验 → 预警闭环'},
   {id:'fusion',name:'AI 数据融合 Agent',en:'FUSION',color:'#7C4DFF',icon:'⬡',
    tag:'多源异构 一体融合',
    desc:'多源数据统一接入，非结构化合同/报告智能解析，打通数据孤岛形成统一资产视图。',
    caps:['多源数据接入','非结构化解析（合同/报告）','实体对齐与映射','统一资产视图'],
    flow:'数据接入 → 模式识别 → 实体抽取 → 对齐映射 → 资产编目'},
+  {id:'compliance',name:'AI 合规治理 Agent',en:'COMPLIANCE',color:'#4F8CFF',icon:'⚖',
+   tag:'规则驱动 → Agent 驱动',
+   desc:'自动解析监管政策文件，构建并维护动态合规标准库，实时校验业务数据合规性。',
+   caps:['自动解析监管政策','构建合规标准库','实时合规校验','合规风险预警'],
+   flow:'政策入库 → 大模型解析 → 标准抽取 → 落标校验 → 预警闭环'},
   {id:'quality',name:'AI 数据质量 Agent',en:'QUALITY',color:'#00F5FF',icon:'◎',
    tag:'事后发现 → 实时体检',
    desc:'自动数据体检与异常检测，定位质量问题并生成修复建议，从后置发现转向实时治理。',
@@ -43,8 +43,9 @@ export function buildAgentGrid(container){
           </div>
           <div class="ac-name">${a.name}</div>
           <div class="ac-tag">${a.tag}</div>
+          <div class="ac-desc">${a.desc}</div>
           <div class="ac-caps">
-            ${a.caps.slice(0,2).map(c=>`<span class="ac-cap">${c}</span>`).join('')}
+            ${a.caps.map(c=>`<span class="ac-cap">${c}</span>`).join('')}
           </div>
           <div class="ac-more">查看详情 →</div>
           <div class="brackets"></div>
@@ -55,24 +56,26 @@ export function buildAgentGrid(container){
   if(!document.getElementById('agentCardStyle')){
     style.id='agentCardStyle';
     style.textContent=`
-    .agent-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;flex:1;min-height:0}
-    .agent-card{position:relative;padding:18px 14px;display:flex;flex-direction:column;gap:8px;
+    .agent-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;flex:1;min-height:0}
+    .agent-card{position:relative;padding:16px 13px;display:flex;flex-direction:column;gap:7px;
       text-align:left;color:inherit;border-radius:14px;cursor:pointer;overflow:hidden}
     .ac-glow{position:absolute;inset:0;opacity:0;transition:opacity .35s;
       background:radial-gradient(circle at 50% 0%,var(--ac),transparent 70%)}
     .agent-card:hover .ac-glow{opacity:0.16}
     .ac-head{display:flex;align-items:center;justify-content:space-between}
-    .ac-ico{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;font-size:20px;
+    .ac-ico{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;font-size:22px;
       color:var(--ac);border:1px solid color-mix(in srgb,var(--ac) 40%,transparent);
       background:color-mix(in srgb,var(--ac) 10%,transparent);text-shadow:0 0 12px var(--ac)}
-    .ac-num{font-family:var(--f-mono);font-size:9px;color:var(--text-dim);letter-spacing:1px}
-    .ac-name{font-size:15px;font-weight:700;color:var(--text-bright);line-height:1.25}
-    .ac-tag{font-size:10px;color:var(--ac);letter-spacing:.5px}
-    .ac-caps{display:flex;flex-direction:column;gap:5px;margin-top:auto}
-    .ac-cap{font-size:11px;color:var(--text-dim);padding-left:10px;position:relative}
-    .ac-cap::before{content:"";position:absolute;left:0;top:50%;width:4px;height:4px;border-radius:50%;
+    .ac-num{font-family:var(--f-mono);font-size:10px;color:var(--text-dim);letter-spacing:1px}
+    .ac-name{font-size:17px;font-weight:800;color:var(--text-bright);line-height:1.25}
+    .ac-tag{font-size:11px;color:var(--ac);letter-spacing:.5px;font-weight:600}
+    .ac-desc{font-size:11.5px;line-height:1.55;color:var(--text-dim);margin-top:2px}
+    .ac-caps{display:flex;flex-direction:column;gap:6px;margin-top:auto;padding-top:10px;
+      border-top:1px solid color-mix(in srgb,var(--ac) 18%,transparent)}
+    .ac-cap{font-size:12px;color:var(--text);padding-left:12px;position:relative;line-height:1.4}
+    .ac-cap::before{content:"";position:absolute;left:0;top:50%;width:5px;height:5px;border-radius:50%;
       background:var(--ac);transform:translateY(-50%);box-shadow:0 0 6px var(--ac)}
-    .ac-more{font-size:11px;color:var(--accent);font-family:var(--f-mono);margin-top:4px;opacity:.8}
+    .ac-more{font-size:12px;color:var(--accent);font-family:var(--f-mono);margin-top:6px;opacity:.85}
     @media(max-width:1100px){.agent-grid{grid-template-columns:repeat(3,1fr)}}
     @media(max-width:680px){.agent-grid{grid-template-columns:repeat(2,1fr)}}
     `;
@@ -116,6 +119,8 @@ export function wireAgentModal(scope, modalEl){
         padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:rgba(0,245,255,.04)}`;
       document.head.appendChild(s);
     }
+    const closeBtn=card.querySelector('.close');
+    if(closeBtn) closeBtn.addEventListener('click',close);
     modalEl.classList.add('open'); modalEl.setAttribute('aria-hidden','false');
     gsap.fromTo(card,{y:24,opacity:0},{y:0,opacity:1,duration:.5,ease:'power3.out'});
   };

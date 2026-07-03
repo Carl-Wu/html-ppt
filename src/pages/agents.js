@@ -12,8 +12,8 @@ export default {
     <div class="slide-inner agents">
       <div class="agents-head">
         <div>
-          <h2 class="slide-title" data-reveal>五大 AI Agent<span class="hl">协同治理体系</span></h2>
-          <p class="slide-sub" data-reveal>多 Agent 分工协作，覆盖合规、融合、质量、风险、决策全链路 — 点击卡片查看 Agent 详情与执行流程</p>
+          <h2 class="slide-title" data-reveal>五大 AI Agent<span class="hl">协同体系</span></h2>
+          <p class="slide-sub" data-reveal>多 Agent 分工协作，覆盖数据融合、治理合规、质检、风险、决策全链路。</p>
         </div>
         <div class="agents-flow glass" data-reveal>
           <div class="af-title">Agent 统一执行流程</div>
@@ -27,10 +27,10 @@ export default {
     if(!document.getElementById('agentsStyle')){
       const s=document.createElement('style');s.id='agentsStyle';
       s.textContent=`
-      .agents{gap:16px}
-      .agents-head{display:grid;grid-template-columns:1.2fr 1fr;gap:18px;align-items:start}
-      .agents-flow{padding:14px 16px}
-      .af-title{font-family:var(--f-mono);font-size:12px;letter-spacing:2px;color:var(--accent);margin-bottom:12px}
+      .agents{gap:10px}
+      .agents-head{display:grid;grid-template-columns:1.1fr 1fr;gap:16px;align-items:center}
+      .agents-flow{padding:10px 14px}
+      .af-title{font-family:var(--f-mono);font-size:11px;letter-spacing:2px;color:var(--accent);margin-bottom:8px}
       .agents-grid-slot{flex:1;min-height:0}
       .agents-grid-slot .agent-grid{height:100%}
       @media(max-width:1000px){.agents-head{grid-template-columns:1fr}}`;
@@ -43,7 +43,7 @@ export default {
     this._neural = makeNeuralField({count:38,spread:34,color:0x7C4DFF});
   },
   activate(ctx){
-    const Q=ctx.Q;
+    const Q=ctx.Q,QA=ctx.QA;
     engine.clearFeatures();
     engine.add(this._neural.group);
     engine.camera.position.z=30;
@@ -51,12 +51,13 @@ export default {
     this._flowTl = buildExecFlow(this.flowBox);
 
     this._tl=gsap.timeline({delay:0.15});
-    this._tl.from(Q('[data-reveal]'),{y:26,opacity:0,duration:0.7,stagger:0.09,ease:'power3.out'})
-      .from(Q('.agent-card'),{y:40,opacity:0,duration:0.6,stagger:0.08,ease:'power3.out'},0.3);
+    this._tl.from(Q('[data-reveal]:not(.agent-card)'),{y:26,opacity:0,duration:0.7,stagger:0.09,ease:'power3.out'})
+      .fromTo(QA('.agent-card'),{y:40,opacity:0},{y:0,opacity:1,duration:0.6,stagger:0.08,ease:'power3.out',clearProps:'transform,opacity'},0.3);
   },
   deactivate(ctx){
     this._tl?.kill(); this._flowTl?.kill();
     this.flowBox.innerHTML='';
+    if(this._slideEl) gsap.set(this._slideEl.querySelectorAll('.agent-card'),{clearProps:'transform,opacity'});
   },
   update(dt,t){
     this._neural?.update(dt,t);
