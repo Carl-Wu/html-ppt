@@ -83,7 +83,7 @@ export default {
       .prob-head{flex-shrink:0}
       .prob-head .slide-title{margin-bottom:4px}
       .prob-head .slide-sub{margin-bottom:0}
-      .prob-body{display:grid;grid-template-columns:1fr 1fr;gap:72px;flex:1;min-height:0;position:relative}
+      .prob-body{display:grid;grid-template-columns:1fr 1fr;gap:36px;flex:1;min-height:0;position:relative}
       .prob-flow{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:5;overflow:visible}
       .prob-left{display:flex;flex-direction:column;gap:8px;min-height:0}
       .prob-card{padding:10px 14px;overflow:hidden;flex:1;display:flex;flex-direction:column;justify-content:center}
@@ -91,8 +91,8 @@ export default {
         text-shadow:0 0 8px var(--ac);margin-bottom:3px}
       .pc-title{font-size:15px;font-weight:700;color:var(--text-bright);margin-bottom:4px}
       .pc-desc{font-size:13px;line-height:1.5;color:var(--text-dim)}
-      .prob-list{display:flex;flex-direction:column;gap:6px;overflow:hidden;justify-content:center;width:85%;margin-left:12px}
-      .prob-item{display:flex;align-items:center;gap:12px;padding:9px 14px;position:relative;overflow:hidden}
+      .prob-list{display:flex;flex-direction:column;gap:6px;flex:1;min-height:0;justify-content:stretch}
+      .prob-item{display:flex;align-items:center;gap:10px;padding:6px 12px;position:relative;overflow:hidden;flex:1;min-height:0}
       .pi-num{font-family:var(--f-en);font-size:24px;font-weight:900;color:var(--ac);
         text-shadow:0 0 12px var(--ac);min-width:30px}
       .pi-body{flex:1}
