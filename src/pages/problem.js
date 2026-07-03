@@ -91,7 +91,7 @@ export default {
         text-shadow:0 0 8px var(--ac);margin-bottom:3px}
       .pc-title{font-size:15px;font-weight:700;color:var(--text-bright);margin-bottom:4px}
       .pc-desc{font-size:13px;line-height:1.5;color:var(--text-dim)}
-      .prob-list{display:flex;flex-direction:column;gap:6px;overflow:hidden;justify-content:center}
+      .prob-list{display:flex;flex-direction:column;gap:6px;overflow:hidden;justify-content:center;width:85%;margin-left:12px}
       .prob-item{display:flex;align-items:center;gap:12px;padding:9px 14px;position:relative;overflow:hidden}
       .pi-num{font-family:var(--f-en);font-size:24px;font-weight:900;color:var(--ac);
         text-shadow:0 0 12px var(--ac);min-width:30px}
