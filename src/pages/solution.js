@@ -1,8 +1,6 @@
 /* Page 4 — /solution 整体解决方案思路
-   左40%：核心驱动逻辑（4点）  右60%：四层3D分层架构 + 层间流光箭头 */
-import * as THREE from 'three';
+   左40%：核心驱动逻辑（4点）  右60%：CSS 3D 透视的四层架构 + 层间流光箭头 */
 import { gsap } from '../core/gsap-controller.js';
-import engine from '../core/engine.js';
 
 /* ---- 左侧：核心驱动逻辑 ---- */
 const DRIVERS = [
@@ -36,33 +34,6 @@ const LAYERS = [
    c:'#22E0A1'},
 ];
 
-function layerTexture(layer){
-  // 贴图比例与 slab 面比例一致，避免文字拉伸失真
-  const w=1280,h=320,c=document.createElement('canvas');c.width=w;c.height=h;
-  const x=c.getContext('2d');
-  const g=x.createLinearGradient(0,0,w,h);
-  g.addColorStop(0,'rgba(12,28,74,0.96)');g.addColorStop(1,'rgba(8,18,48,0.96)');
-  x.fillStyle=g;x.fillRect(0,0,w,h);
-  // border glow (core layer gets gradient border)
-  if(layer.core){
-    const bg=x.createLinearGradient(0,0,w,0);
-    bg.addColorStop(0,'#00F5FF');bg.addColorStop(0.5,'#7C4DFF');bg.addColorStop(1,'#22E0A1');
-    x.strokeStyle=bg;x.lineWidth=8;x.strokeRect(10,10,w-20,h-20);
-    x.shadowColor='#7C4DFF';x.shadowBlur=30;x.strokeRect(10,10,w-20,h-20);x.shadowBlur=0;
-  }else{
-    x.strokeStyle=layer.c;x.lineWidth=5;x.strokeRect(8,8,w-16,h-16);
-  }
-  x.fillStyle=layer.c;x.font='900 80px Orbitron, sans-serif';x.textBaseline='top';
-  x.fillText(layer.n,48,52);
-  x.fillStyle='#FFFFFF';x.font='900 72px "Noto Sans SC", sans-serif';
-  x.fillText(layer.t,200,56);
-  x.fillStyle='#9FB2E8';x.font='400 38px "Noto Sans SC", sans-serif';
-  x.fillText(layer.sub,200,150);
-  // accent bar
-  x.fillStyle=layer.c;x.fillRect(48,248,w-96,8);
-  const tex=new THREE.CanvasTexture(c);tex.anisotropy=8;return tex;
-}
-
 export default {
   id:'solution', index:3, label:'整体解决方案思路',
   html(){
@@ -87,8 +58,24 @@ export default {
         </div>
         <div class="sol-right">
           <div class="sol-sec-title" data-reveal>四层递进式顶层架构</div>
-          <div class="sol-tower-wrap" data-reveal>
-            <div class="sol-tower-slot"></div>
+          <div class="sol-stage" data-reveal>
+            <div class="sol-tower">
+              ${LAYERS.map((l,i)=>`
+              <div class="sol-layer ${l.core?'core':''}" style="--ac:${l.c}" data-layer="${i}">
+                <div class="sol-layer-inner">
+                  <div class="sol-ln">${l.n}</div>
+                  <div class="sol-lt">${l.t}</div>
+                  <div class="sol-ls">${l.sub}</div>
+                </div>
+                <div class="sol-lbar"></div>
+              </div>
+              ${i<LAYERS.length-1?`
+              <div class="sol-arrow" style="--ac:${l.c}" data-arrow="${i}">
+                <div class="sol-arrow-beam"></div>
+                <div class="sol-arrow-head"></div>
+                <div class="sol-flow"></div>
+              </div>`:''}`).join('')}
+            </div>
             <div class="sol-hint">悬停层级高亮 · 指令与数据自上而下流转</div>
           </div>
         </div>
@@ -115,151 +102,85 @@ export default {
       .drv-t{font-size:15px;font-weight:700;color:var(--text-bright)}
       .drv-d{font-size:13px;color:var(--text-dim);margin-top:3px;line-height:1.5}
       .drv-bar{position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--ac);box-shadow:0 0 10px var(--ac)}
-      .sol-tower-wrap{position:relative;border-radius:14px;overflow:hidden;flex:1;min-height:0;
-        background:radial-gradient(circle at 50% 50%,rgba(79,140,255,.08),transparent 70%)}
-      .sol-tower-slot{position:absolute;inset:0}
+
+      /* 右侧 3D 透视舞台 */
+      .sol-stage{flex:1;min-height:0;position:relative;display:flex;align-items:center;justify-content:center;
+        perspective:1400px;perspective-origin:50% 45%;
+        background:radial-gradient(circle at 50% 50%,rgba(79,140,255,.08),transparent 70%);
+        border-radius:14px;overflow:hidden}
+      .sol-tower{transform-style:preserve-3d;transform:rotateX(8deg) rotateY(-14deg);
+        display:flex;flex-direction:column;align-items:center;
+        width:96%;max-width:560px;gap:0;transition:transform .4s ease}
+      .sol-layer{position:relative;width:100%;border-radius:12px;padding:14px 20px;
+        background:linear-gradient(135deg,rgba(18,30,66,.92),rgba(8,18,48,.92));
+        border:1px solid var(--ac);box-shadow:0 8px 30px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.06);
+        transform:translateZ(0);transition:transform .35s ease,box-shadow .35s ease;cursor:default;overflow:hidden}
+      .sol-layer::before{content:"";position:absolute;inset:0;border-radius:12px;pointer-events:none;
+        background:linear-gradient(120deg,transparent 30%,color-mix(in srgb,var(--ac) 14%,transparent) 50%,transparent 70%);
+        opacity:.6}
+      .sol-layer.core{border-width:2px;
+        border-image:linear-gradient(90deg,#00F5FF,#7C4DFF,#22E0A1) 1;
+        box-shadow:0 0 28px rgba(124,77,255,.45),0 8px 30px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.1)}
+      .sol-layer.core::after{content:"核心层";position:absolute;top:8px;right:14px;
+        font-family:var(--f-en);font-size:11px;font-weight:700;letter-spacing:1px;
+        color:#7C4DFF;text-shadow:0 0 8px #7C4DFF;
+        background:rgba(124,77,255,.15);padding:2px 8px;border-radius:4px;border:1px solid rgba(124,77,255,.4)}
+      .sol-layer:hover{transform:translateZ(18px) scale(1.02);
+        box-shadow:0 0 36px color-mix(in srgb,var(--ac) 55%,transparent),0 12px 40px rgba(0,0,0,.5)}
+      .sol-layer-inner{display:flex;align-items:center;gap:14px;position:relative;z-index:2}
+      .sol-ln{font-family:var(--f-en);font-size:26px;font-weight:900;color:var(--ac);
+        text-shadow:0 0 14px var(--ac);min-width:42px;flex-shrink:0}
+      .sol-lt{font-size:17px;font-weight:800;color:var(--text-bright);line-height:1.2}
+      .sol-ls{font-size:12.5px;color:var(--text-dim);margin-top:4px;line-height:1.4}
+      .sol-layer-inner > div:not(.sol-ln){flex:1;min-width:0}
+      .sol-lbar{position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--ac);box-shadow:0 0 12px var(--ac)}
+
+      /* 层间流光箭头 */
+      .sol-arrow{position:relative;height:42px;width:100%;display:flex;flex-direction:column;align-items:center;
+        transform:translateZ(-2px)}
+      .sol-arrow-beam{width:3px;height:100%;background:linear-gradient(180deg,var(--ac),transparent);
+        opacity:.5;border-radius:2px}
+      .sol-arrow-head{width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;
+        border-top:9px solid var(--ac);margin-top:-2px;filter:drop-shadow(0 0 5px var(--ac))}
+      .sol-flow{position:absolute;left:50%;top:0;width:3px;height:14px;border-radius:2px;
+        background:var(--ac);box-shadow:0 0 8px var(--ac),0 0 16px var(--ac);
+        transform:translateX(-50%);opacity:0}
+      .sol-arrow.active .sol-flow{animation:solFlowDown 1.6s linear infinite}
+      @keyframes solFlowDown{
+        0%{top:0;opacity:0}
+        15%{opacity:1}
+        85%{opacity:1}
+        100%{top:calc(100% - 14px);opacity:0}
+      }
+
       .sol-hint{position:absolute;bottom:8px;left:0;right:0;text-align:center;
-        font-family:var(--f-mono);font-size:12px;color:var(--text-dim);letter-spacing:1px}
-      @media(max-width:900px){.sol-body{grid-template-columns:1fr;grid-template-rows:auto 1fr}}`;
+        font-family:var(--f-mono);font-size:11px;color:var(--text-dim);letter-spacing:1px}
+      @media(max-width:900px){.sol-body{grid-template-columns:1fr;grid-template-rows:auto 1fr}
+        .sol-tower{transform:rotateX(4deg) rotateY(-6deg)}}`;
       document.head.appendChild(s);
     }
-    this.slot = ctx.Q('.sol-tower-slot');
+    this._slideEl=ctx.slideEl;
   },
   activate(ctx){
     const Q=ctx.Q,QA=ctx.QA;
-    engine.clearFeatures();
-    engine.camera.position.z = 27;
-
-    const group=new THREE.Group();
-    // 居中于右侧60%区域：右侧区域中心 ≈ 屏幕中线右侧
-    group.position.x = 5.2;
-    this.group=group;
-    this.slabs=[];
-    this.connectors=[];
-
-    const slabW=10.5, slabH=2.0, slabD=3.2, gap=2.3;
-    const totalH=LAYERS.length*slabH+(LAYERS.length-1)*gap;
-    LAYERS.forEach((l,i)=>{
-      const y = totalH/2 - i*(slabH+gap) - slabH/2;
-      const tex=layerTexture(l);
-      const mat=new THREE.MeshStandardMaterial({
-        map:tex,emissive:new THREE.Color(l.c),emissiveIntensity:0.0,
-        transparent:true,opacity:0.0,roughness:0.4,metalness:0.3,emissiveMap:tex
-      });
-      const mesh=new THREE.Mesh(new THREE.BoxGeometry(slabW,slabH,slabD),mat);
-      mesh.position.y=y; mesh.userData={layer:l,index:i,baseY:y,mat};
-      const edges=new THREE.LineSegments(new THREE.EdgesGeometry(mesh.geometry),
-        new THREE.LineBasicMaterial({color:new THREE.Color(l.c),transparent:true,opacity:0}));
-      edges.userData={index:i};
-      mesh.add(edges);
-      group.add(mesh);
-      this.slabs.push({mesh,edges,mat,l,baseY:y});
-
-      // 层间流光连接器（向下箭头光束）
-      if(i<LAYERS.length-1){
-        const startY=y-slabH/2;
-        const endY=y-slabH/2-gap;
-        const beamH=Math.abs(startY-endY);
-        const beamMat=new THREE.MeshBasicMaterial({
-          color:new THREE.Color(l.c),transparent:true,opacity:0.0,side:THREE.DoubleSide,
-          blending:THREE.AdditiveBlending,depthWrite:false
-        });
-        const beam=new THREE.Mesh(new THREE.PlaneGeometry(0.16,beamH),beamMat);
-        beam.position.set(0,(startY+endY)/2,slabD/2+0.05);
-        group.add(beam);
-        const arrowMat=new THREE.MeshBasicMaterial({
-          color:new THREE.Color(l.c),transparent:true,opacity:0.0,side:THREE.DoubleSide,
-          blending:THREE.AdditiveBlending,depthWrite:false
-        });
-        const arrow=new THREE.Mesh(new THREE.ConeGeometry(0.3,0.55,4),arrowMat);
-        arrow.position.set(0,endY+0.28,slabD/2+0.05);
-        arrow.rotation.z=Math.PI;
-        group.add(arrow);
-        const dots=[];
-        for(let k=0;k<3;k++){
-          const dotMat=new THREE.MeshBasicMaterial({
-            color:new THREE.Color(k%2?LAYERS[i+1].c:l.c),transparent:true,opacity:0.0,
-            blending:THREE.AdditiveBlending,depthWrite:false
-          });
-          const dot=new THREE.Mesh(new THREE.SphereGeometry(0.16,12,12),dotMat);
-          dot.position.set(0,startY,slabD/2+0.1);
-          group.add(dot);
-          dots.push({mesh:dot,mat:dotMat,startY,endY,phase:k/3});
-        }
-        this.connectors.push({beam,beamMat,arrow,arrowMat,dots,startY,endY,lit:false});
-      }
-    });
-    engine.add(group);
-
-    // raycaster hover
-    this.ray=new THREE.Raycaster();
-    this.pointer=new THREE.Vector2(-2,-2);
-    this._onMove=(e)=>{
-      const r=engine.canvas.getBoundingClientRect();
-      this.pointer.x=((e.clientX-r.left)/r.width)*2-1;
-      this.pointer.y=-((e.clientY-r.top)/r.height)*2+1;
-    };
-    window.addEventListener('pointermove',this._onMove);
-
-    // 渐进点亮
-    this._lit=new Array(LAYERS.length).fill(false);
-    this._lightTl=gsap.timeline({delay:0.3});
-    this.slabs.forEach((s,i)=>{
-      this._lightTl.to(s.mat,{opacity:1,emissiveIntensity:s.l.core?0.55:0.35,duration:0.5,ease:'power2.out'},i*0.22)
-        .to(s.edges.material,{opacity:s.l.core?1.0:0.8,duration:0.4},i*0.22)
-        .call(()=>{this._lit[i]=true;},null,i*0.22+0.45);
-      if(this.connectors[i]){
-        const c=this.connectors[i];
-        this._lightTl.to(c.beamMat,{opacity:0.5,duration:0.4},i*0.22+0.5)
-          .to(c.arrowMat,{opacity:0.9,duration:0.4},i*0.22+0.5)
-          .call(()=>{c.lit=true;},null,i*0.22+0.7);
-        c.dots.forEach((d,k)=>{
-          this._lightTl.to(d.mat,{opacity:0.9,duration:0.3},i*0.22+0.6+k*0.1);
-        });
-      }
-    });
-
+    this._tl?.kill();
     this._tl=gsap.timeline({delay:0.15});
-    this._tl.from(Q('[data-reveal]'),{y:24,opacity:0,duration:0.65,stagger:0.06,ease:'power3.out'});
+    this._tl.from(Q('[data-reveal]'),{y:24,opacity:0,duration:0.65,stagger:0.05,ease:'power3.out'});
+
+    // 层卡片 3D 入场
+    const layers=QA('.sol-layer');
+    const arrows=QA('.sol-arrow');
+    if(layers.length){
+      this._tl.from(layers,{z:-120,opacity:0,duration:0.6,stagger:0.18,ease:'power3.out'},'-=0.3');
+    }
+    // 箭头依次激活流光
+    if(arrows.length){
+      arrows.forEach((a,i)=>{
+        this._tl.call(()=>a.classList.add('active'),null,'<'+(i*0.18+0.3));
+      });
+    }
   },
   deactivate(ctx){
-    this._tl?.kill();this._lightTl?.kill();
-    window.removeEventListener('pointermove',this._onMove);
-    delete this._onMove;
-  },
-  update(dt,t){
-    if(!this.group) return;
-    // 轻微自动旋转（保持文字可读）+ 指针倾斜
-    this.group.rotation.y = Math.sin(t*0.15)*0.22 + (this.pointer?.x||0)*0.18;
-    this.group.rotation.x = (this.pointer?.y||0)*0.08;
-
-    // 射线悬停
-    let hoverIdx=-1;
-    if(this.ray&&this.pointer){
-      this.ray.setFromCamera(this.pointer,engine.camera);
-      const hits=this.ray.intersectObjects(this.group.children,true);
-      if(hits.length){ let o=hits[0].object; while(o&&!o.userData?.index&&o.parent) o=o.parent; if(o?.userData?.index!=null) hoverIdx=o.userData.index; }
-    }
-    this.slabs.forEach((s,i)=>{
-      const lit=this._lit[i];
-      const target=(i===hoverIdx)?1:0;
-      s.mat.emissiveIntensity += ((lit?(s.l.core?0.55:0.35):0)+target*0.5 - s.mat.emissiveIntensity)*0.15;
-      const sc=(i===hoverIdx)?1.04:1;
-      s.mesh.scale.x += (sc-s.mesh.scale.x)*0.15;
-      s.mesh.position.z += ((i===hoverIdx?0.6:0)-s.mesh.position.z)*0.15;
-    });
-
-    // 流光光点沿光柱下行
-    this.connectors.forEach((c,i)=>{
-      if(!c.lit) return;
-      const speed=0.6;
-      c.dots.forEach((d,k)=>{
-        const tt=(t*speed+d.phase)%1;
-        d.mesh.position.y = d.startY + (d.endY-d.startY)*tt;
-        const fade=Math.sin(tt*Math.PI);
-        d.mat.opacity = 0.9*fade;
-      });
-      c.beamMat.opacity = 0.4 + Math.sin(t*2+i)*0.12;
-    });
+    this._tl?.kill();
   }
 };
