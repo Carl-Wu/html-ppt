@@ -24,7 +24,7 @@ function nodeTexture(t,sub,c){
 }
 
 export default {
-  id:'architecture', index:5, label:'技术路线与架构',
+  id:'architecture', index:5, label:'产品组件架构',
   html(){
     return `
     <div class="slide-inner arch">
