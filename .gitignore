@@ -3,3 +3,6 @@ dist
 .DS_Store
 *.local
 .vite
+
+# media assets (local-only, never commit)
+src/asset/
