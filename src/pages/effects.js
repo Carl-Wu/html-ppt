@@ -49,17 +49,17 @@ export default {
       .eff-body{display:grid;grid-template-columns:0.85fr 1.6fr;gap:16px;flex:1;min-height:0}
       .eff-kpis{display:grid;grid-template-columns:1fr 1fr;gap:12px}
       .eff-kpi{padding:16px;display:flex;flex-direction:column;gap:6px}
-      .kpi-label{font-family:var(--f-mono);font-size:10px;letter-spacing:1px;color:var(--text-dim)}
+      .kpi-label{font-family:var(--f-mono);font-size:12px;letter-spacing:1px;color:var(--text-dim)}
       .kpi-row{display:flex;align-items:baseline;gap:8px}
-      .kpi-old{font-size:14px;color:var(--danger);text-decoration:line-through;opacity:.7}
+      .kpi-old{font-size:16px;color:var(--danger);text-decoration:line-through;opacity:.7}
       .kpi-arrow{color:var(--text-dim)}
-      .kpi-new{font-family:var(--f-en);font-weight:900;font-size:26px;color:var(--accent);text-shadow:var(--glow-cyan)}
-      .kpi-note{font-size:10px;color:var(--text-dim)}
+      .kpi-new{font-family:var(--f-en);font-weight:900;font-size:30px;color:var(--accent);text-shadow:var(--glow-cyan)}
+      .kpi-note{font-size:12px;color:var(--text-dim)}
       .eff-gauge{padding:12px;display:flex;flex-direction:column;grid-column:span 2}
       .eff-gauge-box{flex:1;min-height:120px}
       .eff-chart{padding:14px;display:flex;flex-direction:column}
       .eff-chart-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
-      .eff-chart-t{font-size:13px;color:var(--text-bright);font-weight:600}
+      .eff-chart-t{font-size:15px;color:var(--text-bright);font-weight:600}
       .eff-chart-box{flex:1;min-height:0}
       @media(max-width:1000px){.eff-body{grid-template-columns:1fr}}`;
       document.head.appendChild(s);

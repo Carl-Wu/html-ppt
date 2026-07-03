@@ -18,7 +18,7 @@ export default {
           <span>让决策<span class="hl">实时产生</span></span>
         </p>
         <div class="end-foot" data-reveal>
-          <span class="chip">让金融数据治理从人工规则</span>
+          /* <span class="chip">让金融数据治理从人工规则</span> */
           <span class="chip gold">AI DATA AGENT SYSTEM</span>
         </div>
       </div>

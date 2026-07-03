@@ -60,12 +60,12 @@ export default {
         background:radial-gradient(circle at 50% 50%,rgba(124,77,255,.1),transparent 70%)}
       .arch-slot{position:absolute;inset:0}
       .arch-hint{position:absolute;bottom:10px;left:0;right:0;text-align:center;
-        font-family:var(--f-mono);font-size:10px;color:var(--text-dim);letter-spacing:1px}
+        font-family:var(--f-mono);font-size:12px;color:var(--text-dim);letter-spacing:1px}
       .arch-legend{display:flex;flex-direction:column;gap:8px;justify-content:center}
       .arch-core-leg,.arch-leg{display:flex;align-items:center;gap:11px;padding:11px 13px}
       .arch-core-leg{border-color:color-mix(in srgb,var(--ac) 50%,transparent)}
       .al-n{font-family:var(--f-en);font-weight:900;color:var(--ac);text-shadow:0 0 10px var(--ac);min-width:26px;text-align:center}
-      .al-b{flex:1}.al-t{font-size:13px;font-weight:700;color:var(--text-bright)}.al-s{font-size:10px;color:var(--text-dim)}
+      .al-b{flex:1}.al-t{font-size:15px;font-weight:700;color:var(--text-bright)}.al-s{font-size:12px;color:var(--text-dim)}
       @media(max-width:900px){.arch-body{grid-template-columns:1fr;grid-template-rows:1fr auto}}`;
       document.head.appendChild(s);
     }

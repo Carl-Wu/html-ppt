@@ -57,7 +57,7 @@ export default {
         box-shadow:0 0 12px rgba(0,245,255,.6);border-radius:2px}
       .toc-node{display:flex;align-items:center;gap:18px;position:relative;z-index:1;cursor:pointer}
       .toc-dot{position:relative;width:48px;height:48px;display:grid;place-items:center;flex-shrink:0}
-      .toc-dot-num{font-family:var(--f-en);font-size:13px;font-weight:900;color:var(--text-dim);
+      .toc-dot-num{font-family:var(--f-en);font-size:15px;font-weight:900;color:var(--text-dim);
         z-index:2;transition:color .4s,text-shadow .4s}
       .toc-dot-ring{position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(79,140,255,.25);
         transition:all .4s}
@@ -71,12 +71,12 @@ export default {
       .toc-node.active .toc-dot-ring::before{background:#0C2030}
       .toc-card{display:flex;align-items:center;gap:14px;padding:12px 18px;flex:1;max-width:560px;
         transition:all .35s;border:1px solid var(--line)}
-      .toc-card-num{font-family:var(--f-en);font-size:20px;font-weight:900;color:var(--primary);
+      .toc-card-num{font-family:var(--f-en);font-size:24px;font-weight:900;color:var(--primary);
         text-shadow:0 0 10px rgba(79,140,255,.4);min-width:30px;transition:color .35s}
       .toc-card-body{flex:1}
-      .toc-card-t{font-size:16px;font-weight:700;color:var(--text-bright)}
-      .toc-card-d{font-size:11px;color:var(--text-dim);margin-top:2px}
-      .toc-card-arrow{font-size:16px;color:var(--text-dim);opacity:0;transform:translateX(-8px);transition:all .35s}
+      .toc-card-t{font-size:18px;font-weight:700;color:var(--text-bright)}
+      .toc-card-d{font-size:13px;color:var(--text-dim);margin-top:2px}
+      .toc-card-arrow{font-size:18px;color:var(--text-dim);opacity:0;transform:translateX(-8px);transition:all .35s}
       .toc-node.active .toc-card{border-color:rgba(0,245,255,.4);background:rgba(0,245,255,.06);
         box-shadow:0 0 20px rgba(0,245,255,.12)}
       .toc-node.active .toc-card-arrow{opacity:1;transform:translateX(0);color:var(--accent)}

@@ -30,7 +30,7 @@ export default {
       .agents{gap:16px}
       .agents-head{display:grid;grid-template-columns:1.2fr 1fr;gap:18px;align-items:start}
       .agents-flow{padding:14px 16px}
-      .af-title{font-family:var(--f-mono);font-size:10px;letter-spacing:2px;color:var(--accent);margin-bottom:12px}
+      .af-title{font-family:var(--f-mono);font-size:12px;letter-spacing:2px;color:var(--accent);margin-bottom:12px}
       .agents-grid-slot{flex:1;min-height:0}
       .agents-grid-slot .agent-grid{height:100%}
       @media(max-width:1000px){.agents-head{grid-template-columns:1fr}}`;

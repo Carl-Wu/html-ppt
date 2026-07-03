@@ -65,13 +65,13 @@ export default {
         background:radial-gradient(circle at 50% 50%,rgba(79,140,255,.08),transparent 70%)}
       .sol-tower-slot{position:absolute;inset:0}
       .sol-hint{position:absolute;bottom:10px;left:0;right:0;text-align:center;
-        font-family:var(--f-mono);font-size:10px;color:var(--text-dim);letter-spacing:1px}
+        font-family:var(--f-mono);font-size:12px;color:var(--text-dim);letter-spacing:1px}
       .sol-legend{display:flex;flex-direction:column;gap:9px;justify-content:center}
       .sol-leg{display:flex;align-items:center;gap:12px;padding:12px 14px}
-      .sl-n{font-family:var(--f-en);font-weight:900;font-size:16px;color:var(--ac);text-shadow:0 0 10px var(--ac);min-width:34px}
+      .sl-n{font-family:var(--f-en);font-weight:900;font-size:18px;color:var(--ac);text-shadow:0 0 10px var(--ac);min-width:34px}
       .sl-body{flex:1}
-      .sl-t{font-size:14px;font-weight:700;color:var(--text-bright)}
-      .sl-s{font-size:10px;color:var(--text-dim);margin-top:2px}
+      .sl-t{font-size:16px;font-weight:700;color:var(--text-bright)}
+      .sl-s{font-size:12px;color:var(--text-dim);margin-top:2px}
       @media(max-width:900px){.sol-body{grid-template-columns:1fr;grid-template-rows:1fr auto}}`;
       document.head.appendChild(s);
     }

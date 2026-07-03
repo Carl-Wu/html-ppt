@@ -41,11 +41,11 @@ export default {
       .inno-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;flex:1;min-height:0}
       .inno-card{padding:18px;display:flex;flex-direction:column;gap:7px}
       .ic-head{display:flex;justify-content:space-between;align-items:center}
-      .ic-n{font-family:var(--f-en);font-weight:900;font-size:22px;color:var(--ac);text-shadow:0 0 12px var(--ac)}
+      .ic-n{font-family:var(--f-en);font-weight:900;font-size:26px;color:var(--ac);text-shadow:0 0 12px var(--ac)}
       .ic-core{width:14px;height:14px;border-radius:50%;background:var(--ac);box-shadow:0 0 16px var(--ac);animation:pulse 1.8s infinite}
-      .ic-t{font-size:16px;font-weight:800;color:var(--text-bright);line-height:1.3}
-      .ic-d{font-size:11px;color:var(--ac);font-family:var(--f-mono)}
-      .ic-desc{font-size:12px;color:var(--text-dim);line-height:1.6;margin-top:4px}
+      .ic-t{font-size:18px;font-weight:800;color:var(--text-bright);line-height:1.3}
+      .ic-d{font-size:13px;color:var(--ac);font-family:var(--f-mono)}
+      .ic-desc{font-size:14px;color:var(--text-dim);line-height:1.6;margin-top:4px}
       @media(max-width:880px){.inno-cards{grid-template-columns:1fr}}`;
       document.head.appendChild(s);
     }

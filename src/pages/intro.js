@@ -30,7 +30,7 @@ export default {
       style.textContent=`
       .intro{justify-content:space-between;padding-top:10vh}
       .intro-stage{position:relative;flex:1;display:grid;place-items:center;min-height:240px}
-      .intro-stage .slide-title{text-align:center;font-size:clamp(35.2px,3.74vw,50.6px)}
+      .intro-stage .slide-title{text-align:center}
       .intro-coreword{font-family:var(--f-en);font-weight:900;letter-spacing:6px;font-size:clamp(30px,3.4vw,46px);
         background:linear-gradient(90deg,#00F5FF,#4F8CFF,#7C4DFF);-webkit-background-clip:text;background-clip:text;
         -webkit-text-fill-color:transparent;filter:drop-shadow(0 0 24px rgba(0,245,255,.55));position:relative;z-index:2}
