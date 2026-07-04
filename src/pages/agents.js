@@ -1,4 +1,4 @@
-/* Page 4 — /agents 五大 AI Agent 协同治理体系 */
+/* Page 7 — /agents 五大 AI Agent 协同治理体系 */
 import { gsap } from '../core/gsap-controller.js';
 import engine from '../core/engine.js';
 import { makeNeuralField } from '../components/particles.js';
@@ -6,7 +6,7 @@ import { buildAgentGrid, wireAgentModal } from '../components/agent-card.js';
 import { buildExecFlow } from '../core/agent-runtime.js';
 
 export default {
-  id:'agents', index:4, label:'整体解决方案思路',
+  id:'agents', index:6, label:'03 技术路线与架构',
   html(){
     return `
     <div class="slide-inner agents">

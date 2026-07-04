@@ -35,13 +35,13 @@ const LAYERS = [
 ];
 
 export default {
-  id:'solution', index:3, label:'整体解决方案思路',
+  id:'solution', index:3, label:'02 整体解决方案思路',
   html(){
     return `
     <div class="slide-inner solution">
       <div class="sol-head">
         <h2 class="slide-title" data-reveal>AI 数据合规治理与决策平台<span class="hl">解决方案思路</span></h2>
-        <p class="slide-sub" data-reveal>一门户・一引擎・N 智能体・一底座，AI 原生重构金融租赁数据治理与决策全链路</p>
+        <p class="slide-sub" data-reveal>一门户・N 智能体・一引擎・一底座，AI 原生重构金融租赁数据治理与决策全链路</p>
       </div>
       <div class="sol-body">
         <div class="sol-left">

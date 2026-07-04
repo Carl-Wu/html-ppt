@@ -80,6 +80,73 @@ export class Router {
       if(e.code==='Space'){ e.preventDefault(); this.toggleAuto(); 
         document.getElementById('btnAuto').classList.toggle('active',this.autoPlaying); }
     });
+    this._buildCrumbMenu();
+  }
+
+  /* breadcrumb click → page-jump dropdown */
+  _buildCrumbMenu(){
+    const crumb=document.getElementById('hudCrumb');
+    if(!crumb) return;
+    // inject styles once
+    if(!document.getElementById('crumbMenuStyle')){
+      const st=document.createElement('style');st.id='crumbMenuStyle';
+      st.textContent=`
+      #hudCrumb{cursor:pointer;user-select:none;transition:color .2s}
+      #hudCrumb:hover{color:var(--accent)}
+      .crumb-menu{position:fixed;top:54px;left:50%;transform:translateX(-50%);z-index:300;
+        display:none;flex-direction:column;gap:2px;min-width:280px;max-height:70vh;overflow-y:auto;
+        padding:10px;border-radius:12px;
+        background:linear-gradient(135deg,rgba(12,22,52,.96),rgba(8,16,40,.98));
+        border:1px solid var(--line-strong);backdrop-filter:blur(14px);
+        box-shadow:0 12px 48px rgba(0,0,0,.6),0 0 24px rgba(0,245,255,.12)}
+      .crumb-menu.open{display:flex;animation:crumbIn .22s ease-out}
+      @keyframes crumbIn{from{opacity:0;transform:translateX(-50%) translateY(-8px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+      .crumb-item{display:flex;align-items:center;gap:10px;padding:9px 14px;border-radius:8px;
+        cursor:pointer;transition:background .18s,border-color .18s;border:1px solid transparent}
+      .crumb-item:hover{background:rgba(0,245,255,.08);border-color:var(--line-strong)}
+      .crumb-item.active{background:rgba(0,245,255,.12);border-color:var(--accent)}
+      .crumb-idx{font-family:var(--f-en);font-size:13px;font-weight:900;color:var(--accent);
+        min-width:26px;text-shadow:0 0 8px var(--accent)}
+      .crumb-label{font-size:13px;color:var(--text-bright);font-weight:600}
+      .crumb-item:hover .crumb-label{color:#fff}`;
+      document.head.appendChild(st);
+    }
+    const menu=document.createElement('div');menu.className='crumb-menu';
+    menu.innerHTML=pages.map((pg,i)=>`
+      <div class="crumb-item" data-i="${i}">
+        <span class="crumb-idx">${String(i+1).padStart(2,'0')}</span>
+        <span class="crumb-label">${pg.label}</span>
+      </div>`).join('');
+    document.body.appendChild(menu);
+    this._crumbMenu=menu;
+    const toggle=(e)=>{
+      e?.stopPropagation();
+      const open=menu.classList.toggle('open');
+      this._syncCrumbActive();
+    };
+    crumb.addEventListener('click',toggle);
+    menu.addEventListener('click',e=>{
+      const item=e.target.closest('.crumb-item'); if(!item) return;
+      const i=parseInt(item.dataset.i,10);
+      menu.classList.remove('open');
+      this.goTo(i);
+    });
+    document.addEventListener('click',e=>{
+      if(menu.classList.contains('open') && !menu.contains(e.target) && e.target!==crumb && !crumb.contains(e.target)){
+        menu.classList.remove('open');
+      }
+    });
+    document.addEventListener('keydown',e=>{
+      if(e.key==='Escape') menu.classList.remove('open');
+    });
+  }
+
+  _syncCrumbActive(){
+    if(!this._crumbMenu) return;
+    const cur=this.current;
+    this._crumbMenu.querySelectorAll('.crumb-item').forEach(it=>{
+      it.classList.toggle('active', parseInt(it.dataset.i,10)===cur);
+    });
   }
 
   _activate(i){
@@ -93,10 +160,15 @@ export class Router {
     document.getElementById('hudSection').textContent = p.label;
     document.getElementById('pageIndex').textContent = `${String(i+1).padStart(2,'0')} / ${String(pages.length).padStart(2,'0')}`;
     document.getElementById('progressFill').style.width = `${((i)/(pages.length-1))*100}%`;
+    this._syncCrumbActive();
   }
   _deactivate(i){
     const p = pages[i]; if(!p) return;
     p.deactivate?.({engine,gsap,router:this,index:i});
+    // safety net: clear residual GSAP inline transform/opacity so a slide left
+    // mid-animation (fast scrolling) renders fully visible on re-entry.
+    const slideEl = this.sw?.slides?.[i];
+    if(slideEl) gsap.set(slideEl.querySelectorAll('*'),{clearProps:'transform,opacity'});
   }
 
   goTo(i){ if(i>=0&&i<pages.length) this.sw.slideTo(i); }

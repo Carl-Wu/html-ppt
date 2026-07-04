@@ -14,7 +14,7 @@ const VIDEOS = [
 ];
 
 export default {
-  id:'effects', index:6, label:'实施效果与价值评估',
+  id:'effects', index:7, label:'04 实施效果与价值评估',
   html(){
     return `
     <div class="slide-inner vfx">

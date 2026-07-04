@@ -18,7 +18,7 @@ const LAYERS = [
 ];
 
 export default {
-  id:'tech-stack', index:5, label:'技术路线与架构',
+  id:'tech-stack', index:5, label:'03 技术路线与架构',
   html(){
     return `
     <div class="slide-inner tstack">

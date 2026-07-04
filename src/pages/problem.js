@@ -43,7 +43,7 @@ const FLOW = [
 ];
 
 export default {
-  id:'problem', index:2, label:'问题定义与痛点分析',
+  id:'problem', index:2, label:'01 问题定义与痛点分析',
   html(){
     return `
     <div class="slide-inner problem">

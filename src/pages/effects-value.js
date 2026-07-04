@@ -18,7 +18,7 @@ const RADS = [
 ];
 
 export default {
-  id:'effects-value', index:8, label:'实施效果与价值评估',
+  id:'effects-value', index:8, label:'04 实施效果与价值评估',
   html(){
     return `
     <div class="slide-inner ev">

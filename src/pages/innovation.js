@@ -11,7 +11,7 @@ const INNO = [
 ];
 
 export default {
-  id:'innovation', index:7, label:'核心创新点总结',
+  id:'innovation', index:9, label:'05 核心创新点总结',
   html(){
     return `
     <div class="slide-inner inno">

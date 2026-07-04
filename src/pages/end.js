@@ -4,7 +4,7 @@ import engine from '../core/engine.js';
 import { makeAICore, makeConverge, makeNeuralField } from '../components/particles.js';
 
 export default {
-  id:'end', index:8, label:'未来',
+  id:'end', index:8, label:'结语',
   html(){
     return `
     <div class="slide-inner end">
