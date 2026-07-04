@@ -29,9 +29,9 @@ export default {
       s.textContent=`
       .agents{gap:10px}
       .agents-head{display:grid;grid-template-columns:1.1fr 1fr;gap:16px;align-items:center}
-      .agents-flow{padding:10px 14px}
+      .agents-flow{padding:12px 16px;min-height:220px}
       .af-title{font-family:var(--f-mono);font-size:11px;letter-spacing:2px;color:var(--accent);margin-bottom:8px}
-      .agents-grid-slot{flex:1;min-height:0}
+      .agents-grid-slot{flex:0.92;min-height:0;margin-top:24px}
       .agents-grid-slot .agent-grid{height:100%}
       @media(max-width:1000px){.agents-head{grid-template-columns:1fr}}`;
       document.head.appendChild(s);

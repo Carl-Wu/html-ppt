@@ -29,13 +29,13 @@ export function buildExecFlow(container){
   const style = document.createElement('style');
   style.textContent = `
     .exec-flow{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap}
-    .exec-node{display:flex;flex-direction:column;align-items:center;gap:8px;min-width:96px;opacity:.35}
+    .exec-node{display:flex;flex-direction:column;align-items:center;gap:10px;min-width:104px;opacity:.35}
     .exec-node.on{opacity:1}
-    .exec-ico{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;font-size:20px;
+    .exec-ico{width:54px;height:54px;border-radius:14px;display:grid;place-items:center;font-size:24px;
       color:var(--accent);border:1px solid var(--line);background:rgba(0,245,255,.05);transition:all .3s}
     .exec-node.on .exec-ico{color:#fff;background:linear-gradient(135deg,var(--primary),var(--secondary));
       border-color:transparent;box-shadow:var(--glow-blue);transform:scale(1.08)}
-    .exec-label{font-size:11px;color:var(--text-dim);text-align:center;letter-spacing:.5px}
+    .exec-label{font-size:13px;color:var(--text-dim);text-align:center;letter-spacing:.5px}
     .exec-node.on .exec-label{color:var(--accent)}
     .exec-link{position:relative;width:42px;height:2px;background:rgba(79,140,255,.18);overflow:hidden}
     .exec-pulse{position:absolute;top:-1px;left:0;width:14px;height:4px;border-radius:4px;

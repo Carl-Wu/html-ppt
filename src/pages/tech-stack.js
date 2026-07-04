@@ -4,17 +4,17 @@ import { gsap } from '../core/gsap-controller.js';
 
 const LAYERS = [
   {n:'L1',name:'统一智能门户层',platform:'亿信华辰・智问 Agent 平台',c:'#00F5FF',
-   comps:'对话交互、可视化渲染、权限中心、报告生成、审计日志',tech:'自然语言交互、低代码可视化、统一身份认证'},
+   tech:'自然语言语义理解（NLU）、低代码可视化渲染引擎、统一身份认证（SSO）、全链路操作审计、EUI前端框架'},
   {n:'L2',name:'N+场景智能体层',platform:'亿信华辰・智问 Agent 平台',c:'#4F8CFF',
-   comps:'智能体模板、配置中心、协同调度、规则引擎',tech:'领域 Prompt 工程、多 Agent 协同、规则配置化'},
+   tech:'领域 Prompt 工程、低代码智能体编排引擎、多智能体协同通信协议、业务规则 DSL 引擎、智能体生命周期管理'},
   {n:'L3',name:'智能体引擎核心层',platform:'亿信华辰・智问 Agent 平台',c:'#7C4DFF',
-   comps:'Planner、Workflow、RAG、Memory、Tool Calling 网关',tech:'检索增强生成、任务拆解、长会话记忆、标准化工具协议'},
+   tech:'RAG 检索增强生成、任务拆解与路径规划（Planner）、可视化工作流编排、长会话上下文记忆管理、标准化工具调用协议、向量检索引擎'},
   {n:'L4',name:'大模型推训一体层',platform:'亿信华辰・万象 MaaS 平台',c:'#FFC857',
-   comps:'多模型纳管、LoRA 微调、推理网关、模型评测、安全对齐',tech:'分布式推理、低参数量化微调、多模型路由、安全对齐'},
+   tech:'大模型分布式推理加速、LoRA/QLoRA 低参数量化微调、多模型智能路由与负载均衡、GPU 资源池化调度、模型安全对齐与合规管控、训练数据闭环管理'},
   {n:'L5',name:'全域数据治理底座层',platform:'亿信华辰・睿治 Agent 多模态治理平台',c:'#22E0A1',
-   comps:'多模态集成、元数据血缘、质量引擎、资产目录、脱敏组件',tech:'批流一体集成、语义映射、自动化巡检、血缘自动解析'},
-  {n:'L6',name:'数据资源与基础设施层',platform:'亿信华辰 ArteryDocker 容器云平台 +<br>亿信华辰 Petabase 大数据平台',c:'#FF8C42',
-   comps:'分布式计算、对象存储、容器编排、微服务治理、加密体系',tech:'云原生容器化、分布式存储计算、全链路数据加密'},
+   tech:'批流一体数据集成、自动化元数据血缘解析、语义级数据标准映射、AI 驱动数据质量巡检、多模态非结构化解析、动态数据脱敏与分级授权'},
+  {n:'L6',name:'数据资源与基础设施层',platform:'亿信华辰 ArteryDocker 容器云平台 + 亿信华辰 Petabase 大数据平台',c:'#FF8C42',
+   tech:'Kubernetes 容器编排、微服务服务网格、弹性伸缩调度、全链路可观测监控、容器级安全隔离；湖仓一体存储、分布式列存计算、多源联邦查询、冷热分层存储、分布式事务一致性'},
 ];
 
 export default {
@@ -29,13 +29,12 @@ export default {
       <div class="ts-body">
         <div class="ts-left" data-reveal>
           <div class="ts-sec-title"><span class="chip">STACK</span>分层技术栈与依托平台</div>
-          <div class="ts-table-wrap" style="margin-top: 45px;>
+          <div class="ts-table-wrap" >
             <table class="ts-table">
               <thead>
                 <tr>
                   <th class="col-lyr">架构层级</th>
                   <th class="col-plat">依托核心平台</th>
-                  <th class="col-comp">核心组件</th>
                   <th class="col-tech">核心技术</th>
                 </tr>
               </thead>
@@ -44,7 +43,6 @@ export default {
                 <tr data-layer="${i}" style="--ac:${l.c}">
                   <td class="ts-lyr"><span class="ts-ln">${l.n}</span><span class="ts-lname">${l.name}</span></td>
                   <td class="ts-plat">${l.platform}</td>
-                  <td class="ts-comp">${l.comps}</td>
                   <td class="ts-tech">${l.tech}</td>
                 </tr>`).join('')}
               </tbody>
@@ -79,10 +77,9 @@ export default {
       .ts-table th{font-family:var(--f-mono);font-size:11px;font-weight:600;letter-spacing:.5px;
         color:var(--text-dim);text-align:left;padding:11px 14px;text-transform:uppercase;vertical-align:middle;
         background:rgba(0,245,255,.05);border-bottom:1px solid var(--line);position:sticky;top:0}
-      .ts-table th.col-lyr{width:16%}.ts-table th.col-plat{width:27%}
-      .ts-table th.col-comp{width:31%}.ts-table th.col-tech{width:26%}
-      .ts-table td{padding:11px 14px;font-size:12.5px;line-height:1.5;color:var(--text);
-        border-bottom:1px solid rgba(79,140,255,.1);vertical-align:middle}
+      .ts-table th.col-lyr{width:18%}.ts-table th.col-plat{width:32%}.ts-table th.col-tech{width:50%}
+      .ts-table td{padding:11px 14px;font-size:12.5px;line-height:1.55;color:var(--text);
+        border-bottom:1px solid rgba(79,140,255,.1);vertical-align:middle;word-break:break-word;overflow-wrap:break-word}
       .ts-table tbody tr{transition:background .25s,box-shadow .25s;opacity:0;transform:translateX(-14px)}
       .ts-table tbody tr.lit{opacity:1;transform:translateX(0)}
       .ts-table tbody tr:hover{background:color-mix(in srgb,var(--ac) 14%,transparent);
@@ -91,7 +88,7 @@ export default {
       .ts-ln{font-family:var(--f-en);font-size:13px;font-weight:900;color:var(--ac);
         text-shadow:0 0 8px var(--ac)}
       .ts-lname{font-size:12.5px;font-weight:700;color:var(--text-bright)}
-      .ts-plat{font-size:12.5px;font-weight:800;background:linear-gradient(90deg,var(--ac),color-mix(in srgb,var(--ac) 35%,#FFFFFF));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 8px color-mix(in srgb,var(--ac) 45%,transparent))}
+      .ts-plat{font-size:12.5px;font-weight:800;line-height:1.45;word-break:break-word;background:linear-gradient(90deg,var(--ac),color-mix(in srgb,var(--ac) 35%,#FFFFFF));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 8px color-mix(in srgb,var(--ac) 45%,transparent))}
       .ts-comp,.ts-tech{font-size:11px;color:var(--text-dim)}`;
       document.head.appendChild(s);
     }

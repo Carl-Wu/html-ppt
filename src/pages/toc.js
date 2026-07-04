@@ -25,7 +25,6 @@ export default {
         ${OUTLINE.map((c,i)=>`
           <div class="toc-node" data-i="${i}" data-reveal>
             <div class="toc-dot">
-              <span class="toc-dot-num">${c.n}</span>
               <span class="toc-dot-ring"></span>
             </div>
             <div class="toc-card glass hoverable">

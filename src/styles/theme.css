@@ -87,14 +87,14 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   background:linear-gradient(180deg,rgba(5,11,30,.85),rgba(5,11,30,0));
   backdrop-filter:blur(6px);pointer-events:none}
 .hud-top > *{pointer-events:auto}
-.hud-brand{display:flex;align-items:center;gap:10px;font-family:var(--f-en);font-size:12px;
+.hud-brand{display:flex;align-items:center;gap:10px;font-family:var(--f-en);font-size:15px;
   letter-spacing:2px;color:var(--text-bright)}
 .hud-glyph{width:18px;height:18px;border-radius:4px;position:relative;
   background:conic-gradient(from 0deg,var(--primary),var(--accent),var(--secondary),var(--primary));
   box-shadow:var(--glow-blue);animation:spin 6s linear infinite}
 .hud-glyph::after{content:"";position:absolute;inset:4px;border-radius:2px;background:var(--bg)}
-.hud-center{display:flex;align-items:center;gap:9px;font-family:var(--f-mono);font-size:16px;
-  letter-spacing:2px;color:var(--accent)}
+.hud-center{display:flex;align-items:center;gap:9px;font-family:var(--f-en);font-size:15px;
+  letter-spacing:2px;color:var(--text-bright)}
 .hud-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:var(--glow-cyan);
   animation:pulse 1.6s ease-in-out infinite}
 .hud-right{display:flex;align-items:center;gap:12px}
