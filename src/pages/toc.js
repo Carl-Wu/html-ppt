@@ -4,11 +4,11 @@ import engine from '../core/engine.js';
 import { makeNeuralField } from '../components/particles.js';
 
 const OUTLINE = [
-  {n:'01',t:'问题定义与痛点分析',d:'金融数据治理五大核心挑战',target:2},
-  {n:'02',t:'整体解决方案思路',d:'AI Agent 自治治理体系',target:3},
-  {n:'03',t:'技术路线与架构实现',d:'大模型 × 智能体 × 数据闭环',target:4},
-  {n:'04',t:'实施效果与价值评估',d:'效率提升与合规覆盖量化',target:8},
-  {n:'05',t:'核心创新点总结',d:'行业首创与差异化优势',target:9},
+  {n:'01',t:'问题定义与痛点分析',d:'金融租赁数据治理与决策五大核心挑战',target:2},
+  {n:'02',t:'整体解决方案思路',d:'一门户，N智能体，一引擎，一底座',target:3},
+  {n:'03',t:'技术路线与架构实现',d:'六层解构，成熟产品底座支撑快速落地',target:4},
+  {n:'04',t:'实施效果与价值评估',d:'合规治理与决策实施效果带来的效率与质量跃迁',target:8},
+  {n:'05',t:'核心创新点总结',d:'三大核心创新',target:9},
 ];
 
 export default {
