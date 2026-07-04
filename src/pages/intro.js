@@ -10,6 +10,10 @@ export default {
     <div class="slide-inner intro">
       <div class="intro-stage">
       <h1 class="slide-title" data-reveal>金融租赁数据合规治理与决策赋能<br><span class="hl">方案汇报</span></h1>
+        <div class="intro-org" data-reveal>
+          <span class="intro-line"><span class="intro-lbl">汇报单位</span><span class="intro-em">北京动态时序科技有限公司</span></span>
+          <span class="intro-line"><span class="intro-lbl">汇报人</span><span class="intro-em">吴思全</span></span>
+        </div>
         <div class="intro-ring"></div>
       </div>
       <div class="intro-foot">
@@ -30,7 +34,12 @@ export default {
       style.textContent=`
       .intro{justify-content:space-between;padding-top:10vh}
       .intro-stage{position:relative;flex:1;display:grid;place-items:center;min-height:240px}
-      .intro-stage .slide-title{text-align:center}
+      .intro-stage .slide-title{text-align:center;font-size:clamp(37px,3.91vw,53px)}
+      .intro-stage .intro-org{margin-top:16px;display:flex;flex-direction:column;align-items:center;gap:8px}
+      .intro-stage .intro-line{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;
+        border:1px solid var(--line-strong);border-radius:20px;background:rgba(0,245,255,.05);backdrop-filter:blur(6px)}
+      .intro-stage .intro-lbl{font-size:17px;color:var(--text-dim);letter-spacing:1px}
+      .intro-stage .intro-em{font-size:17px;font-weight:700;color:#FFFFFF;letter-spacing:.5px;font-family:var(--f-zh)}
       .intro-coreword{font-family:var(--f-en);font-weight:900;letter-spacing:6px;font-size:clamp(30px,3.4vw,46px);
         background:linear-gradient(90deg,#00F5FF,#4F8CFF,#7C4DFF);-webkit-background-clip:text;background-clip:text;
         -webkit-text-fill-color:transparent;filter:drop-shadow(0 0 24px rgba(0,245,255,.55));position:relative;z-index:2}

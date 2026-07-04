@@ -140,13 +140,13 @@ export function makeNeuralField({count=60,spread=22,color=0x00F5FF}={}){
 }
 
 /* data streams: particles flowing along a set of bezier paths between two points */
-export function makeDataStreams({paths=1,from=[0,-8,0],to=[0,8,0],color=0x00F5FF,perPath=80}={}){
+export function makeDataStreams({paths=1,from=[0,-8,0],to=[0,8,0],color=0x00F5FF,perPath=80,spread=4}={}){
   const group=new THREE.Group();
   const streams=[];
   for(let p=0;p<paths;p++){
     const pos=new Float32Array(perPath*3);
     const tArr=new Float32Array(perPath);
-    const ctrl=new THREE.Vector3((Math.random()-0.5)*8,(from[1]+to[1])/2,(Math.random()-0.5)*4);
+    const ctrl=new THREE.Vector3((Math.random()-0.5)*spread*2,(from[1]+to[1])/2,(Math.random()-0.5)*spread);
     for(let i=0;i<perPath;i++){ tArr[i]=Math.random(); }
     const geo=new THREE.BufferGeometry();
     geo.setAttribute('position',new THREE.BufferAttribute(pos,3));

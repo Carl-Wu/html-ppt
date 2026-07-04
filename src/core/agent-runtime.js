@@ -65,7 +65,7 @@ export function buildClosedLoop(container){
     {t:'决策输出', sub:'DECIDE', c:'var(--gold)'},
     {t:'持续学习', sub:'LEARN', c:'var(--green)'},
   ];
-  const size = 300, R = 118, cx=size/2, cy=size/2;
+  const size = 380, R = 150, cx=size/2, cy=size/2;
   const pts = NODES.map((_,i)=>{
     const a = (-90 + i*(360/NODES.length)) * Math.PI/180;
     return [cx+R*Math.cos(a), cy+R*Math.sin(a)];
@@ -80,7 +80,7 @@ export function buildClosedLoop(container){
         </defs>
         <circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="url(#loopGrad)" stroke-width="1.5"
           stroke-dasharray="4 6" opacity="0.5"/>
-        ${pts.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="22" fill="rgba(5,11,30,.8)" stroke="${NODES[pts.indexOf(p)].c}" stroke-width="1.5"/>`).join('')}
+        ${pts.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="34" fill="rgba(5,11,30,.85)" stroke="${NODES[pts.indexOf(p)].c}" stroke-width="1.5" style="filter:drop-shadow(0 0 8px ${NODES[pts.indexOf(p)].c})"/>`).join('')}
       </svg>
       <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" style="position:absolute;inset:0;overflow:visible">
         <circle r="4" fill="#00F5FF" style="filter:drop-shadow(0 0 6px #00F5FF)">
@@ -96,8 +96,8 @@ export function buildClosedLoop(container){
   style.textContent=`
     .cl-node{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;
       align-items:center;gap:1px;pointer-events:none}
-    .cl-t{font-size:13px;font-weight:700;color:var(--text-bright)}
-    .cl-s{font-size:8px;font-family:var(--f-mono);color:var(--c,#00F5FF);letter-spacing:1px}
+    .cl-t{font-size:13px;font-weight:700;color:var(--text-bright);white-space:nowrap}
+    .cl-s{font-size:8px;font-family:var(--f-mono);color:var(--c,#00F5FF);letter-spacing:1px;white-space:nowrap}
     .cl-core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:46px;height:46px;
       border-radius:50%;display:grid;place-items:center;font-family:var(--f-en);font-weight:900;
       color:#fff;background:radial-gradient(circle,var(--secondary),var(--primary));

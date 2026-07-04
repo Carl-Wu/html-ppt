@@ -1,4 +1,4 @@
-/* Page 7 — /innovation 核心创新 (三能量核心 + 融合爆炸) */
+/* Page 10 — /innovation 核心创新 (三能量核心对齐卡片 + 融合爆炸) */
 import * as THREE from 'three';
 import { gsap } from '../core/gsap-controller.js';
 import engine from '../core/engine.js';
@@ -49,6 +49,33 @@ export default {
       @media(max-width:880px){.inno-cards{grid-template-columns:1fr}}`;
       document.head.appendChild(s);
     }
+    this._slideEl=ctx.slideEl;
+    this._onResize=()=>this._layoutCores();
+    window.addEventListener('resize',this._onResize);
+  },
+  /* align each 3D core to the center of its corresponding card (screen→world) */
+  _layoutCores(){
+    if(!this.cores||!this.cores.length||!this._slideEl) return;
+    const cards=this._slideEl.querySelectorAll('.inno-card');
+    const coresBox=this._slideEl.querySelector('.inno-cores')?.getBoundingClientRect();
+    if(!cards.length||!coresBox||!coresBox.width) return;
+    const cam=engine.camera;
+    const halfH=cam.position.z*Math.tan((cam.fov/2)*Math.PI/180);
+    const halfW=halfH*cam.aspect;
+    const cy=coresBox.top+coresBox.height/2;
+    const worldY=-((cy/window.innerHeight)*2-1)*halfH;
+    this.cores.forEach((entry,idx)=>{
+      const card=cards[idx]; if(!card) return;
+      const r=card.getBoundingClientRect();
+      const cx=r.left+r.width/2;
+      const worldX=((cx/window.innerWidth)*2-1)*halfW;
+      entry.c.group.position.set(worldX,worldY,0);
+      entry.glow.position.set(worldX,worldY,0);
+    });
+    // fusion flash sits on the middle core
+    const mid=this.cores[1];
+    if(mid) this.flash.position.set(mid.c.group.position.x,worldY,0);
+    this._coresY=worldY;
   },
   activate(ctx){
     const Q=ctx.Q;
@@ -57,16 +84,19 @@ export default {
 
     const group=new THREE.Group(); this.group=group;
     this.cores=[];
-    const xs=[-7,0,7];
     INNO.forEach((i,idx)=>{
       const c=makeAICore({radius:1.7,color:new THREE.Color(i.c).getHex(),color2:0xffffff});
-      c.group.position.set(xs[idx],0,0);
-      group.add(c.group); this.cores.push({c,data:i,x:xs[idx]});
-      const glow=makeGlowSprite(new THREE.Color(i.c).getHex(),4.5); glow.position.set(xs[idx],0,0); group.add(glow);
+      group.add(c.group);
+      const glow=makeGlowSprite(new THREE.Color(i.c).getHex(),4.5); group.add(glow);
+      this.cores.push({c,data:i,glow});
     });
     // central fusion flash sprite (hidden until burst)
-    this.flash=makeGlowSprite(0xFFFFFF,0.1); this.flash.position.set(0,0,0); group.add(this.flash);
+    this.flash=makeGlowSprite(0xFFFFFF,0.1); group.add(this.flash);
     engine.add(group);
+
+    // align cores to cards after layout settles (immediate + post-animation correction)
+    requestAnimationFrame(()=>this._layoutCores());
+    this._layoutT=setTimeout(()=>this._layoutCores(),1000);
 
     // fusion burst timeline
     this._burst=gsap.timeline({delay:1.2,repeat:-1,repeatDelay:2.5});
@@ -85,6 +115,8 @@ export default {
   deactivate(ctx){
     this._tl?.kill(); this._burst?.kill();
     gsap.killTweensOf(this.cores?.map(o=>o.c.group.scale));
+    clearTimeout(this._layoutT);
+    window.removeEventListener('resize',this._onResize);
   },
   update(dt,t){
     this.cores?.forEach(({c},i)=>c.update(dt,t+i));
