@@ -46,6 +46,7 @@ export default {
       <div class="sol-body">
         <div class="sol-left">
           <div class="sol-sec-title" data-reveal>核心驱动逻辑</div>
+          <div class="drv-list">
           ${DRIVERS.map((d,i)=>`
           <div class="drv-item glass hoverable" style="--ac:${d.c}" data-reveal>
             <div class="drv-num">${d.n}</div>
@@ -55,6 +56,7 @@ export default {
             </div>
             <div class="drv-bar"></div>
           </div>`).join('')}
+          </div>
         </div>
         <div class="sol-right">
           <div class="sol-sec-title" data-reveal>四层递进式顶层架构</div>
@@ -100,16 +102,17 @@ export default {
       .sol-head .slide-title{margin-bottom:4px}
       .sol-head .slide-sub{margin-bottom:0}
       .sol-body{display:grid;grid-template-columns:2fr 3fr;gap:32px;flex:1;min-height:0;position:relative}
-      .sol-left{display:flex;flex-direction:column;gap:8px;min-height:0}
+      .sol-left{display:flex;flex-direction:column;gap:12px;min-height:0;justify-content:flex-start}
+      .drv-list{display:flex;flex-direction:column;gap:10px;flex:1;min-height:0;justify-content:center}
       .sol-right{display:flex;flex-direction:column;gap:8px;min-height:0}
-      .sol-sec-title{font-size:15px;font-weight:800;color:var(--text-bright);letter-spacing:1px;
+      .sol-sec-title{font-size:20px;font-weight:800;color:var(--text-bright);letter-spacing:1px;
         padding-left:6px;border-left:3px solid #4F8CFF;flex-shrink:0}
-      .drv-item{display:flex;align-items:flex-start;gap:12px;padding:10px 14px;position:relative;overflow:hidden;flex:1;min-height:0}
-      .drv-num{font-family:var(--f-en);font-size:24px;font-weight:900;color:var(--ac);
-        text-shadow:0 0 12px var(--ac);min-width:32px;line-height:1.1}
+      .drv-item{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;position:relative;overflow:hidden}
+      .drv-num{font-family:var(--f-en);font-size:28px;font-weight:900;color:var(--ac);
+        text-shadow:0 0 12px var(--ac);min-width:34px;line-height:1.1}
       .drv-body{flex:1}
-      .drv-t{font-size:15px;font-weight:700;color:var(--text-bright)}
-      .drv-d{font-size:13px;color:var(--text-dim);margin-top:3px;line-height:1.5}
+      .drv-t{font-size:17px;font-weight:700;color:var(--text-bright)}
+      .drv-d{font-size:14px;color:var(--text-dim);margin-top:4px;line-height:1.55}
       .drv-bar{position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--ac);box-shadow:0 0 10px var(--ac)}
 
       /* ===== 全息投影舞台 ===== */

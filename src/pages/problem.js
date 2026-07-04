@@ -83,21 +83,21 @@ export default {
       .prob-head{flex-shrink:0}
       .prob-head .slide-title{margin-bottom:4px}
       .prob-head .slide-sub{margin-bottom:0}
-      .prob-body{display:grid;grid-template-columns:1fr 1fr;gap:36px;flex:1;min-height:0;position:relative}
+      .prob-body{display:grid;grid-template-columns:1fr 1fr;gap:36px;flex:1;min-height:0;position:relative;padding:45px 0}
       .prob-flow{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:5;overflow:visible}
       .prob-left{display:flex;flex-direction:column;gap:8px;min-height:0}
       .prob-card{padding:10px 14px;overflow:hidden;flex:1;display:flex;flex-direction:column;justify-content:center}
-      .pc-tag{font-family:var(--f-mono);font-size:12px;letter-spacing:1px;color:var(--ac);
+      .pc-tag{font-family:var(--f-mono);font-size:17px;letter-spacing:1px;color:var(--ac);
         text-shadow:0 0 8px var(--ac);margin-bottom:3px}
-      .pc-title{font-size:15px;font-weight:700;color:var(--text-bright);margin-bottom:4px}
-      .pc-desc{font-size:13px;line-height:1.5;color:var(--text-dim)}
+      .pc-title{font-size:17px;font-weight:700;color:var(--text-bright);margin-bottom:5px}
+      .pc-desc{font-size:14px;line-height:1.55;color:var(--text-dim)}
       .prob-list{display:flex;flex-direction:column;gap:6px;flex:1;min-height:0;justify-content:stretch}
       .prob-item{display:flex;align-items:center;gap:10px;padding:6px 12px;position:relative;overflow:hidden;flex:1;min-height:0}
-      .pi-num{font-family:var(--f-en);font-size:24px;font-weight:900;color:var(--ac);
-        text-shadow:0 0 12px var(--ac);min-width:30px}
+      .pi-num{font-family:var(--f-en);font-size:27px;font-weight:900;color:var(--ac);
+        text-shadow:0 0 12px var(--ac);min-width:32px}
       .pi-body{flex:1}
-      .pi-t{font-size:15px;font-weight:700;color:var(--text-bright)}
-      .pi-d{font-size:13px;color:var(--text-dim);margin-top:2px;line-height:1.35}
+      .pi-t{font-size:17px;font-weight:700;color:var(--text-bright)}
+      .pi-d{font-size:14px;color:var(--text-dim);margin-top:2px;line-height:1.45}
       .pi-bar{position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--ac);box-shadow:0 0 10px var(--ac)}
       @media(max-width:900px){.prob-body{grid-template-columns:1fr;grid-template-rows:auto auto}.prob-flow{display:none}}`;
       document.head.appendChild(s);

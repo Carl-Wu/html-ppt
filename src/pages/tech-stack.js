@@ -29,7 +29,7 @@ export default {
       <div class="ts-body">
         <div class="ts-left" data-reveal>
           <div class="ts-sec-title"><span class="chip">STACK</span>分层技术栈与依托平台</div>
-          <div class="ts-table-wrap">
+          <div class="ts-table-wrap" style="margin-top: 45px;>
             <table class="ts-table">
               <thead>
                 <tr>
@@ -63,8 +63,8 @@ export default {
       .ts-head .slide-title{margin-bottom:4px}
 
       .ts-body{flex:1;min-height:0;display:flex;flex-direction:column}
-      .ts-left{display:flex;flex-direction:column;min-height:0;width:100%}
-      .ts-sec-title{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;
+      .ts-left{display:flex;flex-direction:column;min-height:0;width:100%;max-width:100%}
+      .ts-sec-title{display:flex;align-items:center;gap:8px;font-size:20px;font-weight:700;
         color:var(--text-bright);margin-bottom:10px;flex-shrink:0}
       .ts-sec-title .chip{font-family:var(--f-en);font-size:9px;letter-spacing:1px;
         padding:2px 7px;border-radius:4px;color:var(--accent);
@@ -73,15 +73,16 @@ export default {
       .ts-table-wrap{flex:1;min-height:0;overflow:hidden;border-radius:12px;
         background:linear-gradient(135deg,rgba(18,30,66,.6),rgba(12,22,52,.75));
         border:1px solid var(--line);backdrop-filter:blur(10px);
-        box-shadow:inset 0 1px 0 rgba(255,255,255,.04),0 8px 30px rgba(0,0,0,.4)}
-      .ts-table{width:100%;height:100%;border-collapse:collapse;table-layout:fixed}
+        box-shadow:inset 0 1px 0 rgba(255,255,255,.04),0 8px 30px rgba(0,0,0,.4);
+        display:flex;align-items:center;justify-content:center;padding:8px}
+      .ts-table{width:100%;border-collapse:collapse;table-layout:fixed}
       .ts-table th{font-family:var(--f-mono);font-size:11px;font-weight:600;letter-spacing:.5px;
-        color:var(--text-dim);text-align:left;padding:11px 14px;text-transform:uppercase;
+        color:var(--text-dim);text-align:left;padding:11px 14px;text-transform:uppercase;vertical-align:middle;
         background:rgba(0,245,255,.05);border-bottom:1px solid var(--line);position:sticky;top:0}
       .ts-table th.col-lyr{width:16%}.ts-table th.col-plat{width:27%}
       .ts-table th.col-comp{width:31%}.ts-table th.col-tech{width:26%}
       .ts-table td{padding:11px 14px;font-size:12.5px;line-height:1.5;color:var(--text);
-        border-bottom:1px solid rgba(79,140,255,.1);vertical-align:top}
+        border-bottom:1px solid rgba(79,140,255,.1);vertical-align:middle}
       .ts-table tbody tr{transition:background .25s,box-shadow .25s;opacity:0;transform:translateX(-14px)}
       .ts-table tbody tr.lit{opacity:1;transform:translateX(0)}
       .ts-table tbody tr:hover{background:color-mix(in srgb,var(--ac) 14%,transparent);
