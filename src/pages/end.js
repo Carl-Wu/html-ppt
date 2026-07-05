@@ -2,17 +2,13 @@
 import { gsap } from '../core/gsap-controller.js';
 import engine from '../core/engine.js';
 import { makeAICore, makeConverge, makeNeuralField } from '../components/particles.js';
+import { showBlobs, hideBlobs } from '../components/bg-blobs.js';
 
 export default {
   id:'end', index:8, label:'结语',
   html(){
     return `
     <div class="slide-inner end">
-      <div class="bg-blobs" aria-hidden="true">
-        <div class="bg-blob b1"></div>
-        <div class="bg-blob b2"></div>
-        <div class="bg-blob b3"></div>
-      </div>
       <div class="end-stage">
         <div class="end-ring"></div>
         <div class="end-center">
@@ -46,14 +42,7 @@ export default {
         color:var(--text);font-weight:300;letter-spacing:1px;margin:10px 0}
       .end-manifesto .hl{color:var(--accent);font-weight:700;text-shadow:var(--glow-cyan)}
       .end-foot{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
-      .bg-blobs{position:fixed;inset:0;overflow:hidden;z-index:0;pointer-events:none;display:none}
-      .bg-blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:.55;will-change:transform}
-      .bg-blob.b1{width:44vw;height:44vw;left:-8vw;top:-8vh;background:radial-gradient(circle,#004af0 0%,transparent 70%);animation:blobFloat1 18s ease-in-out infinite}
-      .bg-blob.b2{width:38vw;height:38vw;right:-6vw;top:12vh;background:radial-gradient(circle,#00d4aa 0%,transparent 70%);animation:blobFloat2 22s ease-in-out infinite}
-      .bg-blob.b3{width:48vw;height:48vw;left:28vw;bottom:-14vh;background:radial-gradient(circle,#8b7cf0 0%,transparent 70%);animation:blobFloat3 26s ease-in-out infinite}
-      @keyframes blobFloat1{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(8vw,6vh) scale(1.15)}66%{transform:translate(-4vw,10vh) scale(.9)}}
-      @keyframes blobFloat2{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(-10vw,8vh) scale(1.1)}66%{transform:translate(6vw,-6vh) scale(1.2)}}
-      @keyframes blobFloat3{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(6vw,-8vh) scale(1.1)}66%{transform:translate(-8vw,4vh) scale(.95)}}`;
+`;
       document.head.appendChild(s);
     }
     this._neural = makeNeuralField({count:46,spread:40});
@@ -61,8 +50,7 @@ export default {
   activate(ctx){
     const Q=ctx.Q;
     engine.clearFeatures();
-    this._blobs = ctx.Q('.bg-blobs');
-    if(this._blobs) this._blobs.style.display='block';
+    showBlobs();
     this._core = makeAICore({radius:3.2});
     this._conv = makeConverge({count:1100,radius:2.2});
     engine.add(this._neural.group);
@@ -83,7 +71,7 @@ export default {
   },
   deactivate(ctx){
     this._tl?.kill();
-    if(this._blobs) this._blobs.style.display='none';
+    hideBlobs();
     gsap.killTweensOf(engine.camera.position);
   },
   update(dt,t){
