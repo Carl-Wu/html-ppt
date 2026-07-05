@@ -8,6 +8,11 @@ export default {
   html(){
     return `
     <div class="slide-inner intro">
+      <div class="bg-blobs" aria-hidden="true">
+        <div class="bg-blob b1"></div>
+        <div class="bg-blob b2"></div>
+        <div class="bg-blob b3"></div>
+      </div>
       <div class="intro-stage">
       <h1 class="slide-title" data-reveal>金融租赁数据合规治理与决策赋能<br><span class="hl">方案汇报</span></h1>
         <div class="intro-org" data-reveal>
@@ -51,7 +56,15 @@ export default {
       .intro-foot{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px}
       .intro-foot .slide-title{margin-bottom:4px}
       .intro-foot .slide-sub{margin-bottom:12px}
-      .intro-stats{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}`;
+      .intro-stats{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+      .bg-blobs{position:fixed;inset:0;overflow:hidden;z-index:0;pointer-events:none;display:none}
+      .bg-blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:.55;will-change:transform}
+      .bg-blob.b1{width:44vw;height:44vw;left:-8vw;top:-8vh;background:radial-gradient(circle,#004af0 0%,transparent 70%);animation:blobFloat1 18s ease-in-out infinite}
+      .bg-blob.b2{width:38vw;height:38vw;right:-6vw;top:12vh;background:radial-gradient(circle,#00d4aa 0%,transparent 70%);animation:blobFloat2 22s ease-in-out infinite}
+      .bg-blob.b3{width:48vw;height:48vw;left:28vw;bottom:-14vh;background:radial-gradient(circle,#8b7cf0 0%,transparent 70%);animation:blobFloat3 26s ease-in-out infinite}
+      @keyframes blobFloat1{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(8vw,6vh) scale(1.15)}66%{transform:translate(-4vw,10vh) scale(.9)}}
+      @keyframes blobFloat2{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(-10vw,8vh) scale(1.1)}66%{transform:translate(6vw,-6vh) scale(1.2)}}
+      @keyframes blobFloat3{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(6vw,-8vh) scale(1.1)}66%{transform:translate(-8vw,4vh) scale(.95)}}`;
       document.head.appendChild(style);
     }
     this._neural = makeNeuralField({count:46,spread:40});
@@ -59,6 +72,8 @@ export default {
   activate(ctx){
     // 3D features
     engine.clearFeatures();
+    this._blobs = ctx.Q('.bg-blobs');
+    if(this._blobs) this._blobs.style.display='block';
     this._core = makeAICore({radius:3.2});
     this._conv = makeConverge({count:1100,radius:2.2});
     engine.add(this._neural.group);
@@ -79,6 +94,7 @@ export default {
   },
   deactivate(ctx){
     this._tl?.kill();
+    if(this._blobs) this._blobs.style.display='none';
     engine.remove?.(this._neural.group);
     // features cleared by router on next activate
   },
