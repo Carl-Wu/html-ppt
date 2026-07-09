@@ -12,7 +12,7 @@ export default {
       <div class="intro-stage">
       <h1 class="slide-title" data-reveal>金融租赁数据合规治理与决策赋能<br><span class="hl">方案汇报</span></h1>
         <div class="intro-org" data-reveal>
-          <span class="intro-line"><span class="intro-lbl">汇报单位</span><span class="intro-em">北京亿信华辰软件有限责任公司</span></span>
+          <span class="intro-line"><span class="intro-lbl">汇报单位</span><span class="intro-em">北京动态时序科技有限公司</span></span>
           <span class="intro-line"><span class="intro-lbl">汇报人</span><span class="intro-em">吴思全</span></span>
         </div>
         <div class="intro-ring"></div>
