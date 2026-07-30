@@ -322,6 +322,13 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 .slide-inner{position:relative;overflow:visible}
 .hl-num{color:var(--brand)!important}
 }
+
+/* Case section heading with gradient background */
+.case-section-heading{padding:12px 16px;margin-bottom:12px;border-radius:8px;
+  background:linear-gradient(135deg,rgba(0,102,255,0.06) 0%,rgba(77,163,255,0.03) 100%);
+  border-left:3px solid var(--brand);font-weight:600}
+.case-section-heading strong{color:var(--brand)}
+
 </style>
 </head>
 <body>
@@ -2071,6 +2078,15 @@ function retryInitCharts(){
 // Try to init charts after a short delay in case CDN is still loading
 setTimeout(retryInitCharts, 300);
 
+
+
+// Style case section headings (p > strong with （数字）)
+document.querySelectorAll('.case-content p').forEach(function(p){
+  var strong=p.querySelector('strong');
+  if(strong&&/^（[0-9一二三四五六七八九十]+）/.test(strong.textContent)){
+    p.classList.add('case-section-heading');
+  }
+});
 
 goSlide(0);
 
