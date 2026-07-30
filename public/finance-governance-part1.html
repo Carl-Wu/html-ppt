@@ -22,6 +22,7 @@
   --line: #e8f0fa;
   --shadow: 0 2px 12px rgba(0,102,255,0.06);
   --shadow-hover: 0 6px 24px rgba(0,102,255,0.10);
+  --gold: #c9a84c;
   --f1: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'PingFang SC', 'Helvetica Neue', sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
@@ -50,10 +51,10 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 @keyframes slideReveal{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 
 .slide-wrapper{position:absolute;inset:0;display:flex;flex-direction:column;z-index:1}
-.slide-inner{position:absolute;inset:0;display:flex;flex-direction:column;overflow-y:auto;padding:60px 48px 32px}
-.slide-inner::-webkit-scrollbar{width:4px}
+.slide-inner{position:absolute;inset:0;display:flex;flex-direction:column;overflow:hidden;padding:60px 48px 32px}
+.slide-inner::-webkit-scrollbar{width:6px}
 .slide-inner::-webkit-scrollbar-track{background:transparent}
-.slide-inner::-webkit-scrollbar-thumb{background:rgba(0,102,255,.10);border-radius:2px}
+.slide-inner::-webkit-scrollbar-thumb{background:rgba(0,102,255,.2);border-radius:3px}
 
 /* Cover */
 .slide-cover .slide-wrapper{justify-content:center;align-items:center}
@@ -64,8 +65,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 .slide-chapter .slide-inner{position:relative;padding:64px 48px 40px;justify-content:center;align-items:center}
 .slide-end .slide-wrapper{justify-content:center;align-items:center}
 .slide-end .slide-inner{position:relative;padding:0;justify-content:center;align-items:center}
-.slide-content .slide-inner{padding:60px 48px 32px}
-.slide-case .slide-inner{padding:60px 48px 40px}
+.slide-content .slide-inner{padding:60px 48px 32px;min-height:0}
+.slide-case .slide-inner{padding:60px 48px 40px;min-height:0}
 
 /* Glass card - light style */
 .glass-card{background:var(--card-bg);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
@@ -182,7 +183,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 .chapter-desc{font-size:14px;color:var(--text2);line-height:1.7}
 
 /* Content page */
-.content-wrapper{max-width:1080px;width:100%;margin:0 auto;flex:1;display:flex;flex-direction:column;gap:14px}
+.content-wrapper{max-width:1080px;width:100%;margin:0 auto;flex:1;display:flex;flex-direction:column;gap:14px;min-height:0;overflow-y:auto}
 .content-title{font-size:clamp(18px,1.8vw,24px);font-weight:700;color:var(--text);margin-bottom:6px;letter-spacing:-.2px;line-height:1.3}
 .content-body{padding:20px 24px;font-size:14px;line-height:1.9;color:var(--text2);letter-spacing:.2px}
 .content-body p{font-size:14px;margin-bottom:10px;line-height:1.9;color:var(--text2)}
@@ -199,25 +200,27 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 .h4-body strong{color:var(--brand);font-weight:600}
 
 /* Charts */
-.chart-section{display:flex;gap:20px;flex:1;min-height:0;margin-top:8px}
-.chart-box{flex:1;min-height:300px;padding:12px}
-.table-section{flex:1;min-width:0;padding:16px 18px;overflow:auto;font-size:13px;max-height:400px}
+.chart-section{display:block;gap:20px;min-height:0;margin-top:8px}
+.chart-box{min-height:320px;padding:12px;width:100%}
+.table-section{padding:16px 18px;overflow:auto;font-size:13px;max-height:none;width:100%;margin-top:14px}
 
 /* Case page */
 .case-section-label{font-size:11px;letter-spacing:2px;color:var(--brand);margin-bottom:4px;font-weight:600}
-.case-content{padding:22px 28px;font-size:14px;line-height:1.9;color:var(--text2);overflow-y:auto;flex:1;letter-spacing:.2px}
+.case-content{padding:22px 28px;font-size:14px;line-height:1.9;color:var(--text2);overflow-y:auto;flex:1;letter-spacing:.2px;min-height:0}
 .case-content p{font-size:14px;margin-bottom:10px;line-height:1.9;color:var(--text2)}
 .case-content strong{color:var(--brand);font-weight:600}
 .case-content .tbl{font-size:13px;line-height:1.7}
 
 /* End page */
-.end-content{text-align:center;padding:52px 60px;max-width:520px}
-.end-badge{font-size:11px;letter-spacing:8px;color:var(--text3);font-weight:500;margin-bottom:20px}
-.end-line{width:40px;height:2px;background:var(--brand);margin:0 auto 18px}
-.end-title{font-size:clamp(32px,3.5vw,48px);font-weight:800;color:var(--text);margin-bottom:10px;letter-spacing:-.5px}
-.end-sub{font-size:15px;color:var(--text2);font-weight:400;margin-bottom:24px;line-height:1.5}
-.end-divider{width:24px;height:2px;background:var(--brand);margin:0 auto 22px}
-.end-contact{font-size:13px;color:var(--text3);line-height:2;letter-spacing:.2px}
+.slide-end{justify-content:center;align-items:center;background:linear-gradient(160deg,#0a0f1a 0%,#121926 40%,#1e293b 100%)}
+.end-page{display:flex;flex-direction:column;align-items:center;gap:20px}
+.end-badge{font-size:14px;letter-spacing:8px;color:var(--gold);border:1px solid rgba(201,168,76,.3);padding:8px 28px;border-radius:24px;font-weight:500}
+.end-line{width:60px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.end-title{font-size:clamp(30px,3vw,48px);font-weight:800;color:#fff;margin:0}
+.end-sub{font-size:16px;color:rgba(255,255,255,.8);font-weight:300;margin:0}
+.end-divider{width:40px;height:2px;background:var(--gold);margin:0}
+.end-contact{text-align:center;color:rgba(255,255,255,.7);font-size:14px;line-height:2}
+.end-contact p{margin:0;font-size:14px;color:rgba(255,255,255,.7)}
 
 /* Lists */
 .clean-list{list-style:none;padding:0}
@@ -290,7 +293,7 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 /* Responsive */
 @media(max-width:1280px){
 .slide-inner{padding:52px 28px 24px}
-.chart-section{flex-direction:column}
+.chart-section{display:block}
 .chart-box{min-height:240px}
 
 .content-wrapper{max-width:100%}
@@ -376,9 +379,6 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
       <div class="toc-card-arrow">→</div>
     </div>
   </div>
-</div>
-</div>
-</div>
 </div>
 </div>
 <div class="slide slide-chapter" id="slide2">
@@ -1826,19 +1826,18 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 </div>
 </div>
 <div class="slide slide-end" id="slide29">
-<div class="bg-grid"></div>
-<div class="bg-orb bg-orb-1"></div>
-<div class="bg-orb bg-orb-2"></div>
-<div class="bg-orb bg-orb-3"></div>
 <div class="slide-wrapper">
 <div class="slide-inner">
-<div class="end-content glass-card">
-<div class="end-badge">THANK YOU</div>
-<div class="end-line"></div>
-<h1 class="end-title">谢谢</h1>
-<p class="end-sub">中国金融行业数据治理与AI应用解决方案</p>
-<div class="end-divider"></div>
-<div class="end-contact">金融业务创新中心<br>2026年7月</div>
+<div class="end-page">
+  <div class="end-badge">THANK YOU</div>
+  <div class="end-line"></div>
+  <h2 class="end-title">感谢阅读</h2>
+  <p class="end-sub">中国金融行业数据治理与AI应用解决方案 — 行业现状与标杆实践</p>
+  <div class="end-divider"></div>
+  <div class="end-contact">
+    <p>金融业务创新中心</p>
+    <p>2026年7月</p>
+  </div>
 </div>
 </div>
 </div>
@@ -1900,7 +1899,7 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
   <div class="ftr-l">FINANCIAL DATA GOVERNANCE & AI APPLICATION</div>
   <div class="ftr-r">
     <button onclick="goSlide(cur-1)" id="prevBtn2" disabled>‹</button>
-    <span class="ftr-page"><span id="ftrCurr">1</span> / 28</span>
+    <span class="ftr-page"><span id="ftrCurr">1</span> / 30</span>
     <button onclick="goSlide(cur+1)" id="nextBtn2">›</button>
   </div>
 </div>
@@ -1924,6 +1923,9 @@ document.getElementById("nextBtn").disabled=(n===total-1);
 document.getElementById("prevBtn2").disabled=(n===0);
 document.getElementById("nextBtn2").disabled=(n===total-1);
 document.querySelectorAll(".nd-item").forEach(function(el){el.classList.toggle("active",parseInt(el.dataset.idx)===n)});
+// Reset scroll position
+var newSlide=document.getElementById("slide"+n);
+if(newSlide){var cw=newSlide.querySelector(".content-wrapper");if(cw)cw.scrollTop=0;var cc=newSlide.querySelector(".case-content");if(cc)cc.scrollTop=0;var si=newSlide.querySelector(".slide-inner");if(si)si.scrollTop=0;}
 closeNav();initCharts();highlightNumbers();}
 
 document.addEventListener("keydown",function(e){
@@ -1989,45 +1991,103 @@ function highlightNumbers(){
   });
 }
 
-var chartsInited=false;
 function initCharts(){
-  if(chartsInited) return;
-  var maturityEl=document.getElementById("maturityChart");
-  if(maturityEl&&!maturityEl.__echart){
-    var mc=echarts.init(maturityEl);
-    mc.setOption({
-      tooltip:{trigger:"axis",axisPointer:{type:"shadow"}},
-      grid:{left:180,right:30,top:15,bottom:30},
-      xAxis:{type:"value",name:"成熟度评分",nameTextStyle:{fontSize:10,color:"#8a94a6"},axisLabel:{fontSize:10,color:"#8a94a6"},max:100},
-      yAxis:{type:"category",data:["AI研报生成与投资辅助","企业知识库与智能问答","智能合同审查","流程自动化RPA+AI","智能营销推荐","智能风控定价","智能客服与智能问答","反欺诈识别与交易监控"],axisLabel:{fontSize:11,color:"#8a94a6",width:160,overflow:"truncate"}},
-      series:[{
-        type:"bar",data:[40,65,55,72,75,78,85,90],
-        itemStyle:{color:{type:"linear",x:0,y:0,x2:1,y2:0,colorStops:[{offset:0,color:"#0066FF"},{offset:1,color:"#0052cc"}]},borderRadius:[0,4,4,0]},
-        barWidth:18,label:{show:true,position:"right",fontSize:10,color:"#8a94a6",formatter:"{c}"}
-      }]
-    });
-    maturityEl.__echart=true;
-  }
-  var gapEl=document.getElementById("gapChart");
-  if(gapEl&&!gapEl.__echart){
-    var gc=echarts.init(gapEl);
-    gc.setOption({
-      tooltip:{trigger:"axis"},
-      legend:{data:["境外领先","中国领先"],bottom:0,textStyle:{fontSize:11,color:"#8a94a6"}},
-      grid:{left:60,right:20,top:20,bottom:40},
-      xAxis:{type:"category",data:["数据治理方法论","非结构化文档","知识图谱应用","责任AI体系","AI平台化程度","全员AI素养","AI投入规模"],axisLabel:{fontSize:10,color:"#8a94a6",interval:0,rotate:15}},
-      yAxis:{type:"value",name:"成熟度评分",nameTextStyle:{fontSize:10,color:"#8a94a6"},axisLabel:{fontSize:10,color:"#8a94a6"},max:10},
-      series:[
-        {name:"境外领先",type:"bar",data:[9,9,8,8,9,9,10],itemStyle:{color:"#0066FF",borderRadius:[4,4,0,0]},barWidth:18},
-        {name:"中国领先",type:"bar",data:[4,5,5,5,5,6,3],itemStyle:{color:"#a1a1a6",borderRadius:[4,4,0,0]},barWidth:18}
-      ]
-    });
-    gapEl.__echart=true;
-  }
-  chartsInited=true;
+  try{
+    var maturityEl=document.getElementById("maturityChart");
+    // Only init if element exists, not already initialized, and its slide is active
+    if(maturityEl&&!maturityEl.__echart&&typeof echarts!=='undefined'){
+      // Check if the slide containing this chart is visible
+      var slide=maturityEl.closest('.slide');
+      if(slide&&slide.classList.contains('active')){
+        var mc=echarts.init(maturityEl);
+        mc.setOption({
+          tooltip:{trigger:"axis",axisPointer:{type:"shadow"}},
+          grid:{left:180,right:30,top:15,bottom:30},
+          xAxis:{type:"value",name:"成熟度评分",nameTextStyle:{fontSize:10,color:"#8a94a6"},axisLabel:{fontSize:10,color:"#8a94a6"},max:100},
+          yAxis:{type:"category",data:["AI研报生成与投资辅助","企业知识库与智能问答","智能合同审查","流程自动化RPA+AI","智能营销推荐","智能风控定价","智能客服与智能问答","反欺诈识别与交易监控"],axisLabel:{fontSize:11,color:"#8a94a6",width:160,overflow:"truncate"}},
+          series:[{
+            type:"bar",data:[40,65,55,72,75,78,85,90],
+            itemStyle:{color:{type:"linear",x:0,y:0,x2:1,y2:0,colorStops:[{offset:0,color:"#0066FF"},{offset:1,color:"#0052cc"}]},borderRadius:[0,4,4,0]},
+            barWidth:18,label:{show:true,position:"right",fontSize:10,color:"#8a94a6",formatter:"{c}"}
+          }]
+        });
+        maturityEl.__echart=mc;
+        setTimeout(function(){mc.resize();},200);
+      }
+    }
+    var gapEl=document.getElementById("gapChart");
+    if(gapEl&&!gapEl.__echart&&typeof echarts!=='undefined'){
+      var slide=gapEl.closest('.slide');
+      if(slide&&slide.classList.contains('active')){
+        var gc=echarts.init(gapEl);
+        gc.setOption({
+          tooltip:{trigger:"axis"},
+          legend:{data:["境外领先","中国领先"],bottom:0,textStyle:{fontSize:11,color:"#8a94a6"}},
+          grid:{left:60,right:20,top:20,bottom:40},
+          xAxis:{type:"category",data:["数据治理方法论","非结构化文档","知识图谱应用","责任AI体系","AI平台化程度","全员AI素养","AI投入规模"],axisLabel:{fontSize:10,color:"#8a94a6",interval:0,rotate:15}},
+          yAxis:{type:"value",name:"成熟度评分",nameTextStyle:{fontSize:10,color:"#8a94a6"},axisLabel:{fontSize:10,color:"#8a94a6"},max:10},
+          series:[
+            {name:"境外领先",type:"bar",data:[9,9,8,8,9,9,10],itemStyle:{color:"#0066FF",borderRadius:[4,4,0,0]},barWidth:18},
+            {name:"中国领先",type:"bar",data:[4,5,5,5,5,6,3],itemStyle:{color:"#a1a1a6",borderRadius:[4,4,0,0]},barWidth:18}
+          ]
+        });
+        gapEl.__echart=gc;
+        setTimeout(function(){gc.resize();},200);
+      }
+    }
+  }catch(e){}
 }
 
+// Retry chart initialization if ECharts CDN hasn't loaded yet
+function retryInitCharts(){
+  if(typeof echarts==='undefined'){
+    setTimeout(retryInitCharts, 500);
+  } else {
+    initCharts();
+  }
+}
+// Try to init charts after a short delay in case CDN is still loading
+setTimeout(retryInitCharts, 300);
+
+
 goSlide(0);
+
+// Window resize handler for ECharts
+var resizeTimer;
+window.addEventListener("resize",function(){
+  clearTimeout(resizeTimer);
+  resizeTimer=setTimeout(function(){
+    try{
+      var charts=document.querySelectorAll("#maturityChart,#gapChart");
+      charts.forEach(function(el){
+        if(el.__echart&&typeof el.__echart.resize==="function"){
+          el.__echart.resize();
+        }
+      });
+    }catch(e){}
+  },300);
+});
+
+// Retry chart initialization when navigating - ensure dimensions are correct
+var origGoSlide=window.goSlide;
+window.goSlide=function(n){
+  if(n<0||n>=total)return;
+  origGoSlide(n);
+  // Re-trigger chart resize after slide transition completes
+  setTimeout(function(){
+    try{
+      var activeSlide=document.getElementById("slide"+n);
+      if(!activeSlide)return;
+      var charts=activeSlide.querySelectorAll("#maturityChart,#gapChart");
+      charts.forEach(function(el){
+        if(el.__echart&&typeof el.__echart.resize==="function"){
+          el.__echart.resize();
+        }
+      });
+    }catch(e){}
+  },450);
+}
+
 </script>
 </body>
 </html>
