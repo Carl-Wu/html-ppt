@@ -79,10 +79,10 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
   display:flex;align-items:center;padding:0 20px;gap:12px;
   background:rgba(0,102,255,0.06);
   backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);
-  border-bottom:1px solid var(--card-border)}
-.topbar-logo{display:flex;align-items:center;gap:6px;flex-shrink:0;padding:0 12px 0 0;
+  border-bottom:1px solid var(--card-border);
+  background-image:url('/title-bg.png');background-repeat:no-repeat;background-position:left top;background-size:auto 48px}
+.topbar-logo{display:flex;align-items:center;flex-shrink:0;padding:0 20px 0 16px;border-left:1px solid var(--card-border);margin-left:8px;}
   font-size:13px;font-weight:700;color:var(--brand);letter-spacing:.3px}
-.topbar-logo .ls{font-weight:400;color:var(--text3);font-size:12px}
 .nav-idx{display:flex;align-items:center;gap:5px;cursor:pointer;height:30px;padding:0 12px;
   border:1px solid var(--card-border);border-radius:6px;background:var(--brand-light);transition:all .3s;flex-shrink:0}
 .nav-idx:hover{border-color:var(--brand);background:var(--brand-dim)}
@@ -92,7 +92,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 .nav-idx.open .arrow{transform:rotate(180deg)}
 .topbar-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:10px;max-width:60%;}
 .topbar-title{font-size:13px;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;font-weight:400;letter-spacing:.2px}
-.topbar-controls{display:flex;gap:5px;flex-shrink:0}
+.topbar-controls{display:none}
 .topbar-controls button{background:var(--brand-light);border:1px solid var(--card-border);
   border-radius:6px;width:30px;height:28px;cursor:pointer;font-size:14px;color:var(--text);
   transition:all .3s;display:flex;align-items:center;justify-content:center}
@@ -140,7 +140,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 
 /* Cover content */
 .cover-content{text-align:center;padding:52px 60px;max-width:680px}
-.cover-tagline{font-size:11px;letter-spacing:4px;color:var(--brand);margin-bottom:22px;font-weight:600}
+.cover-tagline{font-size:11px;letter-spacing:4px;color:#fff;margin-bottom:22px;font-weight:600;display:inline-block;padding:6px 20px;border-radius:20px;background:linear-gradient(90deg,#0066FF 0%,#4da3ff 100%)}
 .cover-title{font-size:clamp(28px,3vw,42px);font-weight:800;color:var(--text);line-height:1.2;margin-bottom:6px;letter-spacing:-.5px}
 .cover-divider{width:40px;height:2px;background:var(--brand);margin:18px auto}
 .cover-subtitle{font-size:16px;color:var(--text2);font-weight:400;margin-bottom:30px;line-height:1.5}
@@ -149,8 +149,11 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
   background:var(--brand-light);padding:7px 18px;border-radius:20px;border:1px solid var(--line)}
 .meta-icon{font-size:14px}
 .meta-text strong{color:var(--brand);font-weight:700}
-.cover-bottom{display:flex;justify-content:center;gap:28px;font-size:12px;color:var(--text3);
-  border-top:1px solid var(--line);padding-top:18px}
+.cover-bottom{display:flex;justify-content:center;gap:28px;font-size:12px;color:#fff;
+  border-top:1px solid rgba(255,255,255,.12);padding:16px 20px;margin:0 -24px -24px;
+  border-radius:0 0 14px 14px;
+  background:linear-gradient(90deg,#0066FF 0%,#4da3ff 100%)}
+.cover-bottom div,.cover-bottom .hl-num{color:#fff!important;font-weight:700}
 
 /* TOC */
 .slide-toc{justify-content:center;padding:56px 60px 40px}
@@ -189,9 +192,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 
 /* H4 blocks */
 .h4-block{padding:18px 22px;margin-top:8px}
-.h4-title{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:600;color:var(--text);margin-bottom:14px;line-height:1.3}
-.h4-badge{display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;
-  color:var(--brand);background:var(--brand-dim);padding:3px 10px;border-radius:6px;letter-spacing:.3px}
+.h4-title{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:600;color:var(--text);margin-bottom:14px;line-height:1.3;padding:10px 16px;border-radius:8px;background:linear-gradient(90deg,rgba(0,102,255,0.06) 0%,rgba(0,102,255,0.02) 100%)}
+
 .h4-body{font-size:14px;line-height:1.9;color:var(--text2);letter-spacing:.2px}
 .h4-body p{font-size:14px;margin-bottom:8px;line-height:1.9;color:var(--text2)}
 .h4-body strong{color:var(--brand);font-weight:600}
@@ -335,7 +337,7 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="cover-meta-item"><span class="meta-icon">🏢</span><span class="meta-text"><strong>16个</strong> 境内外标杆案例</span></div>
 <div class="cover-meta-item"><span class="meta-icon">📊</span><span class="meta-text">深度分析 · 数据驱动 · 战略洞察</span></div>
 </div>
-<div class="cover-bottom"><div class="cover-org">金融业务创新中心</div><div class="cover-date">2026年7月</div></div>
+<div class="cover-bottom"><div class="cover-org">金融业务创新中心</div><div class="cover-presenter">汇报人：吴思全</div><div class="cover-date" style="color:#fff!important">2026年7月</div></div>
 </div>
 </div>
 </div>
@@ -407,21 +409,21 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="content-wrapper">
 <h2 class="content-title">1.1.1 国家战略及政策</h2>
 <div class="content-body glass-card"><p>中国金融行业的数据治理与AI应用发展，是在国家层面 <strong>"数字中国"、"人工智能+"和"数据要素市场化"</strong> 三大战略框架下展开的，形成了<strong>以"数据要素化为驱动、以数字化转型为载体、以AI赋能为目标"</strong> 的三位一体格局。近年来，国家层面密集出台了一系列顶层政策文件，从AI发展战略、数据要素市场化配置、数字金融建设、数据安全法治保障等维度，共同构成了全行业数据治理与AI应用的国家战略导向与通用发展框架。</p></div>
-<div class="h4-block glass-card"><div class="h4-title"><span class="h4-badge">1.1.1.1</span>1.1.1.1 人工智能国家战略</div><div class="h4-body"><ul class="clean-list">
+<div class="h4-block glass-card"><div class="h4-title">1.1.1.1 人工智能国家战略</div><div class="h4-body"><ul class="clean-list">
 <li>2025年8月，国务院印发 <strong>《关于深入实施“人工智能+”行动的意见》</strong>（国发〔2025〕11号）<a href="javascript:void(0)" onclick="openSrc('https://www.gov.cn/zhengce/content/202508/content_7037861.htm')" class="src-link">🔗 来源</a>，从国家层面对AI全领域融合应用作出顶层部署。</li>
 <li>在此框架下，工业和信息化部等八部门于2026年1月联合发布 <strong>《“人工智能+制造”专项行动实施意见》</strong><a href="javascript:void(0)" onclick="openSrc('https://www.miit.gov.cn/cms_files/filemanager/1226211233/attach/20261/735011cb05584824b3cb2a45666a58ce.pdf')" class="src-link">🔗 来源</a>，系统推进人工智能赋能新型工业化，为金融行业依托AI服务实体经济、深化产融结合指明了发展方向。</li>
 <li>全国人大常委会将<strong>人工智能领域立法纳入2025年度立法工作筹备</strong>范畴，明确由有关方面抓紧开展调研和起草工作，视情安排审议<a href="javascript:void(0)" onclick="openSrc('https://www.thepaper.cn/newsDetail_forward_30827402')" class="src-link">🔗 来源</a>，预示着AI治理将逐步从政策引导走向法治化轨道。上述政策为金融行业探索AI应用提供了顶层制度保障和创新空间。</li>
 <li>2026年6月国家金融监督管理总局发布的 <strong>《关于银行业保险业人工智能安全开发应用的指导意见》</strong>（金发〔2026〕8号）<a href="javascript:void(0)" onclick="openSrc('https://www.nfra.gov.cn/cn/view/pages/ItemDetail.html?docId=1261784&itemId=928')" class="src-link">🔗 来源</a>是银行业数据治理与AI应用的标志性文件，全文共32条，覆盖AI模型的全生命周期管理要求，包括数据治理、模型准入、安全评估、可解释性、消费者保护、应急处置等核心领域。</li>
-</ul></div></div><div class="h4-block glass-card"><div class="h4-title"><span class="h4-badge">1.1.1.2</span>1.1.1.2 数据治理及要素市场化政策</div><div class="h4-body"><ul class="clean-list">
+</ul></div></div><div class="h4-block glass-card"><div class="h4-title">1.1.1.2 数据治理及要素市场化政策</div><div class="h4-body"><ul class="clean-list">
 <li><strong>《银行业金融机构数据治理指引》</strong>（银保监发〔2018〕22号）<a href="javascript:void(0)" onclick="openSrc('https://www.gov.cn/zhengce/zhengceku/2018-12/31/content_5450808.htm')" class="src-link">🔗 来源</a>：确立了银行业数据治理的"数据治理架构—数据管理—数据质量控制—数据价值实现—监督管理"五位一体框架，是银行业数据治理的基础性文件，为后续AI应用奠定了数据基础。</li>
 <li><strong>《中国银保监会办公厅关于银行业保险业数字化转型的指导意见》</strong>（银保监办发〔2022〕2号）<a href="javascript:void(0)" onclick="openSrc('https://www.gov.cn/zhengce/zhengceku/2022-01/27/content_5670680.htm')" class="src-link">🔗 来源</a>：要求银行保险机构制定数字化转型战略，加大数据治理力度，构建企业级数据中台，提升AI在业务场景中的应用能力，是银行业数字化与AI建设的核心指引。</li>
 <li>2022年12月，中共中央、国务院印发 <strong>《关于构建数据基础制度更好发挥数据要素作用的意见》</strong>（简称"数据二十条"）<a href="javascript:void(0)" onclick="openSrc('https://www.gov.cn/zhengce/2022-12/19/content_5732695.htm')" class="src-link">🔗 来源</a>，确立了数据产权、流通交易、收益分配、安全治理四项基础制度，为金融行业AI训练数据的治理与流通确立了基本规则。</li>
 <li>2023年国家数据局正式挂牌成立后，会同中央网信办等17个部门联合印发 <strong>《"数据要素×"三年行动计划（2024—2026年）》</strong>（国数政策〔2023〕11号）<a href="javascript:void(0)" onclick="openSrc('https://www.nda.gov.cn/sjj/zwgk/zcfb/0830/20240830174038137859023_mobile.html')" class="src-link">🔗 来源</a>，文件于2024年1月正式对外公布，将金融服务列为重点行动领域，明确要求提升数据治理水平、强化数据融合应用、打造AI训练高质量数据集，直接推动了金融行业面向AI的数据治理体系建设。</li>
-</ul></div></div><div class="h4-block glass-card"><div class="h4-title"><span class="h4-badge">1.1.1.3</span>1.1.1.3 数字金融战略</div><div class="h4-body"><ul class="clean-list">
+</ul></div></div><div class="h4-block glass-card"><div class="h4-title">1.1.1.3 数字金融战略</div><div class="h4-body"><ul class="clean-list">
 <li>2022年01月，中国人民银行关于印发《金融科技发展规划（2022—2025年）》的通知<a href="javascript:void(0)" onclick="openSrc('https://camlmac.pbc.gov.cn/zhengwugongkai/4081330/4406346/4693549/4470403/index.html')" class="src-link">🔗 来源</a>，构建了金融数字化转型的顶层设计，重点包括数据中台建设、AI能力建设、数字化人才培育等方向。</li>
 <li>2024年5月，国家金融监督管理总局发布《关于银行业保险业做好金融"五篇大文章"的指导意见》<a href="javascript:void(0)" onclick="openSrc('https://www.gov.cn/zhengce/zhengceku/202405/content_6950223.htm')" class="src-link">🔗 来源</a>，将科技金融、数字金融等列为五大重点领域，要求金融机构加快数字化转型。</li>
 <li>2025年12月，国家金融监督管理总局发布《银行业保险业数字金融高质量发展实施方案》的通知<a href="javascript:void(0)" onclick="openSrc('https://www.gov.cn/zhengce/zhengceku/202512/content_7052874.htm')" class="src-link">🔗 来源</a>，充分发挥人工智能等新技术创新引领作用，加快发展“人工智能+金融”。鼓励有条件的金融机构加强人工智能安全开发应用，建设企业级人工智能平台。</li>
-</ul></div></div><div class="h4-block glass-card"><div class="h4-title"><span class="h4-badge">1.1.1.4</span>1.1.1.4 数据安全与法治保障框架</div><div class="h4-body"><p>《中华人民共和国网络安全法》《中华人民共和国数据安全法》《中华人民共和国个人信息保护法》构成了金融数据治理与AI应用的基础法律框架。</p>
+</ul></div></div><div class="h4-block glass-card"><div class="h4-title">1.1.1.4 数据安全与法治保障框架</div><div class="h4-body"><p>《中华人民共和国网络安全法》《中华人民共和国数据安全法》《中华人民共和国个人信息保护法》构成了金融数据治理与AI应用的基础法律框架。</p>
 <ul class="clean-list">
 <li>《数据安全法》<a href="javascript:void(0)" onclick="openSrc('https://www.cac.gov.cn/2021-06/11/c_1624994566919140.htm')" class="src-link">🔗 来源</a>确立了数据分类分级保护制度，为AI训练数据的分级管理提供了法律依据；</li>
 <li>《个人信息保护法》<a href="javascript:void(0)" onclick="openSrc('https://sdca.miit.gov.cn/zwgk/fgbz/art/2026/art_3e2ad39014b743d58bab7a6815640aee.html')" class="src-link">🔗 来源</a>对金融领域个人信息处理提出了严格要求，直接影响AI模型训练中个人数据的合规使用。</li>
@@ -440,8 +442,8 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="slide-inner">
 <div class="content-wrapper">
 <h2 class="content-title">1.1.2 政策要求发展导向</h2>
-<div class="content-body glass-card"></div>
-<div class="h4-block glass-card"><div class="h4-title"><span class="h4-badge">1.1.2.1</span>1.1.2.1 发展导向</div><div class="h4-body"><ul class="clean-list">
+
+<div class="h4-block glass-card"><div class="h4-title">1.1.2.1 发展导向</div><div class="h4-body"><ul class="clean-list">
 <li><strong>导向一：数据全生命周期管理。</strong> 政策明确要求金融机构建立覆盖数据采集、存储、处理、传输、共享、销毁全生命周期的管理制度。对大模型训练数据的来源合法性、标注质量、版本管理提出了细化要求，为AI应用提供高质量的数据基础。</li>
 <li><strong>导向二：高质量AI训练数据集建设与共建共享。</strong> 在数据要素市场化框架下，政策鼓励金融机构推动AI训练数据集的标准化和规模化建设，同时实现数据集的安全共享与协作，打破"数据孤岛"，促进跨机构、跨行业的AI训练数据生态建设。"数据要素×"行动计划明确将金融服务领域打造成高质量AI训练数据集的重点方向，推动数据资源的整合、治理与价值释放。</li>
 <li><strong>导向三：数据分类分级管理。</strong> 《数据安全法》确立的数据分类分级制度在金融领域得到全面执行。金融机构需根据数据敏感程度和业务影响进行分级管理，AI训练数据的使用需遵循分级授权机制，既保障数据安全又促进数据价值释放。</li>
@@ -449,7 +451,7 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <li><strong>导向五：知识工程与知识图谱建设。</strong> 政策鼓励金融机构构建企业级知识图谱和领域知识库，将隐性知识转化为结构化的AI可用数据资产。这一要求在国家金融科技发展规划中有明确体现，是金融行业"面向AI的数据治理"的重要方向。</li>
 <li><strong>导向六：AI模型可解释性与公平性。</strong> 政策要求金融机构建立AI模型的全生命周期管理机制，对模型的可解释性、公平性、稳健性进行评估和监控。高风险场景要求高可解释性，低风险场景鼓励探索创新，体现差异化的治理理念。</li>
 <li><strong>导向七：AI应用风险分级管理。</strong> 2026年8号文建立的AI应用风险分级制度（高、中、低三档）标志着金融AI治理从"统一要求"走向"分级分类精细化"，对不同风险等级的应用场景匹配差异化的管理要求。</li>
-</ul></div></div><div class="h4-block glass-card"><div class="h4-title"><span class="h4-badge">1.1.2.2</span>1.1.2.2 各业态差异化政策重点与发展方向</div><div class="h4-body"><table class="tbl"><thead><tr>
+</ul></div></div><div class="h4-block glass-card"><div class="h4-title">1.1.2.2 各业态差异化政策重点与发展方向</div><div class="h4-body"><table class="tbl"><thead><tr>
 <th>业态</th>
 <th>差异化政策重点与发展方向</th>
 </tr></thead><tbody>
@@ -546,7 +548,7 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="slide-inner">
 <div class="content-wrapper">
 <h2 class="content-title">1.2.2 通用AI应用场景成熟度</h2>
-<div class="content-body glass-card"></div>
+
 <div class="chart-section">
 <div class="chart-box glass-card" id="maturityChart"></div>
 <div class="table-section glass-card"><table class="tbl"><thead><tr>
@@ -625,14 +627,14 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="slide-inner">
 <div class="content-wrapper">
 <h2 class="content-title">1.2.3 行业共性痛点与业态差异化挑战</h2>
-<div class="content-body glass-card"></div>
-<div class="h4-block glass-card"><div class="h4-title"><span class="h4-badge">1.2.3.1</span>1.2.3.1 全行业共性痛点</div><div class="h4-body"><ul class="clean-list">
+
+<div class="h4-block glass-card"><div class="h4-title">1.2.3.1 全行业共性痛点</div><div class="h4-body"><ul class="clean-list">
 <li><strong>痛点一：数据孤岛与数据割裂。</strong> 尽管数据治理投入持续增加，但跨部门、跨系统的数据整合仍面临巨大挑战。多数机构的数据仍分散在不同业务系统中，缺乏统一的数据标准和交换机制。</li>
 <li><strong>痛点二："数据多但AI不可用"。</strong> 这是全行业最突出的矛盾——金融机构积累了海量数据，但这些数据在质量、标注、结构化程度上远未达到"AI-Ready"标准。大量数据以非结构化文档形式存在，无法被AI模型直接消费。</li>
 <li><strong>痛点三：大模型的"幻觉"与可信度问题。</strong> 金融行业对AI输出的准确性和可解释性要求极高，大模型的"幻觉"问题成为规模化落地的核心障碍。</li>
 <li><strong>痛点四：复合型人才严重短缺。</strong> "既懂金融又懂AI"的复合型人才极度稀缺，各业态均面临"AI团队不懂业务、业务团队不懂AI"的结构性矛盾。</li>
 <li><strong>痛点五：政策细则落地与业务创新的节奏匹问题。</strong> 尽管政策框架日趋完善，但AI在具体业务场景中的管理要求与业务创新速度之间仍存在节奏差异，金融机构需要在探索前沿应用的同时做好政策衔接。</li>
-</ul></div></div><div class="h4-block glass-card"><div class="h4-title"><span class="h4-badge">1.2.3.2</span>1.2.3.2 各业态差异化挑战</div><div class="h4-body"><p><strong>银行业</strong>：</strong></p>
+</ul></div></div><div class="h4-block glass-card"><div class="h4-title">1.2.3.2 各业态差异化挑战</div><div class="h4-body"><p><strong>银行业</strong>：</strong></p>
 <ul class="clean-list">
 <li>体量大、系统复杂，AI改造涉及大量遗留系统的适配</li>
 <li>模型可解释性和公平性要求最为严格，对技术方案选择有深远影响</li>
@@ -1653,10 +1655,10 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="slide-inner">
 <div class="content-wrapper">
 <h2 class="content-title">1.4.2 境内外建设情况对比分析</h2>
-<div class="content-body glass-card"></div>
+
 <div class="chart-section">
 <div class="chart-box glass-card" id="gapChart"></div>
-</div><div class="h4-block glass-card"><div class="h4-title"><span class="h4-badge">1.4.2.1</span>1.4.2.1 境内外在数据治理与AI应用方面的差异</div><div class="h4-body"><table class="tbl"><thead><tr>
+</div><div class="h4-block glass-card"><div class="h4-title">1.4.2.1 境内外在数据治理与AI应用方面的差异</div><div class="h4-body"><table class="tbl"><thead><tr>
 <th>对比维度</th>
 <th>境外领先机构</th>
 <th>中国领先机构</th>
@@ -1704,7 +1706,7 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <td>工行、建行等AI投入年化约数十亿人民币</td>
 <td>数量级差异</td>
 </tr>
-</tbody></table></div></div><div class="h4-block glass-card"><div class="h4-title"><span class="h4-badge">1.4.2.2</span>1.4.2.2 典型业务场景落地维度</div><div class="h4-body"><table class="tbl"><thead><tr>
+</tbody></table></div></div><div class="h4-block glass-card"><div class="h4-title">1.4.2.2 典型业务场景落地维度</div><div class="h4-body"><table class="tbl"><thead><tr>
 <th>编号</th>
 <th>经验要点</th>
 <th>核心内容</th>
@@ -1845,7 +1847,6 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 </div>
 
 <div class="topbar">
-  <div class="topbar-logo">亿信华辰 <span class="ls">ESENSOFT</span></div>
   <div class="topbar-center">
     <div class="nav-idx" id="navIdx" onclick="toggleNav()">
       <b id="navCurr">1</b><span class="sep">/</span><span style="font-size:11px;color:#8a94a6;font-weight:400">30</span>
@@ -1892,6 +1893,7 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
     <button id="prevBtn" onclick="goSlide(cur-1)" disabled>◀</button>
     <button id="nextBtn" onclick="goSlide(cur+1)">▶</button>
   </div>
+  <div class="topbar-logo"><img src="/logo-esen.svg" alt="亿信华辰" style="height:20px;display:block"></div>
 </div><div id="prog" style="width:5%"></div>
 
 <div class="ftr">
