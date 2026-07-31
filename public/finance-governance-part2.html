@@ -460,9 +460,12 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <h2 class="content-title">2.1.1 从"看清现状"到"找到路径"</h2>
 <div class="content-body glass-card">
 <p>第一部分系统梳理了中国金融行业数据治理与AI应用的政策环境、行业现状与标杆实践。核心发现可以概括为三点：</p>
-<p class="bold-lead"><strong>第一，行业差距显著。</strong> 银行业（尤其是国有大行和股份制银行）在数据治理和AI应用上已进入规模化阶段，而金融租赁、融资租赁、财务公司等非银业态仍处于起步或试点时期，部分业态甚至尚未完成基础数据治理建设（国家金融监督管理总局，《关于银行业保险业数字化转型的指导意见》；国家金融监督管理总局，《银行业金融机构数据治理指引》）。</p>
-<p class="bold-lead"><strong>第二，境外领先机构的方法论值得借鉴但不可照搬。</strong> 摩根大通的OmniAI平台、摩根士丹利的非结构化文档资产化工程、星展银行的"3A"平台架构等境外实践，为中国金融机构提供了方法论参考，但必须结合国内监管环境、行业成熟度和机构自身禀赋进行本土化适配（J.P. Morgan, <a href="https://www.jpmorganchase.com/annualreport" target="_blank" class="external-link">OmniAI Platform</a>；DBS Bank, <a href="https://www.dbs.com/digital-transformation" target="_blank" class="external-link">3A Platform</a>；Morgan Stanley, <a href="https://www.morganstanley.com/" target="_blank" class="external-link">Document Assetization</a>）。</p>
-<p class="bold-lead"><strong>第三，"数据治理先行"是AI应用规模化的前提条件，但传统数据治理架构需要升级。</strong> 无论是工行、招行等境内领先机构，还是摩根大通、星展等境外标杆，其AI规模化落地的最重要前提都是"完成了面向AI的数据治理基础建设"。但传统以BI报表为核心消费场景的治理体系，不足以支撑AI时代的模型训练、RAG检索、Agent推理等新型消费模式（Gartner, <a href="https://www.gartner.com/en/documents/" target="_blank" class="external-link">Data Quality Solutions MQ 2024</a>）。</p>
+<p class="case-section-heading"><strong>（1）行业差距显著。</strong></p>
+<ul class="clean-list"><li>银行业（尤其是国有大行和股份制银行）在数据治理和AI应用上已进入规模化阶段，而金融租赁、融资租赁、财务公司等非银业态仍处于起步或试点时期，部分业态甚至尚未完成基础数据治理建设（国家金融监督管理总局，《关于银行业保险业数字化转型的指导意见》；国家金融监督管理总局，《银行业金融机构数据治理指引》）。</li></ul>
+<p class="case-section-heading"><strong>（2）境外领先机构的方法论值得借鉴但不可照搬。</strong></p>
+<ul class="clean-list"><li>摩根大通的OmniAI平台、摩根士丹利的非结构化文档资产化工程、星展银行的"3A"平台架构等境外实践，为中国金融机构提供了方法论参考，但必须结合国内监管环境、行业成熟度和机构自身禀赋进行本土化适配（J.P. Morgan, <a href="https://www.jpmorganchase.com/annualreport" target="_blank" class="external-link">OmniAI Platform</a>；DBS Bank, <a href="https://www.dbs.com/digital-transformation" target="_blank" class="external-link">3A Platform</a>；Morgan Stanley, <a href="https://www.morganstanley.com/" target="_blank" class="external-link">Document Assetization</a>）。</li></ul>
+<p class="case-section-heading"><strong>（3）"数据治理先行"是AI应用规模化的前提条件，但传统数据治理架构需要升级。</strong></p>
+<ul class="clean-list"><li>无论是工行、招行等境内领先机构，还是摩根大通、星展等境外标杆，其AI规模化落地的最重要前提都是"完成了面向AI的数据治理基础建设"。但传统以BI报表为核心消费场景的治理体系，不足以支撑AI时代的模型训练、RAG检索、Agent推理等新型消费模式（Gartner, <a href="https://www.gartner.com/en/documents/" target="_blank" class="external-link">Data Quality Solutions MQ 2024</a>）。</li></ul>
 <p>基于以上发现，本方案的核心任务是从"看清现状"走向"找到路径"——为金融机构提供一套可落地、可验证的整体解决方案。</p>
 </div>
 </div>
@@ -479,9 +482,9 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <h2 class="content-title">2.1.2 核心理念：AI原生数据治理</h2>
 <div class="content-body glass-card">
 <p>本方案的核心方法论区别于传统数据治理，其核心理念可概括为<strong>"AI原生数据治理"</strong>——不是"传统治理工具+AI外挂"，而是治理体系本身就是AI驱动、为AI服务的。</p>
-<p class="bold-lead"><strong>四个关键转变：</strong></p>
+<p class="case-section-heading"><strong>（1）四个关键转变：</strong></p>
 <div class="table-wrap"><table><thead><tr><th>维度</th><th>传统数据治理</th><th>AI原生数据治理</th></tr></thead><tbody><tr><td><strong>治理目标</strong></td><td>确保数据"可管、可控、可信"</td><td>确保数据"可被AI消费、可被模型理解、可被信任"</td></tr><tr><td><strong>数据范围</strong></td><td>以结构化数据为主</td><td>结构化+非结构化（文档/图片/音视频/IoT时序）</td></tr><tr><td><strong>治理手段</strong></td><td>人工规则+工具链</td><td>AI Agent驱动的自动发现、自动分级、自动修复、自动推荐</td></tr><tr><td><strong>消费方式</strong></td><td>BI报表/数据分析师查询</td><td>模型训练/RAG检索/Agent推理/API调用</td></tr></tbody></table></div>
-<p class="bold-lead"><strong>三个核心闭环：</strong></p>
+<p class="case-section-heading"><strong>（2）三个核心闭环：</strong></p>
 <p>本方案通过三个正反馈循环实现治理与AI的持续进化：</p>
 <pre><code>闭环一·治理质量闭环：AI检测异常 → 根因分析 → 自动修复/推人工 → 修复验证 → 质量趋势提升
 闭环二·知识增强闭环：知识检索 → LLM生成 → 用户反馈 → 知识修正 → 检索质量提升
@@ -502,26 +505,11 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <h2 class="content-title">2.1.3 七层全域智能架构总览</h2>
 <div class="content-body glass-card">
 <p>基于以上理念，本方案设计<strong>"七层全域智能架构"</strong>作为整体解决方案的技术框架。架构自上而下共七层，上层面向业务用户和AI场景，下层提供基础设施与数据底座，每一层解耦设计，层间通过标准化接口交互。</p>
-<pre><code>┌─────────────────────────────────────────────────────────────────────────────┐
-│  L1  全域智能应用层        核心业务 · 经营分析 · 风险合规 · 办公运营 · 数字营销 │
-├─────────────────────────────────────────────────────────────────────────────┤
-│  L2  多智能体协同支撑层    Agent引擎 · 构建编排 · MCP网关 · Skill插件 · 审计 │
-├─────────────────────────────────────────────────────────────────────────────┤
-│  L3  语义建模与知识服务层  本体建模 · 知识图谱 · 向量语义 · 语义融合 · 混合检索 │
-├─────────────────────────────────────────────────────────────────────────────┤
-│  L4  AI-Native 数据治理层  元数据Agent · 质量Agent · 标准Agent · 安全Agent   │
-│                           主数据 · 数据资产 · 数据服务 · 指标 · 标签        │
-├─────────────────────────────────────────────────────────────────────────────┤
-│  L5  AI-Native 服务层      大模型训推一体 · 模型管理 · 数据管理 · 推理服务     │
-├─────────────────────────────────────────────────────────────────────────────┤
-│  L6  统一存储与计算层      湖仓 · 数仓 · 对象存储 · 图库 · 向量库 · 时序库    │
-├─────────────────────────────────────────────────────────────────────────────┤
-│  L7  基础设施与云原生底座   边缘设备 · 算力中心 · 私有云 · 公有云 · 容器底座   │
-└─────────────────────────────────────────────────────────────────────────────┘
-</code></pre>
-<p class="bold-lead"><strong>各层定位：</strong></p>
+<p class="case-section-heading"><strong>（1）七层全域智能架构：</strong></p>
+<p class="img-wrap"><img src="/AI_Native_Architecture.jpg" alt="七层全域智能架构" style="max-width:100%;border-radius:8px"></p>
+<p class="case-section-heading"><strong>（2）各层定位：</strong></p>
 <ul class="clean-list"><li><strong>L7 基础设施与云原生底座</strong>：算力、存储、网络的物理基座，支撑容器编排和GPU调度</li><li><strong>L6 统一存储与计算层</strong>：多模态数据的统一存储——湖仓（Iceberg）、数仓（Doris）、对象存储、图库、向量库、时序库</li><li><strong>L5 AI-Native服务层</strong>：大模型训推一体化平台，覆盖模型训练（SFT/DPO/CPT）、推理服务、模型管理</li><li><strong>L4 AI-Native数据治理层</strong>：架构的核心枢纽，以多Agent驱动数据治理——元数据Agent、质量Agent、标准Agent、安全Agent等协同工作</li><li><strong>L3 语义建模与知识服务层</strong>：将治理后的数据抽象为"本体—图谱—向量"三层语义表达，让AI理解数据的业务含义</li><li><strong>L2 多智能体协同支撑层</strong>：Agent的运行、编排、通信、审计平台，通过MCP协议实现跨Agent标准化协同</li><li><strong>L1 全域智能应用层</strong>：直接面向用户的应用——核心业务、经营分析、风险合规、办公运营、数字营销五大板块</li></ul>
-<p class="bold-lead"><strong>架构设计原则：</strong></p>
+<p class="case-section-heading"><strong>（3）架构设计原则：</strong></p>
 <ul class="clean-list"><li><strong>AI原生注入</strong>：治理模块不"外挂"AI，LLM/Agent/向量/图谱作为治理引擎的固有组件</li><li><strong>数据闭环优先</strong>：治理→AI→应用→反馈→治理优化的正反馈循环是核心约束</li><li><strong>解耦与可替换</strong>：七层之间通过标准化API/MCP协议解耦，每层可独立演进</li><li><strong>安全内置</strong>：安全策略、隐私计算、分级管控从架构设计之初即嵌入每一层</li><li><strong>信创适配</strong>：全面支持国产芯片（昇腾/鲲鹏）、国产操作系统、国产数据库与中间件</li></ul>
 </div>
 </div>
@@ -581,9 +569,9 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="content-wrapper">
 <h2 class="content-title">2.2.1 从传统数据治理到AI-Native数据治理的升级路径</h2>
 <div class="content-body glass-card">
-<p class="bold-lead"><strong>传统数据治理 vs AI-Native数据治理的核心差异：</strong></p>
+<p class="case-section-heading"><strong>（1）传统数据治理 vs AI-Native数据治理的核心差异：</strong></p>
 <div class="table-wrap"><table><thead><tr><th>维度</th><th>传统数据治理</th><th>AI-Native数据治理</th></tr></thead><tbody><tr><td><strong>驱动方式</strong></td><td>人工规则+工具链驱动</td><td>AI Agent自动驱动</td></tr><tr><td><strong>数据范围</strong></td><td>以结构化数据为主</td><td>结构化+非结构化（文档/图片/音视频/IoT）</td></tr><tr><td><strong>治理时效</strong></td><td>事后治理（批处理）</td><td>实时治理（流式+事件驱动）</td></tr><tr><td><strong>消费方式</strong></td><td>BI报表/数据分析师查询</td><td>模型训练/RAG检索/Agent推理/API调用</td></tr><tr><td><strong>组织模式</strong></td><td>科技部门主导</td><td>业务+科技+风险+合规+法务+人力六方协同</td></tr></tbody></table></div>
-<p class="bold-lead"><strong>升级路径分为五个阶段：</strong></p>
+<p class="case-section-heading"><strong>（2）升级路径分为五个阶段：</strong></p>
 <div class="table-wrap"><table><thead><tr><th>阶段</th><th>时间</th><th>核心工作</th></tr></thead><tbody><tr><td>现状评估</td><td>1~2个月</td><td>对照AI-Native标准评估当前数据治理体系的差距</td></tr><tr><td>体系设计</td><td>2~3个月</td><td>设计治理Agent体系、非结构化文档治理方案、语义层方案</td></tr><tr><td>试点实施</td><td>3~6个月</td><td>选择1~2个业务域，部署元数据Agent/质量Agent/安全Agent</td></tr><tr><td>规模推广</td><td>6~12个月</td><td>治理Agent覆盖全业务域，语义层和知识图谱上线</td></tr><tr><td>持续运营</td><td>长期</td><td>质量闭环迭代，治理Agent持续优化</td></tr></tbody></table></div>
 </div>
 </div>
@@ -600,14 +588,14 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <h2 class="content-title">2.2.2 数据产品化（Data as a Product）实施</h2>
 <div class="content-body glass-card">
 <p>数据产品化是将数据从"副产品"升级为"产品"的治理范式转变，是境外领先机构面向AI的数据治理的核心方法论。</p>
-<p class="bold-lead"><strong>数据产品的定义与要素：</strong></p>
+<p class="case-section-heading"><strong>（1）数据产品的定义与要素：</strong></p>
 <p>一个数据产品是围绕某一业务领域打包的、有明确定义、可被发现、可被信任、可被消费的数据资产。每个数据产品包含五个核心要素：</p>
 <p>1. <strong>数据本身</strong>：表、视图、事件流、向量集合等</p>
 <p>2. <strong>元数据与文档</strong>：业务描述、字段说明、质量指标、血缘关系</p>
 <p>3. <strong>数据合同（Data Contract）</strong>：明确生产方承诺的Schema、SLA、质量指标，以及消费方的使用边界</p>
 <p>4. <strong>质量指标与监控</strong>：持续可观测的数据质量评分</p>
 <p>5. <strong>访问接口</strong>：API/视图/向量检索等多种消费方式</p>
-<p class="bold-lead"><strong>数据产品负责人（Data Product Owner）与AI可用性标签：</strong></p>
+<p class="case-section-heading"><strong>（2）数据产品负责人（Data Product Owner）与AI可用性标签：</strong></p>
 <p>建议设立数据产品负责人制度，来自业务条线，对数据产品的质量和采用率负责。同时，每个数据产品在发布前必须完成AI可用性标签评级：</p>
 <div class="table-wrap"><table><thead><tr><th>AI可用性标签</th><th>定义</th><th>审批流程</th></tr></thead><tbody><tr><td>L4-客户面可用</td><td>可在面向客户的AI场景中使用</td><td>产品负责人+合规+隐私+安全四方联签</td></tr><tr><td>L3-内部AI可用</td><td>可在内部AI/分析场景中使用</td><td>产品负责人+合规方联签</td></tr><tr><td>L2-内部分析可用</td><td>仅可用于BI分析，不可用于AI模型</td><td>产品负责人审批</td></tr><tr><td>L1-禁止AI消费</td><td>禁止在任何AI场景中使用</td><td>默认状态</td></tr></tbody></table></div>
 </div>
@@ -625,16 +613,16 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <h2 class="content-title">2.2.3 非结构化文档资产化工程</h2>
 <div class="content-body glass-card">
 <p>非结构化文档是金融机构最大的"暗数据"资产——尽调报告、合同、核保文件、理赔影像、招股书、研报、监管报送文档等，是AI应用最直接、最有价值的数据源。</p>
-<p class="bold-lead"><strong>文档资产化全流程：</strong></p>
+<p class="case-section-heading"><strong>（1）文档资产化全流程：</strong></p>
 <pre><code>原始文档 → 分类与清洗 → 语义分块（Chunking） → 向量化（Embedding） → 入库索引 → 质量审查
 </code></pre>
-<p class="bold-lead"><strong>各环节关键要点：</strong></p>
+<p class="case-section-heading"><strong>（2）各环节关键要点：</strong></p>
 <p>1. <strong>分类与清洗</strong>：建立文档分类标准（业态—业务环节—文档类型三级分类），去除无关页面和噪声数据</p>
 <p>2. <strong>语义分块</strong>：按语义段落/条款切分，设置适当重叠（128~256 tokens），保留完整元数据</p>
 <p>3. <strong>向量化</strong>：采用BGE-M3/M3E等中文Embedding模型，将文档切片转为768d/1024d向量</p>
 <p>4. <strong>入库索引</strong>：向量写入Milvus/Qdrant，同步写入ES全文索引，元数据标签关联</p>
 <p>5. <strong>质量审查</strong>：建立抽样审查机制，设Content Librarian岗位负责文档质量审核</p>
-<p class="bold-lead"><strong>分业态优先治理文档类型：</strong></p>
+<p class="case-section-heading"><strong>（3）分业态优先治理文档类型：</strong></p>
 <div class="table-wrap"><table><thead><tr><th>业态</th><th>优先治理文档</th><th>周期</th></tr></thead><tbody><tr><td>银行</td><td>信贷尽调报告、贷后检查报告</td><td>6~9个月</td></tr><tr><td>保险</td><td>核保医学文档、理赔影像</td><td>6~9个月</td></tr><tr><td>证券</td><td>招股说明书、研究报告</td><td>4~6个月</td></tr><tr><td>金租</td><td>租赁合同、尽调报告、资产权属文件</td><td>6~12个月</td></tr><tr><td>商租</td><td>设备采购合同、还款记录</td><td>4~6个月</td></tr><tr><td>消费金融</td><td>授信审批文件、催收记录</td><td>3~4个月</td></tr><tr><td>财务公司</td><td>资金调拨单据、监管报表</td><td>3~4个月</td></tr></tbody></table></div>
 </div>
 </div>
@@ -651,11 +639,11 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <h2 class="content-title">2.2.4 知识图谱与企业语义层建设</h2>
 <div class="content-body glass-card">
 <p>知识图谱是解决AI"理解数据业务含义"这一核心问题的关键技术手段。本方案在L3语义建模与知识服务层中承载知识图谱能力。</p>
-<p class="bold-lead"><strong>知识图谱在金融AI场景中的应用模式：</strong></p>
+<p class="case-section-heading"><strong>（1）知识图谱在金融AI场景中的应用模式：</strong></p>
 <p>1. <strong>实体解析与关系推理</strong>：将分散在不同系统中的客户、产品、合同、交易等实体进行统一标识和关联，推理隐含的业务关系（如关联交易、担保圈、供应链关系）</p>
 <p>2. <strong>图RAG（GraphRAG）</strong>：在传统的向量RAG基础上引入图结构检索，使AI能够理解实体之间的多跳关系</p>
 <p>3. <strong>业务语义层</strong>：将跨系统的业务术语、指标定义、计算规则统一管理，作为AI理解业务数据的"翻译层"</p>
-<p class="bold-lead"><strong>知识图谱建设方法论：</strong></p>
+<p class="case-section-heading"><strong>（2）知识图谱建设方法论：</strong></p>
 <div class="table-wrap"><table><thead><tr><th>步骤</th><th>内容</th><th>周期</th></tr></thead><tbody><tr><td>高价值域识别</td><td>选择业务价值最高、实体关系最密集的领域（如银行：企业客户关系图谱；证券：上市公司知识图谱；金租：租赁物知识图谱）</td><td>1~2个月</td></tr><tr><td>本体设计与数据接入</td><td>定义实体类型、关系类型、属性；接入结构化数据源和数据产品</td><td>2~3个月</td></tr><tr><td>实体解析与关系构建</td><td>实体对齐（同实体跨系统融合）、关系抽取（从非结构化文档中抽取）、质量验证</td><td>3~6个月</td></tr><tr><td>推理与消费</td><td>图查询API、GraphRAG增强检索、持续扩展</td><td>持续</td></tr></tbody></table></div>
 </div>
 </div>
@@ -672,9 +660,9 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <h2 class="content-title">2.2.5 面向AI的数据质量管控体系升级</h2>
 <div class="content-body glass-card">
 <p>AI场景对数据质量提出了比传统BI场景更严格的要求。传统的数据质量管控主要关注"准确性、完整性、一致性"，AI场景需要在此基础上增加三个新维度：</p>
-<p class="bold-lead"><strong>AI场景的六维数据质量框架：</strong></p>
+<p class="case-section-heading"><strong>（1）AI场景的六维数据质量框架：</strong></p>
 <div class="table-wrap"><table><thead><tr><th>质量维度</th><th>传统含义</th><th>AI场景的扩展要求</th></tr></thead><tbody><tr><td>准确性</td><td>数据与真实值一致</td><td>+ 标注数据的一致性</td></tr><tr><td>完整性</td><td>无缺失值</td><td>+ 覆盖所有业务场景</td></tr><tr><td>一致性</td><td>跨系统数据统一</td><td>+ 时间维度的一致性</td></tr><tr><td>时效性</td><td>数据及时更新</td><td>+ 模型对数据新鲜度的敏感度</td></tr><tr><td>代表性</td><td>—</td><td>训练数据与目标分布的匹配度</td></tr><tr><td>可解释性</td><td>—</td><td>数据来源和加工过程可追溯</td></tr></tbody></table></div>
-<p class="bold-lead"><strong>AI驱动的数据质量实现方式：</strong></p>
+<p class="case-section-heading"><strong>（2）AI驱动的数据质量实现方式：</strong></p>
 <ul class="clean-list"><li><strong>质量规则自动生成</strong>：LLM根据字段名、数据类型、样本分布自动推荐质量规则</li><li><strong>异常自动检测</strong>：统计异常（IQR/3σ）+ 时序异常（Prophet/LSTM）+ 语义异常（LLM判断）</li><li><strong>根因分析与修复建议</strong>：质量失败事件由LLM自动分析根因，输出自然语言修复建议</li><li><strong>质量评分闭环</strong>：表级/字段级评分 → 趋势监控 → 异常告警 → 修复跟踪 → 评分更新</li></ul>
 </div>
 </div>
@@ -691,9 +679,9 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <h2 class="content-title">2.2.6 隐私计算与数据安全分类分级方案</h2>
 <div class="content-body glass-card">
 <p>在数据合规要求日益严格的背景下，数据安全治理是数据治理的底线。</p>
-<p class="bold-lead"><strong>隐私计算技术选型：</strong></p>
+<p class="case-section-heading"><strong>（1）隐私计算技术选型：</strong></p>
 <div class="table-wrap"><table><thead><tr><th>技术方案</th><th>适用场景</th><th>推荐业态</th></tr></thead><tbody><tr><td>联邦学习（FL）</td><td>多方联合建模，数据不出域</td><td>银行、消费金融、保险</td></tr><tr><td>安全多方计算（MPC）</td><td>联合查询/统计，安全性最高</td><td>风控黑名单共享、跨机构数据对碰</td></tr><tr><td>可信执行环境（TEE）</td><td>敏感数据计算，性能较好</td><td>数据聚合分析、监管报送</td></tr><tr><td>差分隐私（DP）</td><td>数据发布/统计，理论保证强</td><td>监管报送、数据开放</td></tr></tbody></table></div>
-<p class="bold-lead"><strong>数据分类分级（对齐JR/T 0197）：</strong></p>
+<p class="case-section-heading"><strong>（2）数据分类分级（对齐JR/T 0197）：</strong></p>
 <p>建议建立五级数据分类分级体系（C1~C5），与AI可用性标签联动。AI Agent在调用数据时自动校验标签，不符合的被中央数据网关拦截。</p>
 </div>
 </div>
@@ -736,7 +724,7 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <h2 class="content-title">2.3.1 企业级AI平台架构设计</h2>
 <div class="content-body glass-card">
 <p>本方案的AI平台架构以七层架构中的<strong>L5 AI-Native服务层</strong>和<strong>L2 多智能体协同支撑层</strong>为核心，采用"<strong>集中式平台+联邦式用例</strong>"的模式——这是境外领先机构（摩根大通OmniAI、星展3A平台、BBVA GAIA）经过多年实践验证的架构模式（J.P. Morgan, <a href="https://www.jpmorganchase.com/annualreport" target="_blank" class="external-link">OmniAI Platform</a>；DBS Bank, <a href="https://www.dbs.com/digital-transformation" target="_blank" class="external-link">3A Platform</a>；Morgan Stanley, <a href="https://www.morganstanley.com/" target="_blank" class="external-link">Document Assetization</a>）。</p>
-<p class="bold-lead"><strong>平台核心能力：</strong></p>
+<p class="case-section-heading"><strong>（1）平台核心能力：</strong></p>
 <div class="table-wrap"><table><thead><tr><th>能力域</th><th>核心能力</th><th>说明</th></tr></thead><tbody><tr><td><strong>模型管理</strong></td><td>模型注册与版本管理</td><td>统一管理全机构所有AI模型的注册、版本、发布、退役</td></tr><tr><td><strong>模型训练</strong></td><td>SFT/DPO/CPT/LoRA</td><td>支持多种微调方式，满足不同场景的模型定制需求</td></tr><tr><td><strong>推理服务</strong></td><td>vLLM/TensorRT-LLM</td><td>统一推理网关，支持多模型、多GPU、弹性扩缩</td></tr><tr><td><strong>Agent平台</strong></td><td>多智能体编排+MCP协议</td><td>Agent的构建、编排、运行、审计全生命周期管理</td></tr><tr><td><strong>知识服务</strong></td><td>知识图谱+向量检索</td><td>统一的语义检索和知识推理能力</td></tr><tr><td><strong>数据服务</strong></td><td>数据产品目录对接</td><td>与L4数据治理层连接，支持AI场景按需消费数据</td></tr><tr><td><strong>算力管理</strong></td><td>GPU资源池化与调度</td><td>训练/推理算力池分离，弹性扩缩，优先级队列</td></tr><tr><td><strong>安全管控</strong></td><td>模型安全+数据审计</td><td>模型上线前安全评估、全链路数据访问审计</td></tr></tbody></table></div>
 </div>
 </div>
@@ -752,9 +740,9 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="content-wrapper">
 <h2 class="content-title">2.3.2 大模型选型与部署策略</h2>
 <div class="content-body glass-card">
-<p class="bold-lead"><strong>大模型选型建议：</strong></p>
+<p class="case-section-heading"><strong>（1）大模型选型建议：</strong></p>
 <div class="table-wrap"><table><thead><tr><th>场景</th><th>推荐模型</th><th>选型理由</th></tr></thead><tbody><tr><td>智能客服/知识问答</td><td>Qwen-72B / DeepSeek-V3</td><td>中文能力领先，长上下文支持（128K+），性能接近GPT-4</td></tr><tr><td>治理Agent（元数据/质量/标准）</td><td>Qwen-14B / GLM-4-9B</td><td>性价比最优，单卡可部署，延迟低</td></tr><tr><td>文档智能抽取（合同/尽调报告）</td><td>万象法律大模型V5.0/Qwen-72B / GPT-4o</td><td>复杂文档理解能力要求高</td></tr><tr><td>Embedding/向量化</td><td>BGE-M3 / M3E / 通义Embedding v3</td><td>中文语义理解精度高，支持多语言</td></tr><tr><td>代码生成（ETL/辅助开发）</td><td>DeepSeek-Coder / Qwen-Coder</td><td>金融代码生成场景专用</td></tr></tbody></table></div>
-<p class="bold-lead"><strong>部署策略建议：</strong></p>
+<p class="case-section-heading"><strong>（2）部署策略建议：</strong></p>
 <p>对于绝大多数金融机构，建议采用"<strong>私有化核心+公有云弹性</strong>"的混合部署模式：</p>
 <ul class="clean-list"><li><strong>私有化环境</strong>：部署核心数据资产、关键推理服务（风控模型、信贷审批）、知识图谱</li><li><strong>公有云环境</strong>：弹性算力用于模型训练/微调、非敏感场景推理、开发测试环境</li><li><strong>统一管理面</strong>：通过统一的AI平台实现跨环境的模型部署、监控和调度</li></ul>
 </div>
@@ -783,9 +771,9 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 │  湖仓一体 · 实时数仓 · 对象存储 · 图库 · 向量库 │
 └─────────────────────────────────────────────┘
 </code></pre>
-<p class="bold-lead"><strong>第一层——统一数据底座</strong>：以Apache Iceberg湖仓为基础，整合Apache Doris实时数仓、MinIO对象存储、Neo4j/HugeGraph图数据库、Milvus/Qdrant向量数据库、TDengine时序数据库、Elasticsearch搜索引擎，为上层提供多模态数据的统一存储与查询能力。</p>
-<p class="bold-lead"><strong>第二层——语义与知识服务平台</strong>：在数据底座之上，构建知识图谱、向量语义、本体建模三大能力。知识图谱承载实体关系和业务规则，向量语义承载非结构化文档的语义理解，本体建模定义业务概念的统一语义。三者通过语义融合层实现混合检索（Hybrid Search）。</p>
-<p class="bold-lead"><strong>第三层——多智能体协同平台</strong>：在最上层，基于MCP协议构建多智能体协同体系。治理Agent（元数据/质量/标准/安全）、知识Agent（图谱查询/向量检索）、业务Agent（风控分析/合规审查/报告生成）通过标准化接口互联，可编排、可审计、可复用。</p>
+<p class="case-section-heading"><strong>（1）第一层——统一数据底座</strong>：以Apache Iceberg湖仓为基础，整合Apache Doris实时数仓、MinIO对象存储、Neo4j/HugeGraph图数据库、Milvus/Qdrant向量数据库、TDengine时序数据库、Elasticsearch搜索引擎，为上层提供多模态数据的统一存储与查询能力。</p>
+<p class="case-section-heading"><strong>（2）第二层——语义与知识服务平台</strong>：在数据底座之上，构建知识图谱、向量语义、本体建模三大能力。知识图谱承载实体关系和业务规则，向量语义承载非结构化文档的语义理解，本体建模定义业务概念的统一语义。三者通过语义融合层实现混合检索（Hybrid Search）。</p>
+<p class="case-section-heading"><strong>（3）第三层——多智能体协同平台</strong>：在最上层，基于MCP协议构建多智能体协同体系。治理Agent（元数据/质量/标准/安全）、知识Agent（图谱查询/向量检索）、业务Agent（风控分析/合规审查/报告生成）通过标准化接口互联，可编排、可审计、可复用。</p>
 </div>
 </div>
 </div>
@@ -800,9 +788,9 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="content-wrapper">
 <h2 class="content-title">2.3.4 算力规划与部署架构</h2>
 <div class="content-body glass-card">
-<p class="bold-lead"><strong>算力需求测算：</strong></p>
+<p class="case-section-heading"><strong>（1）算力需求测算：</strong></p>
 <div class="table-wrap"><table><thead><tr><th>场景类型</th><th>算力特征</th><th>推荐配置</th><th>典型场景</th></tr></thead><tbody><tr><td>模型训练/微调</td><td>高算力、高显存</td><td>A100/H100 8卡+</td><td>金融领域模型微调、Embedding模型训练</td></tr><tr><td>在线推理</td><td>低延迟、高并发</td><td>L40S/H100 1~4卡</td><td>智能客服、实时风控</td></tr><tr><td>离线批处理</td><td>吞吐优先</td><td>多卡并行</td><td>文档批量向量化、批量合同审查</td></tr><tr><td>RAG检索</td><td>CPU+适量GPU</td><td>2~4卡</td><td>知识问答、文档检索</td></tr></tbody></table></div>
-<p class="bold-lead"><strong>算力规划建议：</strong></p>
+<p class="case-section-heading"><strong>（2）算力规划建议：</strong></p>
 <p>建议机构在AI建设初期避免大规模算力投资，采用"先小后大"策略——起步阶段以API调用为主，仅配置少量GPU用于测试评估；试点阶段根据首批落地场景的实际需求配置中等规模GPU资源；规模阶段基于半年以上的实际用量数据做精准扩容规划。</p>
 </div>
 </div>
@@ -847,11 +835,11 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="content-wrapper">
 <h2 class="content-title">2.4.1 银行业</h2>
 <div class="content-body glass-card">
-<p class="bold-lead"><strong>场景矩阵：</strong></p>
+<p class="case-section-heading"><strong>（1）场景矩阵：</strong></p>
 <div class="table-wrap"><table><thead><tr><th>高价值高可行</th><th>高价值中可行</th><th>中价值高可行</th></tr></thead><tbody><tr><td>智能客服/坐席助手</td><td>对公授信智能审批</td><td>AI辅助代码开发</td></tr><tr><td>零售客户精准营销</td><td>信贷风险智能预警</td><td>监管报送自动化</td></tr><tr><td>反欺诈实时识别</td><td>AI投资顾问</td><td>智能文档处理</td></tr><tr><td>智能运营/流程自动化</td><td>流动性风险预测</td><td>内部知识检索</td></tr></tbody></table></div>
-<p class="bold-lead"><strong>重点建设层：L4→L5→L3</strong></p>
+<p class="case-section-heading"><strong>（2）重点建设层：L4→L5→L3</strong></p>
 <p>银行在数据治理方面已有较好基础，升级路径为：先在现有治理体系上叠加AI-Native治理Agent（L4），同步建设AI-Native服务层（L5），再启动企业客户关系图谱和智能投研知识图谱（L3）。</p>
-<p class="bold-lead"><strong>典型路径（12~18个月）：</strong></p>
+<p class="case-section-heading"><strong>（3）典型路径（12~18个月）：</strong></p>
 <p>1. 治理Agent体系部署（元数据Agent/质量Agent/安全Agent上线）——第1~4个月</p>
 <p>2. AI-Native服务层上线，智能客服和智能运营场景落地——第4~8个月</p>
 <p>3. 企业客户关系图谱建设，投研知识图谱启动——第8~12个月</p>
@@ -870,11 +858,11 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="content-wrapper">
 <h2 class="content-title">2.4.2 保险业</h2>
 <div class="content-body glass-card">
-<p class="bold-lead"><strong>场景矩阵：</strong></p>
+<p class="case-section-heading"><strong>（1）场景矩阵：</strong></p>
 <div class="table-wrap"><table><thead><tr><th>高价值高可行</th><th>高价值中可行</th><th>中价值高可行</th></tr></thead><tbody><tr><td>智能核保自动化</td><td>AI精算定价优化</td><td>智能合同管理</td></tr><tr><td>极速理赔/AI定损</td><td>保险欺诈网络识别</td><td>代理人智能助手</td></tr><tr><td>智能客服</td><td>健康险AI健康管理</td><td>监管报送自动化</td></tr><tr><td>理赔文档智能处理</td><td>个性化产品推荐</td><td>内部知识检索</td></tr></tbody></table></div>
-<p class="bold-lead"><strong>重点建设层：L3→L4</strong></p>
+<p class="case-section-heading"><strong>（2）重点建设层：L3→L4</strong></p>
 <p>保险业的核心瓶颈是非结构化文档的治理。核保医学文档、理赔影像的标准化治理直接决定AI应用效果。建议优先建设L3语义层（文档向量化、知识图谱），同步建设L4治理Agent体系。</p>
-<p class="bold-lead"><strong>典型路径（12~18个月）：</strong></p>
+<p class="case-section-heading"><strong>（3）典型路径（12~18个月）：</strong></p>
 <p>1. 非结构化文档资产化工程（核保文档/理赔影像的解析、分块、向量化、入库）——第1~6个月</p>
 <p>2. L3语义层建设（保险本体建模、健康知识图谱）——第4~8个月</p>
 <p>3. 智能核保助手、极速理赔场景上线——第6~12个月</p>
@@ -893,11 +881,11 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="content-wrapper">
 <h2 class="content-title">2.4.3 证券业</h2>
 <div class="content-body glass-card">
-<p class="bold-lead"><strong>场景矩阵：</strong></p>
+<p class="case-section-heading"><strong>（1）场景矩阵：</strong></p>
 <div class="table-wrap"><table><thead><tr><th>高价值高可行</th><th>高价值中可行</th><th>中价值高可行</th></tr></thead><tbody><tr><td>AI辅助研究报告生成</td><td>智能投研知识图谱</td><td>AI合规审查</td></tr><tr><td>智能投顾/财富管理</td><td>上市公司关联关系挖掘</td><td>智能文档管理</td></tr><tr><td>市场风险实时监控</td><td>IPO招股书智能审核</td><td>客户智能运营</td></tr><tr><td>智能客服</td><td>债券违约预测</td><td>监管报送自动化</td></tr></tbody></table></div>
-<p class="bold-lead"><strong>重点建设层：L3→L2</strong></p>
+<p class="case-section-heading"><strong>（2）重点建设层：L3→L2</strong></p>
 <p>证券业的知识密集程度最高，知识图谱是核心差异化能力。建议优先建设L3语义层（上市公司知识图谱、投研本体建模），再建设L2多智能体平台（投研Agent、合规审查Agent）。</p>
-<p class="bold-lead"><strong>典型路径（12~18个月）：</strong></p>
+<p class="case-section-heading"><strong>（3）典型路径（12~18个月）：</strong></p>
 <p>1. 上市公司知识图谱建设——第1~6个月</p>
 <p>2. L2多智能体平台建设（投研Agent、合规审查Agent）——第3~6个月</p>
 <p>3. AI投研助手（研究报告辅助生成+摘要+风险提示）上线——第6~12个月</p>
@@ -916,11 +904,11 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="content-wrapper">
 <h2 class="content-title">2.4.4 金融租赁（金租）</h2>
 <div class="content-body glass-card">
-<p class="bold-lead"><strong>场景矩阵：</strong></p>
+<p class="case-section-heading"><strong>（1）场景矩阵：</strong></p>
 <div class="table-wrap"><table><thead><tr><th>高价值高可行</th><th>高价值中可行</th><th>中价值高可行</th></tr></thead><tbody><tr><td>租赁物动态估值AI</td><td>AI驱动的租前尽调</td><td>智能报表分析</td></tr><tr><td>资产风险监控AI</td><td>飞机/船舶智能投研</td><td>监管报送自动化</td></tr><tr><td>智能合同审查</td><td>关联风险穿透分析</td><td>内部知识库/智能问答</td></tr><tr><td>租金催收智能管理</td><td>绿色能源装备风险预警</td><td>AI辅助编程</td></tr></tbody></table></div>
-<p class="bold-lead"><strong>重点建设层：L4→L6</strong></p>
+<p class="case-section-heading"><strong>（2）重点建设层：L4→L6</strong></p>
 <p>金租行业的核心特征是租赁物数据治理——这是区别于其他所有金融业态的关键差异点。飞机、船舶、工程机械等租赁物的IoT数据、权属数据、市场交易数据的标准化治理，是AI应用的前提条件。</p>
-<p class="bold-lead"><strong>典型路径（12~18个月）：</strong></p>
+<p class="case-section-heading"><strong>（3）典型路径（12~18个月）：</strong></p>
 <p>1. 租赁物数据治理体系建设（IoT数据标准化、资产分类、质量基线）——第1~4个月</p>
 <p>2. L6统一存储建设（IoT时序入TDengine、文档入MinIO+ES、向量入Milvus）——第4~8个月</p>
 <p>3. 租赁物AI估值模型、资产风险监控AI上线——第6~12个月</p>
@@ -939,11 +927,11 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="content-wrapper">
 <h2 class="content-title">2.4.5 融资租赁（商租）</h2>
 <div class="content-body glass-card">
-<p class="bold-lead"><strong>场景矩阵：</strong></p>
+<p class="case-section-heading"><strong>（1）场景矩阵：</strong></p>
 <div class="table-wrap"><table><thead><tr><th>高价值高可行</th><th>高价值中可行</th><th>中价值高可行</th></tr></thead><tbody><tr><td>小微租赁AI自动审批</td><td>合同智能审查</td><td>监管报送自动化</td></tr><tr><td>租金催收智能管理</td><td>产业场景数据治理</td><td>智能报表分析</td></tr><tr><td>内部知识库/智能问答</td><td>资产质量风险预警</td><td>AI辅助编程</td></tr></tbody></table></div>
-<p class="bold-lead"><strong>重点建设层：L4→L1</strong></p>
+<p class="case-section-heading"><strong>（2）重点建设层：L4→L1</strong></p>
 <p>商租行业数据基础薄弱但场景碎片化程度高，建议聚焦核心场景快速见效。以L4基础数据治理为起点，同步在小微租赁等高频场景落地L1轻量级AI应用。</p>
-<p class="bold-lead"><strong>典型路径（12~14个月）：</strong></p>
+<p class="case-section-heading"><strong>（3）典型路径（12~14个月）：</strong></p>
 <p>1. 核心数据治理（客户/合同/租赁物基础数据治理）——第1~4个月</p>
 <p>2. 小微租赁AI审批助手（L1轻量应用）——第3~6个月</p>
 <p>3. 监管报送自动化、资产质量监控AI——第6~12个月</p>
@@ -961,9 +949,9 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="content-wrapper">
 <h2 class="content-title">2.4.6 消费金融</h2>
 <div class="content-body glass-card">
-<p class="bold-lead"><strong>场景矩阵：</strong></p>
+<p class="case-section-heading"><strong>（1）场景矩阵：</strong></p>
 <div class="table-wrap"><table><thead><tr><th>高价值高可行</th><th>高价值中可行</th><th>中价值高可行</th></tr></thead><tbody><tr><td>实时反欺诈识别</td><td>跨机构联合风控（联邦学习）</td><td>内部知识库/智能问答</td></tr><tr><td>智能授信审批</td><td>贷后催收策略优化</td><td>监管报送自动化</td></tr><tr><td>智能客服</td><td>客户生命周期管理</td><td>AI辅助编程</td></tr></tbody></table></div>
-<p class="bold-lead"><strong>重点建设层：L5→L2</strong></p>
+<p class="case-section-heading"><strong>（2）重点建设层：L5→L2</strong></p>
 <p>消费金融行业的核心是实时风控能力，对模型推理速度和数据治理的时效性要求最高。建议优先建设L5 AI-Native服务层（风控模型训练和推理平台），同步推进L2多智能体平台（Agent驱动的智能审批流）。</p>
 </div>
 </div>
@@ -979,9 +967,9 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="content-wrapper">
 <h2 class="content-title">2.4.7 财务公司</h2>
 <div class="content-body glass-card">
-<p class="bold-lead"><strong>场景矩阵：</strong></p>
+<p class="case-section-heading"><strong>（1）场景矩阵：</strong></p>
 <div class="table-wrap"><table><thead><tr><th>高价值高可行</th><th>高价值中可行</th><th>中价值高可行</th></tr></thead><tbody><tr><td>资金头寸智能预测</td><td>集团资金全景监控</td><td>智能报表分析</td></tr><tr><td>流动性风险AI预警</td><td>数字员工（RPA+AI）</td><td>内部知识库/智能问答</td></tr><tr><td>资金调拨智能审批</td><td>同业授信评估AI</td><td>监管报送自动化</td></tr></tbody></table></div>
-<p class="bold-lead"><strong>重点建设层：L4→L6</strong></p>
+<p class="case-section-heading"><strong>（2）重点建设层：L4→L6</strong></p>
 <p>财务公司的核心是司库数据治理。在集团数据安全框架下，优先建设L4治理体系（资金数据治理、成员单位数据标准化），同步建设L6统一存储底座（时序数据+实时数仓）。</p>
 </div>
 </div>
@@ -1087,7 +1075,7 @@ Content Librarian/数据管家（操作层）
 <h2 class="content-title">2.5.4 "六方协同"工作机制</h2>
 <div class="content-body glass-card">
 <p>AI和数据治理不能由科技部门一家完成。高效的AI治理必须是"<strong>业务+科技+风险+合规+法务+人力</strong>"六方协同。</p>
-<p class="bold-lead"><strong>关键协同节点：</strong></p>
+<p class="case-section-heading"><strong>（1）关键协同节点：</strong></p>
 <div class="table-wrap"><table><thead><tr><th>阶段</th><th>主导方</th><th>协同方</th><th>交付物</th></tr></thead><tbody><tr><td>场景识别</td><td>业务AI产品经理</td><td>科技方评估技术可行性</td><td>场景评估报告</td></tr><tr><td>立项审批</td><td>AI委员会</td><td>六方联签</td><td>项目立项书</td></tr><tr><td>数据准备</td><td>数据产品负责人</td><td>科技方实施、合规方审查</td><td>数据产品、数据合同</td></tr><tr><td>模型开发</td><td>科技方</td><td>业务方验收</td><td>模型、评估报告</td></tr><tr><td>上线审批</td><td>风险方+合规方</td><td>六方会签</td><td>上线审批单</td></tr><tr><td>运营监控</td><td>科技方+业务方</td><td>风险方持续监控</td><td>运营报告</td></tr></tbody></table></div>
 </div>
 </div>
@@ -1160,7 +1148,7 @@ Content Librarian/数据管家（操作层）
 <h2 class="content-title">2.6.2 第一阶段：基础建设期（0~12个月）</h2>
 <div class="content-body glass-card">
 <div class="table-wrap"><table><thead><tr><th>工作线</th><th>0~3个月</th><th>3~6个月</th><th>6~9个月</th><th>9~12个月</th></tr></thead><tbody><tr><td><strong>数据治理</strong></td><td>完成AI-Native治理差距评估</td><td>治理Agent试点（元数据+质量+安全），非结构化文档治理试点</td><td>数据产品化试点（2~3个数据产品）</td><td>治理Agent覆盖核心业务域</td></tr><tr><td><strong>AI平台</strong></td><td>AI平台方案设计启动</td><td>AI平台MVP上线（模型管理+基础算力）</td><td>向量检索+知识图谱服务上线</td><td>AI平台V1.0（含Agent运行引擎）</td></tr><tr><td><strong>场景落地</strong></td><td>场景筛选和优先级确定</td><td>首批场景（知识问答+合同审查）开发</td><td>首批场景上线</td><td>场景成效评估和优化</td></tr><tr><td><strong>组织变革</strong></td><td>AI委员会设立、CAIO任命</td><td>数据产品负责人制度试点</td><td>全员AI素养培训首批完成</td><td>六方协同机制运行</td></tr></tbody></table></div>
-<p class="bold-lead"><strong>关键里程碑：</strong></p>
+<p class="case-section-heading"><strong>（1）关键里程碑：</strong></p>
 <ul class="clean-list"><li>第3个月：AI-Native治理评估报告完成</li><li>第6个月：AI平台MVP上线，首批AI场景进入开发</li><li>第9个月：首批AI场景上线运行</li><li>第12个月：数据产品化试点完成，AI平台V1.0（含Agent引擎）上线</li></ul>
 </div>
 </div>
@@ -1235,9 +1223,9 @@ Content Librarian/数据管家（操作层）
 <p>参照《关于银行业保险业人工智能安全开发应用的指导意见》（金发〔2026〕8号）的要求（国家金融监督管理总局，<a href="http://www.cbirc.gov.cn/" target="_blank" class="external-link">《人工智能安全开发应用指导意见》</a>），建议建立从模型需求到模型退役的全生命周期风险管理体系：</p>
 <pre><code>┌─风险识别──┴─数据审查──┴─开发规范──┴─安全评估──┴─上线审批──┴─运行监控──┴─退役审查──┐
 </code></pre>
-<p class="bold-lead"><strong>各环节风险管理要点：</strong></p>
+<p class="case-section-heading"><strong>（1）各环节风险管理要点：</strong></p>
 <div class="table-wrap"><table><thead><tr><th>环节</th><th>风险点</th><th>管控措施</th></tr></thead><tbody><tr><td>模型需求</td><td>场景选择不当、业务目标不清晰</td><td>AI委员会审批场景立项、业务方主导需求定义</td></tr><tr><td>数据准备</td><td>数据质量不足、数据偏见、数据合规风险</td><td>数据质量评估、AI可用性标签检查、数据合规审查</td></tr><tr><td>模型开发</td><td>模型过拟合、代码安全漏洞、第三方模型供应链风险</td><td>开发规范、代码审查、第三方模型安全评估</td></tr><tr><td>模型评估</td><td>评估不充分、测试集偏差</td><td>独立评估团队、多维评估框架</td></tr><tr><td>上线审批</td><td>未通过安全审查、合规审查不通过</td><td>六方联签上线审批、高危场景保留人工复核</td></tr><tr><td>部署运行</td><td>推理性能下降、数据漂移、安全攻击</td><td>实时监控、自动告警、应急响应预案</td></tr><tr><td>持续监控</td><td>模型效果衰减、合规环境变化</td><td>定期复评、自动化漂移检测、监管政策跟踪</td></tr><tr><td>模型退役</td><td>退役模型仍被误用</td><td>退役审批、模型下线确认、退役文档归档</td></tr></tbody></table></div>
-<p class="bold-lead"><strong>模型分级管理：</strong></p>
+<p class="case-section-heading"><strong>（2）模型分级管理：</strong></p>
 <div class="table-wrap"><table><thead><tr><th>级别</th><th>定义</th><th>管控要求</th><th>典型场景</th></tr></thead><tbody><tr><td><strong>L1-高风险</strong></td><td>直接影响客户权益或重大资产安全的AI决策</td><td>上线前独立审计、持续人工复核、季度风险评估</td><td>信贷审批、保险理赔、大额投资建议</td></tr><tr><td><strong>L2-中风险</strong></td><td>辅助业务决策但不直接产生法律效力的AI应用</td><td>标准化评估、定期抽检、半年风险评估</td><td>智能客服、营销推荐、内部辅助分析</td></tr><tr><td><strong>L3-低风险</strong></td><td>内部效率工具，不涉及客户权益</td><td>开发规范、年度审查</td><td>代码辅助、会议纪要、内部知识检索</td></tr></tbody></table></div>
 </div>
 </div>
@@ -1253,9 +1241,9 @@ Content Librarian/数据管家（操作层）
 <div class="content-wrapper">
 <h2 class="content-title">2.7.2 数据安全与隐私计算</h2>
 <div class="content-body glass-card">
-<p class="bold-lead"><strong>数据安全五层防护：</strong></p>
+<p class="case-section-heading"><strong>（1）数据安全五层防护：</strong></p>
 <div class="table-wrap"><table><thead><tr><th>防护层</th><th>措施</th></tr></thead><tbody><tr><td>传输安全</td><td>TLS 1.3/SM4加密传输，mTLS双向认证</td></tr><tr><td>存储安全</td><td>AES-256-GCM/SM4存储加密，KMS密钥统一管理</td></tr><tr><td>访问控制</td><td>RBAC+细粒度列级权限，属性访问控制(ABAC)</td></tr><tr><td>数据脱敏</td><td>动态脱敏（查询时实时屏蔽）+ 静态脱敏（写入时脱敏）</td></tr><tr><td>审计追溯</td><td>全链路数据访问日志，谁在什么时间访问了什么数据</td></tr></tbody></table></div>
-<p class="bold-lead"><strong>隐私计算在金融场景中的典型应用：</strong></p>
+<p class="case-section-heading"><strong>（2）隐私计算在金融场景中的典型应用：</strong></p>
 <div class="table-wrap"><table><thead><tr><th>场景</th><th>技术方案</th><th>参与方</th><th>输出</th></tr></thead><tbody><tr><td>多头授信联合风控</td><td>纵向联邦学习</td><td>3~5家银行/消金</td><td>联合信用评分模型</td></tr><tr><td>跨机构黑名单共享</td><td>秘密共享+差分隐私</td><td>同业联盟</td><td>不可逆黑名单查询</td></tr><tr><td>监管数据报送（隐私保护）</td><td>TEE+差分隐私</td><td>金融机构→监管</td><td>聚合统计报表</td></tr></tbody></table></div>
 </div>
 </div>
@@ -1271,12 +1259,12 @@ Content Librarian/数据管家（操作层）
 <div class="content-wrapper">
 <h2 class="content-title">2.7.3 AI安全开发与部署规范</h2>
 <div class="content-body glass-card">
-<p class="bold-lead"><strong>AI开发安全规范要点：</strong></p>
+<p class="case-section-heading"><strong>（1）AI开发安全规范要点：</strong></p>
 <p>1. <strong>数据安全</strong>：训练数据必须来自已评级的数据产品，使用符合AI可用性标签授权范围</p>
 <p>2. <strong>模型安全</strong>：模型文件加密存储，部署前安全扫描（后门检测、对抗样本测试）</p>
 <p>3. <strong>推理安全</strong>：输入内容脱敏过滤，输出内容合规审查，推理过程数据不走公网</p>
 <p>4. <strong>访问控制</strong>：模型API认证授权，调用频率限制，访问日志完整记录</p>
-<p class="bold-lead"><strong>AI部署规范要点：</strong></p>
+<p class="case-section-heading"><strong>（2）AI部署规范要点：</strong></p>
 <ul class="clean-list"><li>所有面向客户或涉及重大业务的AI应用上线前必须完成安全评估和上线审批</li><li>建立灰度发布机制，新模型先小范围验证再全量上线</li><li>所有AI应用必须具有"一键下线"机制</li><li>保留人工复核通道，客户可要求从AI决策转为人工处理</li></ul>
 </div>
 </div>
@@ -1292,9 +1280,9 @@ Content Librarian/数据管家（操作层）
 <div class="content-wrapper">
 <h2 class="content-title">2.7.4 应急预案与消费者保护</h2>
 <div class="content-body glass-card">
-<p class="bold-lead"><strong>应急预案体系：</strong></p>
+<p class="case-section-heading"><strong>（1）应急预案体系：</strong></p>
 <div class="table-wrap"><table><thead><tr><th>应急场景</th><th>响应措施</th><th>恢复目标</th></tr></thead><tbody><tr><td>AI输出严重错误</td><td>立即下线问题模型/场景，启动人工替代方案</td><td>2小时内恢复</td></tr><tr><td>数据安全事件</td><td>关闭数据访问通道，启动安全应急流程</td><td>1小时内阻断</td></tr><tr><td>模型性能严重下降</td><td>自动切换备用模型，通知开发团队</td><td>30分钟内恢复</td></tr><tr><td>监管合规事件</td><td>暂停相关AI场景，配合监管调查</td><td>按监管要求时限</td></tr></tbody></table></div>
-<p class="bold-lead"><strong>消费者保护机制：</strong></p>
+<p class="case-section-heading"><strong>（2）消费者保护机制：</strong></p>
 <ul class="clean-list"><li><strong>知情权</strong>：在AI服务入口明确告知"您正在使用AI服务"</li><li><strong>选择权</strong>：客户可选择不接受AI服务而转向人工服务</li><li><strong>申诉渠道</strong>：建立AI决策的客户申诉和复核机制</li><li><strong>信息披露</strong>：AI生成的投资建议、产品推荐标注"AI生成"</li><li><strong>数据权利</strong>：客户可查询数据在AI场景中的使用情况，可要求删除</li></ul>
 </div>
 </div>
@@ -1327,7 +1315,7 @@ Content Librarian/数据管家（操作层）
       <b id="navCurr">1</b><span class="sep">/</span><span style="font-size:11px;color:#8a94a6;font-weight:400">44</span>
       <span class="arrow">▼</span>
     </div>
-    <div class="topbar-title" id="topbarTitle">第二部分：金融行业数据治理与AI应用整体解决方案</div>
+    <div class="topbar-title" id="topbarTitle">第一部分：行业现状与标杆实践</div>
     <div class="nav-drop" id="navDrop">
 <div class="nd-grp">封面</div>
 <div class="nd-item" data-idx="0" onclick="goSlide(0)"><span class="nd-item-num">1</span><span class="nd-item-label">封面</span></div>
