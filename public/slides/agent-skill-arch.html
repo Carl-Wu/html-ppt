@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基于Agent+Skill架构的AI原生技术支撑体系</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .arrow-down::after {
+            content: "↓";
+            font-size: 18px;
+            color: #64748b;
+        }
+        .arrow-up::after {
+            content: "↑";
+            font-size: 18px;
+            color: #64748b;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 py-8 px-4">
+    <div class="max-w-6xl mx-auto bg-white rounded-xl shadow-md p-8">
+        <!-- 顶部标题区 -->
+        <div class="text-center mb-6">
+            <h1 class="text-2xl font-bold text-gray-800 mb-1">基于 Agent + Skill 架构的 AI 原生技术支撑体系</h1>
+            <p class="text-sm text-gray-500">各部门沉淀知识 · Skill 标准化发布 ·  桌面 Agent 统一检索与问答</p>
+        </div>
+
+        <!-- 顶层：公司全体员工 -->
+        <div class="bg-gray-800 text-white rounded-lg py-4 px-6 text-center mb-6">
+            <div class="font-medium text-lg">公司全体员工</div>
+            <div class="text-xs text-gray-300 mt-1">知识问答·业务办理·分析决策与汇报支持</div>
+        </div>
+        
+        <!-- 向下箭头 -->
+        <div class="flex justify-center text-gray-500 text-sm mb-2">
+            <span class="arrow-down"></span>
+        </div>
+
+        <!-- ① 统一入口层 -->
+        <div class="border-2 border-blue-400 bg-blue-50 rounded-xl p-5 mb-2">
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-2">
+                    <span class="font-bold text-blue-700">①</span>
+                    <span class="font-medium text-gray-700">统一入口层</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="bg-blue-500 text-white px-4 py-1 rounded-md text-sm font-medium">桌面 Agent</span>
+                    <span class="text-xs text-gray-500">阿里 CoPaw / 腾讯WorkBuddy /字节 Aily</span>
+                </div>
+            </div>
+            <div class="grid grid-cols-5 gap-3">
+                <div class="bg-white rounded-lg p-3 text-center border border-blue-200">
+                    <div class="font-medium text-gray-700 mb-1">智能问答</div>
+                    <div class="text-xs text-gray-500">自然语言交互</div>
+                </div>
+                <div class="bg-white rounded-lg p-3 text-center border border-blue-200">
+                    <div class="font-medium text-gray-700 mb-1">知识检索</div>
+                    <div class="text-xs text-gray-500">跨部门统一检索</div>
+                </div>
+                <div class="bg-white rounded-lg p-3 text-center border border-blue-200">
+                    <div class="font-medium text-gray-700 mb-1">通用办公</div>
+                    <div class="text-xs text-gray-500">PPT·Excel·定时任务</div>
+                </div>
+                <div class="bg-white rounded-lg p-3 text-center border border-blue-200">
+                    <div class="font-medium text-gray-700 mb-1">统一调用</div>
+                    <div class="text-xs text-gray-500">一个入口调所有Skill</div>
+                </div>
+                <div class="bg-white rounded-lg p-3 text-center border border-blue-200">
+                    <div class="font-medium text-gray-700 mb-1">任务编排</div>
+                    <div class="text-xs text-gray-500">多 Skill 组合自动化</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 调用/注册箭头标注 -->
+        <div class="flex justify-between px-10 text-sm text-gray-500 mb-2">
+            <span>调用↓</span>
+            <span>注册↑</span>
+        </div>
+
+        <!-- ② 能力层 -->
+        <div class="border-2 border-blue-400 bg-blue-50 rounded-xl p-5 mb-2">
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-2">
+                    <span class="font-bold text-blue-700">②</span>
+                    <span class="font-medium text-gray-700">能力层 — 能力注册中心 /</span>
+                </div>
+                <span class="bg-blue-500 text-white px-4 py-1 rounded-md text-sm font-medium">Skill 市场</span>
+            </div>
+            <div class="grid grid-cols-4 gap-3">
+                <div class="bg-white rounded-lg p-3 text-center border border-blue-200 font-medium text-gray-700">能力注册/发现</div>
+                <div class="bg-white rounded-lg p-3 text-center border border-blue-200 font-medium text-gray-700">标准化封装</div>
+                <div class="bg-white rounded-lg p-3 text-center border border-blue-200 font-medium text-gray-700">权限/审计</div>
+                <div class="bg-white rounded-lg p-3 text-center border border-blue-200 font-medium text-gray-700">版本控制</div>
+            </div>
+        </div>
+
+        <!-- 三个向上箭头标注 -->
+        <div class="grid grid-cols-3 gap-6 text-sm text-gray-500 mb-2 px-2">
+            <div class="text-center">发布 Skill ↑</div>
+            <div class="text-center">发布 Skill ↑</div>
+            <div class="text-center">Skill / MCP ↑</div>
+        </div>
+
+        <!-- 中间三层并列 -->
+        <div class="grid grid-cols-3 gap-6 mb-2">
+            <!-- ③ 知识沉淀层 -->
+            <div class="border-2 border-green-400 bg-green-50 rounded-xl p-4">
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="font-bold text-green-700">③</span>
+                    <span class="font-medium text-gray-700">知识沉淀层</span>
+                </div>
+                <div class="text-xs text-gray-500 mb-3 text-center">各部门知识库</div>
+                
+                <div class="grid grid-cols-2 gap-2 mb-3">
+                    <div class="bg-white rounded-md p-2 text-center text-sm border border-green-200">人力/HR</div>
+                    <div class="bg-white rounded-md p-2 text-center text-sm border border-green-200">财务</div>
+                    <div class="bg-white rounded-md p-2 text-center text-sm border border-green-200">事业部/业务</div>
+                    <div class="bg-white rounded-md p-2 text-center text-sm border border-green-200">研发/技术</div>
+                    <div class="bg-white rounded-md p-2 text-center text-sm border border-green-200">市场/销售</div>
+                    <div class="bg-white rounded-md p-2 text-center text-sm border border-green-200">运营/行政</div>
+                </div>
+
+                <div class="text-xs text-gray-500 mb-3 text-center">知识库平台（部门知识承载）</div>
+
+                <div class="grid grid-cols-2 gap-2 mb-4">
+                    <div class="bg-green-200 rounded-md p-2 text-center text-sm font-medium text-gray-700">金租标准知识库</div>
+                    <div class="bg-green-200 rounded-md p-2 text-center text-sm font-medium text-gray-700">企业知识库</div>
+                </div>
+
+                <div class="text-xs text-gray-600 text-center leading-relaxed">
+                    积累知识 → 沉淀知识库<br>
+                    → 封装为 Skill 发布<br>
+                    沉淀·复用·持续更新
+                </div>
+            </div>
+
+            <!-- ④ 业务系统层 -->
+            <div class="border-2 border-orange-400 bg-orange-50 rounded-xl p-4">
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="font-bold text-orange-700">④</span>
+                    <span class="font-medium text-gray-700">业务系统层</span>
+                </div>
+                <div class="text-xs text-gray-500 mb-3 text-center">各系统能力开放</div>
+                
+                <div class="grid grid-cols-2 gap-2 mb-6">
+                    <div class="bg-orange-100 rounded-md p-2 text-center text-sm border border-orange-200">即时通讯</div>
+                    <div class="bg-orange-100 rounded-md p-2 text-center text-sm border border-orange-200">会议系统</div>
+                    <div class="bg-orange-100 rounded-md p-2 text-center text-sm border border-orange-200">日程</div>
+                    <div class="bg-orange-100 rounded-md p-2 text-center text-sm border border-orange-200">考勤</div>
+                    <div class="bg-orange-100 rounded-md p-2 text-center text-sm border border-orange-200">财务系统</div>
+                    <div class="bg-orange-100 rounded-md p-2 text-center text-sm border border-orange-200">更多业务系统...</div>
+                </div>
+
+                <div class="text-xs text-gray-600 text-center leading-relaxed mt-8">
+                    各系统 → 封装能力<br>
+                    → 以 Skill 发布<br>
+                    连接·触达·自动执行
+                </div>
+            </div>
+
+            <!-- ⑤ 万象智能体平台 -->
+            <div class="border-2 border-purple-400 bg-purple-50 rounded-xl p-4">
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="font-bold text-purple-700">⑤</span>
+                    <span class="font-medium text-gray-700">睿治智能体平台</span>
+                </div>
+                <div class="text-xs text-gray-500 mb-3 text-center">低代码智能体平台</div>
+                
+                <div class="space-y-2 mb-4">
+                    <div class="bg-white rounded-md p-2 text-center text-sm border border-purple-200">智能体广场</div>
+                    <div class="bg-white rounded-md p-2 text-center text-sm border border-purple-200">智能体构建</div>
+                    <div class="bg-white rounded-md p-2 text-center text-sm border border-purple-200">工作流编排</div>
+                    <div class="bg-white rounded-md p-2 text-center text-sm border border-purple-200">MCP / Skill / 工具</div>
+                    <div class="bg-white rounded-md p-2 text-center text-sm border border-purple-200">API 接入</div>
+                </div>
+
+                <div class="bg-purple-500 text-white rounded-md p-2 text-center text-sm font-medium mb-4">
+                    睿治智能体平台
+                </div>
+
+                <div class="text-xs text-gray-600 text-center leading-relaxed">
+                    搭建智能体 → 经 API<br>
+                    → 以 Skill / MCP 接入 桌面应用Agent<br>
+                    编排·接入·复用
+                </div>
+            </div>
+        </div>
+
+        <!-- 向上箭头标注 -->
+        <div class="flex justify-center text-sm text-gray-500 mb-2">
+            模型能力支撑 ↑
+        </div>
+
+        <!-- ⑥ 万象MaaS平台 -->
+        <div class="border-2 border-gray-400 bg-gray-100 rounded-xl p-5 mb-6">
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-2">
+                    <span class="font-bold text-gray-700">⑥</span>
+                    <span class="font-medium text-gray-700">万象MaaS 平台</span>
+                </div>
+                <span class="text-xs text-gray-500">基于金租数据标准，业务知识微调行业模型，模型即服务·为上层 Agent 与智能体提供底层模型能力支撑</span>
+            </div>
+            <div class="grid grid-cols-4 gap-3">
+                <div class="bg-white rounded-lg p-3 text-center border border-gray-300 font-medium text-gray-700">数据标注</div>
+                <div class="bg-white rounded-lg p-3 text-center border border-gray-300 font-medium text-gray-700">模型训练</div>
+                <div class="bg-white rounded-lg p-3 text-center border border-gray-300 font-medium text-gray-700">模型推理</div>
+                <div class="bg-white rounded-lg p-3 text-center border border-gray-300 font-medium text-gray-700">资源调度</div>
+            </div>
+        </div>
+
+        <!-- 底部图例 -->
+        <div class="flex justify-center gap-6 text-sm text-gray-600">
+            <div class="flex items-center gap-2">
+                <span class="w-4 h-4 bg-blue-400 rounded-sm inline-block"></span>
+                <span>统一入口/能力层</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="w-4 h-4 bg-green-400 rounded-sm inline-block"></span>
+                <span>部门知识库</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="w-4 h-4 bg-orange-400 rounded-sm inline-block"></span>
+                <span>业务系统</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="w-4 h-4 bg-purple-400 rounded-sm inline-block"></span>
+                <span>睿治智能体平台</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="w-4 h-4 bg-gray-400 rounded-sm inline-block"></span>
+                <span>万象 MaaS 平台</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

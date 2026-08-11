@@ -4,5 +4,8 @@ dist
 *.local
 .vite
 
+# 导出PDF中间产物（逐页，可重新生成）
+exports/_slides/
+
 # media assets (local-only, never commit)
 src/asset/
