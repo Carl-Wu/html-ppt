@@ -4,7 +4,7 @@ import path from 'path';
 
 const TOTAL = 11;
 const OUT_DIR = '/Users/kris/Documents/CodexProject/html-ppt/exports/_slides/dama';
-const URL = 'http://127.0.0.1:5173/';
+const URL = 'http://127.0.0.1:5173/slides/dama-finance-governance.html';
 const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 
 if (!fs.existsSync(OUT_DIR)) fs.mkdirSync(OUT_DIR, { recursive: true });
