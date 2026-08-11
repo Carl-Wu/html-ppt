@@ -9,3 +9,6 @@ exports/_slides/
 
 # media assets (local-only, never commit)
 src/asset/
+
+# 本地归档，不纳入版本库
+legacy/
