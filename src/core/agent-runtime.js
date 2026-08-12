@@ -6,7 +6,7 @@ import { gsap } from './gsap-controller.js';
 
 const FLOW_STEPS = [
   {k:'recv', t:'任务接收', icon:'▮'},
-  {k:'rag',  t:'RAG 知识检索', icon:'⟁'},
+  {k:'rag',  t:'混合知识检索', icon:'⟁'},
   {k:'plan', t:'Planner 任务拆解', icon:'☿'},
   {k:'tool', t:'Tool Calling 执行', icon:'⚙'},
   {k:'out',  t:'结果输出', icon:'⊞'},
