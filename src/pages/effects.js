@@ -1,7 +1,7 @@
 /* Page 8 — /effects 数据安全治理与决策赋能 Agent 实施效果展示
    左右双视频卡片：点击弹出全屏视频播放器 */
 import { gsap } from '../core/gsap-controller.js';
-import governVideo from '../asset/analyse.mp4';
+import governVideo from '../asset/govern.mp4';
 import analyseVideo from '../asset/analyse.mp4';
 
 const VIDEOS = [
