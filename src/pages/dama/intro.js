@@ -1,8 +1,8 @@
 /* Page 1 — /intro 科技宇宙封面 */
-import { gsap } from '../core/gsap-controller.js';
-import engine from '../core/engine.js';
-import { makeAICore, makeConverge, makeNeuralField } from '../components/particles.js';
-import { showBlobs, hideBlobs } from '../components/bg-blobs.js';
+import { gsap } from '../../core/gsap-controller.js';
+import engine from '../../core/engine.js';
+import { makeAICore, makeConverge, makeNeuralField } from '../../components/particles.js';
+import { showBlobs, hideBlobs } from '../../components/bg-blobs.js';
 
 export default {
   id:'intro', index:0, label:'前言',

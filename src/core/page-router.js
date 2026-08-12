@@ -9,7 +9,7 @@ import 'swiper/css';
 import { gsap } from './gsap-controller.js';
 import engine from './engine.js';
 
-import pages from '../pages/index.js';
+import pages from '../pages/dama/index.js';
 
 
 export class Router {

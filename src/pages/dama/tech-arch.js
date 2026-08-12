@@ -1,6 +1,6 @@
 /* Page 5 — /tech-arch 技术路线与架构：六层解耦
    每层模块拆分为独立芯片块，左侧层级标识 + 右侧模块分块，3D 透视 + 层间流光 */
-import { gsap } from '../core/gsap-controller.js';
+import { gsap } from '../../core/gsap-controller.js';
 
 const LAYERS = [
   {n:'L1', t:'统一智能门户层', tag:'交互入口・统一视图', c:'#00F5FF',

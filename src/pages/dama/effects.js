@@ -1,12 +1,12 @@
-/* Page 8 — /effects 数据安全治理与决策赋能 Agent 实施效果展示
+/* Page 8 — /effects 数据治理与决策赋能 Agent 实施效果展示
    左右双视频卡片：点击弹出全屏视频播放器 */
-import { gsap } from '../core/gsap-controller.js';
-import governVideo from '../asset/govern.mp4';
-import analyseVideo from '../asset/analyse.mp4';
+import { gsap } from '../../core/gsap-controller.js';
+import governVideo from '../../asset/govern.mp4';
+import analyseVideo from '../../asset/analyse.mp4';
 
 const VIDEOS = [
   { key:'govern', src:governVideo, tag:'GOVERNANCE', accent:'#22E0A1',
-    title:'数据安全治理 Agent',
+    title:'数据治理 Agent',
     desc:'数据模型、集成、元数据、标准、质量、风险识别归因全链路治理' },
   { key:'analyse', src:analyseVideo, tag:'ANALYSIS', accent:'#FFC857',
     title:'决策分析赋能 Agent',
@@ -19,7 +19,7 @@ export default {
     return `
     <div class="slide-inner vfx">
       <div class="vfx-head">
-        <h2 class="slide-title" data-reveal>数据安全治理与决策赋能<span class="hl">Agent实施效果展示</span></h2>
+        <h2 class="slide-title" data-reveal>数据治理与决策赋能<span class="hl">Agent实施效果展示</span></h2>
         <p class="slide-sub" data-reveal>涵盖数据模型、集成、元数据、标准、质量、风险识别归因，决策分析等</p>
       </div>
       <div class="vfx-body">

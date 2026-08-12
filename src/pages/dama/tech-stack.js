@@ -1,6 +1,6 @@
 /* Page 6 — /tech-stack 技术平台与技术栈
    分层技术栈选型表（玻璃拟态，整页居中占满） */
-import { gsap } from '../core/gsap-controller.js';
+import { gsap } from '../../core/gsap-controller.js';
 
 const LAYERS = [
   {n:'L1',name:'统一智能门户层',platform:'亿信华辰・智问 Agent 平台',c:'#00F5FF',

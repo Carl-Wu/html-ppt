@@ -1,8 +1,8 @@
 /* Page 10 — /innovation 三大核心创新 (治理范式/技术架构/赋能模式) */
 import * as THREE from 'three';
-import { gsap } from '../core/gsap-controller.js';
-import engine from '../core/engine.js';
-import { makeAICore, makeGlowSprite } from '../components/particles.js';
+import { gsap } from '../../core/gsap-controller.js';
+import engine from '../../core/engine.js';
+import { makeAICore, makeGlowSprite } from '../../components/particles.js';
 
 const INNO = [
   {

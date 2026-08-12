@@ -1,6 +1,6 @@
 /* Page 4 — /solution 整体解决方案思路
    左40%：核心驱动逻辑（4点）  右60%：全息投影四层架构塔 */
-import { gsap } from '../core/gsap-controller.js';
+import { gsap } from '../../core/gsap-controller.js';
 
 /* ---- 左侧：核心驱动逻辑 ---- */
 const DRIVERS = [

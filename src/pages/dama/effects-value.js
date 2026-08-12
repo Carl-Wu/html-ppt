@@ -1,7 +1,7 @@
 /* Page 9 — /effects-value AI 智能体带来的效率与质量跃迁
    太空作战 HUD · 6 指标卡片 + 提升倍数柱状图(单 ECharts) + CSS 径向达标环 */
-import { gsap } from '../core/gsap-controller.js';
-import { renderEfficiencyBars, renderQualityGauges } from '../components/charts.js';
+import { gsap } from '../../core/gsap-controller.js';
+import { renderEfficiencyBars, renderQualityGauges } from '../../components/charts.js';
 
 const KPIS = [
   {id:'01',label:'数据模型设计',     before:'2人天',after:'2小时',  ac:'#00F5FF',ref:'设计中等复杂模型 20 个实体'},

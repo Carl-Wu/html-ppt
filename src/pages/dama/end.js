@@ -1,8 +1,8 @@
 /* Page 11 — /end 总结页 (3D 效果同首页：能量核心 + 粒子汇聚 + 神经场) */
-import { gsap } from '../core/gsap-controller.js';
-import engine from '../core/engine.js';
-import { makeAICore, makeConverge, makeNeuralField } from '../components/particles.js';
-import { showBlobs, hideBlobs } from '../components/bg-blobs.js';
+import { gsap } from '../../core/gsap-controller.js';
+import engine from '../../core/engine.js';
+import { makeAICore, makeConverge, makeNeuralField } from '../../components/particles.js';
+import { showBlobs, hideBlobs } from '../../components/bg-blobs.js';
 
 export default {
   id:'end', index:8, label:'结语',

@@ -1,7 +1,7 @@
 /* Page 2 — /toc 汇报目录 (vertical timeline) */
-import { gsap } from '../core/gsap-controller.js';
-import engine from '../core/engine.js';
-import { makeNeuralField } from '../components/particles.js';
+import { gsap } from '../../core/gsap-controller.js';
+import engine from '../../core/engine.js';
+import { makeNeuralField } from '../../components/particles.js';
 
 const OUTLINE = [
   {n:'01',t:'问题定义与痛点分析',d:'金融租赁数据治理与决策五大核心挑战',target:2},

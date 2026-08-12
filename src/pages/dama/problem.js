@@ -1,7 +1,7 @@
 /* Page 3 — /problem 强监管+广业务：数据治理与决策五大核心挑战
    左侧4端现状 → 右侧5大核心挑战（SVG 推导流光动画）
    动画链路：现状卡片入场 → 贝塞尔曲线绘制 → 挑战卡片依次点亮 → 流光粒子持续流动 */
-import { gsap } from '../core/gsap-controller.js';
+import { gsap } from '../../core/gsap-controller.js';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 
