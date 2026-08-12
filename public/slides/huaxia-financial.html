@@ -1293,11 +1293,11 @@ function initEffChart(){
     backgroundColor:'transparent',
     grid:{left:120,right:170,top:24,bottom:24},
     tooltip:{trigger:'axis',backgroundColor:'rgba(8,18,48,0.92)',borderColor:'rgba(0,245,255,0.4)',textStyle:{color:'#fff'},axisPointer:{type:'shadow',shadowStyle:{color:'rgba(0,245,255,0.06)'}}},
-    xAxis:{type:'value',max:10.5,axisLabel:{color:'#8aa0d0',fontSize:10,formatter:v=>v+'×'},splitLine:{lineStyle:{color:'rgba(79,140,255,0.12)'}},axisLine:{lineStyle:{color:'rgba(79,140,255,0.3)'}}},
-    yAxis:{type:'category',data:data.map(d=>d.name),axisTick:{show:false},axisLine:{lineStyle:{color:'rgba(79,140,255,0.3)'}},axisLabel:{color:'#c9d6f8',fontSize:11.5,fontWeight:600}},
+    xAxis:{type:'value',max:10.5,axisLabel:{color:'#111111',fontSize:10,formatter:v=>v+'×'},splitLine:{lineStyle:{color:'rgba(79,140,255,0.12)'}},axisLine:{lineStyle:{color:'rgba(79,140,255,0.3)'}}},
+    yAxis:{type:'category',data:data.map(d=>d.name),axisTick:{show:false},axisLine:{lineStyle:{color:'rgba(79,140,255,0.3)'}},axisLabel:{color:'#111111',fontSize:11.5,fontWeight:600}},
     series:[{name:'AI 提升倍数',type:'bar',barWidth:15,
       data:data.map(d=>({value:d.val,itemStyle:{color:new echarts.graphic.LinearGradient(0,0,1,0,[{offset:0,color:'rgba(79,140,255,0.15)'},{offset:1,color:d.c}]),borderRadius:[0,6,6,0],shadowColor:d.c,shadowBlur:14},
-        label:{show:true,position:'right',distance:8,color:d.c,formatter:'{a|'+d.label+'}  {b|'+d.badge+'}',rich:{a:{color:'#c9d6f8',fontSize:10.5,fontWeight:600},b:{color:'#fff',fontSize:11,fontWeight:900,backgroundColor:d.c,borderWidth:1,padding:[2,7],borderRadius:4}}}}))}],
+        label:{show:true,position:'right',distance:8,color:d.c,formatter:'{a|'+d.label+'}  {b|'+d.badge+'}',rich:{a:{color:'#111111',fontSize:10.5,fontWeight:600},b:{color:'#fff',fontSize:11,fontWeight:900,backgroundColor:d.c,borderWidth:1,padding:[2,7],borderRadius:4}}}}))}],
     animationDuration:1700,animationEasing:'cubicOut',animationDelay:i=>i*130
   });
   el.__echart=chart;setTimeout(function(){chart.resize();},300);
@@ -1318,9 +1318,9 @@ function initGauges(){
       anchor:{show:true,size:8,itemStyle:{color:g.ac,borderColor:'#fff',borderWidth:1}},
       axisTick:{show:false},
       splitLine:{distance:-12,length:5,lineStyle:{color:'rgba(0,245,255,0.35)',width:2}},
-      axisLabel:{distance:-22,color:'#7e8bb8',fontSize:8},
+      axisLabel:{distance:-22,color:'#111111',fontSize:8},
       detail:{valueAnimation:true,formatter:v=>Math.round(v)+'%',color:g.ac,fontSize:22,fontWeight:900,offsetCenter:[0,54],textShadowColor:g.ac,textShadowBlur:12},
-      title:{show:true,offsetCenter:[0,84],color:'#c9d6f8',fontSize:10.5,fontWeight:600},
+      title:{show:true,offsetCenter:[0,84],color:'#111111',fontSize:10.5,fontWeight:600},
       data:[{value:g.val,name:g.label}]}],animationDuration:2000,animationEasing:'cubicOut'});
     el.__echart=chart;setTimeout(function(){chart.resize();},300);
   });
