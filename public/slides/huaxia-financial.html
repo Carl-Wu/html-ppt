@@ -551,7 +551,7 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 .part-line{flex:1;height:1px;background:linear-gradient(90deg,var(--ac),transparent);opacity:.45}
 .part-count{flex-shrink:0;font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:1px;color:var(--text3)}
 .toc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.toc-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:12px;padding:14px 16px;cursor:pointer;transition:all .3s;position:relative;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:6px}
+.toc-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:12px;padding:14px 16px;cursor:pointer;transition:all .3s;position:relative;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:6px;height:132px;overflow:hidden;box-sizing:border-box}
 .toc-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:3px 0 0 3px;background:var(--ac);opacity:0;transition:opacity .3s}
 .toc-card:hover{transform:translateY(-3px);border-color:var(--ac);box-shadow:0 8px 26px color-mix(in srgb,var(--ac) 16%,transparent)}
 .toc-card:hover::before{opacity:1}
@@ -600,7 +600,7 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="toc-header"><span class="toc-label">CONTENTS</span><h2>目录 · 汇报内容</h2><div class="toc-line"></div></div>
 <div class="toc-parts">
 <div class="toc-part p1">
-<div class="part-head"><span class="part-badge">PART 01</span><div class="part-titles"><div class="part-title">走进亿信华辰</div><div class="part-sub">认识公司与定位 · 发展历程 · 实力见证 · 战略愿景</div></div><div class="part-line"></div><span class="part-count">01-04 / 4 PAGES</span></div>
+<div class="part-head"><span class="part-badge">PART 01</span><div class="part-titles"><div class="part-title">公司简介与发展规划</div><div class="part-sub">定位 · 发展历程 · 实力见证 · 整体战略愿景</div></div><div class="part-line"></div><span class="part-count">01-04 / 4 PAGES</span></div>
 <div class="toc-grid">
 <div class="toc-card" onclick="goSlide(2)"><div class="toc-card-num">01</div><div class="toc-card-title">公司简介</div><div class="toc-card-desc">定位 · 愿景使命 · 五大核心产品线 · 全国布局</div><div class="toc-card-arrow">→</div></div>
 <div class="toc-card" onclick="goSlide(3)"><div class="toc-card-num">02</div><div class="toc-card-title">发展历程</div><div class="toc-card-desc">20 载技术沉淀 · 三次战略升级</div><div class="toc-card-arrow">→</div></div>
@@ -609,21 +609,20 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 </div>
 </div>
 <div class="toc-part p2">
-<div class="part-head"><span class="part-badge">PART 02</span><div class="part-titles"><div class="part-title">AI 原生能力</div><div class="part-sub">AI 战略与技术底座 · 研发进展 · Agent 落地 · 实施效果</div></div><div class="part-line"></div><span class="part-count">05-08 / 4 PAGES</span></div>
+<div class="part-head"><span class="part-badge">PART 02</span><div class="part-titles"><div class="part-title">公司 AI 战略布局</div><div class="part-sub">AI 战略 · 技术研发 · 五大 Agent · 实施效果 · 效率跃迁</div></div><div class="part-line"></div><span class="part-count">05-09 / 5 PAGES</span></div>
 <div class="toc-grid">
 <div class="toc-card" onclick="goSlide(6)"><div class="toc-card-num">05</div><div class="toc-card-title">AI 整体战略</div><div class="toc-card-desc">Data+AI 双轮驱动 · AI 原生七层架构</div><div class="toc-card-arrow">→</div></div>
 <div class="toc-card" onclick="goSlide(7)"><div class="toc-card-num">06</div><div class="toc-card-title">技术研发进展</div><div class="toc-card-desc">AI 能力升级 · 金租场景突破 · 技术底座与信创</div><div class="toc-card-arrow">→</div></div>
 <div class="toc-card" onclick="goSlide(8)"><div class="toc-card-num">07</div><div class="toc-card-title">已落地 AI Agent 场景</div><div class="toc-card-desc">五大 AI Agent 协同体系</div><div class="toc-card-arrow">→</div></div>
-<div class="toc-card" onclick="goSlide(9)"><div class="toc-card-num">08</div><div class="toc-card-title">实施效果展示</div><div class="toc-card-desc">数据治理与决策赋能 Agent 实施效果</div><div class="toc-card-arrow">→</div></div>
+<div class="toc-card" onclick="goSlide(9)"><div class="toc-card-num">08</div><div class="toc-card-title">数据治理与决策赋能 Agent 实施效果展示</div><div class="toc-card-desc">数据治理与决策赋能 Agent 实施效果</div><div class="toc-card-arrow">→</div></div>
+<div class="toc-card" onclick="goSlide(10)"><div class="toc-card-num">09</div><div class="toc-card-title">AI 智能体带来的效率与质量跃迁</div><div class="toc-card-desc">AI 智能体带来的效率与质量跃迁</div><div class="toc-card-arrow">→</div></div>
 </div>
 </div>
 <div class="toc-part p3">
-<div class="part-head"><span class="part-badge">PART 03</span><div class="part-titles"><div class="part-title">场景落地与未来规划</div><div class="part-sub">效率质量跃迁 · 金租科技创新规划 · 携手共创 · 展望</div></div><div class="part-line"></div><span class="part-count">09-12 / 4 PAGES</span></div>
+<div class="part-head"><span class="part-badge">PART 03</span><div class="part-titles"><div class="part-title">面向金融科技创新规划</div><div class="part-sub">金租科技创新规划 · 携手共创未来</div></div><div class="part-line"></div><span class="part-count">10-11 / 2 PAGES</span></div>
 <div class="toc-grid">
-<div class="toc-card" onclick="goSlide(10)"><div class="toc-card-num">09</div><div class="toc-card-title">效率与质量跃迁</div><div class="toc-card-desc">AI 智能体带来的效率与质量跃迁</div><div class="toc-card-arrow">→</div></div>
-<div class="toc-card" onclick="goSlide(11)"><div class="toc-card-num">10</div><div class="toc-card-title">金融租赁科技创新规划</div><div class="toc-card-desc">底座 + 短中长期路线图</div><div class="toc-card-arrow">→</div></div>
-<div class="toc-card" onclick="goSlide(12)"><div class="toc-card-num">11</div><div class="toc-card-title">携手共创</div><div class="toc-card-desc">合作愿景 · 四大方向 · 价值保障</div><div class="toc-card-arrow">→</div></div>
-<div class="toc-card" onclick="goSlide(13)"><div class="toc-card-num">12</div><div class="toc-card-title">结束 · 感谢</div><div class="toc-card-desc">期待与华夏金租携手共创数智未来</div><div class="toc-card-arrow">→</div></div>
+<div class="toc-card" onclick="goSlide(11)"><div class="toc-card-num">10</div><div class="toc-card-title">金融租赁的科技创新规划</div><div class="toc-card-desc">底座 + 短中长期路线图</div><div class="toc-card-arrow">→</div></div>
+<div class="toc-card" onclick="goSlide(12)"><div class="toc-card-num">11</div><div class="toc-card-title">携手共创华夏金租数智化新未来</div><div class="toc-card-desc">合作愿景 · 四大方向 · 价值保障</div><div class="toc-card-arrow">→</div></div>
 </div>
 </div>
 </div>
