@@ -550,7 +550,7 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 .slide-toc .slide-inner{overflow-y:auto;justify-content:flex-start;align-items:center;padding:70px 40px 40px}
 .toc-container{max-width:1280px;width:100%;margin:0 auto}
 .toc-header{margin-bottom:14px}
-.toc-header h2{font-size:clamp(27.3px,2.5vw,36.4px)}
+.toc-header h2{font-size:clamp(27.3px,2.5vw,31.2px)}
 .toc-parts{display:flex;flex-direction:column;gap:14px}
 .toc-part{--ac:#0066FF;padding:12px 16px 14px;background:linear-gradient(180deg,rgba(255,255,255,.74),rgba(255,255,255,.46));border:1px solid var(--card-border);border-radius:14px;box-shadow:var(--shadow)}
 .toc-part.p1{--ac:#0066FF}
@@ -567,13 +567,13 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 .toc-grid.g4{grid-template-columns:repeat(4,1fr)}
 .toc-grid.g5{grid-template-columns:repeat(5,1fr)}
 .toc-grid.g2{grid-template-columns:repeat(2,1fr)}
-.toc-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:10px;padding:10px 12px;cursor:pointer;transition:all .3s;position:relative;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:4px;height:102px;overflow:hidden;box-sizing:border-box}
+.toc-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:10px;padding:10px 12px;cursor:pointer;transition:all .3s;position:relative;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:4px;height:112px;overflow:hidden;box-sizing:border-box}
 .toc-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:3px 0 0 3px;background:var(--ac);opacity:0;transition:opacity .3s}
 .toc-card:hover{transform:translateY(-3px);border-color:var(--ac);box-shadow:0 8px 26px color-mix(in srgb,var(--ac) 16%,transparent)}
 .toc-card:hover::before{opacity:1}
 .toc-card-num{font-size:24.7px;font-weight:900;line-height:1;color:color-mix(in srgb,var(--ac) 15%,transparent);font-family:Georgia,'Times New Roman',serif}
 .toc-card-title{font-size:16.9px;font-weight:700;color:var(--text);line-height:1.3;margin-top:3px}
-.toc-card-desc{font-size:14.3px;color:var(--text2);line-height:1.4}
+.toc-card-desc{font-size:13px;color:var(--text2);line-height:1.4}
 .toc-card-arrow{position:absolute;bottom:9px;right:11px;font-size:18.2px;color:var(--ac);opacity:0;transition:all .3s}
 .toc-card:hover .toc-card-arrow{opacity:1;transform:translateX(4px)}
 @media(max-width:1400px){.toc-grid.g5{grid-template-columns:repeat(3,1fr)}.toc-grid.g4{grid-template-columns:repeat(2,1fr)}.toc-grid.g2{grid-template-columns:repeat(2,1fr)}}
@@ -613,7 +613,7 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="slide slide-toc" id="slide1">
 <div class="slide-wrapper"><div class="slide-inner">
 <div class="toc-container">
-<div class="toc-header"><span class="toc-label">CONTENTS</span><h2>目录 · 汇报内容</h2><div class="toc-line"></div></div>
+<div class="toc-header"><h2>目录 · 汇报内容</h2><div class="toc-line"></div></div>
 <div class="toc-parts">
 <div class="toc-part p1">
 <div class="part-head"><span class="part-badge">PART 01</span><div class="part-titles"><div class="part-title">走进亿信华辰</div><div class="part-sub">认识公司与定位 · 发展历程 · 实力见证 · 战略愿景</div></div><div class="part-line"></div><span class="part-count">01-04 / 4 PAGES</span></div>
@@ -629,9 +629,9 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="toc-grid g5">
 <div class="toc-card" onclick="goSlide(6)"><div class="toc-card-num">05</div><div class="toc-card-title">AI 整体战略</div><div class="toc-card-desc">Data+AI 双轮驱动 · AI 原生七层架构</div><div class="toc-card-arrow">→</div></div>
 <div class="toc-card" onclick="goSlide(7)"><div class="toc-card-num">06</div><div class="toc-card-title">技术研发进展</div><div class="toc-card-desc">AI 能力升级 · 金租场景突破 · 技术底座与信创</div><div class="toc-card-arrow">→</div></div>
-<div class="toc-card" onclick="goSlide(8)"><div class="toc-card-num">07</div><div class="toc-card-title">已落地 AI Agent 场景</div><div class="toc-card-desc">五大 AI Agent 协同体系</div><div class="toc-card-arrow">→</div></div>
-<div class="toc-card" onclick="goSlide(9)"><div class="toc-card-num">08</div><div class="toc-card-title">数据治理与决策赋能 Agent 实施效果展示</div><div class="toc-card-desc">数据治理与决策赋能 Agent 实施效果</div><div class="toc-card-arrow">→</div></div>
-<div class="toc-card" onclick="goSlide(10)"><div class="toc-card-num">09</div><div class="toc-card-title">AI 智能体带来的效率与质量跃迁</div><div class="toc-card-desc">AI 智能体带来的效率与质量跃迁</div><div class="toc-card-arrow">→</div></div>
+<div class="toc-card" onclick="goSlide(8)"><div class="toc-card-num">07</div><div class="toc-card-title">已落地 AI Agent 场景</div><div class="toc-card-desc">五大 AI Agent 协同</div><div class="toc-card-arrow">→</div></div>
+<div class="toc-card" onclick="goSlide(9)"><div class="toc-card-num">08</div><div class="toc-card-title">Agent 实施效果演示</div><div class="toc-card-desc">数据治理与决策赋能 Agent 实施效果</div><div class="toc-card-arrow">→</div></div>
+<div class="toc-card" onclick="goSlide(10)"><div class="toc-card-num">09</div><div class="toc-card-title">效率与质量跃迁</div><div class="toc-card-desc">AI 智能体带来的效率与质量跃迁</div><div class="toc-card-arrow">→</div></div>
 </div>
 </div>
 <div class="toc-part p3">
@@ -844,7 +844,7 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="content-title">技术研发进展 · 三大维度硬核成果</div>
 <div class="tech-grid">
 <div class="tech-card glass-card">
-<div class="tech-head"><span class="tech-n">A</span>AI 核心产品能力全面升级</div>
+<div class="tech-head"><span class="tech-n">1</span>AI 核心产品能力全面升级</div>
 <div class="tech-desc">全产品线 AI 能力升级与前沿落地</div>
 <ul class="tech-list">
 <li><span class="ok">✓</span><span>睿治 Agent 全模块 AI 能力上线，落地<strong>十大智能体治理场景</strong>，治理实施效率提升<em>60%</em></span></li>
@@ -853,7 +853,7 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 </ul>
 </div>
 <div class="tech-card glass-card" style="border-color:#2f6fed;box-shadow:0 0 0 1px #2f6fed inset,var(--shadow)">
-<div class="tech-head"><span class="tech-n">B</span>金融租赁行业场景深度突破</div>
+<div class="tech-head"><span class="tech-n">2</span>金融租赁行业场景深度突破</div>
 <div class="tech-desc" style="color:var(--brand);font-weight:600">重点板块 · 金租监管报送方案全面升级，打造监管报送全链路智能化能力</div>
 <ul class="tech-list">
 <li><span class="ok">✓</span><span>内置<strong>监管报送问数助手</strong>：支持 EAST、金数、利率报备等数据自然语言查询与校验，替代人工查数、提升效率</span></li>
@@ -862,7 +862,7 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 </ul>
 </div>
 <div class="tech-card glass-card">
-<div class="tech-head"><span class="tech-n">C</span>技术底座与合规保障</div>
+<div class="tech-head"><span class="tech-n">3</span>技术底座与合规保障</div>
 <div class="tech-desc">底座能力与自主可控夯实</div>
 <ul class="tech-list">
 <li><span class="ok">✓</span><span>万象 MaaS 平台完成<strong>V4.0 升级</strong>：算力智能调度、模型全生命周期管理、金融级安全管控全面强化</span></li>
@@ -876,7 +876,7 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <!-- 五大 AI Agent -->
 <div class="slide slide-content" id="slide8">
 <div class="slide-wrapper"><div class="slide-inner">
-<div class="ag-title">五大 AI Agent<span class="hl">协同体系</span></div>
+<div class="ag-title">五大 AI Agent<span class="hl">协同</span></div>
 <div class="ag-sub">多 Agent 分工协作，覆盖数据融合、治理合规、质检、风险、决策全链路。</div>
 <div class="agent-grid">
 <div class="agent-card" style="--ac:#7C4DFF" onclick="openAgent(0)"><div class="ac-glow"></div><div class="ac-head"><div class="ac-ico">⬡</div><div class="ac-num">AGENT 01</div></div><div class="ac-name">AI 数据融合 Agent</div><div class="ac-tag">多源异构 一体融合</div><div class="ac-desc">多源数据统一接入，非结构化合同/报告智能解析，打通数据孤岛形成统一资产视图。</div><div class="ac-caps"><span class="ac-cap">多源数据接入</span><span class="ac-cap">非结构化解析（合同/报告）</span><span class="ac-cap">实体对齐与映射</span><span class="ac-cap">统一资产视图</span></div><div class="ac-more">查看详情 →</div><div class="brackets"></div></div>
@@ -923,7 +923,6 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="slide-wrapper"><div class="slide-inner">
 <div class="ev-head">
 <div class="ev-head-l">
-<span class="ev-status">● COMBAT READY</span>
 <div class="ag-title">AI 智能体带来的<span class="hl">效率与质量跃迁</span></div>
 <div class="ag-sub">效率质量双跃迁，AI 智能体重构数据治理核心生产力</div>
 </div>
@@ -1107,7 +1106,7 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <script>
 var total=14;
 var cur=0;
-var navTitles=["封面","目录","公司简介 · 亿信华辰","发展历程：20 载技术沉淀 · 三次战略升级","实力见证：权威资质认证与行业方法论沉淀","整体战略愿景：成为领先的 AI 原生数据智能厂商","AI 整体战略：Data+AI 双轮驱动","技术研发进展","已落地部分 AI Agent 场景：五大 AI Agent 协同体系","数据治理与决策赋能 Agent 实施效果展示","AI 智能体带来的效率与质量跃迁","面向金融租赁的科技创新规划","携手共创华夏金租数智化新未来","结束 · 感谢"];
+var navTitles=["封面","目录","公司简介 · 亿信华辰","发展历程：20 载技术沉淀 · 三次战略升级","实力见证：权威资质认证与行业方法论沉淀","整体战略愿景：成为领先的 AI 原生数据智能厂商","AI 整体战略：Data+AI 双轮驱动","技术研发进展：三大维度硬核成果","已落地部分 AI Agent 场景：五大 AI Agent 协同","数据治理与决策赋能 Agent 实施效果展示","AI 智能体带来的效率与质量跃迁","面向金融租赁的科技创新规划","携手共创华夏金租数智化新未来","结束 · 感谢"];
 
 function buildNav(){
   var d=document.getElementById('navDrop');
