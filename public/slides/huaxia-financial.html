@@ -45,6 +45,14 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 #slide0 .cover-meta-item strong{color:#6fd0ff}
 #slide0 .cover-tagline{background:linear-gradient(90deg,#0a84ff 0%,#7C4DFF 100%)}
 #slide0 .cover-divider{background:linear-gradient(90deg,#0a84ff,#7C4DFF)}
+#slide13 .slide-inner{background:linear-gradient(180deg,rgba(5,11,30,.45) 0%,rgba(5,11,30,.25) 100%)}
+#slide13 .end-content{background:rgba(8,16,42,.40);border:1px solid rgba(140,175,255,.25);box-shadow:0 24px 70px rgba(0,0,0,.35)}
+#slide13 .end-badge{color:#8fa0cf}
+#slide13 .end-title{color:#ffffff}
+#slide13 .end-line{background:linear-gradient(90deg,#0a84ff,#7C4DFF)}
+#slide13 .end-sub{color:#d7e0ff}
+#slide13 .end-divider{background:linear-gradient(90deg,#0a84ff,#7C4DFF)}
+#slide13 .end-contact{color:#a8b6d8}
 #deck{position:fixed;inset:0;z-index:10}
 
 .slide{position:absolute;inset:0;display:none;flex-direction:column;background:transparent}
@@ -1094,7 +1102,7 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="nav-drop" id="navDrop"></div>
 </div>
 <div class="topbar-controls"><button id="prevBtn" onclick="goSlide(cur-1)" disabled>◀</button><button id="nextBtn" onclick="goSlide(cur+1)">▶</button></div>
-<div class="topbar-logo"><img src="/assets/logo-esen.svg" alt="亿信华辰" style="height:20px;display:block"></div>
+<div class="topbar-logo"><img src="/assets/logo-esen.svg" alt="亿信华辰" style="height:20px;display:block"><span style="width:1px;height:20px;background:var(--card-border);margin:0 10px"></span><img src="/assets/huaxia.png" alt="华夏金租" style="height:16px;display:block;padding:2px 8px;background:#C7000B;border-radius:3px;box-sizing:content-box"></div>
 </div>
 <div id="prog" style="width:5%"></div>
 <div class="ftr">
@@ -1377,7 +1385,7 @@ function goSlide(n){if(n<0||n>=total)return;
   var cc=ns.querySelector(".case-content");if(cc)cc.scrollTop=0;
   var si=ns.querySelector(".slide-inner");if(si)si.scrollTop=0;
   closeNav();initCharts();highlightNumbers();onEnter(n);
-  if(window.__huaxiaStage){ window.__huaxiaStage.show(n===0); }
+  if(window.__huaxiaStage){ window.__huaxiaStage.show(n===0||n===13); }
 }
 function toggleNav(){document.getElementById("navDrop").classList.toggle("open");document.getElementById("navIdx").classList.toggle("open");}
 function closeNav(){document.getElementById("navDrop").classList.remove("open");document.getElementById("navIdx").classList.remove("open");}
