@@ -35,6 +35,16 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 .bg-shape-3{width:280px;height:280px;background:radial-gradient(circle,rgba(0,153,255,0.04),transparent 70%);bottom:60px;right:120px;animation:shapeFloat 25s ease-in-out infinite}
 @keyframes shapeFloat{0%,100%{transform:translate(0,0)}33%{transform:translate(20px,-24px)}66%{transform:translate(-12px,18px)}}
 
+#stage{position:fixed;inset:0;width:100%;height:100%;z-index:5;pointer-events:none;opacity:0;transition:opacity .6s ease;will-change:opacity}
+#stage.on{opacity:1}
+#slide0 .slide-inner{background:linear-gradient(180deg,rgba(5,11,30,.45) 0%,rgba(5,11,30,.25) 100%)}
+#slide0 .cover-content{background:rgba(8,16,42,.40);border:1px solid rgba(140,175,255,.25);box-shadow:0 24px 70px rgba(0,0,0,.35)}
+#slide0 .cover-title{color:#ffffff}
+#slide0 .cover-subtitle{color:#d7e0ff}
+#slide0 .cover-meta-item{background:rgba(255,255,255,.08);border-color:rgba(150,180,255,.3);color:#e8ecff;box-shadow:none}
+#slide0 .cover-meta-item strong{color:#6fd0ff}
+#slide0 .cover-tagline{background:linear-gradient(90deg,#0a84ff 0%,#7C4DFF 100%)}
+#slide0 .cover-divider{background:linear-gradient(90deg,#0a84ff,#7C4DFF)}
 #deck{position:fixed;inset:0;z-index:10}
 
 .slide{position:absolute;inset:0;display:none;flex-direction:column;background:transparent}
@@ -587,6 +597,7 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="bg-shape bg-shape-2"></div>
 <div class="bg-shape bg-shape-3"></div>
 </div>
+<canvas id="stage" aria-hidden="true"></canvas>
 <div id="deck">
 
 <!-- 封面 -->
@@ -1104,6 +1115,219 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 .ev-kpi.in,.ev-chart.in,.ev-rads.in{opacity:1;transform:none}
 </style>
 <script>
+(function(){
+  var canvas=document.getElementById('stage');
+  if(!canvas) return;
+  var gl=canvas.getContext('webgl',{antialias:true,alpha:false})||canvas.getContext('experimental-webgl',{antialias:true,alpha:false});
+  if(!gl){ return; }
+
+  var W=0,H=0,dpr=Math.min(window.devicePixelRatio||1,2);
+  var visible=(document.getElementById('slide0')||{}).className&&String(document.getElementById('slide0').className).indexOf('active')>=0;
+
+  function resize(){
+    var r=canvas.getBoundingClientRect();
+    W=Math.max(1,Math.floor(r.width||window.innerWidth));
+    H=Math.max(1,Math.floor(r.height||window.innerHeight));
+    canvas.width=Math.floor(W*dpr);
+    canvas.height=Math.floor(H*dpr);
+    gl.viewport(0,0,canvas.width,canvas.height);
+  }
+  window.addEventListener('resize',resize,{passive:true});
+
+  function compile(type,src){
+    var s=gl.createShader(type); gl.shaderSource(s,src); gl.compileShader(s);
+    if(!gl.getShaderParameter(s,gl.COMPILE_STATUS)){ console.error(gl.getShaderInfoLog(s)); }
+    return s;
+  }
+  function link(vs,fs){
+    var p=gl.createProgram(); gl.attachShader(p,compile(gl.VERTEX_SHADER,vs)); gl.attachShader(p,compile(gl.FRAGMENT_SHADER,fs));
+    gl.linkProgram(p); return p;
+  }
+
+  // ---------- matrix helpers (column-major) ----------
+  function perspective(fovy,aspect,near,far){
+    var f=1/Math.tan(fovy/2),nf=1/(near-far);
+    return new Float32Array([f/aspect,0,0,0, 0,f,0,0, 0,0,(far+near)*nf,-1, 0,0,(2*far*near)*nf,0]);
+  }
+  function lookAt(ex,ey,ez,cx,cy,cz,ux,uy,uz){
+    var zx=ex-cx,zy=ey-cy,zz=ez-cz,l=Math.sqrt(zx*zx+zy*zy+zz*zz); zx/=l;zy/=l;zz/=l;
+    var xx=uy*zz-uz*zy,xy=uz*zx-ux*zz,xz=ux*zy-uy*zx,lx=Math.sqrt(xx*xx+xy*xy+xz*xz); xx/=lx;xy/=lx;xz/=lx;
+    var yx=zy*xz-zz*xy,yy=zz*xx-zx*xz,yz=zx*xy-zy*xx;
+    return new Float32Array([
+      xx,xy,xz,0,
+      yx,yy,yz,0,
+      zx,zy,zz,0,
+      -(xx*ex+xy*ey+xz*ez),-(yx*ex+yy*ey+yz*ez),-(zx*ex+zy*ey+zz*ez),1
+    ]);
+  }
+  function mul(a,b){
+    var o=new Float32Array(16);
+    for(var c=0;c<4;c++)for(var r=0;r<4;r++){
+      o[c*4+r]=a[0*4+r]*b[c*4+0]+a[1*4+r]*b[c*4+1]+a[2*4+r]*b[c*4+2]+a[3*4+r]*b[c*4+3];
+    }
+    return o;
+  }
+
+  // ---------- nebula background ----------
+  var bgVS="attribute vec2 aPos;varying vec2 vUv;void main(){vUv=aPos*0.5+0.5;gl_Position=vec4(aPos,0.0,1.0);}";
+  var bgFS=[
+   'precision highp float;',
+   'varying vec2 vUv;',
+   'uniform vec2 uRes;',
+   'uniform vec3 uColorA,uColorB,uColorC,uAccent,uPurple;',
+   'float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}',
+   'float vnoise(vec2 p){vec2 i=floor(p),f=fract(p);float a=hash(i),b=hash(i+vec2(1.,0.)),c=hash(i+vec2(0.,1.)),d=hash(i+vec2(1.,1.));vec2 u=f*f*(3.-2.*f);return mix(mix(a,b,u.x),mix(c,d,u.x),u.y);}',
+   'float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<6;i++){v+=a*vnoise(p);p*=2.02;a*=.5;}return v;}',
+   'void main(){',
+   '  vec2 uv=vUv;vec2 p=(uv*2.-1.);',
+   '  p.x*=uRes.x/uRes.y;',
+   '  float t=uTime*0.04;',
+   '  vec2 q=vec2(fbm(p*1.4+t),fbm(p*1.4-vec2(3.2,1.7)+t));',
+   '  vec2 r=vec2(fbm(p*1.8+q*2.0+t*1.3),fbm(p*1.8+q*2.0-vec2(1.1,2.3)+t));',
+   '  float n=fbm(p*1.2+r*2.0);',
+   '  float grad=smoothstep(-0.2,1.0,uv.y);',
+   '  vec3 col=mix(uColorA,uColorB,grad);',
+   '  col=mix(col,uColorC,smoothstep(0.45,0.95,n));',
+   '  float vein=pow(smoothstep(0.55,0.9,n),2.5);',
+   '  col+=vein*mix(uAccent,uPurple,uv.x)*0.5;',
+   '  vec2 mp=uMouse*vec2(uRes.x/uRes.y,1.0);',
+   '  float d=length(p-mp*0.6);',
+   '  col+=exp(-d*2.4)*0.25*uAccent;',
+   '  float st=step(0.997,hash(floor(p*180.0+floor(uTime*3.0))));',
+   '  col+=st*0.7;',
+   '  col*=smoothstep(1.5,0.2,length(p));',
+   '  gl_FragColor=vec4(col,1.0);',
+   '}'].join('\n');
+  // inject uTime,uMouse
+  var bgFSFull=bgFS.replace('varying vec2 vUv;','varying vec2 vUv;uniform float uTime;uniform vec2 uMouse;');
+
+  var bgProg=link(bgVS,bgFSFull);
+  var bgMat={uRes:[W,H],uMouse:[0,0],uTime:0};
+  gl.useProgram(bgProg);
+  gl.uniform3f(gl.getUniformLocation(bgProg,'uColorA'),5/255,11/255,30/255);
+  gl.uniform3f(gl.getUniformLocation(bgProg,'uColorB'),12/255,28/255,70/255);
+  gl.uniform3f(gl.getUniformLocation(bgProg,'uColorC'),26/255,47/255,110/255);
+  gl.uniform3f(gl.getUniformLocation(bgProg,'uAccent'),0/255,245/255,255/255);
+  gl.uniform3f(gl.getUniformLocation(bgProg,'uPurple'),124/255,77/255,255/255);
+  var locBgUv=gl.getAttribLocation(bgProg,'aPos');
+  var locBgRes=gl.getUniformLocation(bgProg,'uRes');
+  var locBgTime=gl.getUniformLocation(bgProg,'uTime');
+  var locBgMouse=gl.getUniformLocation(bgProg,'uMouse');
+  var bgBuf=gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER,bgBuf);
+  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1, 3,-1, -1,3]),gl.STATIC_DRAW);
+
+  // ---------- ambient particles ----------
+  var COUNT=window.innerWidth<768?420:900;
+  var palette=[[0/255,245/255,255/255],[79/255,140/255,255/255],[124/255,77/255,255/255],[1,1,1]];
+  var pos=new Float32Array(COUNT*3),col=new Float32Array(COUNT*3),sz=new Float32Array(COUNT);
+  for(var i=0;i<COUNT;i++){
+    var r=26+Math.random()*120;
+    var th=Math.random()*Math.PI*2;
+    var ph=Math.acos(2*Math.random()-1);
+    pos[i*3]=r*Math.sin(ph)*Math.cos(th);
+    pos[i*3+1]=r*Math.sin(ph)*Math.sin(th);
+    pos[i*3+2]=r*Math.cos(ph)-20;
+    var c=palette[Math.floor(Math.random()*palette.length)];
+    col[i*3]=c[0];col[i*3+1]=c[1];col[i*3+2]=c[2];
+    sz[i]=Math.random()*1.6+0.3;
+  }
+  var pVS=[
+   'attribute vec3 aPos;attribute vec3 aColor;attribute float aSize;',
+   'uniform mat4 uMVP;uniform mat4 uView;uniform float uTime,uRy,uRx,uPixel;',
+   'varying vec3 vColor;varying float vTw;',
+   'void main(){',
+   '  vColor=aColor;',
+   '  vec3 p=aPos;',
+   '  float cy=cos(uRy),sy=sin(uRy),cx=cos(uRx),sx=sin(uRx);',
+   '  vec3 a1=vec3(p.x*cy+p.z*sy,p.y,-p.x*sy+p.z*cy);',
+   '  vec3 a2=vec3(a1.x,a1.y*cx-a1.z*sx,a1.y*sx+a1.z*cx);',
+   '  p=a2;',
+   '  p.y+=sin(uTime*0.4+p.x*0.1)*0.8;',
+   '  float tw=sin(uTime*1.2+p.x*0.3+p.y*0.2)*0.5+0.5;',
+   '  vTw=tw;',
+   '  vec4 vp=uView*vec4(p,1.0);',
+   '  gl_Position=uMVP*vec4(p,1.0);',
+   '  gl_PointSize=aSize*(180.0/-vp.z)*uPixel*(0.6+tw*0.6);',
+   '}'].join('\n');
+  var pFS='precision mediump float;varying vec3 vColor;varying float vTw;void main(){vec2 c=gl_PointCoord-0.5;float d=length(c);if(d>0.5)discard;float a=smoothstep(0.5,0.0,d);gl_FragColor=vec4(vColor,a*(0.5+vTw*0.5));}';
+  var pProg=link(pVS,pFS);
+  var pBuf=gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER,pBuf);gl.bufferData(gl.ARRAY_BUFFER,pos,gl.STATIC_DRAW);
+  var cBuf=gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER,cBuf);gl.bufferData(gl.ARRAY_BUFFER,col,gl.STATIC_DRAW);
+  var sBuf=gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER,sBuf);gl.bufferData(gl.ARRAY_BUFFER,sz,gl.STATIC_DRAW);
+  var locPMVP=gl.getUniformLocation(pProg,'uMVP'),locPView=gl.getUniformLocation(pProg,'uView');
+  var locPTime=gl.getUniformLocation(pProg,'uTime'),locPRy=gl.getUniformLocation(pProg,'uRy'),locPRx=gl.getUniformLocation(pProg,'uRx'),locPPix=gl.getUniformLocation(pProg,'uPixel');
+  var aPPos=gl.getAttribLocation(pProg,'aPos'),aPCol=gl.getAttribLocation(pProg,'aColor'),aPSize=gl.getAttribLocation(pProg,'aSize');
+
+  // ---------- animation ----------
+  var pointer={x:0,y:0,tx:0,ty:0};
+  window.addEventListener('pointermove',function(e){pointer.tx=(e.clientX/window.innerWidth)*2-1;pointer.ty=(e.clientY/window.innerHeight)*2-1;},{passive:true});
+
+  var proj=perspective(55*Math.PI/180, W/H||1, 0.1, 400);
+  var t0=performance.now();
+  function frame(now){
+    requestAnimationFrame(frame);
+    if(!visible) return;
+    var t=(now-t0)/1000;
+    pointer.x+=(pointer.tx-pointer.x)*0.05;
+    pointer.y+=(pointer.ty-pointer.y)*0.05;
+    var ex=pointer.x*2.4, ey=-pointer.y*1.8, ez=30;
+    var view=lookAt(ex,ey,ez,0,0,0,0,1,0);
+    var mvp=mul(proj,view);
+
+    gl.clearColor(5/255,11/255,30/255,1);
+    gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
+
+    // nebula bg
+    gl.disable(gl.DEPTH_TEST);
+    gl.disable(gl.BLEND);
+    gl.useProgram(bgProg);
+    gl.bindBuffer(gl.ARRAY_BUFFER,bgBuf);
+    gl.enableVertexAttribArray(locBgUv);
+    gl.vertexAttribPointer(locBgUv,2,gl.FLOAT,false,0,0);
+    gl.uniform2f(locBgRes,W*1.0,H*1.0);
+    gl.uniform1f(locBgTime,t);
+    gl.uniform2f(locBgMouse,pointer.x,pointer.y);
+    gl.drawArrays(gl.TRIANGLES,0,3);
+
+    // particles
+    gl.enable(gl.BLEND);
+    gl.blendFunc(gl.ONE,gl.ONE);
+    gl.disable(gl.DEPTH_TEST);
+    gl.useProgram(pProg);
+    gl.bindBuffer(gl.ARRAY_BUFFER,pBuf);gl.enableVertexAttribArray(aPPos);gl.vertexAttribPointer(aPPos,3,gl.FLOAT,false,0,0);
+    gl.bindBuffer(gl.ARRAY_BUFFER,cBuf);gl.enableVertexAttribArray(aPCol);gl.vertexAttribPointer(aPCol,3,gl.FLOAT,false,0,0);
+    gl.bindBuffer(gl.ARRAY_BUFFER,sBuf);gl.enableVertexAttribArray(aPSize);gl.vertexAttribPointer(aPSize,1,gl.FLOAT,false,0,0);
+    gl.uniformMatrix4fv(locPMVP,false,mvp);
+    gl.uniformMatrix4fv(locPView,false,view);
+    gl.uniform1f(locPTime,t);
+    gl.uniform1f(locPRy,t*0.012);
+    gl.uniform1f(locPRx,t*0.006);
+    gl.uniform1f(locPPix,dpr);
+    gl.drawArrays(gl.POINTS,0,COUNT);
+  }
+
+  function show(on){
+    visible=!!on;
+    canvas.classList.toggle('on',visible);
+  }
+  function start(){
+    resize();
+    visible=(document.getElementById('slide0').className.indexOf('active')>=0);
+    canvas.classList.toggle('on',visible);
+    requestAnimationFrame(frame);
+  }
+
+  // expose to the deck's goSlide()
+  window.__huaxiaStage={show:show};
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',start);}else{start();}
+})();
+
+</script>
+<script>
 var total=14;
 var cur=0;
 var navTitles=["封面","目录","公司简介 · 亿信华辰","发展历程：20 载技术沉淀 · 三次战略升级","实力见证：权威资质认证与行业方法论沉淀","整体战略愿景：成为领先的 AI 原生数据智能厂商","AI 整体战略：Data+AI 双轮驱动","技术研发进展：三大维度硬核成果","已落地部分 AI Agent 场景：五大 AI Agent 协同","数据治理与决策赋能 Agent 实施效果展示","AI 智能体带来的效率与质量跃迁","面向金融租赁的科技创新规划","携手共创华夏金租数智化新未来","结束 · 感谢"];
@@ -1153,6 +1377,7 @@ function goSlide(n){if(n<0||n>=total)return;
   var cc=ns.querySelector(".case-content");if(cc)cc.scrollTop=0;
   var si=ns.querySelector(".slide-inner");if(si)si.scrollTop=0;
   closeNav();initCharts();highlightNumbers();onEnter(n);
+  if(window.__huaxiaStage){ window.__huaxiaStage.show(n===0); }
 }
 function toggleNav(){document.getElementById("navDrop").classList.toggle("open");document.getElementById("navIdx").classList.toggle("open");}
 function closeNav(){document.getElementById("navDrop").classList.remove("open");document.getElementById("navIdx").classList.remove("open");}
