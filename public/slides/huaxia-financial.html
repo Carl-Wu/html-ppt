@@ -287,7 +287,23 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 .case-section-heading strong{color:var(--brand)}
 /* ============ 公司简介 ============ */
 .pos-body{padding:20px 24px;font-size:18.9px;line-height:2;color:var(--text2)}
+/* ============ 公司简介 ============ */
+.pos-body{padding:20px 24px;font-size:18.9px;line-height:2;color:var(--text2)}
 .pos-body strong{color:var(--brand);font-weight:700}
+.brand-intro{padding:18px 24px;font-size:19.5px;line-height:1.95;color:var(--text2);background:linear-gradient(135deg,rgba(0,102,255,0.06),rgba(0,102,255,0.02));border-left:3px solid var(--brand)}
+.brand-intro strong{color:var(--brand);font-weight:700}
+.group-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.group-card{display:flex;flex-direction:column;gap:8px;padding:16px 18px}
+.group-tag{font-size:18.9px;font-weight:700;color:var(--brand);display:flex;align-items:center;gap:8px}
+.group-tag::before{content:'';width:8px;height:18px;border-radius:2px;background:linear-gradient(180deg,#0066FF,#4da3ff)}
+.group-text{font-size:16.9px;color:var(--text2);line-height:1.75}
+.group-text strong{color:var(--brand)}
+.strength-card{padding:18px 24px;display:flex;flex-direction:column;gap:10px;background:linear-gradient(135deg,rgba(0,102,255,0.05),rgba(0,102,255,0.015));border-left:3px solid var(--brand)}
+.strength-text{font-size:17.6px;color:var(--text2);line-height:1.85}
+.strength-text strong{color:var(--brand)}
+.strength-labels{display:flex;flex-wrap:wrap;gap:10px}
+.strength-lbl{font-size:15px;font-weight:700;color:var(--brand);background:var(--brand-dim);padding:4px 12px;border-radius:14px}
+@media(max-width:1280px){.group-grid{grid-template-columns:1fr}}
 .vm-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .vm-card{padding:18px 22px;border-left:3px solid var(--brand);background:linear-gradient(135deg,rgba(0,102,255,0.05),rgba(0,102,255,0.015))}
 .vm-tag{font-size:13px;letter-spacing:2px;color:var(--brand);font-weight:600;margin-bottom:6px}
@@ -670,7 +686,15 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="slide-wrapper"><div class="slide-inner">
 <div class="content-wrapper">
 <div class="content-title">公司简介 · 亿信华辰</div>
-<div class="glass-card pos-body">北京亿信华辰软件有限责任公司成立于 <strong>2006 年</strong>，华宇软件（股票代码：<strong>300271</strong>）旗下核心企业，深耕数据智能领域 <strong>20 年</strong>，服务网络覆盖全国。</div>
+<div class="brand-intro">北京亿信华辰软件有限责任公司成立于 <strong>2006 年</strong>，是国内领先的 <strong>AI 原生数据智能产品与解决方案服务商</strong>，为 <strong>A 股上市公司北京华宇软件股份有限公司（股票代码：300271）核心控股子公司</strong>。公司深耕数据智能领域二十载，聚焦 <strong>数据治理、商业智能、AI 智能体、数据资产化</strong>四大核心赛道，为政企客户提供全栈式数智化转型服务。</div>
+<div class="content-title" style="margin-top:6px">与华宇软件的集团协同关系</div>
+<div class="group-grid">
+<div class="group-card glass-card"><div class="group-tag">股权与战略定位</div><div class="group-text">华宇软件为集团上市主体，持有亿信华辰 <strong>80%</strong> 股权，将亿信华辰定位为集团<strong>数据智能战略核心板块</strong>。亿信华辰保持独立的产品研发、市场运营与项目交付体系，同时依托集团资本与行业资源优势，持续加大底层数据技术与生成式 AI 的研发投入。</div></div>
+<div class="group-card glass-card"><div class="group-tag">业务互补协同</div><div class="group-text">华宇软件深耕法律科技、智慧政务、智慧教育三大行业数字化赛道；亿信华辰专注通用数据底座与行业数据智能能力建设，既为集团全行业业务线提供底层数据技术支撑，也独立面向金融、制造、能源等市场化行业提供端到端数智化解决方案，形成「行业应用 + 数据底座」的双向协同格局。</div></div>
+<div class="group-card glass-card"><div class="group-tag">技术能力共享</div><div class="group-text">亿信华辰全面共享集团自研的<strong>万象大模型体系、万象 MaaS 全栈 AI 平台</strong>核心技术，将集团级 AI 底座深度融入数据治理、监管报送、资产智能等产品矩阵，为金融等强监管行业提供安全可控的私有化 AI 落地能力。</div></div>
+</div>
+<div class="content-title" style="margin-top:6px">核心实力</div>
+<div class="strength-card glass-card"><div class="strength-labels"><span class="strength-lbl">100% 自主研发</span><span class="strength-lbl">CMMI 5 级</span><span class="strength-lbl">ISO9001 / ISO20000 / ISO27001</span><span class="strength-lbl">DCMM 3 级</span><span class="strength-lbl">服务超 13000 家政企客户</span></div><div class="strength-text">公司全线产品 <strong>100% 自主研发</strong>，覆盖数据存储计算、数据治理、BI 分析、AI 智能体、监管报送、数据资产管理全链路；持有 <strong>CMMI 5 级、ISO9001/ISO20000/ISO27001、DCMM 3 级</strong>等全套权威资质，累计服务超 <strong>13000</strong> 家政企客户，在金融租赁领域沉淀了成熟的资产管理、监管报送、智能风控全场景解决方案。</div></div>
 <div class="vm-grid">
 <div class="vm-card glass-card"><div class="vm-tag">企业愿景</div><div class="vm-text">做中国卓越的智能数据产品与服务提供商</div></div>
 <div class="vm-card glass-card"><div class="vm-tag">企业使命</div><div class="vm-text">构筑数据之美，服务知识发现</div></div>
@@ -807,7 +831,7 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 </div>
 <div class="strat-card glass-card">
 <div class="strat-head"><span class="strat-n">2</span><span class="strat-t">组织 AI Native 变革</span></div>
-<div class="strat-item">组织、流程、人才全面 AI 原生重构：组织扁平化、企业知识统一沉淀（上下文资产化）。</div>
+<div class="strat-item">组织、流程、人才全面 AI 原生重构：组织扁平化、企业知识统一沉淀。</div>
 <div class="strat-item">以「token 消耗 + 实际产出 + 落地成果」综合考核，从“堆时长”转向“看价值”。</div>
 </div>
 <div class="strat-card glass-card">
@@ -1074,7 +1098,7 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="end-line"></div>
 <div class="end-sub">期待与华夏金租携手共创数智未来 · 欢迎就数智化底座、监管报送智能化、资产全生命周期 AI 应用等方向深入探讨</div>
 <div class="end-divider"></div>
-<div class="end-contact">金融业务创新中心 ｜ 汇报人：吴思全 ｜ 联系方式待填</div>
+<div class="end-contact">金融业务创新中心 ｜ 汇报人：吴思全 </div>
 </div>
 </div></div>
 </div>
