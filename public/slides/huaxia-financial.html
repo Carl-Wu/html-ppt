@@ -314,6 +314,16 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 .prod-badge{font-size:11.7px;letter-spacing:1.5px;color:var(--brand);font-weight:700;background:var(--brand-dim);align-self:flex-start;padding:2px 8px;border-radius:10px}
 .prod-name{font-size:18.9px;font-weight:700;color:var(--text);line-height:1.35}
 .prod-desc{font-size:15.6px;color:var(--text3);line-height:1.75}
+
+.prod-card[data-img]{cursor:pointer}
+.prod-card[data-img]:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,102,255,.14)}
+.prod-card[data-img]::after{content:'点击查看产品图';position:absolute;top:8px;right:8px;font-size:11px;color:var(--brand);background:var(--brand-dim);padding:2px 8px;border-radius:10px;opacity:.9}
+.prod-lightbox{position:fixed;inset:0;background:rgba(5,10,25,.78);z-index:9999;display:none;align-items:center;justify-content:center;padding:40px}
+.prod-lightbox.open{display:flex}
+.prod-lightbox-inner{position:relative;max-width:min(1080px,92vw);max-height:86vh;background:#fff;border-radius:12px;padding:20px;box-shadow:0 24px 70px rgba(0,0,0,.45)}
+.prod-lightbox-img{display:block;max-width:100%;max-height:76vh;margin:0 auto;object-fit:contain;border-radius:6px;background:#fff}
+.prod-lightbox-close{position:absolute;top:10px;right:10px;background:var(--brand);color:#fff;border:none;border-radius:8px;padding:6px 16px;font-size:14px;font-weight:600;cursor:pointer}
+.prod-lightbox-close:hover{opacity:.88}
 .map-wrap{width:100%;height:430px}
 .map-legend{display:flex;gap:20px;justify-content:center;margin-top:6px;flex-wrap:wrap}
 .map-legend span{font-size:15.6px;color:var(--text2);display:inline-flex;align-items:center;gap:6px}
@@ -389,7 +399,7 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 @media(max-width:1280px){.idea-grid{grid-template-columns:1fr}}
 
 /* ============ 技术研发进展 ============ */
-.tech-grid{display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:12px;flex:1;min-height:0}
+.tech-grid{display:grid;grid-template-columns:1fr;gap:14px;flex:1;min-height:0}
 .tech-card{padding:16px 18px;display:flex;flex-direction:column;gap:8px}
 .tech-head{display:flex;align-items:center;gap:9px;font-size:18.9px;font-weight:700;color:var(--text)}
 .tech-n{width:24px;height:24px;border-radius:7px;background:var(--brand);color:#fff;font-size:15.6px;display:grid;place-items:center;flex-shrink:0}
@@ -690,8 +700,8 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="brand-intro">北京亿信华辰软件有限责任公司成立于 <strong>2006 年</strong>，是国内领先的 <strong>AI 原生数据智能产品与解决方案服务商</strong>，为 <strong>A 股上市公司北京华宇软件股份有限公司（股票代码：300271）核心控股子公司</strong>。公司深耕数据智能领域二十载，聚焦 <strong>数据治理、商业智能、AI 智能体、数据资产化</strong>四大核心赛道，为政企客户提供全栈式数智化转型服务。</div>
 <div class="content-title" style="margin-top:6px">与华宇软件的集团协同关系</div>
 <div class="group-grid">
-<div class="group-card glass-card"><div class="group-tag">股权与战略定位</div><div class="group-text">华宇软件为集团上市主体，持有亿信华辰 <strong>80%</strong> 股权，将亿信华辰定位为集团<strong>数据智能战略核心板块</strong>。亿信华辰保持独立的产品研发、市场运营与项目交付体系，同时依托集团资本与行业资源优势，持续加大底层数据技术与生成式 AI 的研发投入。</div></div>
-<div class="group-card glass-card"><div class="group-tag">业务互补协同</div><div class="group-text">华宇软件深耕法律科技、智慧政务、智慧教育三大行业数字化赛道；亿信华辰专注通用数据底座与行业数据智能能力建设，既为集团全行业业务线提供底层数据技术支撑，也独立面向金融、制造、能源等市场化行业提供端到端数智化解决方案，形成「行业应用 + 数据底座」的双向协同格局。</div></div>
+<div class="group-card glass-card"><div class="group-tag">股权与战略定位</div><div class="group-text">华宇软件为集团上市主体，持有亿信华辰 <strong>80%</strong> 股权，将亿信华辰定位为集团<strong>数据智能战略核心板块</strong>。亿信华辰保持<strong>独立的产品研发、市场运营与项目交付体系</strong>，同时依托集团资本与行业资源优势，持续加大底层数据技术与生成式 AI 的研发投入。</div></div>
+<div class="group-card glass-card"><div class="group-tag">业务互补协同</div><div class="group-text">华宇软件深耕<strong>法律科技、智慧政务、智慧教育</strong>三大行业数字化赛道；<strong>亿信华辰专注通用数据底座与行业数据智能能力建设</strong>，既为集团全行业业务线提供底层数据技术支撑，也独立面向金融、制造、能源等市场化行业提供端到端数智化解决方案，形成「行业应用 + 数据底座」的双向协同格局。</div></div>
 <div class="group-card glass-card"><div class="group-tag">技术能力共享</div><div class="group-text">亿信华辰全面共享集团自研的<strong>万象大模型体系、万象 MaaS 全栈 AI 平台、Apex 企业级 AI研发平台、甜橙 AI 智能办公</strong>核心技术，将集团级 AI 底座深度融入数据治理、监管报送、资产智能等产品矩阵，为金融等强监管行业提供安全可控的私有化 AI 落地能力。</div></div>
 </div>
 <div class="content-title" style="margin-top:6px">核心实力</div>
@@ -700,22 +710,22 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="vm-card glass-card"><div class="vm-tag">企业愿景</div><div class="vm-text">做中国卓越的智能数据产品与服务提供商</div></div>
 <div class="vm-card glass-card"><div class="vm-tag">企业使命</div><div class="vm-text">构筑数据之美，服务知识发现</div></div>
 </div>
-<div class="content-title" style="margin-top:6px">七大产品线</div>
-<div class="prod-grid">
-<div class="prod-card glass-card"><div class="prod-badge">数据存储计算</div><div class="prod-name">PetaBase 统一计算存储底座</div><div class="prod-desc">多源异构数据的统一接入与并行计算；支持图库、向量库、时序库等多模态类型，既可做数据湖也可做数据仓库；存算一体、弹性扩展，兼容信创。</div></div>
-<div class="prod-card glass-card"><div class="prod-badge">数据治理</div><div class="prod-name">睿治数据治理平台</div><div class="prod-desc">覆盖元数据、标准、质量、主数据、资产目录等全模块，适配 DAMA/DCMM；全模块 AI 智能化，降低治理门槛。</div></div>
-<div class="prod-card glass-card"><div class="prod-badge">数据分析</div><div class="prod-name">ABI 一站式数据分析平台</div><div class="prod-desc">报表、大屏、挖掘全场景一体，自助即席分析，支持业务人员低门槛用数。</div></div>
-<div class="prod-card glass-card"><div class="prod-badge">智能体协作</div><div class="prod-name">智问企业级智能体中台</div><div class="prod-desc">自然语言智能问数 + 多智能体协作；内置插件生态、标准化工具接入（MCP）、skills 能力沉淀。</div></div>
-<div class="prod-card glass-card"><div class="prod-badge">大模型服务</div><div class="prod-name">万象 MaaS 大模型训推一体化平台</div><div class="prod-desc">训练、微调、推理部署一体化；支持私有化部署与信创，支撑企业级大模型落地。</div></div>
-<div class="prod-card glass-card"><div class="prod-badge">AI开发</div><div class="prod-name">Apex 企业级AI 开发平台</div><div class="prod-desc">云端开箱即用的企业级 AI 开发平台，承载 Agent 开发全流程（需求 → 原型 → 编码 → 提测），能力沉淀、自主可控、支持私有化。</div></div>
-<div class="prod-card glass-card"><div class="prod-badge">智能办公</div><div class="prod-name">甜橙 AI 智能办公平台</div><div class="prod-desc">对话即指令、越用越聪明的 AI 智能办公平台，覆盖文档、合同、报告、PPT、会议纪要等全场景；私有化 + 沙箱安全可控，可孵化行业专属智能体。</div></div>
-</div>
 <div class="content-title" style="margin-top:6px">全国布局</div>
 <div class="glass-card map-wrap" id="chinaMap"></div>
 <div class="map-legend">
 <span><i style="background:#c0392b"></i>总部 · 北京</span>
 <span><i style="background:#2f6fed"></i>研发中心 · 大连、武汉</span>
 <span><i style="background:#7cb342"></i>分支机构 · 上海、广州、成都</span>
+</div>
+<div class="content-title" style="margin-top:6px">七大产品线</div>
+<div class="prod-grid">
+<div class="prod-card glass-card"><div class="prod-badge">数据存储计算</div><div class="prod-name">PetaBase 统一计算存储底座</div><div class="prod-desc">多源异构数据的统一接入与并行计算；支持图库、向量库、时序库等多模态类型，既可做数据湖也可做数据仓库；存算一体、弹性扩展，兼容信创。</div></div>
+<div class="prod-card glass-card" data-img="../assets/product/睿治.jpg" ><div class="prod-badge">数据治理</div><div class="prod-name">睿治数据治理平台</div><div class="prod-desc">覆盖元数据、标准、质量、主数据、资产目录等全模块，适配 DAMA/DCMM；全模块 AI 智能化，降低治理门槛。</div></div>
+<div class="prod-card glass-card" data-img="../assets/product/ABI.jpg" ><div class="prod-badge">数据分析</div><div class="prod-name">ABI 一站式数据分析平台</div><div class="prod-desc">报表、大屏、挖掘全场景一体，自助即席分析，支持业务人员低门槛用数。</div></div>
+<div class="prod-card glass-card" data-img="../assets/product/智问.jpg" ><div class="prod-badge">智能体协作</div><div class="prod-name">智问企业级智能体中台</div><div class="prod-desc">自然语言智能问数 + 多智能体协作；内置插件生态、标准化工具接入（MCP）、skills 能力沉淀。</div></div>
+<div class="prod-card glass-card"><div class="prod-badge">大模型服务</div><div class="prod-name">万象 MaaS 大模型训推一体化平台</div><div class="prod-desc">训练、微调、推理部署一体化；支持私有化部署与信创，支撑企业级大模型落地。</div></div>
+<div class="prod-card glass-card" data-img="../assets/product/Apex.png" ><div class="prod-badge">AI开发</div><div class="prod-name">Apex 企业级AI 开发平台</div><div class="prod-desc">云端开箱即用的企业级 AI 开发平台，承载 Agent 开发全流程（需求 → 原型 → 编码 → 提测），能力沉淀、自主可控、支持私有化。</div></div>
+<div class="prod-card glass-card" data-img="../assets/product/甜橙.png" ><div class="prod-badge">智能办公</div><div class="prod-name">甜橙 AI 智能办公平台</div><div class="prod-desc">对话即指令、越用越聪明的 AI 智能办公平台，覆盖文档、合同、报告、PPT、会议纪要等全场景；私有化 + 沙箱安全可控，可孵化行业专属智能体。</div></div>
 </div>
 </div>
 </div></div>
@@ -750,7 +760,7 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="tl-stage-title">智能升级，底座成型</div>
 <div class="tl-stage-sub">2023 – 至今</div>
 <div class="tl-milestone"><span class="tl-dot"></span><span class="tl-year">2023 · 启智</span><div class="tl-txt">母公司华宇软件发布万象法律大模型，集团级 AI 底座启动建设，开启全产品线智能化升级</div></div>
-<div class="tl-milestone"><span class="tl-dot"></span><span class="tl-year">2024 · 赋能</span><div class="tl-txt">全产品线全面融入 AI 大模型，发布睿治 Agent、智问多智能体平台</div></div>
+<div class="tl-milestone"><span class="tl-dot"></span><span class="tl-year">2024 · 赋能</span><div class="tl-txt">全产品线全面融入 AI 大模型，发布睿治 Agent、智问多智能体中台</div></div>
 <div class="tl-milestone"><span class="tl-dot"></span><span class="tl-year">2025 · 筑底</span><div class="tl-txt">万象 MaaS 平台正式发布，打造全栈 AI 能力底座，支撑政企私有化 AI 落地</div></div>
 </div>
 </div>
@@ -899,8 +909,10 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="tech-desc">全产品线 AI 能力升级与前沿落地</div>
 <ul class="tech-list">
 <li><span class="ok">✓</span><span>睿治 Agent 全模块 AI 能力上线，落地<strong>十大智能体治理场景</strong>，治理实施效率提升<em>60%</em></span></li>
-<li><span class="ok">✓</span><span>智问 4.0 升级为企业级<strong>多智能体平台</strong>，支持复杂流程编排与多智能体协同执行</span></li>
+<li><span class="ok">✓</span><span>智问 4.0 升级为<strong>企业级多智能体中台</strong>，支持复杂流程编排与多智能体协同执行</span></li>
 <li><span class="ok">✓</span><span><strong>多模态数据治理能力</strong>正式发布，实现结构化与非结构化数据全生命周期统一管理</span></li>
+<li><span class="ok">✓</span><span><strong>Apex 企业级 AI 开发平台</strong>上线，云端开箱即用，承载 Agent 开发全流程（需求→原型→编码→提测），能力自主可控、支持私有化部署</span></li>
+<li><span class="ok">✓</span><span><strong>甜橙 AI 智能办公平台</strong>发布，覆盖文档、合同、报告、PPT、会议纪要等全场景，私有化 + 沙箱安全可控</span></li>
 </ul>
 </div>
 <div class="tech-card glass-card" style="border-color:#2f6fed;box-shadow:0 0 0 1px #2f6fed inset,var(--shadow)">
@@ -1425,7 +1437,7 @@ document.addEventListener("click",function(e){if(!e.target.closest(".nav-idx")&&
 document.addEventListener("keydown",function(e){
   if(e.key==="ArrowRight"||e.key==="ArrowDown"||e.key===" ")e.preventDefault(),goSlide(cur+1);
   if(e.key==="ArrowLeft"||e.key==="ArrowUp")e.preventDefault(),goSlide(cur-1);
-  if(e.key==="Escape"){closeAgent();closeVideo();}
+  if(e.key==="Escape"){closeAgent();closeVideo();closeProduct();}
 });
 function openSrc(url){window.open(url,"_blank");}
 
@@ -1600,7 +1612,25 @@ setTimeout(function(){resizeAll();},600);
 buildNav();
 goSlide(0);
 var hsi=parseInt((location.hash||"#0").replace("#",""),10); if(!isNaN(hsi)&&hsi>=0&&hsi<total){ setTimeout(function(){goSlide(hsi);},100); }
+
+function openProduct(img){var lb=document.getElementById("prodLightbox");if(!lb)return;document.getElementById("prodLightboxImg").src=img;lb.classList.add("open");}
+function closeProduct(){var lb=document.getElementById("prodLightbox");if(lb)lb.classList.remove("open");}
+document.querySelectorAll(".prod-card[data-img]").forEach(function(card){
+  card.addEventListener("click",function(){openProduct(this.getAttribute("data-img"));});
+});
+document.addEventListener("click",function(e){
+  var plb=document.getElementById("prodLightbox");
+  if(!plb)return;
+  if(e.target===plb||(e.target.closest&&e.target.closest(".prod-lightbox-close")))closeProduct();
+});
 setTimeout(retryInitCharts,300);
 </script>
+
+<div class="prod-lightbox" id="prodLightbox">
+  <div class="prod-lightbox-inner">
+    <button class="prod-lightbox-close" id="prodLightboxClose" type="button">✕ 关闭</button>
+    <img class="prod-lightbox-img" id="prodLightboxImg" src="" alt="产品图片">
+  </div>
+</div>
 </body>
 </html>
