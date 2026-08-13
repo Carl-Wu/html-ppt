@@ -1041,7 +1041,7 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="rp-motto">打基础、快见效，同步完成数据体系构建与核心 AI 能力落地。</div>
 <ul class="rp-items">
 <li><b>金租行业数据治理标准包</b>：沉淀行业数据标准、质量规则、资产目录模板，构建统一数据语言。</li>
-<li><b>租赁物主数据管理方案</b>：覆盖设备、船舶、新能源资产等核心租赁物，实现资产<em>一物一档</em>、统一口径。</li>
+<li><b>租赁物主数据管理方案</b>：覆盖设备、船舶、新能源资产等核心租赁物，实现资产一物一档、统一口径。</li>
 <li><b>监管报送智能化升级</b>：落地“一表通”，配套 AI 校验、异常检测、监管口径智能问数，全面提升报送效率与准确性。</li>
 <li><b>经营分析智能体</b>：上线自然语言问询，支持多维度指标智能归因分析，辅助管理层快速决策。</li>
 </ul>
@@ -1051,7 +1051,7 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="rp-ph-tag">中期 · 2–3 年</div><div class="rp-ph-time">AI 深度赋能 · 全链路业务智能化升级</div>
 <div class="rp-motto">基于夯实底座，从“工具提效”向“体系化智能赋能”升级。</div>
 <ul class="rp-items">
-<li><b>核心业务场景智能化（租前、租中）</b>：租前尽调智能报告，尽调效率提升<em>5 倍</em>；租中 AI 驱动租赁物残值评估，量化决策支撑。</li>
+<li><b>核心业务场景智能化（租前、租中）</b>：租前尽调智能报告，尽调效率提升5 倍；租中 AI 驱动租赁物残值评估，量化决策支撑。</li>
 <li><b>资产智能体</b>：覆盖资产建档、自动盘点、状态监控、价值重估、资产处置全流程，实现租赁资产全链路数字化管控。</li>
 <li><b>风控智能体</b>：打通业务、财务、资产多源数据，覆盖租前评级、租中审批、租后逾期/违约预警全链路，推动风控前置，降低不良率。</li>
 </ul>
@@ -1617,6 +1617,9 @@ function openProduct(img){var lb=document.getElementById("prodLightbox");if(!lb)
 function closeProduct(){var lb=document.getElementById("prodLightbox");if(lb)lb.classList.remove("open");}
 document.querySelectorAll(".prod-card[data-img]").forEach(function(card){
   card.addEventListener("click",function(){openProduct(this.getAttribute("data-img"));});
+});
+document.querySelectorAll(".thumb-card .thumb-img").forEach(function(img){
+  img.parentElement.addEventListener("click",function(){openProduct(img.getAttribute("src"));});
 });
 document.addEventListener("click",function(e){
   var plb=document.getElementById("prodLightbox");
