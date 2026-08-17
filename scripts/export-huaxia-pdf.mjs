@@ -87,11 +87,11 @@ import img2pdf, glob, os
 d = ${JSON.stringify(OUT_DIR)}
 pngs = sorted(glob.glob(os.path.join(d, 'slide-*.png')))
 layout = img2pdf.get_fixed_dpi_layout_fun((192,192))
-out = os.path.join(d, '华夏金租来访汇报-亿信华辰公司介绍与金融科技创新.pdf')
+out = os.path.join(d, '亿信华辰公司介绍与金融科技创新.pdf')
 with open(out, 'wb') as fh:
     fh.write(img2pdf.convert(pngs, layout_fun=layout))
 print('merged pngs:', len(pngs))
 `;
 const res = execFileSync(PVENV, ['-c', py], { encoding: 'utf8' }).trim();
 console.log('ALL DONE merged: ' + res);
-console.log('PDF at: ' + OUT_DIR + '/华夏金租来访汇报-亿信华辰公司介绍与金融科技创新.pdf');
+console.log('PDF at: ' + OUT_DIR + '/亿信华辰公司介绍与金融科技创新.pdf');
