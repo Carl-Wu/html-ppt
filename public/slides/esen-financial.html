@@ -1104,7 +1104,7 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="case-grid case-grid-3">
 <div class="case-block"><h4>数据应用类</h4><ul><li>EAST、1104 监管报送建设；企业数据驾驶舱、内部管理报表建设</li><li>提升对外报送、数据分析、经营指标可视化查询便捷性</li></ul></div>
 <div class="case-block"><h4>数据平台类</h4><ul><li>搭建面向未来的数据中台架构、企业数据平台</li><li>对接核心业务系统、财务系统、厂商系统</li><li>按主题做数据建模，落地治理成果，架构灵活可扩展</li></ul></div>
-<div class="case-block"><h4>数据治理类</h4><ul><li>建设完整企业数据治理体系，完善制度、办法、流程规范数据管理</li><li>搭建数据治理平台，落地元数据、数据标准、数据质量管控，提升数据规范性与数据质量</li><li>搭建企业数据服务门户作为数据共享媒介；项目完成 DCMM 稳健级评估</li></ul></div>
+<div class="case-block"><h4>数据治理类</h4><ul><li>建设完整企业数据治理体系，完善制度、办法、流程规范数据管理</li><li>搭建数据治理平台，落地元数据、数据标准、数据质量管控，提升数据规范性与数据质量</li><li>搭建企业数据服务门户作为数据共享媒介</li></ul></div>
 </div>
 <div class="content-title" style="margin-top:8px">数据治理体系优化</div>
 <ul class="case-list">
@@ -1119,12 +1119,11 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 </div>
 <div class="content-title" style="margin-top:8px">项目成果</div>
 <div class="case-stat">
-<div class="case-stat-item"><div class="case-stat-num">31/472/32605</div><div class="case-stat-lb">元数据：类型 31 个、表级 472 个、字段级 32605 个、依赖关系 3425 个</div></div>
-<div class="case-stat-item"><div class="case-stat-num">780 / 411</div><div class="case-stat-lb">数据标准：基础标准 780 个（代码 130）、指标标准 411 个，标准化提升 21.5%</div></div>
-<div class="case-stat-item"><div class="case-stat-num">577 条</div><div class="case-stat-lb">质量规则：覆盖监管报送 16 种检核规则、共 577 条，日常+定期考核闭环</div></div>
-<div class="case-stat-item"><div class="case-stat-num">7 个看板</div><div class="case-stat-lb">驾驶舱：PC 端 4 个（126 项指标）+ 移动端 3 个（81 项指标）</div></div>
-<div class="case-stat-item"><div class="case-stat-num">31 + 4 张</div><div class="case-stat-lb">内部报表：31 张跨部门报表 + 4 张补录表，实现缺失数据线上补录</div></div>
-<div class="case-stat-item"><div class="case-stat-num">DCMM 3 级</div><div class="case-stat-lb">2024 DAMA 数据治理最佳实践奖</div></div>
+<div class="case-stat-item"><div class="case-stat-num">元数据：31/472/32605</div><div class="case-stat-lb">类型 31 个、表级 472 个、字段级 32605 个、依赖关系 3425 个</div></div>
+<div class="case-stat-item"><div class="case-stat-num">数据标准：780 / 411</div><div class="case-stat-lb">基础标准 780 个（代码 130）、指标标准 411 个，标准化提升 21.5%</div></div>
+<div class="case-stat-item"><div class="case-stat-num">质量规则：577 条</div><div class="case-stat-lb">覆盖监管报送 16 种检核规则、共 577 条，日常+定期考核闭环</div></div>
+<div class="case-stat-item"><div class="case-stat-num">驾驶舱：7 个看板</div><div class="case-stat-lb">PC 端 4 个（126 项指标）+ 移动端 3 个（81 项指标）</div></div>
+<div class="case-stat-item"><div class="case-stat-num">内部报表：31 + 4 张</div><div class="case-stat-lb">31 张跨部门报表 + 4 张补录表，实现缺失数据线上补录</div></div>
 </div>
 <div class="content-title" style="margin-top:8px">制度文件清单（节选）</div>
 <ul class="case-list">
@@ -1713,7 +1712,7 @@ function highlightNumbers(){
     if(parent.classList&&parent.classList.contains('hl-num'))continue;
     if(parent.classList&&parent.classList.contains('src-link'))continue;
     var text=node.textContent;
-    var newHtml=text.replace(/(\d{1,3}(?:,\d{3})*(?:\.\d+)?(?:\s*(?:亿|万|千|百|元|美元|亿元|万亿元|万亿|年|倍|天|人|个|次|家|岁|分|点|%|\.\d+))?)/g,'<span class="hl-num">$1</span>');
+    var newHtml=text.replace(/(\d+(?:,\d{3})*(?:\.\d+)?(?:\s*(?:亿|万|千|百|元|美元|亿元|万亿元|万亿|年|倍|天|人|个|次|家|岁|分|点|%|\.\d+))?)/g,'<span class="hl-num">$1</span>');
     if(newHtml!==text){var span=document.createElement('span');span.innerHTML=newHtml;parent.replaceChild(span,node);}
   }
   var nums=activeSlide.querySelectorAll('.hl-num');
