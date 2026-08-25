@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { execFileSync } from 'node:child_process';
 
-const TOTAL = 18;
+const TOTAL = 19;
 const OUT_DIR = '/Users/kris/Documents/CodexProject/html-ppt/exports/_slides/esen-financial';
 const URL = 'http://127.0.0.1:5199/slides/esen-financial.html';
 const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
@@ -64,7 +64,7 @@ for (let i = 0; i < TOTAL; i++) {
   await new Promise(r => setTimeout(r, 2400));
 
   let h;
-  if (i === 0 || i === 17) {
+  if (i === 0 || i === 18) {
     h = 1080; // cover & end: full-screen
   } else {
     await expandScreen(i);
