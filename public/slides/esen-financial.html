@@ -229,7 +229,7 @@ ol{padding-left:22px;margin:8px 0}
 ol li{font-size:18.2px;color:var(--text2);line-height:1.8;margin-bottom:3px;letter-spacing:.2px}
 p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 
-.hl-num{display:inline-block;color:var(--brand);font-weight:700;font-feature-settings:"tnum";
+.hl-num{display:inline-block;color:#0052cc;font-weight:700;font-feature-settings:"tnum";
   transition:all .35s cubic-bezier(.34,1.56,.64,1);cursor:default;
   padding:0 1px;position:relative}
 .hl-num::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1.5px;
@@ -278,8 +278,10 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 #deck{position:relative}
 .slide-wrapper{position:relative}
 .slide-inner{position:relative;overflow:visible}
-.hl-num{color:var(--brand)!important}
+     .hl-num{color:#0052cc!important}
 }
+#slide5 .hl-num{color:#ffffff!important}
+#slide5 .hl-num:hover{color:#ffffff}
 
 .case-section-heading{padding:12px 16px;margin-bottom:12px;border-radius:8px;
   background:linear-gradient(135deg,rgba(0,102,255,0.06) 0%,rgba(77,163,255,0.03) 100%);
@@ -391,21 +393,25 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 .vision-banner .vb-line{font-size:22.1px;font-weight:700;color:var(--text)}
 .vision-banner .vb-line em{color:var(--brand);font-style:normal}
 .vision-banner .vb-sub{font-size:18.2px;color:var(--text2);margin-top:6px}
-.strat-grid{display:grid;grid-template-columns:1fr;gap:14px}
-.strat-card{padding:16px 18px;display:flex;flex-direction:column;gap:8px}
-.strat-head{display:inline-flex;align-items:center;gap:8px;font-size:18.5px;font-weight:700;color:var(--brand);padding:3px 12px;border-radius:14px;background:color-mix(in srgb,var(--brand) 12%,#fff);border:1px solid color-mix(in srgb,var(--brand) 35%,#fff);align-self:flex-start;margin-bottom:8px}
-.strat-n{width:20px;height:20px;border-radius:50%;background:var(--brand);color:#ffffff;font-weight:800;display:grid;place-items:center;font-size:13px;flex-shrink:0}
-.strat-t{font-size:18.5px;font-weight:700;color:var(--brand)}
-.strat-capt{font-size:18px;color:var(--brand);font-weight:600;line-height:1.6;background:var(--brand-dim);padding:6px 10px;border-radius:8px}
+.strat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;flex:1;min-height:0;margin-top:12px;padding-bottom:15px}
+.strat-card{position:relative;padding:16px 18px;display:flex;flex-direction:column;gap:8px;overflow:hidden;background:var(--card-bg);border:1px solid var(--card-border);border-radius:14px;transition:transform .3s,border-color .3s,box-shadow .3s}
+.strat-card:hover{transform:translateY(-5px);border-color:var(--ac);box-shadow:0 0 28px color-mix(in srgb,var(--ac) 35%,transparent)}
+.strat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--ac);box-shadow:0 0 14px var(--ac)}
+.strat-glow{position:absolute;inset:0;opacity:0;transition:opacity .35s;pointer-events:none;background:radial-gradient(circle at 50% 0%,var(--ac),transparent 70%)}
+.strat-card:hover .strat-glow{opacity:.14}
+.strat-head{display:inline-flex;align-items:center;gap:8px;font-size:18.5px;font-weight:700;color:var(--ac);padding:3px 12px;border-radius:14px;background:color-mix(in srgb,var(--ac) 12%,#fff);border:1px solid color-mix(in srgb,var(--ac) 35%,#fff);align-self:flex-start;margin-bottom:8px}
+.strat-n{width:20px;height:20px;border-radius:50%;background:var(--ac);color:#ffffff;font-weight:800;display:grid;place-items:center;font-size:13px;flex-shrink:0}
+.strat-t{font-size:18.5px;font-weight:700;color:var(--ac)}
+.strat-capt{font-size:18px;color:var(--ac);font-weight:600;line-height:1.6;background:color-mix(in srgb,var(--ac) 10%,transparent);padding:6px 10px;border-radius:8px}
 .strat-item{font-size:18.2px;color:var(--text2);line-height:1.7;padding-left:14px;position:relative}
-.strat-item::before{content:'◆';position:absolute;left:0;top:0;font-size:10.4px;color:var(--brand)}
+.strat-item::before{content:'◆';position:absolute;left:0;top:0;font-size:10.4px;color:var(--ac)}
 .goal-band{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .goal-card{padding:14px 16px;display:flex;flex-direction:column;gap:8px;text-align:center}
 .goal-num{font-size:39px;font-weight:900;color:var(--brand);font-feature-settings:"tnum";line-height:1}
 .goal-num small{font-size:18.2px}
 .goal-txt{font-size:18.2px;color:var(--text2);line-height:1.6}
 .goal-note{font-size:18.2px;color:var(--text3);border-top:1px dashed var(--line);padding-top:6px;line-height:1.6}
-@media(max-width:1280px){.strat-grid{grid-template-columns:1fr}.goal-band{grid-template-columns:1fr}}
+@media(max-width:1280px){.strat-grid{grid-template-columns:repeat(2,1fr);overflow-y:auto}.goal-band{grid-template-columns:1fr}}
 /* ============ AI 整体战略 ============ */
 .ai-core{text-align:center;font-size:20.2px;font-weight:600;color:var(--text);padding:14px 20px;background:linear-gradient(90deg,rgba(0,102,255,0.06),rgba(0,102,255,0.02));border-radius:10px}
 .ai-core strong{color:var(--brand)}
@@ -611,6 +617,13 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 .value-t{font-size:18.2px;font-weight:700;color:var(--text)}
 .value-d{font-size:18px;color:var(--text3);line-height:1.6}
 @media(max-width:1280px){.coop-grid{grid-template-columns:1fr}.value-band{grid-template-columns:1fr 1fr}}
+/* 行业 Sheet 页签 */
+.sheet-tabs{display:flex;gap:10px;margin-bottom:2px;flex-shrink:0;flex-wrap:wrap}
+.sheet-tab{padding:7px 20px;border-radius:22px;font-size:18px;font-weight:700;cursor:pointer;color:var(--text2);background:var(--card-bg);border:1px solid var(--card-border);transition:all .25s;letter-spacing:.3px}
+.sheet-tab:hover{color:var(--brand);border-color:var(--brand)}
+.sheet-tab.active{color:#fff;background:var(--brand);border-color:var(--brand);box-shadow:0 4px 16px color-mix(in srgb,var(--brand) 32%,transparent)}
+.sheet{display:none}
+.sheet.active{display:flex;flex-direction:column;flex:1;min-height:0;gap:12px}
 .slide-toc .slide-inner{overflow-y:auto;justify-content:flex-start;align-items:center;padding:70px 40px 40px}
 .toc-container{max-width:1280px;width:100%;margin:0 auto}
 .toc-header{margin-bottom:14px}
@@ -751,7 +764,7 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="toc-part p4">
 <div class="part-head"><span class="part-badge">PART 04</span><div class="part-titles"><div class="part-title">面向金融科技创新规划</div><div class="part-sub">金融科技创新规划 · 携手共创未来</div></div><div class="part-line"></div><span class="part-count">14-15 / 2 PAGES</span></div>
 <div class="toc-grid g2">
-<div class="toc-card" onclick="goSlide(15)"><div class="toc-card-num">14</div><div class="toc-card-title">金融科技创新规划</div><div class="toc-card-desc">底座 + 短中长期路线图</div><div class="toc-card-arrow">→</div></div>
+<div class="toc-card" onclick="goSlide(15)"><div class="toc-card-num">14</div><div class="toc-card-title">金融行业科技创新规划</div><div class="toc-card-desc">底座 + 短中长期路线图</div><div class="toc-card-arrow">→</div></div>
 <div class="toc-card" onclick="goSlide(16)"><div class="toc-card-num">15</div><div class="toc-card-title">携手共创数智化新未来</div><div class="toc-card-desc">合作愿景 · 四大方向 · 价值保障</div><div class="toc-card-arrow">→</div></div>
 </div>
 </div>
@@ -884,26 +897,26 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="vb-sub">我们不止提供数据工具，更以 AI 原生重构数据智能，与客户共同迈向数智化未来。</div>
 </div>
 <div class="strat-grid">
-<div class="strat-card glass-card">
+<div class="strat-card glass-card" style="--ac:#7C4DFF"><div class="strat-glow"></div>
 <div class="strat-head"><span class="strat-n">1</span><span class="strat-t">产品 AI Native 升级</span></div>
 <div class="strat-capt">以全链路原生重构为核心，从底层架构到研发体系全面 AI 化</div>
 <div class="strat-item"><strong>全产品线原生 AI 改造</strong>：全产品矩阵完成 AI 原生架构重构，产品能力从“工具辅助提效”全面迈向“智能体自主执行”，AI 能力深度嵌入产品核心流程，而非表层功能叠加。</div>
 <div class="strat-item"><strong>统一 AI 技术底座闭环</strong>：依托万象 MaaS AI 服务平台、PetaBase 统一存储计算引擎、睿治数据治理平台、智问多智能体平台，构建「数据接入→治理建模→模型服务→智能体执行」全链路技术闭环，保障全产品能力同源、口径统一。</div>
 </div>
-<div class="strat-card glass-card">
+<div class="strat-card glass-card" style="--ac:#2E86FF"><div class="strat-glow"></div>
 <div class="strat-head"><span class="strat-n">2</span><span class="strat-t">组织 AI Native 变革</span></div>
 <div class="strat-capt">从组织模式、知识体系、考核机制全方位适配 AI 原生发展模式</div>
 <div class="strat-item"><strong>组织与知识体系重构</strong>：推动组织架构扁平化升级，建立企业级统一知识沉淀与共享机制，打破部门信息壁垒，适配 AI 时代高效协作与快速决策的组织需求。</div>
 <div class="strat-item"><strong>人才与考核机制升级</strong>：重塑人才能力标准，打造 AI 原生型人才队伍；以「token 消耗效率 + 实际产出质量 + 业务落地成果」为核心构建综合考核体系，驱动团队从“堆时长、拼人力”向“提效率、创价值”转变。</div>
 </div>
-<div class="strat-card glass-card">
+<div class="strat-card glass-card" style="--ac:#00BFA5"><div class="strat-glow"></div>
 <div class="strat-head"><span class="strat-n">3</span><span class="strat-t">行业深度价值化</span></div>
 <div class="strat-capt">从底层能力到场景落地逐层深耕，构筑垂直行业高壁垒竞争力</div>
 <div class="strat-item"><strong>垂类行业微调小模型建设</strong>：面向金融、制造、政务等核心赛道开展领域知识增量训练与指令微调，打造轻量化、高专业度、可私有化部署的行业专属小模型。</div>
 <div class="strat-item"><strong>行业业务本体与知识工程沉淀</strong>：开展重点行业业务本体建模，梳理核心业务实体、关联关系与业务规则，构建标准化行业语义模型与知识图谱体系，为全场景 AI 应用提供业务语言支撑。</div>
 <div class="strat-item"><strong>金融赛道深度突破</strong>：深耕金融领域，打磨统一监管报送、金租一表通、数据治理、AI应用等成熟方案，形成覆盖合规报送、资产运营、风险管控全链路的金融行业能力体系。</div>
 </div>
-<div class="strat-card glass-card">
+<div class="strat-card glass-card" style="--ac:#FFC857"><div class="strat-glow"></div>
 <div class="strat-head"><span class="strat-n">4</span><span class="strat-t">生态开放共荣</span></div>
 <div class="strat-capt">以标准化开放能力为基础，构建多方协同、价值共创的产业生态</div>
 <div class="strat-item"><strong>标准化技术生态开放</strong>：构建开放兼容的产品技术生态，以 MCP 协议、插件体系、Skills 技能包等标准化接口开放核心能力，降低生态伙伴接入门槛，实现能力灵活扩展、多方共建共享。</div>
@@ -1009,7 +1022,7 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="ev-kpi" style="--ac:#4F8CFF"><span class="ev-kpi-corner tl"></span><span class="ev-kpi-corner tr"></span><span class="ev-kpi-corner bl"></span><span class="ev-kpi-corner br"></span><div class="ev-kpi-id">TGT-02</div><div class="ev-kpi-label">元数据处理</div><div class="ev-kpi-val"><span class="ev-before">6人天</span><span class="ev-arrow">▶</span><span class="ev-after">1人天</span></div><div class="ev-kpi-ref">1000 字段元数据补录</div></div>
 <div class="ev-kpi" style="--ac:#7C4DFF"><span class="ev-kpi-corner tl"></span><span class="ev-kpi-corner tr"></span><span class="ev-kpi-corner bl"></span><span class="ev-kpi-corner br"></span><div class="ev-kpi-id">TGT-03</div><div class="ev-kpi-label">数据标准建设</div><div class="ev-kpi-val"><span class="ev-before">8人天</span><span class="ev-arrow">▶</span><span class="ev-after">1人天</span></div><div class="ev-kpi-ref">1000 个标准初稿</div></div>
 <div class="ev-kpi" style="--ac:#22E0A1"><span class="ev-kpi-corner tl"></span><span class="ev-kpi-corner tr"></span><span class="ev-kpi-corner bl"></span><span class="ev-kpi-corner br"></span><div class="ev-kpi-id">TGT-04</div><div class="ev-kpi-label">数据质量规则开发</div><div class="ev-kpi-val"><span class="ev-before">7人天</span><span class="ev-arrow">▶</span><span class="ev-after">1人天</span></div><div class="ev-kpi-ref">100 条业务规则转技术规则</div></div>
-<div class="ev-kpi" style="--ac:#FF3B6B"><span class="ev-kpi-corner tl"></span><span class="ev-kpi-corner tr"></span><span class="ev-kpi-corner bl"></span><span class="ev-kpi-corner br"></span><div class="ev-kpi-id">TGT-05</div><div class="ev-kpi-label">数据风险识别</div><div class="ev-kpi-val"><span class="ev-before">T+7</span><span class="ev-arrow">▶</span><span class="ev-after">T+0</span></div><div class="ev-kpi-ref">实时归因及风险分析</div></div>
+<div class="ev-kpi" style="--ac:#FFC857"><span class="ev-kpi-corner tl"></span><span class="ev-kpi-corner tr"></span><span class="ev-kpi-corner bl"></span><span class="ev-kpi-corner br"></span><div class="ev-kpi-id">TGT-05</div><div class="ev-kpi-label">数据风险识别</div><div class="ev-kpi-val"><span class="ev-before">T+7</span><span class="ev-arrow">▶</span><span class="ev-after">T+0</span></div><div class="ev-kpi-ref">实时归因及风险分析</div></div>
 <div class="ev-kpi" style="--ac:#FFC857"><span class="ev-kpi-corner tl"></span><span class="ev-kpi-corner tr"></span><span class="ev-kpi-corner bl"></span><span class="ev-kpi-corner br"></span><div class="ev-kpi-id">TGT-06</div><div class="ev-kpi-label">监管报送合格率</div><div class="ev-kpi-val"><span class="ev-before">82%</span><span class="ev-arrow">▶</span><span class="ev-after">98%</span></div><div class="ev-kpi-ref">监管数据报送质量</div></div>
 </div>
 <div class="ev-body">
@@ -1203,7 +1216,12 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="slide slide-content" id="slide15">
 <div class="slide-wrapper"><div class="slide-inner">
 <div class="content-wrapper">
-<div class="content-title">面向金融租赁的科技创新规划</div>
+<div class="content-title">面向金融的科技创新规划</div>
+<div class="sheet-tabs">
+<div class="sheet-tab active" data-sheet="lease" onclick="setSheet('slide15','lease')">金融租赁</div>
+<div class="sheet-tab" data-sheet="insurance" onclick="setSheet('slide15','insurance')">保险行业</div>
+</div>
+<div class="sheet active" data-sheet="lease">
 <div class="glass-card rp-base">
 <div class="rp-base-tag">底座 · 贯穿全周期 · 持续迭代</div>
 <div class="rp-base-pos">金租业务本体与知识工程体系作为企业数智化建设的<strong>统一语义根基</strong>，贯穿短中长期建设全程持续沉淀迭代，为所有数据应用、智能体场景提供同源一致的业务语言与知识支撑，从根源解决跨系统口径不一、知识复用难、AI 场景碎片化建设问题。</div>
@@ -1248,14 +1266,65 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 </div>
 </div>
 </div>
+<div class="sheet" data-sheet="insurance">
+<div class="glass-card rp-base">
+<div class="rp-base-tag">底座 · 贯穿全周期 · 持续迭代</div>
+<div class="rp-base-pos">围绕太平金融运营服务公司<strong>集约化运营与集团协同</strong>的定位，构建保险行业业务本体与知识工程体系作为数智化建设的<strong>统一语义根基</strong>，贯穿短中长期全程持续沉淀迭代，为监管报送、财务共享、承保理赔等所有数据应用与智能体场景提供同源一致的业务语言与知识支撑。</div>
+<div class="rp-base-grid">
+<div class="rp-base-card glass-card"><div class="rp-bc-n">01</div><div class="rp-bc-t">保险领域业务本体建模</div><div class="rp-bc-d">梳理保单、承保、理赔、再保、财务、偿付能力等核心实体与关联关系，覆盖承保、理赔、财务共享、运营服务全流程，构建统一业务语义模型。</div></div>
+<div class="rp-base-card glass-card"><div class="rp-bc-n">02</div><div class="rp-bc-t">行业知识图谱体系构建</div><div class="rp-bc-d">搭建客户、保单、产品、渠道与风险传导图谱，支撑穿透式客户洞察、欺诈骗保识别与经营深度分析。</div></div>
+<div class="rp-base-card glass-card"><div class="rp-bc-n">03</div><div class="rp-bc-t">统一语义服务输出</div><div class="rp-bc-d">封装标准化服务接口，为监管报送、经营分析、财务运营及各智能体提供统一调用入口，保障口径规则同源一致。</div></div>
+<div class="rp-base-card glass-card"><div class="rp-bc-n">04</div><div class="rp-bc-t">长效运营机制建设</div><div class="rp-bc-d">配套知识运营组织流程与工具，随监管更新、业务拓展、场景落地持续迭代，形成可沉淀、可复用、可生长的企业知识资产。</div></div>
+</div>
+</div>
+<div class="rp-phases">
+<div class="rp-phase" style="--rp-c:#0066FF">
+<div class="rp-ph-tag">短期 · 1 年内</div><div class="rp-ph-time">夯实数据底座 · 核心场景快速落地见效</div>
+<div class="rp-motto">打基础、快见效，同步完成数据体系构建与核心 AI 能力落地。</div>
+<ul class="rp-items">
+<li><b>保险行业数据治理</b>：沉淀客户、保单、产品、渠道等主数据与行业数据标准、质量规则，构建统一数据语言。</li>
+<li><b>财务共享运营智能化</b>：落地费用报销 OCR 识别、票据自动稽核与集中核算自动化，提升集约化运营效率。</li>
+<li><b>监管报送智能化</b>：面向偿付能力监管报表与监管统计报表，配套 AI 校验、异常检测与监管口径智能问数，全面提升报送效率与准确性。</li>
+<li><b>经营分析智能体</b>：上线自然语言问询，支持多维度指标智能归因分析，辅助管理层高效科学决策。</li>
+</ul>
+<div class="rp-base-sync"><span class="rp-cn">底座同步</span><br>完成保险业务本体核心框架搭建，覆盖监管报送、财务运营核心业务域。</div>
+</div>
+<div class="rp-phase" style="--rp-c:#7C4DFF">
+<div class="rp-ph-tag">中期 · 2–3 年</div><div class="rp-ph-time">AI 深度赋能 · 全链路运营智能化升级</div>
+<div class="rp-motto">基于夯实底座，从“工具提效”向“体系化智能赋能”升级。</div>
+<ul class="rp-items">
+<li><b>承保与核保智能审核</b>：保单录入智能识别、智能核保辅助决策，提升承保质效、强化风险把关。</li>
+<li><b>理赔智能审单与反欺诈</b>：智能审单、自动定损与反欺诈图谱识别，提升理赔效率、有效防控欺诈骗保。</li>
+<li><b>财务与运营智能体</b>：覆盖集中核算、财报生成、票据智能匹配与稽核，实现财务共享全流程智能化。</li>
+<li><b>客户服务智能体</b>：面向保险业务咨询与柜面服务，提供智能问答、业务引导与工单自动处理。</li>
+</ul>
+<div class="rp-base-sync"><span class="rp-cn">底座同步</span><br>业务本体扩展至承保理赔、财务运营全业务域，知识图谱全面落地，统一语义服务支撑全场景智能体。</div>
+</div>
+<div class="rp-phase" style="--rp-c:#00B4A0">
+<div class="rp-ph-tag">长期 · 3 年以上</div><div class="rp-ph-time">集团协同 · 数智化资产运营</div>
+<div class="rp-motto">构建集团级数据生态，探索前沿技术落地，释放数据资产价值。</div>
+<ul class="rp-items">
+<li><b>集团数据协同与融合</b>：打通集团内承保、理赔、财务、再保与外部生态数据，构建跨主体全域数据视角，支撑集团级运营与管控。</li>
+<li><b>数据资产运营</b>：完善数据资产入表与价值评估体系，实现数据资产合规变现与价值经营，打造数据驱动的新增长引擎。</li>
+<li><b>行业 AI 底座构建</b>：大模型私有化与信创全栈落地，沉淀保险行业大模型应用底座，支撑集团级智能化持续演进。</li>
+</ul>
+<div class="rp-base-sync"><span class="rp-cn">底座同步</span><br>业务本体向集团产业级延伸，融入生态知识，支撑全域运营、价值变现与生态协同。</div>
+</div>
+</div>
+</div>
+</div>
 </div></div>
 </div>
-
 <!-- 携手共创 -->
 <div class="slide slide-content" id="slide16">
 <div class="slide-wrapper"><div class="slide-inner">
 <div class="content-wrapper">
 <div class="content-title">携手共创数智化新未来</div>
+<div class="sheet-tabs">
+<div class="sheet-tab active" data-sheet="lease" onclick="setSheet('slide16','lease')">金融租赁</div>
+<div class="sheet-tab" data-sheet="insurance" onclick="setSheet('slide16','insurance')">保险行业</div>
+</div>
+<div class="sheet active" data-sheet="lease">
 <div class="coop-vision">
 <p>依托亿信华辰<strong>二十年数据智能技术沉淀</strong>与金融行业实践，结合业务发展需求，以「<strong>统一底座筑基、核心场景提效、全链智能赋能、长期生态共创</strong>」为路径，分阶段落地数智化建设，共同打造<strong>金融租赁行业数字化转型标杆</strong>。</p>
 </div>
@@ -1285,9 +1354,39 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="value-item glass-card"><div class="value-ic">🚀</div><div class="value-t">持续迭代共同成长</div><div class="value-d">产品与行业方案持续版本升级，伴随企业长期演进</div></div>
 </div>
 </div>
+<div class="sheet" data-sheet="insurance">
+<div class="coop-vision">
+<p>依托亿信华辰<strong>二十年数据智能技术沉淀</strong>与保险、金融行业实践，结合太平金融运营服务公司<strong>集约化运营与集团协同</strong>的业务需求，以「<strong>统一底座筑基、核心场景提效、全链智能赋能、长期生态共创</strong>」为路径，分阶段落地数智化建设，共同打造<strong>保险行业数字化转型标杆</strong>。</p>
+</div>
+<div class="coop-grid">
+<div class="coop-card glass-card">
+<div class="coop-head"><span class="coop-n">1</span><span class="coop-t">统一底座筑基 · 共建保险数据与业务语义体系</span></div>
+<div class="coop-d">联合构建保险行业数据标准与客户、保单、产品等主数据管理体系，搭建企业级业务本体与知识工程框架；打通承保、理赔、财务、再保等跨系统数据口径，形成可沉淀、可复用、可持续迭代的数智化底座。</div>
+</div>
+<div class="coop-card glass-card">
+<div class="coop-head"><span class="coop-n">2</span><span class="coop-t">合规经营提效 · 偿付能力监管报送与财务运营智能化升级</span></div>
+<div class="coop-d">落地偿付能力监管报送与监管统计报表的 AI 校验、智能问数与制度解读能力；上线财务共享智能化与经营分析智能体，赋能集约化运营与高效科学决策。</div>
+</div>
+<div class="coop-card glass-card">
+<div class="coop-head"><span class="coop-n">3</span><span class="coop-t">运营能力进阶 · 承保理赔与财务共享智能化体系</span></div>
+<div class="coop-d">分步落地承保核保智能审核、理赔智能审单与反欺诈、财务共享自动化等全场景 AI 应用；逐步构建核保、理赔、财务运营智能体，提升运营质效、成本管控与风险识别水平。</div>
+</div>
+<div class="coop-card glass-card">
+<div class="coop-head"><span class="coop-n">4</span><span class="coop-t">长期生态共创 · 联合探索保险科技创新应用</span></div>
+<div class="coop-d">建立长效联合创新机制，逐步探索集团数据协同、数据资产运营、保险行业大模型应用等前沿方向；持续迭代业务本体与知识体系，沉淀企业级数字资产，构筑面向未来的差异化竞争力。</div>
+</div>
+</div>
+<div class="content-title" style="margin-top:6px">合作价值保障</div>
+<div class="value-band">
+<div class="value-item glass-card"><div class="value-ic">🧩</div><div class="value-t">全栈自研端到端交付</div><div class="value-d">从数据治理到 AI 智能体全链路自研，规避多厂商集成风险</div></div>
+<div class="value-item glass-card"><div class="value-ic">📚</div><div class="value-t">成熟保险行业沉淀</div><div class="value-d">预置行业标准模板与场景化方案，缩短周期、降低成本</div></div>
+<div class="value-item glass-card"><div class="value-ic">🔒</div><div class="value-t">金融级安全合规</div><div class="value-d">全栈信创适配、全链路安全审计，满足强监管合规要求</div></div>
+<div class="value-item glass-card"><div class="value-ic">🚀</div><div class="value-t">持续迭代共同成长</div><div class="value-d">产品与行业方案持续版本升级，伴随企业长期演进</div></div>
+</div>
+</div>
+</div>
 </div></div>
 </div>
-
 <!-- 结束 -->
 <div class="slide slide-end" id="slide17">
 <div class="slide-wrapper"><div class="slide-inner">
@@ -1561,7 +1660,7 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <script>
 var total=18;
 var cur=0;
-var navTitles=["封面","目录","公司简介 · 亿信华辰","发展历程：20 载技术沉淀 · 三次战略升级","实力见证：权威资质认证与行业方法论沉淀","整体战略愿景：成为领先的 AI 原生数据智能厂商","AI 整体战略：Data+AI 双轮驱动","已落地部分 AI Agent 场景：五大 AI Agent 协同","数据治理与决策赋能 Agent 实施效果展示","AI 智能体带来的效率与质量跃迁","客户总览 · 整体客户情况 · 三大客户照片墙","案例一 · 中国外贸金融租赁 · 数据治理","案例二 · 国银金融租赁 · 数据治理","案例三 · 江苏金融租赁 · 数据治理","案例四 · 招商租赁 · 数据治理","面向金融租赁的科技创新规划","携手共创数智化新未来","结束 · 感谢"];
+var navTitles=["封面","目录","公司简介 · 亿信华辰","发展历程：20 载技术沉淀 · 三次战略升级","实力见证：权威资质认证与行业方法论沉淀","整体战略愿景：成为领先的 AI 原生数据智能厂商","AI 整体战略：Data+AI 双轮驱动","已落地部分 AI Agent 场景：五大 AI Agent 协同","数据治理与决策赋能 Agent 实施效果展示","AI 智能体带来的效率与质量跃迁","客户总览 · 整体客户情况 · 三大客户照片墙","案例一 · 中国外贸金融租赁 · 数据治理","案例二 · 国银金融租赁 · 数据治理","案例三 · 江苏金融租赁 · 数据治理","案例四 · 招商租赁 · 数据治理","面向金融的科技创新规划","携手共创数智化新未来","结束 · 感谢"];
 
 function buildNav(){
   var d=document.getElementById('navDrop');
@@ -1612,6 +1711,7 @@ function goSlide(n){if(n<0||n>=total)return;
 }
 function toggleNav(){document.getElementById("navDrop").classList.toggle("open");document.getElementById("navIdx").classList.toggle("open");}
 function closeNav(){document.getElementById("navDrop").classList.remove("open");document.getElementById("navIdx").classList.remove("open");}
+function setSheet(paneId,sheet){var pane=document.getElementById(paneId);if(!pane)return;Array.prototype.forEach.call(pane.querySelectorAll(".sheet"),function(s){s.classList.remove("active");});Array.prototype.forEach.call(pane.querySelectorAll(".sheet-tab"),function(t){t.classList.remove("active");});var sh=pane.querySelector('.sheet[data-sheet="'+sheet+'"]');var tb=pane.querySelector('.sheet-tab[data-sheet="'+sheet+'"]');if(sh)sh.classList.add("active");if(tb)tb.classList.add("active");}
 document.addEventListener("click",function(e){if(!e.target.closest(".nav-idx")&&!e.target.closest(".nav-drop"))closeNav();});
 document.addEventListener("keydown",function(e){
   if(e.key==="ArrowRight"||e.key==="ArrowDown"||e.key===" ")e.preventDefault(),goSlide(cur+1);
