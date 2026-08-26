@@ -496,6 +496,10 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 .am-flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:18px;color:#c9d6f8;font-family:ui-monospace,Menlo,monospace}
 .am-flow span{background:rgba(0,245,255,.1);border:1px solid rgba(0,245,255,.2);padding:4px 10px;border-radius:5px}
 .am-flow em{color:#00F5FF;font-style:normal}
+.ins-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(46%,1fr));gap:10px}
+.ins-item{display:flex;align-items:flex-start;gap:8px;font-size:18.2px;color:#e8ecff;line-height:1.6;padding:8px 12px;border-radius:8px;background:color-mix(in srgb,var(--ac) 10%,transparent);border:1px solid color-mix(in srgb,var(--ac) 24%,transparent)}
+.ins-item::before{content:'▸';color:#00B3FF;flex-shrink:0;font-size:18px;line-height:1.5}
+.cust-logo{cursor:pointer}
 
 /* ============ 霓虹 视频/跃迁 页 ============ */
 .vfx-body{display:grid;grid-template-columns:1fr 1fr;gap:18px;flex:1;min-height:0;margin-top:12px}
@@ -1061,6 +1065,10 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="cust-wall">
 <div class="cust-wall-title">融资租赁客户<em>9 家</em></div>
 <div class="cust-grid"><div class="cust-logo"><img src="../assets/customer/融资租赁客户/中交建融资租赁有限公司.png" alt="中交建融资租赁有限公司" loading="lazy"></div><div class="cust-logo"><img src="../assets/customer/融资租赁客户/中民投租赁集团.png" alt="中民投租赁集团" loading="lazy"></div><div class="cust-logo"><img src="../assets/customer/融资租赁客户/中车金融租赁有限公司.png" alt="中车金融租赁有限公司" loading="lazy"></div><div class="cust-logo"><img src="../assets/customer/融资租赁客户/南航租赁.png" alt="南航租赁" loading="lazy"></div><div class="cust-logo"><img src="../assets/customer/融资租赁客户/安鹏租赁.png" alt="安鹏租赁" loading="lazy"></div><div class="cust-logo"><img src="../assets/customer/融资租赁客户/广汽租赁.png" alt="广汽租赁" loading="lazy"></div><div class="cust-logo"><img src="../assets/customer/融资租赁客户/德银天下投资控股有限公司.png" alt="德银天下投资控股有限公司" loading="lazy"></div><div class="cust-logo"><img src="../assets/customer/融资租赁客户/招商租赁.png" alt="招商租赁" loading="lazy"></div><div class="cust-logo"><img src="../assets/customer/融资租赁客户/狮桥资本.png" alt="狮桥资本" loading="lazy"></div></div>
+</div>
+<div class="cust-wall">
+<div class="cust-wall-title">保险行业客户<em>11 家</em></div>
+<div class="cust-grid"><div class="cust-logo" onclick="openInsCust(0)" title="中荷人寿保险有限公司"><img src="../assets/customer/保险行业客户/中荷人寿.png" alt="中荷人寿" loading="lazy"></div><div class="cust-logo" onclick="openInsCust(1)" title="大家保险集团有限责任公司"><img src="../assets/customer/保险行业客户/大家保险.svg" alt="大家保险" loading="lazy"></div><div class="cust-logo" onclick="openInsCust(2)" title="陆家嘴国泰人寿保险有限责任公司"><img src="../assets/customer/保险行业客户/陆家嘴国泰人寿保险.png" alt="陆家嘴国泰人寿" loading="lazy"></div><div class="cust-logo" onclick="openInsCust(3)" title="中汇人寿保险股份有限公司"><img src="../assets/customer/保险行业客户/中汇人寿.jpg" alt="中汇人寿" loading="lazy"></div><div class="cust-logo" onclick="openInsCust(4)" title="中国人民保险股份有限公司"><img src="../assets/customer/保险行业客户/中国人民保险.png" alt="中国人民保险" loading="lazy"></div><div class="cust-logo" onclick="openInsCust(5)" title="昆仑健康保险股份有限公司"><img src="../assets/customer/保险行业客户/昆仑健康保险.png" alt="昆仑健康" loading="lazy"></div><div class="cust-logo" onclick="openInsCust(6)" title="中国人寿财产保险股份有限公司"><img src="../assets/customer/保险行业客户/中国人寿财产保险.png" alt="国寿财险" loading="lazy"></div><div class="cust-logo" onclick="openInsCust(7)" title="众诚汽车保险股份有限公司"><img src="../assets/customer/保险行业客户/众诚保险.jpg" alt="众诚保险" loading="lazy"></div><div class="cust-logo" onclick="openInsCust(8)" title="长江养老保险股份有限公司"><img src="../assets/customer/保险行业客户/长江养老保险.jpg" alt="长江养老" loading="lazy"></div><div class="cust-logo" onclick="openInsCust(9)" title="英大泰和财产保险股份有限公司"><img src="../assets/customer/保险行业客户/英大泰和财产保险.png" alt="英大泰和财险" loading="lazy"></div><div class="cust-logo" onclick="openInsCust(10)" title="凯本财产保险（乐爱金财险）"><img src="../assets/customer/保险行业客户/凯本财产保险.jpg" alt="乐爱金财险" loading="lazy"></div></div>
 </div>
 
 </div>
@@ -1739,6 +1747,29 @@ function openAgent(i){var a=AGENTS[i];var inner=document.getElementById('agentMo
   document.getElementById('agentModal').classList.add('open');
 }
 function closeAgent(){document.getElementById('agentModal').classList.remove('open');}
+
+/* 保险行业客户 · 项目清单 */
+var INSURANCE=[
+ {name:'中荷人寿保险有限公司',projects:['报表平台软件维护项目（2026-2027）','报表平台软件维护项目（2025-2026）','报表平台软件维护项目（2024-2025）']},
+ {name:'大家保险集团有限责任公司',projects:['数据智能分析平台亿信维保项目','数据智能分析平台维护开发项目','BI工具项目软件购买']},
+ {name:'陆家嘴国泰人寿保险有限责任公司',projects:['BI@Report数据分析展示平台维保服务（2025）','BI@Report数据分析展示平台维保服务（2023）','BI@Report数据分析展示平台维保服务（2022）','人员外包技术服务']},
+ {name:'中汇人寿保险股份有限公司',projects:['数据集成平台ABI报表工具原厂维保','数据集成平台BI报表工具原厂维保（2024）','数据集成平台BI报表工具升级']},
+ {name:'中国人民保险股份有限公司',projects:['数据可视化平台维保（河北省分公司）','数据可视化平台维保服务','软件销售（河北省分公司）','经营分析平台改造（吉林省分公司）','运营分析平台（石家庄分公司）','BI数据展现工具软件升级（2021）','BI数据展现工具MA服务（2021）','BI数据下发系统驻场运维服务']},
+ {name:'昆仑健康保险股份有限公司',projects:['报表工具维保服务（2025）','报表工具维保及产品定制开发（2023）','报表工具维保及产品定制开发']},
+ {name:'中国人寿财产保险股份有限公司',projects:['启明星移动报表平台信创化改造及能力提升建设','国产报表工具BI@Report软件产品维保（2024）','国产报表工具BI@Report软件产品维保MA（2023）','国产报表工具BI@Report软件产品维保MA（2022）']},
+ {name:'众诚汽车保险股份有限公司',projects:['信息技术应用创新数据处理分析平台采购','会计信息统计报表系统维保（2023）','会计信息统计报表系统维保','会计信息统计报表增补项目']},
+ {name:'长江养老保险股份有限公司',projects:['数聚智慧决策平台运维项目','数聚智慧决策平台软件销售']},
+ {name:'英大泰和财产保险股份有限公司',projects:['软件开发（经北明软件）','英大财险报表系统']},
+ {name:'凯本财产保险（乐爱金财险）',projects:['BI产品及定制服务运维服务','BI项目']}
+];
+function openInsCust(i){var a=INSURANCE[i];if(!a)return;var inner=document.getElementById('agentModalInner');
+  inner.style.setProperty('--ac','#00B3FF');
+  var html='<div class="am-top"><span class="am-tag">INSURANCE · 保险合作客户</span><button class="am-close" onclick="closeAgent()">✕ 关闭</button></div>';
+  html+='<div class="am-title">'+a.name+'</div><div class="am-descline">亿信华辰 · 已合作项目清单</div>';
+  html+='<div class="am-label">PROJECTS · 项目清单</div><div class="ins-list">'+a.projects.map(function(p){return '<div class="ins-item">'+p+'</div>'}).join('')+'</div>';
+  inner.innerHTML=html;
+  document.getElementById('agentModal').classList.add('open');
+}
 
 /* 视频弹窗 */
 var VIDEOS={govern:{src:'../../src/asset/govern.mp4',title:'数据治理 Agent 完整演示'},analyse:{src:'../../src/asset/analyse.mp4',title:'决策分析赋能 Agent 完整演示'}};
