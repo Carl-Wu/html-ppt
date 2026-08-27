@@ -95,10 +95,9 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 }
 .topbar{position:fixed;top:0;left:0;right:0;z-index:100;height:48px;
   display:flex;align-items:center;padding:0 20px;gap:12px;
-  background:#ffffff;
+  background:linear-gradient(90deg,#e7f1ff 0%,#ffffff 32%,#f3f8ff 68%,#e7f1ff 100%);
   backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);
-  border-bottom:1px solid var(--card-border);
-  background-image:url('/assets/title-bg.png');background-repeat:no-repeat;background-position:left top;background-size:auto 48px}
+  border-bottom:1px solid var(--card-border)}
 .topbar-logo{display:flex;align-items:center;flex-shrink:0;padding:0 20px 0 16px;border-left:1px solid var(--card-border);margin-left:8px;}
 .nav-idx{display:flex;align-items:center;gap:5px;cursor:pointer;height:30px;padding:0 12px;
   border:1px solid var(--card-border);border-radius:6px;background:var(--brand-light);transition:all .3s;flex-shrink:0}
@@ -142,7 +141,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 
 .ftr{position:fixed;bottom:0;left:0;right:0;z-index:50;height:30px;
   display:flex;align-items:center;justify-content:space-between;padding:0 20px;
-  background:#ffffff;
+  background:linear-gradient(90deg,#e7f1ff 0%,#ffffff 32%,#f3f8ff 68%,#e7f1ff 100%);
   backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
   border-top:1px solid rgba(255,255,255,.06)}
 .ftr-l{font-size:11.7px;color:var(--text2);letter-spacing:1.5px;font-weight:500}
@@ -1430,7 +1429,7 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 
 <div class="topbar">
 <div class="topbar-center">
-<div class="nav-idx" id="navIdx" onclick="toggleNav()"><b id="navCurr">1</b><span class="sep">/</span><span style="font-size:11px;color:#8a94a6;font-weight:400" id="navTotal">19</span><span class="arrow">▼</span></div>
+<div class="nav-idx" id="navIdx" onclick="toggleNav()"><b id="navCurr">1</b><span class="sep">/</span><span style="font-size:11px;color:#8a94a6;font-weight:400" id="navTotal">18</span><span class="arrow">▼</span></div>
 <div class="topbar-title" id="topbarTitle">封面</div>
 <div class="nav-drop" id="navDrop"></div>
 </div>
