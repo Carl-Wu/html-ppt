@@ -44,14 +44,14 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 #slide0 .cover-meta-item{background:rgba(0,102,255,.06);border-color:rgba(0,102,255,.16);color:var(--text2);box-shadow:none}
 #slide0 .cover-meta-item strong{color:var(--brand)}
 #slide0 .cover-divider{background:linear-gradient(90deg,#0a84ff,#7C4DFF)}
-#slide14 .slide-inner{background:transparent}
-#slide14 .end-content{background:transparent;border:none;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
-#slide14 .end-badge{color:var(--brand)}
-#slide14 .end-title{color:var(--text)}
-#slide14 .end-line{background:linear-gradient(90deg,#0a84ff,#7C4DFF)}
-#slide14 .end-sub{color:var(--text2)}
-#slide14 .end-divider{background:linear-gradient(90deg,#0a84ff,#7C4DFF)}
-#slide14 .end-contact{color:var(--text2)}
+#slide15 .slide-inner{background:transparent}
+#slide15 .end-content{background:transparent;border:none;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+#slide15 .end-badge{color:var(--brand)}
+#slide15 .end-title{color:var(--text)}
+#slide15 .end-line{background:linear-gradient(90deg,#0a84ff,#7C4DFF)}
+#slide15 .end-sub{color:var(--text2)}
+#slide15 .end-divider{background:linear-gradient(90deg,#0a84ff,#7C4DFF)}
+#slide15 .end-contact{color:var(--text2)}
 #deck{position:fixed;inset:0;z-index:10}
 
 .slide{position:absolute;inset:0;display:none;flex-direction:column;background:transparent}
@@ -758,17 +758,18 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 </div>
 </div>
 <div class="toc-part p3">
-<div class="part-head"><span class="part-badge">PART 03</span><div class="part-titles"><div class="part-title">客户总览与案例介绍</div><div class="part-sub">客户总览 · 数据治理项目实施案例 · 金融租赁实战沉淀</div></div><div class="part-line"></div><span class="part-count">11-12 / 2 PAGES</span></div>
-<div class="toc-grid g2">
+<div class="part-head"><span class="part-badge">PART 03</span><div class="part-titles"><div class="part-title">客户总览与案例介绍</div><div class="part-sub">客户总览 · 数据治理项目实施案例 · 金融租赁实战沉淀</div></div><div class="part-line"></div><span class="part-count">11-13 / 3 PAGES</span></div>
+<div class="toc-grid g3">
 <div class="toc-card" onclick="goSlide(10)"><div class="toc-card-num">11</div><div class="toc-card-title">客户总览</div><div class="toc-card-desc">整体客户情况 · 金融客户一览</div><div class="toc-card-arrow">→</div></div>
 <div class="toc-card" onclick="goSlide(11)"><div class="toc-card-num">12</div><div class="toc-card-title">金融租赁客户案例</div><div class="toc-card-desc">四大金融租赁数据治理案例</div><div class="toc-card-arrow">→</div></div>
+<div class="toc-card" onclick="goSlide(12)"><div class="toc-card-num">13</div><div class="toc-card-title">银行客户案例</div><div class="toc-card-desc">七大银行数据治理案例</div><div class="toc-card-arrow">→</div></div>
 </div>
 </div>
 <div class="toc-part p4">
-<div class="part-head"><span class="part-badge">PART 04</span><div class="part-titles"><div class="part-title">面向金融科技创新规划</div><div class="part-sub">金融科技创新规划 · 携手共创未来</div></div><div class="part-line"></div><span class="part-count">13-14 / 2 PAGES</span></div>
+<div class="part-head"><span class="part-badge">PART 04</span><div class="part-titles"><div class="part-title">面向金融科技创新规划</div><div class="part-sub">金融科技创新规划 · 携手共创未来</div></div><div class="part-line"></div><span class="part-count">14-15 / 2 PAGES</span></div>
 <div class="toc-grid g2">
-<div class="toc-card" onclick="goSlide(12)"><div class="toc-card-num">13</div><div class="toc-card-title">金融行业科技创新规划</div><div class="toc-card-desc">底座 + 短中长期路线图</div><div class="toc-card-arrow">→</div></div>
-<div class="toc-card" onclick="goSlide(13)"><div class="toc-card-num">14</div><div class="toc-card-title">携手共创数智化新未来</div><div class="toc-card-desc">合作愿景 · 四大方向 · 价值保障</div><div class="toc-card-arrow">→</div></div>
+<div class="toc-card" onclick="goSlide(13)"><div class="toc-card-num">14</div><div class="toc-card-title">金融行业科技创新规划</div><div class="toc-card-desc">底座 + 短中长期路线图</div><div class="toc-card-arrow">→</div></div>
+<div class="toc-card" onclick="goSlide(14)"><div class="toc-card-num">15</div><div class="toc-card-title">携手共创数智化新未来</div><div class="toc-card-desc">合作愿景 · 四大方向 · 价值保障</div><div class="toc-card-arrow">→</div></div>
 </div>
 </div>
 </div>
@@ -1226,11 +1227,169 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div class="slide slide-content" id="slide12">
 <div class="slide-wrapper"><div class="slide-inner">
 <div class="content-wrapper">
+<div class="content-title">银行客户案例</div>
+<div class="sheet-tabs">
+<div class="sheet-tab active" data-sheet="b1" onclick="setSheet('slide12','b1')">案例一 · 中国进出口银行</div>
+<div class="sheet-tab" data-sheet="b2" onclick="setSheet('slide12','b2')">案例二 · 赣州银行</div>
+<div class="sheet-tab" data-sheet="b3" onclick="setSheet('slide12','b3')">案例三 · 中国农业发展银行</div>
+<div class="sheet-tab" data-sheet="b4" onclick="setSheet('slide12','b4')">案例四 · 秦皇岛银行</div>
+<div class="sheet-tab" data-sheet="b5" onclick="setSheet('slide12','b5')">案例五 · 贵阳农商银行</div>
+<div class="sheet-tab" data-sheet="b6" onclick="setSheet('slide12','b6')">案例六 · 辽宁省农村信用社</div>
+<div class="sheet-tab" data-sheet="b7" onclick="setSheet('slide12','b7')">案例七 · 黄河农村商业银行</div>
+</div>
+<div class="sheet active" data-sheet="b1">
+<div class="content-title">案例一 · 中国进出口银行 —— 全行数据治理与统计报送</div>
+<div class="case-quote"><strong>获得奖项：</strong>数据质量卓越实践奖</div>
+<div class="case-quote"><strong>项目背景：</strong>自 2009 年开始合作建设“新一代报表系统”，数据来源于信贷、国结、资金、会计、财管等各类核心业务系统，并涉及担保系统、授信系统、ECIF 系统、ESB 系统、管理会计系统等多套异构系统。通过统一治理多源业务数据，消除跨系统口径不一与数据孤岛，全面满足监管报送与内部统计分析要求。</div>
+<div class="content-title" style="margin-top:8px">建设内容</div>
+<div class="case-grid">
+<div class="case-block"><h4>① 数据标准（数标）</h4><ul><li>结合各系统建设需求编制数据标准，在系统开发阶段推动标准落地，从源头统一字段命名与代码规范</li><li>收集汇总跨系统数据需求，保障监管数据要求在业务系统落地实现，形成可追溯、可复用的标准资产</li></ul></div>
+<div class="case-block"><h4>② 数据治理平台</h4><ul><li>覆盖数据标准、数据质量、元数据、数据模型、数据需求五大核心模块</li><li>构建“事前定义、事中管控、事后评估”的全链路数据治理闭环</li></ul></div>
+<div class="case-block"><h4>③ 数据仓库主题建设</h4><ul><li>基于数仓思想构建总账、信贷、国结、资金、存款业务主题群</li><li>各主题既可独立使用，也可关联分析，为上层应用提供同源一致的数据底座</li></ul></div>
+<div class="case-block"><h4>④ 统计报表系统</h4><ul><li>覆盖统计报送新旧版本、固定报表、客户风险、外汇局资负交易、资本管理、经营分析查询、基础数据补录与管理、统计考评、分析报告、即席分析、资源管理等模块</li><li>支持 EAST 监管报送，实现监管与统计口径统一</li></ul></div>
+</div>
+<div class="content-title" style="margin-top:8px">数据治理要点</div>
+<ul class="case-list">
+<li><strong>多源异构系统统一接入：</strong>打通信贷、国结、资金、会计、财管及担保、授信、ECIF、ESB、管理会计等系统，统一业务口径与数据标准</li>
+<li><strong>监管要求业务化落地：</strong>将 EAST 等监管报送要求拆解为业务规则与数据标准，推动在源头业务系统落地</li>
+<li><strong>治理平台线上化运营：</strong>依托元数据、数据质量、模型与需求管理，实现数据资产可视化与全流程闭环管控</li>
+</ul>
+<div class="content-title" style="margin-top:8px">项目成效</div>
+<ul class="case-list">
+<li>监管报送工作长期名列前茅，多次收到监管机构公开表扬</li>
+<li>打通多业务系统数据，实现监管数据、内部统计报表统一输出</li>
+<li>荣获<strong>数据质量卓越实践奖</strong></li>
+</ul>
+</div>
+<div class="sheet" data-sheet="b2">
+<div class="content-title">案例二 · 赣州银行（城商行）—— 数据治理体系建设</div>
+<div class="case-quote"><strong>获得奖项：</strong>赣州银行：数据质量卓越实践奖；厂商：DAMA 中国数据治理优秀产品奖</div>
+<div class="case-quote"><strong>项目背景：</strong>行内存量业务系统多达 61 套，缺少统一的数据管理平台，数据混乱，既无法支撑内部快速业务发展，也难以满足外部严格金融监管要求。治理系统范围覆盖新信贷系统、新理财系统、总账系统、核算平台；业务治理范围覆盖各类报表、监管指标、业务接口、业务命名规范。</div>
+<div class="case-quote" style="margin-top:6px"><strong>总体目标：</strong>梳理全行各业务条线产品，新建系统全面落实数据标准，统一字段命名、规范业务接口，提升监管数据质量，支撑业务发展与金融创新。</div>
+<div class="content-title" style="margin-top:8px">关键任务</div>
+<div class="case-grid">
+<div class="case-block"><h4>体系建设</h4><ul><li>搭建数据治理平台，建设元数据管理、标准管理、数据质量管理三大核心模块</li><li>同时治理生产、准生产、开发三套环境数据，形成覆盖全环境的统一管控</li></ul></div>
+<div class="case-block"><h4>组织规划</h4><ul><li>成立数据管理委员会，推动业务部门、项目组共同参与数据治理</li><li>构建“业务 + 科技”协同的长效治理机制</li></ul></div>
+<div class="case-block"><h4>标准落地</h4><ul><li>梳理制定 8 大主题数据标准，新建业务系统强制落标</li><li>从源头保障数据规范统一，扭转“先建设、后治理”的被动局面</li></ul></div>
+</div>
+<div class="content-title" style="margin-top:8px">项目成效</div>
+<ul class="case-list">
+<li>历时 5 个月元数据治理，新信贷、总账、理财、核算系统<strong>注释填充率达到 100%</strong>，实现元数据变更事前管控</li>
+<li>梳理 8 个主题合计 <strong>1244 条数据标准</strong>，7000 + 关键字段落地评估；标准通过率由初始 20% 提升至 <strong>85%</strong></li>
+<li>适配 EAST4.0 监管要求，梳理 300 + 条数据校验规则，搭建预警机制，实现监管报送指标自动化校验</li>
+<li>荣获 2020 DAMA 数据质量卓越实践奖</li>
+</ul>
+</div>
+<div class="sheet" data-sheet="b3">
+<div class="content-title">案例三 · 中国农业发展银行 —— 全行数据平台与报表体系建设</div>
+<div class="case-quote"><strong>项目背景：</strong>分为报表应用类、数据平台类两大项目群，兼顾外部监管报送（银保监会、人行、外管局）与内部经营分析；实现全行数据集中，构建统一数据视图，全面提升整体数据质量。</div>
+<div class="content-title" style="margin-top:8px">项目分类</div>
+<div class="case-grid">
+<div class="case-block"><h4>报表应用类项目</h4><ul><li>2009 综合报表平台、2012 报表升级、2015 领导驾驶舱、2016 信贷监测、2017 数据服务平台</li><li>面向监管报送与内部分析，统一指标口径与展现规范</li></ul></div>
+<div class="case-block"><h4>数据平台类项目</h4><ul><li>2013 数据平台一期、2014 二期整合层、2015 平台优化、2016 运维</li><li>实现全行数据集中整合，构建统一数据底座</li></ul></div>
+</div>
+<div class="content-title" style="margin-top:8px">建设工具 &amp; 能力</div>
+<ul class="case-list">
+<li><strong>数据标准：</strong>梳理业务指标，形成基础、指标两套数据标准，统一全行口径</li>
+<li><strong>元数据管理：</strong>血缘分析、影响分析，跟踪数据“存储 - 加工 - 应用”全链路</li>
+<li><strong>数据调度平台：</strong>ETL 作业依赖统一管理，自动化调度</li>
+<li><strong>数据质量检查：</strong>多维度质量校验，自动生成质量报告，形成问题闭环</li>
+<li><strong>数据生命周期管理：</strong>数据库分区管控仓库历史数据，控制存储成本</li>
+<li><strong>数据切分传输加载：</strong>总行数据切分下发省分行，支撑分行本地特色报表</li>
+</ul>
+<div class="content-title" style="margin-top:8px">三大能力域</div>
+<div class="case-grid">
+<div class="case-block"><h4>数据平台类</h4><ul><li>存储全行业务数据，按业务主题做数据分类整合</li></ul></div>
+<div class="case-block"><h4>数据管理类</h4><ul><li>元数据、数据质量、数据生命周期、数据交换、调度平台</li></ul></div>
+<div class="case-block"><h4>数据应用类</h4><ul><li>数据服务平台、综合报表平台、统计集中系统、高管驾驶舱、通用台账平台</li></ul></div>
+</div>
+<div class="content-title" style="margin-top:8px">项目成效</div>
+<ul class="case-list">
+<li>建成全行统一数据服务平台，提供监管报送、多维分析、自助分析、指标应用、风险监控能力</li>
+<li>总行 - 省分行数据分发体系落地，支持分行个性化报表建设</li>
+<li>完整覆盖监管报送、经营分析、风险监控等核心场景</li>
+</ul>
+</div>
+<div class="sheet" data-sheet="b4">
+<div class="content-title">案例四 · 秦皇岛银行 —— 风险数据治理与数据集市</div>
+<div class="case-quote"><strong>项目名称：</strong>风险数据治理、风险数据集市、数据管控平台项目<br><strong>项目背景：</strong>区分风险管理条线治理、全行级数据治理两条主线，构建纵深的银行数据治理体系。</div>
+<div class="content-title" style="margin-top:8px">两条治理主线</div>
+<div class="case-grid">
+<div class="case-block"><h4>风险管理条线（风险管理部主导）</h4><ul><li>围绕客户管理、产品管理、财务管理、人员管理</li><li>覆盖信用 / 市场 / 操作风险、资产负债、监管数据</li><li>支撑风险计量、评估、监测、报告，治理风险域基础数据，贯穿“决策 - 执行 - 监督”内控流程</li></ul></div>
+<div class="case-block"><h4>全行数据治理（信息科技部主导）</h4><ul><li>覆盖全行 IT 系统，完整落地数据标准、元数据、数据质量等治理域</li><li>输出完整、准确、及时、一致的数据底座，供全行应用使用</li></ul></div>
+</div>
+<div class="content-title" style="margin-top:8px">建设内容</div>
+<div class="case-quote"><strong>风险数据集市、数据管控平台；</strong>业务总览监控、地域监控、指标趋势分析，风险指标可视化看板。</div>
+<div class="content-title" style="margin-top:8px">项目成效</div>
+<ul class="case-list">
+<li>建成风险数据集市，实现风险指标、经营指标可视化监控</li>
+<li>建立“业务部门 + 科技部门”协同的数据治理组织模式，区分风险专项治理与全行统一治理</li>
+</ul>
+</div>
+<div class="sheet" data-sheet="b5">
+<div class="content-title">案例五 · 贵阳农商银行 —— BI 商业智能体系升级</div>
+<div class="case-quote"><strong>项目背景：</strong>业务规模快速扩张，业务品种持续丰富，数字化业务流程增加，数据体量与复杂度快速上升，原有 BI 体系难以满足经营决策需求。</div>
+<div class="case-quote" style="margin-top:6px"><strong>建设目标：</strong>采用新一代架构重构调度工具、ETL 工具；新增实时数据处理、管理驾驶舱、自助分析、移动报表；完善商业智能 BI 体系；降低用数成本、提升用数效率与数据质量；构建全行统一高质量信息视图，最大化释放数据价值，支撑经营决策，提升金融服务竞争力。</div>
+<div class="content-title" style="margin-top:8px">建设内容</div>
+<ul class="case-list">
+<li>新一代调度 &amp; ETL 架构，实时数据接入，夯实数据分析底座</li>
+<li>管理驾驶舱大屏：经营指标概览、存贷款、人员、风险指标、地域分布、指标趋势</li>
+<li>自助分析、移动报表能力，降低业务用数门槛</li>
+<li>配套数据质量校验与指标口径统一，保障分析结果可信</li>
+</ul>
+<div class="content-title" style="margin-top:8px">项目成效</div>
+<ul class="case-list">
+<li>完善全行 BI 商业智能体系，统一全行信息视图</li>
+<li>经营、风险、监管指标集中可视化，支撑管理层决策</li>
+<li>降低业务人员获取数据成本，提升数据运营能力</li>
+</ul>
+</div>
+<div class="sheet" data-sheet="b6">
+<div class="content-title">案例六 · 辽宁省农村信用社 —— 自助数据应用平台</div>
+<div class="case-quote"><strong>项目背景（痛点）：</strong>报表样式固化，无法满足灵活自助分析、自定义报表的个性化需求；依靠手工下发数据，人力成本高、复用性差，缺少数据使用管控手段。</div>
+<div class="case-quote" style="margin-top:6px"><strong>建设目标：</strong>面向全省法人行社管理人员、业务人员提供自助数据应用工具，满足各级机构个性化数据分析，提升数据使用效率，释放数据价值。</div>
+<div class="content-title" style="margin-top:8px">核心功能模块</div>
+<div class="case-grid">
+<div class="case-block"><h4>即席查询</h4><ul><li>授权范围内拖拽勾选，自定义筛选条件自助查询集市数据</li></ul></div>
+<div class="case-block"><h4>自助分析</h4><ul><li>拖拽式报表设计，支撑客户分析、经营分析、营销活动分析</li></ul></div>
+<div class="case-block"><h4>数据采集与补录</h4><ul><li>自定义采集报表，多表复用采集模板，打通“采集 - 数据应用”链路</li></ul></div>
+<div class="case-block"><h4>指标管理</h4><ul><li>梳理机构常用指标，构建业务主题指标模型，统一口径</li></ul></div>
+<div class="case-block"><h4>数据质量管理</h4><ul><li>多维度数据校验评估，线上跟踪质量问题闭环</li></ul></div>
+<div class="case-block"><h4>数据安全管理</h4><ul><li>字段级权限控制，查看下载支持敏感数据脱敏</li></ul></div>
+</div>
+<div class="content-title" style="margin-top:8px">项目成效</div>
+<ul class="case-list">
+<li>摆脱纯固定报表模式，业务人员可自助完成查询与报表制作</li>
+<li>实现数据采集、质量管控、权限脱敏一体化平台</li>
+<li>大屏可视化：贷款分布、五级分类、不良贷款变动、关键经营指标监控</li>
+</ul>
+</div>
+<div class="sheet" data-sheet="b7">
+<div class="content-title">案例七 · 黄河农村商业银行 —— 智能报表分析平台</div>
+<div class="case-quote"><strong>建设目标：</strong>打造智能报表分析平台；基于大数据平台构建报表数据集市；将数据作为资产进行管理运营；建设一体化、组件化的数据服务平台。</div>
+<div class="content-title" style="margin-top:8px">建设内容</div>
+<div class="case-grid">
+<div class="case-block"><h4>报表数据集市构建</h4><ul><li>基于大数据平台整合多源业务数据，构建主题化报表数据集市，统一口径与数据质量</li></ul></div>
+<div class="case-block"><h4>智能报表分析平台</h4><ul><li>规模指标、风险指标、热点地图、专题分析</li><li>资产概况、盈利情况、存贷比、不良贷款率等可视化大屏</li></ul></div>
+</div>
+<div class="content-title" style="margin-top:8px">项目成效</div>
+<ul class="case-list">
+<li>实现资产、盈利、风险指标集中可视化监控</li>
+<li>构建组件化数据服务底座，支撑报表、专题分析等业务持续扩展</li>
+</ul>
+</div>
+</div>
+</div></div>
+</div>
+
+<div class="slide slide-content" id="slide13">
+<div class="slide-wrapper"><div class="slide-inner">
+<div class="content-wrapper">
 <div class="content-title">面向金融的科技创新规划</div>
 <div class="sheet-tabs">
-<div class="sheet-tab active" data-sheet="lease" onclick="setSheet('slide12','lease')">金融租赁</div>
-<div class="sheet-tab" data-sheet="insurance" onclick="setSheet('slide12','insurance')">保险行业</div>
-<div class="sheet-tab" data-sheet="bank" onclick="setSheet('slide12','bank')">银行业</div>
+<div class="sheet-tab active" data-sheet="lease" onclick="setSheet('slide13','lease')">金融租赁</div>
+<div class="sheet-tab" data-sheet="insurance" onclick="setSheet('slide13','insurance')">保险行业</div>
+<div class="sheet-tab" data-sheet="bank" onclick="setSheet('slide13','bank')">银行业</div>
 </div>
 <div class="sheet active" data-sheet="lease">
 <div class="glass-card rp-base">
@@ -1372,14 +1531,14 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 </div></div>
 </div>
 <!-- 携手共创 -->
-<div class="slide slide-content" id="slide13">
+<div class="slide slide-content" id="slide14">
 <div class="slide-wrapper"><div class="slide-inner">
 <div class="content-wrapper">
 <div class="content-title">携手共创数智化新未来</div>
 <div class="sheet-tabs">
-<div class="sheet-tab active" data-sheet="lease" onclick="setSheet('slide13','lease')">金融租赁</div>
-<div class="sheet-tab" data-sheet="insurance" onclick="setSheet('slide13','insurance')">保险行业</div>
-<div class="sheet-tab" data-sheet="bank" onclick="setSheet('slide13','bank')">银行业</div>
+<div class="sheet-tab active" data-sheet="lease" onclick="setSheet('slide14','lease')">金融租赁</div>
+<div class="sheet-tab" data-sheet="insurance" onclick="setSheet('slide14','insurance')">保险行业</div>
+<div class="sheet-tab" data-sheet="bank" onclick="setSheet('slide14','bank')">银行业</div>
 </div>
 <div class="sheet active" data-sheet="lease">
 <div class="coop-vision">
@@ -1475,7 +1634,7 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 </div></div>
 </div>
 <!-- 结束 -->
-<div class="slide slide-end" id="slide14">
+<div class="slide slide-end" id="slide15">
 <div class="slide-wrapper"><div class="slide-inner">
 <div class="end-content glass-card">
 <div class="end-badge">THANKS FOR WATCHING</div>
@@ -1506,7 +1665,7 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 
 <div class="topbar">
 <div class="topbar-center">
-<div class="nav-idx" id="navIdx" onclick="toggleNav()"><b id="navCurr">1</b><span class="sep">/</span><span style="font-size:11px;color:#8a94a6;font-weight:400" id="navTotal">15</span><span class="arrow">▼</span></div>
+<div class="nav-idx" id="navIdx" onclick="toggleNav()"><b id="navCurr">1</b><span class="sep">/</span><span style="font-size:11px;color:#8a94a6;font-weight:400" id="navTotal">16</span><span class="arrow">▼</span></div>
 <div class="topbar-title" id="topbarTitle">封面</div>
 <div class="nav-drop" id="navDrop"></div>
 </div>
@@ -1516,7 +1675,7 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 <div id="prog" style="width:5%"></div>
 <div class="ftr">
 <div class="ftr-l">亿信华辰 · 公司介绍与金融科技创新汇报</div>
-<div class="ftr-r"><button onclick="goSlide(cur-1)" id="prevBtn2" disabled>‹</button><span class="ftr-page"><span id="ftrCurr">1</span> / 15</span><button onclick="goSlide(cur+1)" id="nextBtn2">›</button></div>
+<div class="ftr-r"><button onclick="goSlide(cur-1)" id="prevBtn2" disabled>‹</button><span class="ftr-page"><span id="ftrCurr">1</span> / 16</span><button onclick="goSlide(cur+1)" id="nextBtn2">›</button></div>
 </div>
 <style>
 .slide-neon .slide-inner{overflow-y:auto}
@@ -1649,14 +1808,14 @@ p{margin-bottom:6px;line-height:1.9;color:var(--text2)}
 })();
 </script>
 <script>
-var total=15;
+var total=16;
 var cur=0;
-var navTitles=["封面","目录","公司简介 · 亿信华辰","发展历程：20 载技术沉淀 · 三次战略升级","实力见证：权威资质认证与行业方法论沉淀","整体战略愿景：成为领先的 AI 原生数据智能厂商","AI 整体战略：Data+AI 双轮驱动","已落地部分 AI Agent 场景：五大 AI Agent 协同","数据治理与决策赋能 Agent 实施效果展示","AI 智能体带来的效率与质量跃迁","客户总览 · 整体客户情况 · 金融客户一览","金融租赁客户案例 · 数据治理","面向金融的科技创新规划","携手共创数智化新未来","结束 · 感谢"];
+var navTitles=["封面","目录","公司简介 · 亿信华辰","发展历程：20 载技术沉淀 · 三次战略升级","实力见证：权威资质认证与行业方法论沉淀","整体战略愿景：成为领先的 AI 原生数据智能厂商","AI 整体战略：Data+AI 双轮驱动","已落地部分 AI Agent 场景：五大 AI Agent 协同","数据治理与决策赋能 Agent 实施效果展示","AI 智能体带来的效率与质量跃迁","客户总览 · 整体客户情况 · 金融客户一览","金融租赁客户案例 · 数据治理","银行客户案例 · 数据治理","面向金融的科技创新规划","携手共创数智化新未来","结束 · 感谢"];
 
 function buildNav(){
   var d=document.getElementById('navDrop');
   var html='';
-  var groups=[["封面",0,0],["导航",1,1],["第一部分 · 公司简介与发展规划",2,5],["第二部分 · AI 战略布局",6,9],["第三部分 · 客户总览与案例介绍",10,11],["第四部分 · 面向金融科技创新规划",12,13],["结束",14,14]];
+  var groups=[["封面",0,0],["导航",1,1],["第一部分 · 公司简介与发展规划",2,5],["第二部分 · AI 战略布局",6,9],["第三部分 · 客户总览与案例介绍",10,12],["第四部分 · 面向金融科技创新规划",13,14],["结束",15,15]];
   groups.forEach(function(g){
     html+='<div class="nd-grp">'+g[0]+'</div>';
     for(var i=g[1];i<=g[2];i++){
