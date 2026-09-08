@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>金租数据治理 & 监管报送 · AI 原生战略落地方案</title>
+<style>
+  :root{
+    --blue:#0071e3; --blue-2:#42a5f5; --purple:#7c5cff; --green:#34c759;
+    --orange:#ff9f0a; --pink:#ff375f; --ink:#1d1d1f; --gray:#6e6e73;
+    --bg:#fbfbfd; --bg-2:#f5f5f7; --line:rgba(0,0,0,.08); --card:rgba(255,255,255,.72);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue","PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;line-height:1.5;}
+  nav{position:sticky;top:0;z-index:100;backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);background:rgba(251,251,253,.8);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;gap:22px;height:48px;font-size:13px;flex-wrap:wrap;}
+  nav a{color:var(--gray);text-decoration:none;transition:.3s;font-weight:500;}
+  nav a:hover{color:var(--ink);}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px;}
+  section{padding:108px 0;border-bottom:1px solid var(--line);}
+  .eyebrow{color:var(--blue);font-weight:600;font-size:15px;letter-spacing:.4px;text-transform:uppercase;margin-bottom:14px;}
+  h1{font-size:clamp(38px,6.6vw,72px);font-weight:700;letter-spacing:-.02em;line-height:1.05;}
+  h2{font-size:clamp(30px,4.6vw,50px);font-weight:700;letter-spacing:-.02em;line-height:1.1;margin-bottom:18px;}
+  h3{font-size:23px;font-weight:600;letter-spacing:-.01em;margin-bottom:10px;}
+  .lead{font-size:clamp(17px,2.2vw,21px);color:var(--gray);max-width:840px;font-weight:400;line-height:1.55;}
+  .hero{text-align:center;padding:138px 0 116px;background:radial-gradient(1200px 600px at 50% -10%,rgba(0,113,227,.18),transparent 60%),radial-gradient(900px 500px at 80% 10%,rgba(124,92,255,.14),transparent 55%);}
+  .hero .badge{display:inline-block;border:1px solid var(--line);background:var(--card);backdrop-filter:blur(10px);border-radius:980px;padding:7px 18px;font-size:13px;color:var(--gray);margin-bottom:28px;font-weight:500;}
+  .hero h1{background:linear-gradient(120deg,#1d1d1f 30%,#0071e3 100%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .hero .lead{margin:22px auto 0;}
+  .scroll-hint{margin-top:58px;color:var(--gray);font-size:13px;letter-spacing:2px;}
+  .scroll-hint span{display:block;font-size:22px;animation:bob 1.8s infinite;}
+  @keyframes bob{0%,100%{transform:translateY(0);opacity:.5;}50%{transform:translateY(8px);opacity:1;}}
+  /* strategy house */
+  .house{max-width:1000px;margin:54px auto 0;}
+  .roof{position:relative;height:152px;background:linear-gradient(135deg,var(--blue),var(--purple));clip-path:polygon(50% 0,100% 100%,0 100%);display:flex;align-items:center;justify-content:center;}
+  .roof .rt{background:rgba(255,255,255,.96);color:var(--ink);padding:14px 28px;border-radius:16px;font-weight:700;font-size:17px;text-align:center;max-width:74%;box-shadow:0 8px 24px rgba(0,0,0,.18);}
+  .roof .rt small{display:block;font-weight:500;font-size:12.5px;color:var(--gray);margin-top:4px;}
+  .house-body{display:grid;grid-template-columns:1fr 2.1fr 1fr;gap:14px;margin-top:14px;}
+  .wall{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;backdrop-filter:blur(12px);}
+  .wall h4{color:var(--ink);font-size:15px;font-weight:700;margin-bottom:10px;text-align:center;}
+  .wall ul{list-style:none;}
+  .wall li{font-size:13px;line-height:1.5;padding:7px 10px;margin-bottom:7px;background:var(--bg-2);border-radius:10px;color:var(--ink);}
+  .center-col{display:flex;flex-direction:column;gap:14px;}
+  .obj{background:linear-gradient(135deg,var(--ink),#2a2a2e);color:#fff;border-radius:16px;padding:18px 20px;text-align:center;}
+  .obj h4{color:var(--blue-2);font-size:13px;font-weight:600;margin-bottom:6px;letter-spacing:.1em;}
+  .obj p{font-size:16px;font-weight:600;line-height:1.4;}
+  .pillars-h{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;}
+  .pillar-h{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--blue);border-radius:14px;padding:14px 10px;text-align:center;backdrop-filter:blur(12px);}
+  .pillar-h .n{font-size:12px;font-weight:700;color:var(--blue);}
+  .pillar-h .t{font-size:13.5px;font-weight:700;color:var(--ink);margin:6px 0 4px;}
+  .pillar-h .d{font-size:11.5px;color:var(--gray);line-height:1.45;}
+  .foundation{background:linear-gradient(135deg,var(--ink),#2a2a2e);color:#fff;border-radius:16px;padding:18px 22px;margin-top:14px;display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;}
+  .foundation .ft{font-weight:700;font-size:14px;margin-right:8px;}
+  .foundation span{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);padding:7px 14px;border-radius:30px;font-size:12.5px;}
+  /* white pb cards */
+  .pb-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:54px;}
+  .pb{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:30px;backdrop-filter:blur(12px);}
+  .pb .k{display:inline-block;font-size:12px;font-weight:700;color:var(--blue);background:rgba(0,113,227,.1);padding:4px 11px;border-radius:8px;margin-bottom:12px;letter-spacing:.5px;}
+  .pb.k2 .k{color:var(--purple);background:rgba(124,92,255,.1);}
+  .pb.k3 .k{color:var(--green);background:rgba(52,199,89,.1);}
+  .pb.k4 .k{color:#b46a00;background:rgba(255,159,10,.12);}
+  .pb.k5 .k{color:var(--pink);background:rgba(255,55,95,.1);}
+  .pb h3{font-size:20px;}
+  .pb p{font-size:14px;color:var(--gray);line-height:1.65;}
+  .pb p b{color:var(--ink);}
+  .pb.k5{margin-top:0;}
+  /* note */
+  .note{margin-top:30px;background:linear-gradient(120deg,rgba(52,199,89,.1),rgba(0,113,227,.07));border:1px solid rgba(52,199,89,.3);border-radius:18px;padding:22px 26px;font-size:14px;color:var(--ink);line-height:1.65;}
+  .note .t{color:var(--green);font-weight:700;font-size:14px;letter-spacing:.5px;margin-bottom:6px;}
+  /* tables */
+  .tbl-scroll{overflow-x:auto;margin-top:40px;}
+  .tbl{border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--card);backdrop-filter:blur(12px);min-width:680px;}
+  .tbl table{width:100%;border-collapse:collapse;font-size:14px;}
+  .tbl thead th{background:var(--ink);color:#fff;font-weight:600;padding:14px 16px;text-align:left;font-size:13.5px;letter-spacing:.3px;vertical-align:top;}
+  .tbl tbody td{padding:14px 16px;border-top:1px solid var(--line);vertical-align:top;color:var(--ink);line-height:1.6;}
+  .tbl tbody tr:nth-child(even){background:rgba(0,0,0,.025);}
+  .tbl td b{color:var(--ink);}
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);}
+  .reveal.in{opacity:1;transform:none;}
+  .reveal.d1{transition-delay:.08s;} .reveal.d2{transition-delay:.16s;} .reveal.d3{transition-delay:.24s;}
+  footer{padding:50px 0;text-align:center;color:var(--gray);font-size:13px;}
+  footer b{color:var(--ink);}
+  @media(max-width:860px){
+    .pb-grid,.house-body{grid-template-columns:1fr;}
+    .pillars-h{grid-template-columns:repeat(2,1fr);}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero">总览</a>
+  <a href="#house">战略屋</a>
+  <a href="#ogsm">OGSM</a>
+  <a href="#res">资源需求</a>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="hero">
+  <div class="wrap">
+    <div class="badge reveal">金融业务创新中心 · 战略落地方案</div>
+    <h1 class="reveal d1">金租 AI 原生<br/>数据治理与监管报送 OPP<br/>战略落地方案</h1>
+    <p class="lead reveal d2">以「战略屋（OGSM）→ 资源需求」为主线，将 AI 原生解决方案转化为可衡量、可考核的部门执行蓝图。</p>
+    <div class="scroll-hint reveal d3">向下滑动<span>⌄</span></div>
+  </div>
+</header>
+
+<!-- 战略屋 -->
+<section id="house">
+  <div class="wrap">
+    <p class="eyebrow reveal">战略屋 · Strategy House</p>
+    <h2 class="reveal">一张图看懂战略全貌</h2>
+    <p class="lead reveal d1">战略屋把"愿景—目标—能力—成功要素—支柱—地基"结构化，让领导一眼看清我们靠什么赢、赢在哪、靠什么支撑。</p>
+
+    <div class="house reveal d2">
+      <div class="roof"><div class="rt">愿景与战略主题<small>成为金租行业 AI 原生数据治理与监管报送的首选合作伙伴</small></div></div>
+      <div class="house-body">
+        <div class="wall">
+          <h4>左墙 · 核心竞争力</h4>
+          <ul>
+            <li>AI 专家团编排能力</li>
+            <li>睿治 + 报送平台产品力</li>
+            <li>金租行业知识沉淀</li>
+            <li>OPP / FDE 交付方法论</li>
+            <li>端到端一站式能力</li>
+          </ul>
+        </div>
+        <div class="center-col">
+          <div class="obj">
+            <h4>战略中心目标（O）</h4>
+            <p>以 AI Native OPP 模式，规模化拓展金租数据治理与监管报送市场，实现业务高质量增长</p>
+          </div>
+          <div class="pillars-h">
+            <div class="pillar-h"><div class="n">支柱1</div><div class="t">产品力升级</div><div class="d">睿治/报送平台 AI Native 化</div></div>
+            <div class="pillar-h"><div class="n">支柱2</div><div class="t">市场拓展</div><div class="d">金租客户规模化覆盖</div></div>
+            <div class="pillar-h"><div class="n">支柱3</div><div class="t">交付革命</div><div class="d">OPP / FDE 一人交付</div></div>
+            <div class="pillar-h"><div class="n">支柱4</div><div class="t">资产化</div><div class="d">知识库与标准沉淀</div></div>
+            <div class="pillar-h"><div class="n">支柱5</div><div class="t">组织力</div><div class="d">团队/技能/激励</div></div>
+          </div>
+        </div>
+        <div class="wall">
+          <h4>右墙 · 关键成功因素</h4>
+          <ul>
+            <li>售前转化效率</li>
+            <li>单项目交付成本/周期</li>
+            <li>客户续约与口碑</li>
+            <li>平台 AI 化就绪度</li>
+            <li>知识复用率</li>
+          </ul>
+        </div>
+      </div>
+      <div class="foundation">
+        <span class="ft">地基 · 组织保障</span>
+        <span>跨部门协同机制</span><span>资源投入</span><span>考核与激励</span><span>数据/知识基建</span><span>领导授权与复盘</span><span>生态合作</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OGSM -->
+<section id="ogsm">
+  <div class="wrap">
+    <p class="eyebrow reveal">OGSM 总表</p>
+    <h2 class="reveal">Objective · Goals · Strategies · Measures</h2>
+    <p class="lead reveal d1">OGSM 是战略屋的文字化展开：定性的方向（O）、定量的目标（G）、实现路径（S）、衡量标尺（M）。</p>
+
+    <div class="tbl-scroll reveal d2">
+      <div class="tbl">
+        <table>
+          <thead><tr><th style="width:120px">维度</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td><b>O 战略目标</b></td><td>在金租行业确立「AI 原生数据治理 + 监管报送」差异化竞争优势，实现业务规模化、可复制、高质量增长。</td></tr>
+            <tr><td><b>G 量化目标</b></td><td>
+              G1 单项目交付周期：以数据治理项目为例，周期由6个月缩短至2个月<br/>
+              G2 客户验收满意度 ≥ 90%
+            </td></tr>
+            <tr><td><b>S 关键策略</b></td><td>
+              S1 平台 AI Native 化改造（MCP/API/NL2Action，让 Agent 可调用平台能力）<br/>
+              S2 打造标准化 OPP 交付方法论 + FDE 能力模型并跑通试点<br/>
+              S3 建设金租行业知识库（监管制度 + 数据治理标准/质检/分类分级）<br/>
+              S4 售前体系升级（AI 专家团对外宣讲 + 桌面 Agent 演示）<br/>
+              S5 开发建设 AI 专家团（治理/报送专家能力模型，封装专家知识、技能与 Tools 工具）
+            </td></tr>
+            <tr><td><b>M 衡量指标</b></td><td>
+              M1 平台改造完成模块数 / 上线 MCP 工具数（≥8 模块、≥40 工具）<br/>
+              M2 知识库条目：监管制度 ≥30 类、金租标准 ≥50 套、质检规则 ≥500 条<br/>
+              M3 OPP 试点项目数 / 平均交付周期 / 复用率 ≥80%<br/>
+              M4 商机数 / 转化率 / 标杆案例数<br/>
+              M5 客户满意度 / 复购率 / 营收达成率<br/>
+              M6 专家团建设：治理/报送专家角色数与能力模型，封装专家知识/技能/Tools 工具数（≥2 类专家、≥20 个工具）
+            </td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 资源需求 -->
+<section id="res" style="border-bottom:none">
+  <div class="wrap">
+    <p class="eyebrow reveal">资源需求 · Resource Map</p>
+    <h2 class="reveal">落地战略需要哪些资源</h2>
+    <p class="lead reveal d1">战略屋的"地基"落到资源上，需人力、技术平台、知识数据、组织机制四类协同投入。</p>
+
+    <div class="pb-grid reveal d1">
+      <div class="pb"><span class="k">人力资源</span><h3>角色与编制</h3>
+        <p>
+        • 平台 AI 化研发：3–4 人（前端/后端/接口/MCP）<br/>
+        • 知识库 / RAG 算法：1–2 人<br/>
+        • FDE 交付工程师：5–8 人（可复用现有交付资源）<br/>
+        • 售前专家：2–3 人<br/>
+        • 项目管理（PMO）：1 人<br/>
+        • 产品经理（平台 AI 化）：1 人<br/>
+        • 知识运营：1 人
+        </p>
+      </div>
+      <div class="pb k2"><span class="k">技术 / 平台</span><h3>基础设施</h3>
+        <p>
+        • 桌面级 Agent 平台EsXWork<br/>
+        • 睿治数据治理平台 + 统一监管报送平台测试/演示环境<br/>
+        • 向量数据库 + RAG 检索基础设施 + 开发联调环境<br/>
+        • 数据中台/样例数据源（核心、信贷、财务、数仓）用于验证
+        </p>
+      </div>
+      <div class="pb k3"><span class="k">知识 / 数据</span><h3>内容资产</h3>
+        <p>
+        • 监管制度原文：EAST / 1104 / 人行大集中 / 金数 / 利率报备 / 征信 / 外管 / 地方特色<br/>
+        • 金租行业样本：元数据标准、业务术语、参考数据、主数据<br/>
+        • 历史项目资产：蓝图、方案、质检规则、映射文档（脱敏复用）<br/>
+        • 方法论与模板：DAMA / DCMM、实施模板库
+        </p>
+      </div>
+      <div class="pb k5"><span class="k">组织 / 机制</span><h3>保障体系</h3>
+        <p>
+        • <b>跨部门协同机制</b>：与平台研发部、交付部建立季度对接与需求优先级通道；<br/>
+        • <b>考核与激励</b>：OPP 项目计奖、标杆案例专项奖、知识贡献积分；<br/>
+        • <b>领导授权与复盘</b>：部门经理对资源调度与对外承诺的授权，月度 OKR 复盘、季度战略校准；<br/>
+        • <b>生态合作</b>：与监管科技、咨询机构形成联合方案。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <b>金租数据治理 &amp; 监管报送 · AI 原生战略落地方案（简化版：战略屋 · OGSM · 资源需求）</b> · 金融业务创新中心<br/>
+    北京亿信华辰软件有限责任公司
+  </div>
+</footer>
+
+<script>
+  const obs=new IntersectionObserver((e)=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in');});},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

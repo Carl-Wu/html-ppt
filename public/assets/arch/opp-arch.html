@@ -1,0 +1,445 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>金融行业OPP解决方案架构图</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+        }
+        body {
+            background: #f5f7fa;
+            padding: 30px;
+            color: #333;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .title {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            color: #1a365d;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 30px;
+        }
+        .layer {
+            margin-bottom: 20px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .layer-title {
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .layer-title .tag {
+            font-size: 12px;
+            background: rgba(255,255,255,0.2);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: normal;
+        }
+        .layer-content {
+            background: #fff;
+            padding: 20px;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        /* 层颜色 */
+        .layer-user .layer-title { background: linear-gradient(90deg, #3b82f6, #2563eb); }
+        .layer-esxwork .layer-title { background: linear-gradient(90deg, #8b5cf6, #7c3aed); }
+        .layer-expert .layer-title { background: linear-gradient(90deg, #10b981, #059669); }
+        .layer-connector .layer-title { background: linear-gradient(90deg, #f59e0b, #d97706); }
+        .layer-product .layer-title { background: linear-gradient(90deg, #ef4444, #dc2626); }
+
+        .card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 14px;
+            min-width: 180px;
+            flex: 1;
+            max-width: 220px;
+        }
+        .card-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #1e293b;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        .card-item {
+            font-size: 12px;
+            color: #475569;
+            line-height: 1.6;
+            padding-left: 12px;
+            position: relative;
+            margin-bottom: 4px;
+        }
+        .card-item:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #94a3b8;
+        }
+        .card-subtitle {
+            font-size: 11px;
+            color: #64748b;
+            margin: 8px 0 4px 0;
+            font-weight: bold;
+            border-top: 1px dashed #e2e8f0;
+            padding-top: 6px;
+        }
+        .track-group {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+        }
+        .track {
+            flex: 1;
+            border: 1px dashed #cbd5e1;
+            border-radius: 8px;
+            padding: 12px;
+        }
+        .track-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #0f766e;
+            margin-bottom: 12px;
+            text-align: center;
+            background: #ccfbf1;
+            padding: 6px;
+            border-radius: 6px;
+        }
+        .arrow {
+            text-align: center;
+            font-size: 20px;
+            color: #94a3b8;
+            margin: 8px 0;
+        }
+        .single-card {
+            max-width: 300px;
+            text-align: center;
+        }
+        .product-card {
+            min-width: 280px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">金融行业OPP（One-Person Project）解决方案架构图</div>
+        <div class="subtitle">基于EsXWork桌面AI工作台 · 数据治理 + 监管报送双赛道 · 自动落地睿治/一表通平台</div>
+
+        <!-- 第一层：用户入口 -->
+        <div class="layer layer-user">
+            <div class="layer-title">
+                <span>第一层：用户入口层</span>
+                <span class="tag">人类核心</span>
+            </div>
+            <div class="layer-content">
+                <div class="card single-card">
+                    <div class="card-title">FDE / 售前顾问（1人）</div>
+                    <div class="card-item">需求澄清与客户沟通</div>
+                    <div class="card-item">业务判断与成果审核</div>
+                    <div class="card-item">专家调度与任务下达</div>
+                    <div class="card-item">资产沉淀与专家迭代</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="arrow">↓</div>
+
+        <!-- 第二层：EsXWork工作台 -->
+        <div class="layer layer-esxwork">
+            <div class="layer-title">
+                <span>第二层：EsXWork桌面AI工作台</span>
+                <span class="tag">运行载体</span>
+            </div>
+            <div class="layer-content">
+                <div class="card">
+                    <div class="card-title">专家调度引擎</div>
+                    <div class="card-item">任务自动拆解分发</div>
+                    <div class="card-item">多专家协同调度</div>
+                    <div class="card-item">过程管控与汇总</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Skill技能市场</div>
+                    <div class="card-item">文档解析 / 表格处理</div>
+                    <div class="card-item">规则生成 / 方案撰写</div>
+                    <div class="card-item">PPT生成 / 数据抽取</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">知识库中心</div>
+                    <div class="card-item">金融行业方法论</div>
+                    <div class="card-item">监管制度库</div>
+                    <div class="card-item">历史项目资产</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Connector管理</div>
+                    <div class="card-item">接口配置与鉴权</div>
+                    <div class="card-item">数据同步与回写</div>
+                    <div class="card-item">落地状态监控</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="arrow">↓</div>
+
+        <!-- 第三层：专家团 -->
+        <div class="layer layer-expert">
+            <div class="layer-title">
+                <span>第三层：OPP领域专家团（Expert）</span>
+                <span class="tag">AI执行核心</span>
+            </div>
+            <div class="layer-content">
+                <div class="track-group">
+                    <!-- 左：数据治理 -->
+                    <div class="track">
+                        <div class="track-title">赛道一：金融数据治理OPP</div>
+                        <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
+                            <div class="card">
+                                <div class="card-title">数据治理总专家</div>
+                                <div class="card-subtitle">思考框架</div>
+                                <div class="card-item">DAMA / DCMM体系</div>
+                                <div class="card-item">金融行业治理方法论</div>
+                                <div class="card-subtitle">核心Skill</div>
+                                <div class="card-item">专家调度 / 方案生成</div>
+                                <div class="card-item">文档解析 / PPT输出</div>
+                            </div>
+                            <div class="card">
+                                <div class="card-title">元数据梳理专家</div>
+                                <div class="card-subtitle">思考框架</div>
+                                <div class="card-item">系统盘点 / 业务血缘</div>
+                                <div class="card-item">数据资产盘点方法论</div>
+                                <div class="card-subtitle">核心Skill</div>
+                                <div class="card-item">PDF解析 / 字段抽取</div>
+                                <div class="card-item">血缘分析 / 清单生成</div>
+                            </div>
+                            <div class="card">
+                                <div class="card-title">数据标准专家</div>
+                                <div class="card-subtitle">思考框架</div>
+                                <div class="card-item">金融数据标准体系</div>
+                                <div class="card-item">码值映射 / 字段规范</div>
+                                <div class="card-subtitle">核心Skill</div>
+                                <div class="card-item">标准生成 / 口径对齐</div>
+                                <div class="card-item">码值匹配 / 清单输出</div>
+                            </div>
+                            <div class="card">
+                                <div class="card-title">数据质量专家</div>
+                                <div class="card-subtitle">思考框架</div>
+                                <div class="card-item">六性质检维度</div>
+                                <div class="card-item">问题诊断 / 整改方案</div>
+                                <div class="card-subtitle">核心Skill</div>
+                                <div class="card-item">规则生成 / 问题分类</div>
+                                <div class="card-item">质检模板 / 评分输出</div>
+                            </div>
+                            <div class="card">
+                                <div class="card-title">主数据专家</div>
+                                <div class="card-subtitle">思考框架</div>
+                                <div class="card-item">主数据模型设计</div>
+                                <div class="card-item">集成架构 / 数据服务</div>
+                                <div class="card-subtitle">核心Skill</div>
+                                <div class="card-item">模型设计 / 属性梳理</div>
+                                <div class="card-item">架构输出 / 目录生成</div>
+                            </div>
+                            <div class="card">
+                                <div class="card-title">数据安全专家</div>
+                                <div class="card-subtitle">思考框架</div>
+                                <div class="card-item">分级分类 / 合规制度</div>
+                                <div class="card-item">权限管理 / 脱敏策略</div>
+                                <div class="card-subtitle">核心Skill</div>
+                                <div class="card-item">敏感识别 / 制度生成</div>
+                                <div class="card-item">权限设计 / 清单输出</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 右：监管报送 -->
+                    <div class="track">
+                        <div class="track-title">赛道二：金融监管报送OPP</div>
+                        <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
+                            <div class="card">
+                                <div class="card-title">监管报送总专家</div>
+                                <div class="card-subtitle">思考框架</div>
+                                <div class="card-item">监管政策框架体系</div>
+                                <div class="card-item">报送方法论 / 项目管理</div>
+                                <div class="card-subtitle">核心Skill</div>
+                                <div class="card-item">专家调度 / 方案生成</div>
+                                <div class="card-item">法规检索 / PPT输出</div>
+                            </div>
+                            <div class="card">
+                                <div class="card-title">报表解析专家</div>
+                                <div class="card-subtitle">思考框架</div>
+                                <div class="card-item">监管制度解读</div>
+                                <div class="card-item">指标口径 / 填报说明</div>
+                                <div class="card-subtitle">核心Skill</div>
+                                <div class="card-item">法规检索 / 指标抽取</div>
+                                <div class="card-item">口径比对 / 手册生成</div>
+                            </div>
+                            <div class="card">
+                                <div class="card-title">源-报映射专家</div>
+                                <div class="card-subtitle">思考框架</div>
+                                <div class="card-item">字段映射 / 数据流转</div>
+                                <div class="card-item">缺失识别 / 补录方案</div>
+                                <div class="card-subtitle">核心Skill</div>
+                                <div class="card-item">矩阵生成 / 差异分析</div>
+                                <div class="card-item">字段匹配 / 映射输出</div>
+                            </div>
+                            <div class="card">
+                                <div class="card-title">校验规则专家</div>
+                                <div class="card-subtitle">思考框架</div>
+                                <div class="card-item">勾稽关系 / 校验逻辑</div>
+                                <div class="card-item">跨表验证 / 差错定位</div>
+                                <div class="card-subtitle">核心Skill</div>
+                                <div class="card-item">规则生成 / 逻辑梳理</div>
+                                <div class="card-item">校验设计 / 规则集输出</div>
+                            </div>
+                            <div class="card">
+                                <div class="card-title">质量诊断专家</div>
+                                <div class="card-subtitle">思考框架</div>
+                                <div class="card-item">问题分析 / 根因定位</div>
+                                <div class="card-item">整改建议 / 风险评估</div>
+                                <div class="card-subtitle">核心Skill</div>
+                                <div class="card-item">问题归类 / 风险评估</div>
+                                <div class="card-item">方案输出 / 报告生成</div>
+                            </div>
+                            <div class="card">
+                                <div class="card-title">报送流程专家</div>
+                                <div class="card-subtitle">思考框架</div>
+                                <div class="card-item">SOP流程 / 组织分工</div>
+                                <div class="card-item">审批机制 / 应急预案</div>
+                                <div class="card-subtitle">核心Skill</div>
+                                <div class="card-item">流程设计 / 制度生成</div>
+                                <div class="card-item">角色划分 / 模板输出</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="arrow">↓</div>
+
+        <!-- 第四层：Connector连接器 -->
+        <div class="layer layer-connector">
+            <div class="layer-title">
+                <span>第四层：Connector 连接器层</span>
+                <span class="tag">接口自动同步</span>
+            </div>
+            <div class="layer-content">
+                <div class="track-group">
+                    <div class="track" style="border-color:#10b981;">
+                        <div class="track-title" style="background:#d1fae5; color:#065f46;">数据治理 Connector</div>
+                        <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
+                            <div class="card">
+                                <div class="card-title">元数据接口</div>
+                                <div class="card-item">模型自动写入</div>
+                                <div class="card-item">采集任务配置</div>
+                            </div>
+                            <div class="card">
+                                <div class="card-title">数据标准接口</div>
+                                <div class="card-item">标准字典导入</div>
+                                <div class="card-item">码值映射同步</div>
+                            </div>
+                            <div class="card">
+                                <div class="card-title">质量规则接口</div>
+                                <div class="card-item">质检规则下发</div>
+                                <div class="card-item">校验脚本配置</div>
+                            </div>
+                            <div class="card">
+                                <div class="card-title">主数据接口</div>
+                                <div class="card-item">主数据目录同步</div>
+                                <div class="card-item">模型配置下发</div>
+                            </div>
+                            <div class="card">
+                                <div class="card-title">指标管理接口</div>
+                                <div class="card-item">指标体系导入</div>
+                                <div class="card-item">口径血缘同步</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="track" style="border-color:#f59e0b;">
+                        <div class="track-title" style="background:#fef3c7; color:#92400e;">监管报送 Connector</div>
+                        <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
+                            <div class="card">
+                                <div class="card-title">报表模板接口</div>
+                                <div class="card-item">报表结构导入</div>
+                                <div class="card-item">指标口径同步</div>
+                            </div>
+                            <div class="card">
+                                <div class="card-title">字段映射接口</div>
+                                <div class="card-item">ETL映射配置</div>
+                                <div class="card-item">取数规则下发</div>
+                            </div>
+                            <div class="card">
+                                <div class="card-title">校验规则接口</div>
+                                <div class="card-item">校验规则导入</div>
+                                <div class="card-item">勾稽逻辑配置</div>
+                            </div>
+                            <div class="card">
+                                <div class="card-title">报送调度接口</div>
+                                <div class="card-item">报送任务配置</div>
+                                <div class="card-item">流程调度下发</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="arrow">↓</div>
+
+        <!-- 第五层：产品落地 -->
+        <div class="layer layer-product">
+            <div class="layer-title">
+                <span>第五层：产品落地层</span>
+                <span class="tag">生产执行底座</span>
+            </div>
+            <div class="layer-content">
+                <div class="card product-card">
+                    <div class="card-title">亿信睿治数据治理平台</div>
+                    <div class="card-item">元数据管理模块</div>
+                    <div class="card-item">数据标准模块</div>
+                    <div class="card-item">数据质量模块</div>
+                    <div class="card-item">主数据管理模块</div>
+                    <div class="card-item">指标管理模块</div>
+                    <div class="card-item">数据安全模块</div>
+                </div>
+                <div class="card product-card">
+                    <div class="card-title">亿信统一监管报送平台（一表通）</div>
+                    <div class="card-item">报表模板管理</div>
+                    <div class="card-item">数据加工ETL</div>
+                    <div class="card-item">数据校验引擎</div>
+                    <div class="card-item">报文生成与报送</div>
+                    <div class="card-item">报送流程调度</div>
+                    <div class="card-item">质量监控与分析</div>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align:center; margin-top:20px; font-size:12px; color:#94a3b8;">
+            北京亿信华辰软件有限责任公司 · 金融业务创新中心 · OPP解决方案架构 V1.0
+        </div>
+    </div>
+</body>
+</html>

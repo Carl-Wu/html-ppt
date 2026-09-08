@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>金融业务创新中心 · 月度例会汇报（售前侧）</title>
+<style>
+  :root{
+    --blue:#0071e3; --blue-2:#42a5f5; --purple:#7c5cff; --green:#34c759;
+    --orange:#ff9f0a; --pink:#ff375f; --ink:#1d1d1f; --gray:#6e6e73;
+    --bg:#fbfbfd; --bg-2:#f5f5f7; --line:rgba(0,0,0,.08); --card:rgba(255,255,255,.72);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue","PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;line-height:1.5;}
+  nav{position:sticky;top:0;z-index:100;backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);background:rgba(251,251,253,.8);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;gap:20px;height:48px;font-size:13px;flex-wrap:wrap;}
+  nav a{color:var(--gray);text-decoration:none;transition:.3s;font-weight:500;}
+  nav a:hover{color:var(--ink);}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
+  section{padding:96px 0;border-bottom:1px solid var(--line);}
+  .eyebrow{color:var(--blue);font-weight:600;font-size:15px;letter-spacing:.4px;text-transform:uppercase;margin-bottom:14px;}
+  h1{font-size:clamp(36px,6.2vw,68px);font-weight:700;letter-spacing:-.02em;line-height:1.05;}
+  h2{font-size:clamp(28px,4.4vw,46px);font-weight:700;letter-spacing:-.02em;line-height:1.1;margin-bottom:16px;}
+  h3{font-size:22px;font-weight:600;letter-spacing:-.01em;margin-bottom:10px;}
+  .lead{font-size:clamp(16px,2.1vw,20px);color:var(--gray);max-width:860px;font-weight:400;line-height:1.55;}
+  .hero{text-align:center;padding:130px 0 108px;background:radial-gradient(1200px 600px at 50% -10%,rgba(0,113,227,.18),transparent 60%),radial-gradient(900px 500px at 80% 10%,rgba(124,92,255,.14),transparent 55%);}
+  .hero .badge{display:inline-block;border:1px solid var(--line);background:var(--card);backdrop-filter:blur(10px);border-radius:980px;padding:7px 18px;font-size:13px;color:var(--gray);margin-bottom:26px;font-weight:500;}
+  .hero h1{background:linear-gradient(120deg,#1d1d1f 30%,#0071e3 100%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .hero .lead{margin:20px auto 0;}
+  .scroll-hint{margin-top:54px;color:var(--gray);font-size:13px;letter-spacing:2px;}
+  .scroll-hint span{display:block;font-size:22px;animation:bob 1.8s infinite;}
+  @keyframes bob{0%,100%{transform:translateY(0);opacity:.5;}50%{transform:translateY(8px);opacity:1;}}
+  /* stat strip */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:48px;}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px 22px;backdrop-filter:blur(12px);text-align:center;}
+  .stat .v{font-size:40px;font-weight:700;letter-spacing:-1px;background:linear-gradient(120deg,#0071e3,#7c5cff);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .stat .l{font-size:13.5px;color:var(--gray);margin-top:8px;line-height:1.4;}
+  /* customer-type distribution cards */
+  .ctype-h{font-size:17px;font-weight:600;margin-top:38px;margin-bottom:2px;}
+  .ctype-sub{font-size:13px;color:var(--gray);margin-bottom:14px;}
+  .ctype-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;}
+  .ctype{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 12px;text-align:center;backdrop-filter:blur(12px);}
+  .ctype .n{font-size:26px;font-weight:700;background:linear-gradient(120deg,#0071e3,#7c5cff);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-.5px;}
+  .ctype .t{font-size:12.5px;color:var(--gray);margin-top:4px;line-height:1.3;}
+  .ctype.hl{border-color:rgba(0,113,227,.45);background:rgba(0,113,227,.06);}
+  .ctype.hl .n{background:linear-gradient(120deg,#0071e3,#34c759);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .ctype .tag{display:inline-block;font-size:10px;font-weight:700;color:#fff;background:var(--green);padding:1px 7px;border-radius:10px;margin-top:6px;}
+  /* policy timeline */
+  .tl{margin-top:34px;border-left:2px solid var(--line);padding-left:26px;}
+  .tl .it{position:relative;margin-bottom:16px;}
+  .tl .it::before{content:'';position:absolute;left:-33px;top:6px;width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,#0071e3,#7c5cff);box-shadow:0 0 0 4px rgba(0,113,227,.12);}
+  .tl .m{font-size:13px;font-weight:700;color:var(--blue);}
+  .tl .tt{font-size:14.5px;font-weight:600;margin:2px 0;}
+  .tl .d{font-size:13px;color:var(--gray);line-height:1.5;}
+  .src{display:inline-block;font-size:12px;font-weight:600;color:var(--blue);text-decoration:none;border:1px solid rgba(0,113,227,.32);background:rgba(0,113,227,.06);padding:2px 10px;border-radius:8px;margin-top:7px;transition:.25s;}
+  .src:hover{background:var(--blue);color:#fff;border-color:var(--blue);}
+  .src::after{content:" ↗";font-size:10.5px;opacity:.85;}
+  .pol h3 .src{margin-left:0;}
+  .tl .it.hl::before{background:linear-gradient(120deg,#0071e3,#34c759);box-shadow:0 0 0 4px rgba(52,199,89,.14);}
+  /* pillars / cards */
+  .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px;}
+  .pillar{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:32px 26px;backdrop-filter:blur(12px);transition:.5s;}
+  .pillar:hover{transform:translateY(-6px);box-shadow:0 24px 50px rgba(0,0,0,.08);}
+  .pillar .ico{font-size:32px;margin-bottom:12px;}
+  .pillar h3{font-size:20px;}
+  .pillar p{color:var(--gray);font-size:14.5px;}
+  /* opportunity table */
+  .tbl-scroll{overflow-x:auto;margin-top:40px;border-radius:20px;border:1px solid var(--line);background:var(--card);backdrop-filter:blur(12px);}
+  table.opp{width:100%;border-collapse:collapse;font-size:13px;min-width:1060px;}
+  table.opp thead th{background:var(--ink);color:#fff;font-weight:600;padding:12px 12px;text-align:left;position:sticky;top:0;font-size:12.5px;letter-spacing:.2px;}
+  table.opp tbody td{padding:11px 12px;border-top:1px solid var(--line);vertical-align:top;color:var(--ink);line-height:1.45;}
+  table.opp tbody tr:nth-child(even){background:rgba(0,0,0,.022);}
+  table.opp tbody tr.key{background:rgba(0,113,227,.07);}
+  table.opp tbody tr.key td:first-child{box-shadow:inset 4px 0 0 var(--blue);}
+  .badge-key{display:inline-block;font-size:10.5px;font-weight:700;color:#fff;background:var(--blue);padding:1px 7px;border-radius:20px;margin-left:6px;vertical-align:middle;letter-spacing:.3px;}
+  .prob{font-weight:700;}
+  .prob.hi{color:var(--green);} .prob.mid{color:var(--blue);} .prob.lo{color:var(--gray);}
+  .note{margin-top:26px;background:linear-gradient(120deg,rgba(52,199,89,.1),rgba(0,113,227,.07));border:1px solid rgba(52,199,89,.3);border-radius:18px;padding:20px 24px;font-size:14px;color:var(--ink);line-height:1.65;}
+  .note .t{color:var(--green);font-weight:700;font-size:14px;letter-spacing:.5px;margin-bottom:6px;}
+  /* needs matrix */
+  .needs{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:46px;}
+  .need{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:30px;backdrop-filter:blur(12px);}
+  .need h3{font-size:19px;display:flex;align-items:center;gap:10px;}
+  .need .tag{font-size:12px;font-weight:700;padding:4px 11px;border-radius:8px;color:#fff;}
+  .need ul{list-style:none;margin-top:14px;}
+  .need li{padding:10px 0;border-top:1px solid var(--line);font-size:14px;color:var(--gray);display:flex;gap:9px;}
+  .need li::before{content:"▸";color:var(--blue);font-weight:700;flex:0 0 auto;}
+  .need li b{color:var(--ink);}
+  /* policy cards */
+  .pol-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:46px;}
+  .pol{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px;backdrop-filter:blur(12px);}
+  .pol .meta{font-size:12px;font-weight:700;color:var(--purple);background:rgba(124,92,255,.1);padding:4px 11px;border-radius:8px;display:inline-block;margin-bottom:10px;letter-spacing:.3px;}
+  .pol h3{font-size:17px;line-height:1.35;}
+  .pol p{font-size:13.5px;color:var(--gray);line-height:1.6;margin-top:8px;}
+  .pol .rel{margin-top:12px;font-size:13px;color:var(--ink);background:rgba(0,113,227,.06);border-left:3px solid var(--blue);padding:10px 13px;border-radius:8px;}
+  .pol .rel b{color:var(--blue);}
+  /* planning cards */
+  .plan-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;margin-top:46px;}
+  .plan{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:30px;backdrop-filter:blur(12px);border-top:4px solid var(--blue);}
+  .plan.b{border-top-color:var(--purple);} .plan.c{border-top-color:var(--green);}
+  .plan .k{font-size:12px;font-weight:700;color:var(--blue);background:rgba(0,113,227,.1);padding:4px 11px;border-radius:8px;display:inline-block;margin-bottom:12px;}
+  .plan.b .k{color:var(--purple);background:rgba(124,92,255,.1);} .plan.c .k{color:var(--green);background:rgba(52,199,89,.1);}
+  .plan h3{font-size:19px;}
+  .plan ul{list-style:none;margin-top:12px;}
+  .plan li{padding:9px 0;border-top:1px solid var(--line);font-size:13.5px;color:var(--gray);display:flex;gap:9px;}
+  .plan li::before{content:"✓";color:var(--green);font-weight:700;flex:0 0 auto;}
+  .plan li b{color:var(--ink);}
+  .plan .src{margin-top:14px;font-size:12px;color:var(--gray);font-style:italic;}
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);}
+  .reveal.in{opacity:1;transform:none;}
+  .reveal.d1{transition-delay:.08s;} .reveal.d2{transition-delay:.16s;} .reveal.d3{transition-delay:.24s;}
+  footer{padding:46px 0;text-align:center;color:var(--gray);font-size:13px;}
+  footer b{color:var(--ink);}
+  @media(max-width:860px){.stats,.pillars,.needs,.pol-grid,.plan-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero">总览</a>
+  <a href="#work">工作统计</a>
+  <a href="#innov">创新成果</a>
+  <a href="#policy">政策通报</a>
+  <a href="#plan">未来规划</a>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="hero">
+  <div class="wrap">
+    <div class="badge reveal">北京亿信华辰 · 金融业务创新中心 · 月度例会</div>
+    <h1 class="reveal d1">金融业务创新中心<br/>月度工作汇报</h1>
+    <p class="lead reveal d2">围绕金融行业 AI 原生数据治理与监管报送方案，汇报在跟商机、新增方案成果、行业政策与未来规划。</p>
+    <div class="scroll-hint reveal d3">向下滑动<span>⌄</span></div>
+  </div>
+</header>
+
+<!-- 工作统计 -->
+<section id="work">
+  <div class="wrap">
+    <p class="eyebrow reveal">一、简要工作数据统计及说明</p>
+    <h2 class="reveal">在跟商机全景</h2>
+    <p class="lead reveal d1">截至本月，金融业务创新中心售前侧共跟进销售商机 26 项，其中重点跟进 14 项；商机覆盖 17 类金融机构（银行、证券、保险、理财、财务公司、金融租赁、消费金融、汽车金融、信托、金融科技公司及泛金融组织等），金租/融资租赁类客户集中度高（合计 8 家），与金租 AI 原生方案高度契合。</p>
+
+    <div class="stats reveal d2">
+      <div class="stat"><div class="v">26</div><div class="l">在跟商机总数（项）</div></div>
+      <div class="stat"><div class="v">14</div><div class="l">重点跟进（项）</div></div>
+      <div class="stat"><div class="v">￥1,122万</div><div class="l">已披露金额合计<br/>（13 项金额未披露）</div></div>
+      <div class="stat"><div class="v">17</div><div class="l">客户类型覆盖（类）</div></div>
+    </div>
+
+    <div class="ctype-h reveal">客户类型分布</div>
+    <div class="ctype-sub reveal">共 26 项商机，覆盖 17 类客户；标绿为金融租赁 / 融资租赁类（战略聚焦客群，合计 8 家）。</div>
+    <div class="ctype-grid reveal d1">
+      <div class="ctype hl"><div class="n">7</div><div class="t">金融租赁</div><span class="tag">金租主题</span></div>
+      <div class="ctype"><div class="n">2</div><div class="t">证券公司</div></div>
+      <div class="ctype"><div class="n">2</div><div class="t">财务公司</div></div>
+      <div class="ctype"><div class="n">2</div><div class="t">金融科技公司</div></div>
+      <div class="ctype hl"><div class="n">1</div><div class="t">融资租赁</div><span class="tag">金租主题</span></div>
+      <div class="ctype"><div class="n">1</div><div class="t">保险</div></div>
+      <div class="ctype"><div class="n">1</div><div class="t">保险公司</div></div>
+      <div class="ctype"><div class="n">1</div><div class="t">银行系理财子公司</div></div>
+      <div class="ctype"><div class="n">1</div><div class="t">商业银行</div></div>
+      <div class="ctype"><div class="n">1</div><div class="t">政策银行</div></div>
+      <div class="ctype"><div class="n">1</div><div class="t">消费金融</div></div>
+      <div class="ctype"><div class="n">1</div><div class="t">汽车金融公司</div></div>
+      <div class="ctype"><div class="n">1</div><div class="t">信托公司</div></div>
+      <div class="ctype"><div class="n">1</div><div class="t">社会组织</div></div>
+      <div class="ctype"><div class="n">1</div><div class="t">政府机关</div></div>
+      <div class="ctype"><div class="n">1</div><div class="t">地方国企</div></div>
+      <div class="ctype"><div class="n">1</div><div class="t">企业</div></div>
+    </div>
+
+    <div class="tbl-scroll reveal d1">
+      <table class="opp">
+        <thead><tr><th>序号</th><th>销售</th><th>预计签订</th><th>项目名称</th><th>概率</th><th>项目金额</th><th>项目类型</th><th>客户类型</th><th>直销/伙伴</th></tr></thead>
+        <tbody>
+          <tr class="key"><td>1</td><td>王瑞</td><td>202609</td><td>中国互联网金融协会ABI一站式数据分析平台产品采购<span class="badge-key">重点</span></td><td class="prob mid">50%</td><td>￥200,000</td><td>ABI</td><td>社会组织</td><td>直销</td></tr>
+          <tr class="key"><td>2</td><td>巩悦</td><td>202609</td><td>外汇管理局青海分局BI工具项目<span class="badge-key">重点</span></td><td class="prob mid">49%</td><td>￥300,000</td><td>ABI</td><td>政府机关</td><td>直销</td></tr>
+          <tr class="key"><td>3</td><td>巩悦</td><td>202610</td><td>恒邦财险-abi<span class="badge-key">重点</span></td><td class="prob mid">49%</td><td>￥1,200,000</td><td>ABI+AI</td><td>保险</td><td>江西普惠征信</td></tr>
+          <tr><td>4</td><td>巩悦</td><td>202608</td><td>紫金集团主数据管理-博彦科技</td><td class="prob mid">49%</td><td>￥300,000</td><td>AI+主数据</td><td>地方国企</td><td>博彦科技</td></tr>
+          <tr><td>5</td><td>巩悦</td><td>202608</td><td>力鸿集团数据治理平台建设项目</td><td class="prob mid">49%</td><td>￥250,000</td><td>AI+数据治理</td><td>企业</td><td>直销</td></tr>
+          <tr><td>6</td><td>王瑞</td><td>/</td><td>泰山财险数据中台建设项目</td><td class="prob lo">30%</td><td>￥1,200,000</td><td>数据中台</td><td>保险公司</td><td>直销</td></tr>
+          <tr class="key"><td>7</td><td>王瑞</td><td>202609</td><td>金融街证券数据治理产品模块采购项目<span class="badge-key">重点</span></td><td class="prob hi">80%</td><td>￥870,000</td><td>AI+数据治理</td><td>证券公司</td><td>直销（华宇信息）</td></tr>
+          <tr class="key"><td>8</td><td>巩悦</td><td>/</td><td>湖北交投集团财务有限公司监管报送项目<span class="badge-key">重点</span></td><td class="prob lo">10%</td><td>/</td><td>监管报送</td><td>财务公司</td><td>直销</td></tr>
+          <tr class="key"><td>9</td><td>刘骁璇</td><td>202610</td><td>徽银理财数据治理项目<span class="badge-key">重点</span></td><td class="prob lo">20%</td><td>￥3,000,000</td><td>AI+数据治理</td><td>银行系理财子公司</td><td>直销（华宇信息）</td></tr>
+          <tr><td>10</td><td>巩悦</td><td>202611</td><td>山东省城市商业银行合作联盟集团主数据平台</td><td class="prob lo">30%</td><td>/</td><td>主数据</td><td>金融科技公司</td><td>直销</td></tr>
+          <tr class="key"><td>11</td><td>闻鑫</td><td>/</td><td>国银金租AI咨询规划及开发项目<span class="badge-key">重点</span></td><td class="prob lo">10%</td><td>/</td><td>AI数据底座+智问</td><td>金融租赁</td><td>直销</td></tr>
+          <tr><td>12</td><td>巩悦</td><td>/</td><td>北汽汽车金融数据治理平台建设项目</td><td class="prob lo">30%</td><td>/</td><td>AI+数据治理</td><td>汽车金融公司</td><td>直销</td></tr>
+          <tr><td>13</td><td>刘骁璇</td><td>202611</td><td>浙商证券主数据项目</td><td class="prob lo">/</td><td>/</td><td>主数据</td><td>证券公司</td><td>直销</td></tr>
+          <tr><td>14</td><td>邴艳清</td><td>202611</td><td>华能天成融资租赁有限公司数据治理项目</td><td class="prob lo">/</td><td>/</td><td>数据治理</td><td>金融租赁</td><td>直销</td></tr>
+          <tr><td>15</td><td>汪鑫</td><td>202610</td><td>前海兴邦PetaBase数据库扩容</td><td class="prob mid">50%</td><td>/</td><td>petabase</td><td>金融租赁</td><td>直销</td></tr>
+          <tr><td>16</td><td>汪鑫</td><td>/</td><td>华润数科金控监管项目</td><td class="prob lo">10%</td><td>￥400,000</td><td>监管报送</td><td>金融科技公司</td><td>直销</td></tr>
+          <tr><td>17</td><td>汪鑫</td><td>/</td><td>横琴华通数据安全项目</td><td class="prob lo">/</td><td>￥100,000</td><td>数据安全</td><td>金融租赁</td><td>直销</td></tr>
+          <tr><td>18</td><td>王瑞</td><td>202610</td><td>恒丰银行-数据治理</td><td class="prob mid">45%</td><td>/</td><td>AI+数据治理</td><td>商业银行</td><td>直销</td></tr>
+          <tr class="key"><td>19</td><td>王瑞</td><td>/</td><td>中国进出口银行-congnos替换项目<span class="badge-key">重点</span></td><td class="prob lo">/</td><td>￥2,000,000</td><td>ABI</td><td>政策银行</td><td>直销</td></tr>
+          <tr><td>20</td><td>刘骁璇</td><td>/</td><td>皖江金融租赁股份有限公司智问项目</td><td class="prob lo">/</td><td>/</td><td>智问</td><td>金融租赁</td><td>直销</td></tr>
+          <tr class="key"><td>21</td><td>巩悦</td><td>/</td><td>航天科工财务有限责任公司数据治理项目<span class="badge-key">重点</span></td><td class="prob lo">/</td><td>/</td><td>AI+数据治理</td><td>财务公司</td><td>直销</td></tr>
+          <tr class="key"><td>22</td><td>汪鑫</td><td>/</td><td>华润融资租赁有限公司数据治理项目<span class="badge-key">重点</span></td><td class="prob mid">40%</td><td>￥1,000,000</td><td>AI+数据治理</td><td>融资租赁</td><td>直销</td></tr>
+          <tr class="key"><td>23</td><td>汪鑫</td><td>/</td><td>平安利顺国际货币经纪公司数据安全<span class="badge-key">重点</span></td><td class="prob lo">/</td><td>￥400,000</td><td>数据安全</td><td>信托公司</td><td>直销</td></tr>
+          <tr class="key"><td>24</td><td>闻鑫</td><td>/</td><td>招商局租赁智问项目<span class="badge-key">重点</span></td><td class="prob lo">/</td><td>/</td><td>智问</td><td>金融租赁</td><td>直销</td></tr>
+          <tr class="key"><td>25</td><td>汪鑫</td><td>/</td><td>中邮消费金融数据治理项目<span class="badge-key">重点</span></td><td class="prob lo">/</td><td>/</td><td>AI+数据治理</td><td>消费金融</td><td>直销</td></tr>
+          <tr class="key"><td>26</td><td>雷继业</td><td>/</td><td>通达金租监管报送项目<span class="badge-key">重点</span></td><td class="prob lo">/</td><td>/</td><td>监管报送</td><td>金融租赁</td><td>直销</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note reveal"><span class="t">重点跟进说明</span>　标蓝行为本月重点跟进项目（共 14 项）：中国互联网金融协会ABI、国银金租AI咨询规划及开发、招商局租赁智问、中邮消费金融数据治理，以及恒邦财险-abi、外汇管理局青海分局BI、金融街证券数据治理、湖北交投财务监管报送、徽银理财数据治理、中国进出口银行cognos替换、航天科工财务数据治理、华润融资租赁数据治理、平安利顺数据安全、通达金租监管报送。其中金融街证券（80%）、恒邦财险（49%）、华润融资租赁（40%）成单概率靠前，建议优先配置售前资源；监管报送与数据安全类（湖北交投、通达金租、平安利顺）与金租 AI 原生监管报送方案形成直接印证；国银金租、招商局租赁、中邮消费金融、互金协会等印证金租/泛金融 AI 原生数据治理与智问方案的市场广度。</div>
+  </div>
+</section>
+
+<!-- 创新方案成果 -->
+<section id="innov">
+  <div class="wrap">
+    <p class="eyebrow reveal">二、新增方案成果</p>
+    <h2 class="reveal">新增方案与客户需求洞察</h2>
+    <p class="lead reveal d1">售前侧新增两套金融行业解决方案能力，并基于在跟客户沟通，沉淀出清晰的需求分层模型。</p>
+
+    <div class="pillars">
+      <div class="pillar reveal d1"><div class="ico">🧠</div><h3>金融行业 AI 数据治理方案</h3><p>面向已建 / 未建数据治理平台的客户，提供"平台 + AI 治理能力"：智能建标落标、AI 质量检核、元数据血缘自动解析、分类分级，呼应金监总局 AI 治理与数据治理要求。</p></div>
+      <div class="pillar reveal d2"><div class="ico">💬</div><h3>智问方案（ChatBI / 智能体）</h3><p>以对话式智能体承载数据问答、报表解读、监管指标查询，覆盖 ChatBI 型与风控 / 营销 / 运营自动化等"其他型"AI 应用，落实"人工智能+金融"场景落地。</p></div>
+      <div class="pillar reveal d3"><div class="ico">🗂️</div><h3>金租 AI 原生方案（基座）</h3><p>以桌面 Agent + 睿治 + 统一监管报送平台 + AI 专家团，支撑数据治理与监管报送 OPP 一人交付，作为行业纵深打法。</p></div>
+    </div>
+
+    <h3 class="reveal" style="margin-top:48px">客户核心需求分层（基于今年已沟通客户）</h3>
+    <div class="needs">
+      <div class="need reveal d1">
+        <h3><span class="tag" style="background:var(--blue)">数据治理</span></h3>
+        <ul>
+          <li><b>已建平台，需 AI 治理能力</b>：在既有治理平台上升级智能建标、质量检核、血缘解析、分类分级（如中邮消费金融、交通银行）</li>
+          <li><b>未建平台，需平台 + AI 能力</b>：从 0 搭建数据治理平台并内置 AI 能力（如金融街证券、华润融资租赁、徽银理财）</li>
+        </ul>
+      </div>
+      <div class="need reveal d2">
+        <h3><span class="tag" style="background:var(--purple)">AI 应用</span></h3>
+        <ul>
+          <li><b>ChatBI 型</b>：对话式数据问答、报表解读、指标查询（如恒邦财险-abi、国银金租智问、皖江/招商局租赁智问）</li>
+          <li><b>其他型（风控 / 营销 / 运营自动化）</b>：智能风控、精准营销、中后台流程自动化（政策鼓励方向，多客户有潜在需求）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 政策通报 -->
+<section id="policy">
+  <div class="wrap">
+    <p class="eyebrow reveal">三、政策新闻通报（2026 · 金融行业）</p>
+    <h2 class="reveal">2026 年数据治理与 AI 应用政策全景</h2>
+    <p class="lead reveal d1">2026 年金融监管层从年初起密集出台数据治理与"人工智能+金融"政策，贯穿 1—7 月（叠加"十五五"规划定调），覆盖银行保险及非银非租机构，直接印证我方 AI 数据治理与智问方案的市场时机。</p>
+
+    <h3 class="ctype-h reveal">政策时间轴（2026 全年 · 按月梳理）</h3>
+    <div class="tl reveal d1">
+      <div class="it hl"><div class="m">2026.01</div><div class="tt">金监总局《银行业保险业数字金融高质量发展实施方案》（开年一号文 · 33 项任务）<a class="src" href="https://www.nfra.gov.cn/cn/view/pages/governmentDetail.html?docId=1239741" target="_blank" rel="noopener">来源</a></div><div class="d">"AI+金融"与"数据要素×"双轮驱动；强化企业级数据治理、数据质量源头管控、智能风控与监管数字化智能化转型。</div></div>
+      <div class="it"><div class="m">2026.01</div><div class="tt">央行金融统计制度（征求意见稿）<a class="src" href="https://www.pbc.gov.cn" target="_blank" rel="noopener">来源</a></div><div class="d">数字人民币首次纳入常态化统计；"五篇大文章"贷款口径精细化拆分，强制跨表/跨系统一致性校验。</div></div>
+      <div class="it hl"><div class="m">2026.01</div><div class="tt">金监总局 金发〔2025〕40号 · 1104 报表制度升级<a class="src" href="https://www.sohu.com/a/970542397_120920581" target="_blank" rel="noopener">来源</a></div><div class="d">新增托管业务独立报表，覆盖金融租赁/消费金融/理财子；监管从"总量统计"转向"精细化穿透监测"。</div></div>
+      <div class="it"><div class="m">2026.01</div><div class="tt">金办发〔2025〕93号 · 数据安全管理能力提升专项行动（至 2026 年底）<a class="src" href="https://www.nfra.gov.cn" target="_blank" rel="noopener">来源</a></div><div class="d">六大维度 118 项要点；明确"谁管业务、谁管数据、谁负责安全"与分类分级动态管理。</div></div>
+      <div class="it"><div class="m">2026.01</div><div class="tt">国家数据局《九个领域"数据要素×"典型场景指引》<a class="src" href="https://www.nda.gov.cn/sjj/zwgk/zjjd/0111/20260111171132934450264_pc.html" target="_blank" rel="noopener">来源</a></div><div class="d">金融服务业梳理 11 大方向、49 个领域、115 个典型场景，落地"数据打通金融堵点"。</div></div>
+      <div class="it"><div class="m">2026.01</div><div class="tt">国家网信办《金融信息服务数据分类分级指南（征求意见稿）》<a class="src" href="https://www.ce.cn/macro/more/202606/t20260615_3031883.shtml" target="_blank" rel="noopener">来源</a></div><div class="d">首次将金融数据按重要程度划分为核心/重要/敏感一般/常规一般四级。</div></div>
+      <div class="it"><div class="m">2026.02</div><div class="tt">国家数据局等《关于培育数据流通服务机构 加快推进数据要素市场化价值化的意见》<a class="src" href="https://big5.www.gov.cn/gate/big5/www.gov.cn/zhengce/zhengceku/202602/content_7057405.htm" target="_blank" rel="noopener">来源</a></div><div class="d">培育数据商、交易所、服务商，支持银行参与数据要素流通生态建设。</div></div>
+      <div class="it"><div class="m">2026.03</div><div class="tt">《中华人民共和国金融法（草案）》公开征求意见<a class="src" href="https://big5.nfra.gov.cn/cn/view/pages/ItemDetail.html?docId=1252211&itemId=925&generaltype=0" target="_blank" rel="noopener">来源</a></div><div class="d">首部金融领域基础性法律，确立全覆盖监管与兜底监管机制。</div></div>
+      <div class="it"><div class="m">2026.03</div><div class="tt">央行调查统计工作会议 · 数据质量是统计生命线<a class="src" href="https://www.pbc.gov.cn" target="_blank" rel="noopener">来源</a></div><div class="d">完善"1+N"五篇大文章统计制度，常态化金融统计执法检查，严厉打击数据造假。</div></div>
+      <div class="it hl"><div class="m">2026.03</div><div class="tt">《十五五规划纲要》· 实施 AI 等科技战略<a class="src" href="https://www.gov.cn/yaowen/liebiao/202603/content_7062633.htm?pageId=273585&websiteId=160748&wfwfid=75096" target="_blank" rel="noopener">来源</a></div><div class="d">加强 AI 数据治理和安全技术研究应用，深化拓展"人工智能+"，赋能治理能力提升。</div></div>
+      <div class="it"><div class="m">2026.05</div><div class="tt">《中国人民银行法（修订草案）》提请审议<a class="src" href="https://www.pbc.gov.cn" target="_blank" rel="noopener">来源</a></div><div class="d">明确数字人民币法定地位，新增宏观审慎管理与金融稳定章节。</div></div>
+      <div class="it"><div class="m">2026.05</div><div class="tt">金监总局《理财公司监管评级暂行办法》<a class="src" href="https://www.nfra.gov.cn" target="_blank" rel="noopener">来源</a></div><div class="d">六维度评价框架、1—6 级与 S 级，分类监管引导理财回归资管本源。</div></div>
+      <div class="it hl"><div class="m">2026.06</div><div class="tt">六部门《金融信息服务数据分类分级指南》（正式印发）<a class="src" href="https://www.ce.cn/macro/more/202606/t20260615_3031883.shtml" target="_blank" rel="noopener">来源</a></div><div class="d">3 类 9 类 67 三级、四级分类分级体系；跨部门联合检查，内外数据分级同步合规。</div></div>
+      <div class="it hl"><div class="m">2026.06</div><div class="tt">金监总局《银行业保险业人工智能安全开发应用的指导意见》（金发〔2026〕8号 · AI 32条）<a class="src" href="https://www.nfra.gov.cn/cn/view/pages/ItemDetail.html?docId=1261784&itemId=861&generaltype=1" target="_blank" rel="noopener">来源</a></div><div class="d">AI 全生命周期治理、数据治理、高质量数据集、知识工程；高风险应用准入管理。</div></div>
+      <div class="it"><div class="m">2026.06</div><div class="tt">广西 / 福建等地"五篇大文章""数智赋能"行动方案落地<a class="src" href="https://www.nfra.gov.cn" target="_blank" rel="noopener">来源</a></div><div class="d">区域推进 DCMM 贯标与 AI 融合，释放 ChatBI、智能风控、营销、运营自动化需求。</div></div>
+      <div class="it hl"><div class="m">2026.07</div><div class="tt">金监总局《银行保险机构数据安全管理办法（征求意见稿）》<a class="src" href="https://big5.nfra.gov.cn/cn/view/pages/ItemDetail.html?docId=1155866&itemId=915&generaltype=0" target="_blank" rel="noopener">来源</a></div><div class="d">九章八十一条，明确数据安全治理、分类分级、个人信息保护与 AI 模型统一管理。</div></div>
+      <div class="it"><div class="m">2026.07</div><div class="tt">央行+金监总局《金融行业 / 银行业保险业网络安全管理办法（征求意见稿）》<a class="src" href="https://big5.nfra.gov.cn/cn/view/pages/ItemDetail.html?docId=1264207&itemId=951&generaltype=2" target="_blank" rel="noopener">来源</a></div><div class="d">构建"治理—运行—监测—应急"框架，明确 AI 赋能下安全运营与分类分级保护基线。</div></div>
+      <div class="it"><div class="m">2026.07</div><div class="tt">九部门《关于加强科技金融领域数据开发利用的通知》+ 目录 1.0<a class="src" href="https://finance.people.com.cn/BIG5/n1/2026/0729/c1004-40770467.html" target="_blank" rel="noopener">来源</a></div><div class="d">8 大类 26 指标，引导"数字信用画像 + 智能风控 + 产业链图谱"的数据融合应用。</div></div>
+    </div>
+
+    <h3 class="ctype-h reveal">重点政策解读与对我方启示</h3>
+    <div class="pol-grid">
+      <div class="pol reveal d1"><span class="meta">2026.01 · 金监总局</span><h3>《银行业保险业数字金融高质量发展实施方案》<a class="src" href="https://www.nfra.gov.cn/cn/view/pages/governmentDetail.html?docId=1239741" target="_blank" rel="noopener">来源</a></h3><p>开年一号文，33 项任务。以"数字技术与数据要素双轮驱动"为核心，要求强化企业级数据治理、数据标准与质量源头管控，加快发展"人工智能+金融"，建设智能风控与监管数字化能力。</p><div class="rel"><b>启示：</b>数据治理从"建平台"转向"治理实效"考核，正契合我方 AI 数据治理方案与金租 AI 原生打法。</div></div>
+      <div class="pol reveal d2"><span class="meta">2026.01 · 金监总局</span><h3>1104 报表升级 + "一表通"穿透监管<a class="src" href="https://www.sohu.com/a/970542397_120920581" target="_blank" rel="noopener">来源</a></h3><p>托管业务单独成表，覆盖金融租赁/消费金融/理财子；监管直调客户/合约/交易全量明细，校验规则数千条，从"事后上报"转"实时穿透"。</p><div class="rel"><b>启示：</b>监管报送进入明细级自动化时代，对应我方统一监管报送平台与金租 AI 原生监管报送 OPP（#8、#16、#26）。</div></div>
+      <div class="pol reveal d1"><span class="meta">2026.01 · 国家数据局</span><h3>《九个领域"数据要素×"典型场景指引》<a class="src" href="https://www.nda.gov.cn/sjj/zwgk/zjjd/0111/20260111171132934450264_pc.html" target="_blank" rel="noopener">来源</a></h3><p>金融服务业 11 大方向、49 领域、115 场景，覆盖科技金融、绿色金融、普惠金融、养老金融、数字金融，明确"数据打通金融堵点"路径。</p><div class="rel"><b>启示：</b>数据要素价值释放成为主线，睿治数据资产管理与"数据要素×"场景可打包进行业方案。</div></div>
+      <div class="pol reveal d2"><span class="meta">2026.03 · 顶层</span><h3>《十五五规划纲要》+《金融法（草案）》<a class="src" href="https://www.gov.cn/yaowen/liebiao/202603/content_7062633.htm?pageId=273585&websiteId=160748&wfwfid=75096" target="_blank" rel="noopener">十五五</a> <a class="src" href="https://big5.nfra.gov.cn/cn/view/pages/ItemDetail.html?docId=1252211&itemId=925&generaltype=0" target="_blank" rel="noopener">金融法</a></h3><p>十五五实施 AI 等科技战略、加强 AI 数据治理；金融法草案确立全覆盖监管与兜底监管，数据合规上升为法定义务。</p><div class="rel"><b>启示：</b>AI 数据治理与合规成为长期刚性需求，售前叙事应从"项目交付"升级为"战略能力共建"。</div></div>
+      <div class="pol reveal d1"><span class="meta">2026.06 · 六部门</span><h3>《金融信息服务数据分类分级指南》<a class="src" href="https://www.ce.cn/macro/more/202606/t20260615_3031883.shtml" target="_blank" rel="noopener">来源</a></h3><p>3 类 9 类 67 三级、四级（核心/重要/敏感一般/常规一般）分类分级体系；操作路径：梳理→分类→分级→清单→报送→动态更新；跨部门联合检查。</p><div class="rel"><b>启示：</b>分类分级成硬要求，对应睿治"数据安全管理/分类分级"模块与数据安全项目（#17 横琴华通、#23 平安利顺）。</div></div>
+      <div class="pol reveal d2"><span class="meta">2026.06 · 金监总局</span><h3>《银行业保险业人工智能安全开发应用指导意见》（AI 32条）<a class="src" href="https://www.nfra.gov.cn/cn/view/pages/ItemDetail.html?docId=1261784&itemId=861&generaltype=1" target="_blank" rel="noopener">来源</a></h3><p>建立 AI 全生命周期治理、数据治理与高质量数据集、知识工程；实施风险分类分级与高风险应用准入管理。</p><div class="rel"><b>启示：</b>金融机构须同步建 AI 治理+数据治理+知识工程，正是我方"AI 数据治理方案 + 智问方案"的价值锚点。</div></div>
+      <div class="pol reveal d1"><span class="meta">2026.07 · 金监总局</span><h3>《银行保险机构数据安全管理办法（征求意见稿）》<a class="src" href="https://big5.nfra.gov.cn/cn/view/pages/ItemDetail.html?docId=1155866&itemId=915&generaltype=0" target="_blank" rel="noopener">来源</a></h3><p>九章八十一条，明确数据安全治理、分类分级、个人信息保护与 AI 模型统一管理（可验证、可审核、可追溯）。</p><div class="rel"><b>启示：</b>数据安全合规刚性增强，推动数据安全类商机（#17、#23）加速落地。</div></div>
+      <div class="pol reveal d2"><span class="meta">2026.07 · 央行+金监总局</span><h3>《网络安全管理办法（征求意见稿）》<a class="src" href="https://big5.nfra.gov.cn/cn/view/pages/ItemDetail.html?docId=1264207&itemId=951&generaltype=2" target="_blank" rel="noopener">来源</a></h3><p>构建"治理—运行—监测—应急"网络安全框架，明确 AI 赋能下的安全运营与分类分级保护基线。</p><div class="rel"><b>启示：</b>AI 应用的安全运营成标配，智问/AI 治理方案需内置安全护栏、脱敏与审计留痕。</div></div>
+      <div class="pol reveal d1"><span class="meta">2026.07 · 九部门</span><h3>《关于加强科技金融领域数据开发利用的通知》<a class="src" href="https://finance.people.com.cn/BIG5/n1/2026/0729/c1004-40770467.html" target="_blank" rel="noopener">来源</a></h3><p>发布全国科技金融数据目录 1.0（8 大类 26 指标），引导构建科创企业数字信用画像、智能风控与产业链图谱。</p><div class="rel"><b>启示：</b>数据融合驱动智能风控成政策鼓励方向，ChatBI 与智问在科创金融场景可规模复制。</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 未来规划 -->
+<section id="plan" style="border-bottom:none">
+  <div class="wrap">
+    <p class="eyebrow reveal">四、未来规划</p>
+    <h2 class="reveal">两个规划，一个战略落地规划</h2>
+    <p class="lead reveal d1">围绕金租 AI 原生打法，形成"售前方案+交付方案“，以及初步战略落地规划</p>
+
+    <div class="plan-grid">
+      <div class="plan reveal d1" onclick="window.open('sub/金租AI_Native_解决方案.html','_blank')" style="cursor:pointer"><span class="k">规划一</span><h3>金租 AI 原生<br/>数据治理与监管报送方案</h3>
+        <ul>
+          <li><b>定位</b>：面向客户宣讲的售前方案</li>
+          <li><b>五层架构</b>：交互层（桌面 Agent）→ AI 专家层（治理/报送专家团）→ 能力层（Skills/Tools/连接）→ 平台能力层（睿治十大模块 + 报送全制度全流程）→ 知识底座（监管 + 治理双库）</li>
+          <li><b>卖点</b>：AI 专家即能力、平台即执行、知识可溯源</li>
+        </ul>
+        <div class="src">详见：金租AI_Native_解决方案.html</div>
+      </div>
+      <div class="plan b reveal d2" onclick="window.open('sub/金租AI_Native_OPP交付方案.html','_blank')" style="cursor:pointer"><span class="k">规划二</span><h3>金租 AI 原生<br/>OPP 交付方案</h3>
+        <ul>
+          <li><b>定位</b>：FDE 工程师一人交付模式</li>
+          <li><b>五层架构</b>：操盘层（FDE）→ Agent 编排层（EsXWork）→ AI 专家团 → 平台原生能力 → 交付落地</li>
+          <li><b>交付</b>：治理/报送各 7 阶段，产物落睿治与报送平台</li>
+          <li><b>改造</b>：平台 8 项 AI Native 提升 + FDE 八项能力模型</li>
+        </ul>
+        <div class="src">详见：金租AI_Native_OPP交付方案.html</div>
+      </div>
+      <div class="plan c reveal d3" onclick="window.open('sub/AI_Native_战略落地方案.html','_blank')" style="cursor:pointer"><span class="k">落地战略</span><h3>AI 原生战略<br/>落地规划</h3>
+        <ul>
+          <li><b>定位</b>：部门战略执行蓝图</li>
+          <li><b>战略屋</b>：愿景 / 中心目标 / 5 支柱 / 地基</li>
+          <li><b>OGSM</b>：O 目标、G 量化（客户数/营收/周期/转化率）、S 策略、M 衡量</li>
+          <li><b>资源</b>：人力 / 资金 / 技术 / 知识 / 组织五类</li>
+        </ul>
+        <div class="src">详见：AI_Native_战略落地方案.html</div>
+      </div>
+    </div>
+
+    <div class="note reveal"><span class="t">本月行动建议</span>　① 重点跟进 14 项中成单概率靠前者（金融街证券、恒邦财险、华润融资租赁）优先投入，力争本季落单；② 以监管报送与安全类商机（湖北交投、通达金租、平安利顺）验证金租 AI 原生监管报送方案；③ 借 2026 数据治理与 AI 政策窗口，强化售前材料中的合规与 AI 治理叙事。</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <b>北京亿信华辰软件有限责任公司 · 金融业务创新中心</b><br/>
+  </div>
+</footer>
+
+<script>
+  const obs=new IntersectionObserver((e)=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in');});},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
