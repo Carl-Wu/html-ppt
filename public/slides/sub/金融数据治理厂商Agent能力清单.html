@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>中国数据治理厂商 · 治理 Agent 能力全景清单</title>
+<style>
+  :root{
+    --blue:#0071e3; --purple:#7c5cff; --green:#34c759; --orange:#ff9f0a; --pink:#ff375f;
+    --bg:#fbfbfd; --card:rgba(255,255,255,.72); --line:rgba(0,0,0,.08);
+    --ink:#1d1d1f; --gray:#6e6e73;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro SC","PingFang SC","Helvetica Neue",sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased;letter-spacing:.2px}
+  .nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:50;
+    background:rgba(255,255,255,.6);backdrop-filter:saturate(180%) blur(20px);
+    border:1px solid var(--line);border-radius:100px;padding:8px 14px;display:flex;gap:4px;box-shadow:0 4px 24px rgba(0,0,0,.08)}
+  .nav a{font-size:12.5px;color:var(--gray);text-decoration:none;padding:6px 12px;border-radius:100px;transition:.25s}
+  .nav a:hover{color:var(--ink);background:rgba(0,0,0,.04)}
+  .hero{min-height:88vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 24px 40px}
+  .eyebrow{font-size:15px;font-weight:600;color:var(--blue);letter-spacing:2px;text-transform:uppercase;margin-bottom:18px}
+  .hero h1{font-size:clamp(30px,5vw,58px);font-weight:700;line-height:1.1;letter-spacing:-1px;
+    background:linear-gradient(120deg,var(--blue),var(--purple));-webkit-background-clip:text;background-clip:text;color:transparent;max-width:18em}
+  .hero p{margin-top:22px;font-size:clamp(15px,2vw,19px);color:var(--gray);max-width:40em}
+  .scroll{margin-top:40px;font-size:13px;color:var(--gray);animation:bob 1.8s infinite}
+  @keyframes bob{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(8px);opacity:1}}
+  section{max-width:1080px;margin:0 auto;padding:72px 24px}
+  h2{font-size:clamp(24px,3.4vw,38px);font-weight:700;letter-spacing:-.5px;text-align:center;margin-bottom:10px}
+  h2 .u{background:linear-gradient(120deg,var(--blue),var(--purple));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{text-align:center;color:var(--gray);font-size:15px;margin-bottom:38px;max-width:46em;margin-left:auto;margin-right:auto}
+  .cards{display:grid;gap:18px}
+  .grid4{grid-template-columns:repeat(4,1fr)}
+  .grid2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:860px){.grid4,.grid2{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.grid4,.grid2{grid-template-columns:1fr}}
+  .stat{background:var(--card);backdrop-filter:blur(20px);border:1px solid var(--line);border-radius:20px;padding:26px 18px;text-align:center}
+  .stat .v{font-size:40px;font-weight:700;background:linear-gradient(120deg,var(--blue),var(--purple));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat .l{font-size:13px;color:var(--gray);margin-top:6px;line-height:1.4}
+  .tbl{width:100%;border-collapse:separate;border-spacing:0;background:var(--card);backdrop-filter:blur(20px);
+    border:1px solid var(--line);border-radius:18px;overflow:hidden;font-size:13.5px}
+  .tbl th{background:linear-gradient(120deg,rgba(0,113,227,.92),rgba(124,92,255,.92));color:#fff;text-align:left;
+    padding:13px 14px;font-weight:600;font-size:13px;position:sticky;top:0}
+  .tbl td{padding:12px 14px;border-top:1px solid var(--line);vertical-align:top}
+  .tbl tbody tr:hover{background:rgba(0,113,227,.04)}
+  .tbl .co{font-weight:600;color:var(--ink)}
+  .tbl .small{font-size:12px;color:var(--gray)}
+  .badge{display:inline-block;font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:100px;white-space:nowrap}
+  .b-y{background:rgba(52,199,89,.16);color:#1a7f37}
+  .b-n{background:rgba(255,159,10,.18);color:#9a6200}
+  .b-w{background:rgba(255,55,95,.14);color:#b32145}
+  .cap{border-radius:20px;padding:26px 24px;color:#fff;position:relative;overflow:hidden}
+  .cap.g{background:linear-gradient(135deg,#0a84ff,#0071e3)}
+  .cap.p{background:linear-gradient(135deg,#7c5cff,#5b3df0)}
+  .cap.o{background:linear-gradient(135deg,#ff9f0a,#ff8000)}
+  .cap h3{font-size:20px;font-weight:700;margin-bottom:10px}
+  .cap ul{list-style:none;font-size:14px;line-height:1.9}
+  .cap ul li::before{content:"▹ ";opacity:.8}
+  .pb{background:var(--card);backdrop-filter:blur(20px);border:1px solid var(--line);border-radius:18px;padding:22px 22px}
+  .pb h3{font-size:16.5px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+  .pb .dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+  .pb p{font-size:13.5px;color:var(--gray);margin-top:6px}
+  .pb .ai{font-size:12.5px;margin-top:10px;padding:9px 12px;background:rgba(0,0,0,.035);border-radius:12px;border-left:3px solid var(--orange)}
+  .note{background:rgba(0,113,227,.06);border:1px solid rgba(0,113,227,.18);border-radius:18px;padding:20px 22px;font-size:14px;color:var(--ink)}
+  .note .t{font-weight:700;color:var(--blue);display:block;margin-bottom:8px}
+  .src-grid{display:grid;gap:10px;grid-template-columns:repeat(2,1fr)}
+  @media(max-width:640px){.src-grid{grid-template-columns:1fr}}
+  .src{display:block;font-size:13px;color:var(--gray);text-decoration:none;background:var(--card);border:1px solid var(--line);
+    border-radius:12px;padding:11px 14px;transition:.2s}
+  .src:hover{color:var(--blue);border-color:rgba(0,113,227,.4);transform:translateY(-2px)}
+  .src b{color:var(--ink);font-weight:600}
+  .reveal{opacity:0;transform:translateY(28px);transition:.7s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+  footer{text-align:center;color:var(--gray);font-size:12.5px;padding:40px 24px 70px}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="#top">概览</a>
+  <a href="#list">完整清单</a>
+  <a href="#agent">已接 Agent</a>
+  <a href="#noagent">未接 Agent</a>
+</nav>
+
+<div class="hero" id="top">
+  <div class="eyebrow reveal">金融行业创新中心 · 竞品对标</div>
+  <h1 class="reveal d1">中国数据治理厂商<br/>治理 Agent 能力全景清单</h1>
+  <div class="scroll reveal d3">向下滚动查看完整清单 ⌄</div>
+</div>
+
+<!-- 概览 -->
+<section>
+  <h2 class="reveal">市场<span class="u">概览</span></h2>
+  <p class="sub reveal d1">2026 国内数据治理市场突破 920 亿元（信通院），AI 原生与全栈信创成采购硬指标。IDC《中国 Data Agent 2026》评估入选 18 家、仅 4 家进入领导者象限。</p>
+  <div class="cards grid4 reveal d2">
+    <div class="stat"><div class="v">21</div><div class="l">调研数据治理厂商（家）</div></div>
+    <div class="stat"><div class="v">11</div><div class="l">已接入治理 Agent（家）</div></div>
+    <div class="stat"><div class="v">10</div><div class="l">金融做治理·未接 Agent（家）</div></div>
+    <div class="stat"><div class="v">5年</div><div class="l">连续 IDC 市场第一<br/>（亿信华辰·睿治）</div></div>
+  </div>
+  <div class="note reveal d3" style="margin-top:22px">
+    <span class="t">口径说明</span>
+    「已接入治理 Agent」＝以大模型为决策内核、多智能体协同执行治理任务（如元数据/标准/质量 Agent、治理大脑、对话即操作）；「未接 Agent」＝以传统平台 + 单点 AI 辅助（智能推荐/自动落标/资产盘点）或基本无 AI 治理能力的厂商。恩核、数语科技属「有 AI 辅助但非 Agent 编排」，最易与 Agent 化方案混淆，已在清单中单独标注。
+  </div>
+</section>
+
+<!-- 完整清单 -->
+<section id="list">
+  <h2 class="reveal">完整<span class="u">清单</span></h2>
+  <p class="sub reveal d1">21 家厂商全量对照：产品、金融数据治理布局、是否接入治理 Agent、现有 AI 能力。</p>
+  <div style="overflow-x:auto" class="reveal d2">
+  <table class="tbl">
+    <thead><tr><th>厂商</th><th>核心产品</th><th>金融数据治理布局</th><th>治理 Agent</th><th>现有 AI 能力（非 Agent 部分）</th></tr></thead>
+    <tbody>
+      <tr><td class="co" id="c-esen">亿信华辰</td><td>睿治 Agent</td><td>全行业；金融/政务/能源标杆，连续 5 年 IDC 市场第一</td><td><span class="badge b-y">已接</span></td><td>多智能体 + 治理大脑（元数据/标准/质量/安全 Agent、智能建模、对话式 ETL）</td></tr>
+      <tr><td class="co">阿里云</td><td>DataWorks Data Agent</td><td>互联网/零售为主，金融私有化弱</td><td><span class="badge b-y">已接</span></td><td>开发/治理/分析/运维 Agent 套件 + Skill 库；IDC Data Agent 2026 领导者第一</td></tr>
+      <tr><td class="co">百分点科技</td><td>AI-DG（百思 BS-LM）</td><td>政务/应急/央国企</td><td><span class="badge b-y">已接</span></td><td>垂类大模型 + 全链路多智能体协同、对话即操作</td></tr>
+      <tr><td class="co">用友</td><td>BIP 多 Agents 协作平台</td><td>央国企/大型制造，金融弱</td><td><span class="badge b-y">已接</span></td><td>16 个专业 Agent，源头治理（ERP 凭证生成即校验）</td></tr>
+      <tr><td class="co">普元</td><td>易数（数字员工）</td><td>金融有落地，元数据专项</td><td><span class="badge b-y">已接·弱</span></td><td>标准生成/半结构化标注/质量评估智能体；规模化自动治理落地待完善</td></tr>
+      <tr><td class="co">华为云</td><td>DataArts Studio</td><td>政企/金融国企（信创）</td><td><span class="badge b-y">已接</span></td><td>盘古大模型 + AI4Data 引擎，标准推荐 + 质量探查</td></tr>
+      <tr><td class="co">腾讯云</td><td>WeData</td><td>金融/游戏/互联网</td><td><span class="badge b-y">已接</span></td><td>Data+AI 一体化、语义层协同治理、编码辅助 Agent</td></tr>
+      <tr><td class="co">火山引擎</td><td>DataLeap</td><td>泛互联网/制造/新零售</td><td><span class="badge b-y">已接</span></td><td>AI Agent 辅助开发运维、字段级血缘自动解析</td></tr>
+      <tr><td class="co">三维天地</td><td>企业级知识工厂</td><td>能源/制造/医药央国企</td><td><span class="badge b-y">已接</span></td><td>数据资源盘点智能体，自动生成目录、智能更新元数据</td></tr>
+      <tr><td class="co">金蝶</td><td>云·苍穹</td><td>制造/零售/集团型</td><td><span class="badge b-y">已接</span></td><td>动态领域模型 + 生成式/判别式 AI 嵌入式治理</td></tr>
+      <tr><td class="co">微软</td><td>Purview</td><td>跨国企业（云到端）</td><td><span class="badge b-y">已接</span></td><td>治理+安全+合规一体，自定义质量规则、可配置质量门槛</td></tr>
+
+      <tr><td class="co">恩核 Encore</td><td>EDGP / EDAP</td><td><b>银行基因最强</b>：交行/光大/民生/华夏/农信；IDC 金融治理典型厂商</td><td><span class="badge b-n">未接</span></td><td>传统 AI：NLP 智能推荐/自动落标/资产盘点，<b>无 Agent 编排</b></td></tr>
+      <tr><td class="co">数语科技</td><td>Datablau DAM</td><td>金融建模专精（银行/金租）</td><td><span class="badge b-n">未接·单点</span></td><td>AIC 引擎：元数据补全/标准推荐，单点智能、非全链路 Agent</td></tr>
+      <tr><td class="co">京东科技</td><td>JD DataWorks</td><td>金融级数据治理 + AI 分析一体化</td><td><span class="badge b-n">未接</span></td><td>偏 AI 分析侧，治理 Agent 未体系化</td></tr>
+      <tr><td class="co">数梦工厂</td><td>DTSphere River</td><td>政务为主，金融较少</td><td><span class="badge b-n">未接</span></td><td>基础 AI 辅助，<b>无全链路智能治理</b></td></tr>
+      <tr><td class="co">星环科技</td><td>大数据平台</td><td>金融底层技术/国产替代</td><td><span class="badge b-n">未接</span></td><td>平台型厂商，治理 AI 非卖点</td></tr>
+      <tr><td class="co">龙石数据</td><td>数据治理平台</td><td>政企专业型（产品+培训+陪跑）</td><td><span class="badge b-n">未接</span></td><td>方法论 + 人工陪跑，未强调 AI</td></tr>
+      <tr><td class="co">科大讯飞</td><td>Data Governance</td><td>政务/企业多源异构</td><td><span class="badge b-n">未接</span></td><td>治理平台未主打 Agent（虽有大模型）</td></tr>
+      <tr><td class="co">浪潮云</td><td>DataStage</td><td>政务/国产化适配</td><td><span class="badge b-n">未接</span></td><td>未强调治理 Agent</td></tr>
+      <tr><td class="co">袋鼠云</td><td>数栈 DTinsight</td><td>DataOps 一站式</td><td><span class="badge b-n">未接</span></td><td>未强调治理 Agent</td></tr>
+      <tr><td class="co">Talend</td><td>数据集成/质量</td><td>开源生态</td><td><span class="badge b-n">未接</span></td><td>传统工具，无治理 Agent</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- 已接 Agent -->
+<section id="agent">
+  <h2 class="reveal">已接入治理<span class="u"> Agent</span>的厂商</h2>
+  <p class="sub reveal d1">11 家已落地治理 Agent / 多智能体。</p>
+  <div class="cards grid2 reveal d2">
+    <div class="pb"><h3><span class="dot" style="background:var(--green)"></span>亿信华辰 · 睿治 Agent</h3><p>全链路 AI 原生 + 全栈信创 + 多行业落地，连续 5 年 IDC 第一。 yourselves。</p><div class="ai">差异化：全模块闭环 + 私有化 + 金融/政务多行业，不与云厂商拼公有云生态。</div></div>
+    <div class="pb"><h3><span class="dot" style="background:var(--green)"></span>阿里云 · DataWorks Data Agent</h3><p>开发/治理/分析/运维 Agent 套件 + Skill 库，IDC Data Agent 2026 领导者第一。</p><div class="ai">边界：金融私有化/信创部署能力弱，偏公有云。</div></div>
+    <div class="pb"><h3><span class="dot" style="background:var(--green)"></span>百分点 / 用友 / 普元 / 三维天地</h3><p>百分点垂类大模型全链路；用友 16 Agent 源头治理；普元"数字员工"（落地弱）；三维天地盘点智能体。</p><div class="ai">边界：百分点偏政务央国企；用友/金蝶绑定 ERP；普元智能化规模化待完善。</div></div>
+    <div class="pb"><h3><span class="dot" style="background:var(--green)"></span>华为 / 腾讯 / 火山 / 金蝶 / 微软</h3><p>华为盘古 DataAgent（信创）；腾讯 WeData 语义协同；火山开发运维 Agent；金蝶嵌入式；Purview 合规一体。</p><div class="ai">边界：华为绑定云底座；腾讯/火山偏互联网；微软跨国合规。</div></div>
+  </div>
+</section>
+
+<!-- 未接 Agent -->
+<section id="noagent">
+  <h2 class="reveal">金融做治理·<span class="u">未接 Agent</span>的厂商</h2>
+  <p class="sub reveal d1">10 家在金融行业有数据治理项目/平台。</p>
+  <div class="cards grid2 reveal d2">
+    <div class="cap o"><h3>① 有 AI 辅助 · 非 Agent（金融强相关）</h3>
+      <ul>
+        <li><b>恩核 Encore</b>：银行基因最强（交行/光大/民生/华夏/农信），传统 AI 智能推荐/自动落标/资产盘点，无 Agent 编排</li>
+        <li><b>数语科技 Datablau DAM</b>：金融建模专精（银行/金租），AIC 单点引擎（元数据补全/标准推荐），非全链路 Agent</li>
+        <li><b>京东科技 JD DataWorks</b>：金融级治理 + AI 分析，治理 Agent 未体系化</li>
+      </ul>
+    </div>
+    <div class="cap g"><h3>② 基本未强调 AI 治理（平台/实施型）</h3>
+      <ul>
+        <li><b>数梦工厂 DTSphere River</b>：政务为主，基础 AI 辅助、无全链路智能治理</li>
+        <li><b>星环科技</b>：金融底层技术/国产替代，治理 AI 非卖点</li>
+        <li><b>龙石数据</b>：政企专业型，方法论+陪跑，未强调 AI</li>
+        <li><b>科大讯飞 / 浪潮云 / 袋鼠云 / Talend</b>：政务或通用型，未主打治理 Agent</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- 来源 
+<section id="src">
+  <h2 class="reveal">信息<span class="u">来源</span></h2>
+  <p class="sub reveal d1">公开报道与厂商官网整理（截至 2026-09），点击可新窗口打开核实。</p>
+  <div class="src-grid reveal d2">
+    <a class="src" href="https://news.iresearch.cn/yx/2026/05/556505.shtml" target="_blank" rel="noopener"><b>艾瑞咨询</b> · 2026 主流数据治理平台排名（睿治第一）</a>
+    <a class="src" href="https://www.cww.net.cn/article?id=611369" target="_blank" rel="noopener"><b>通信世界网</b> · 三大梯队厂商能力与 AI 评价</a>
+    <a class="src" href="https://tech.ifeng.com/c/8vRouL0GFDl" target="_blank" rel="noopener"><b>凤凰网科技</b> · 睿治 Agent 能力详述</a>
+    <a class="src" href="https://tech.china.com.cn/sx/20260901/413750.shtml" target="_blank" rel="noopener"><b>中国网科技</b> · IDC 中国 Data Agent 2026（阿里云第一）</a>
+    <a class="src" href="https://www.cet.com.cn/wzsy/kjzx/cygdzx/10406336.shtml" target="_blank" rel="noopener"><b>中国经济新闻网</b> · 百分点 AI-DG 测评</a>
+    <a class="src" href="https://www.cet.com.cn/wzsy/kjzx/cygdzx/10399537.shtml" target="_blank" rel="noopener"><b>中国经济新闻网</b> · Data Agent 落地实测（用友/DataLeap）</a>
+    <a class="src" href="https://www.cet.com.cn/xwsd/10437083.shtml" target="_blank" rel="noopener"><b>中国经济新闻网</b> · 三维天地知识工厂</a>
+    <a class="src" href="https://www.cet.com.cn/wzsy/kjzx/10416309.shtml" target="_blank" rel="noopener"><b>中国经济新闻网</b> · AI 重塑数据治理（用友/微软 Purview）</a>
+    <a class="src" href="https://t.cj.sina.cn/articles/view/7970864572/1db19bdbc00101xc98" target="_blank" rel="noopener"><b>新浪财经</b> · 平台智能体化三类路线（普元数字员工）</a>
+    <a class="src" href="https://www.sohu.com/a/1035225313_114822" target="_blank" rel="noopener"><b>搜狐</b> · AI 驱动治理升级（六家厂商速览）</a>
+    <a class="src" href="https://news.yesky.com/hotnews/161/354661.shtml" target="_blank" rel="noopener"><b>天极网</b> · 数语/数梦/普元 评测</a>
+    <a class="src" href="http://www.eh-data.com/page19?article_id=178" target="_blank" rel="noopener"><b>恩核官网</b> · 金融产品体系与 AI 能力</a>
+    <a class="src" href="https://aiqicha.baidu.com/details/ugknowledge?id=ec528cfa2faeb027f9a2d46bebe9e0aa" target="_blank" rel="noopener"><b>爱企查</b> · 数据治理厂家排名（京东/讯飞/浪潮/星环/袋鼠云）</a>
+    <a class="src" href="https://shirley@segmentfault.com/a/1190000047980032" target="_blank" rel="noopener"><b>SegmentFault</b> · 11 大厂商排名（龙石数据等）</a>
+  </div>
+</section>
+-->
+<footer>中国数据治理厂商 · 治理 Agent 能力全景清单　|　金融业务创新中心售前侧竞品对标　</footer>
+
+<script>
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

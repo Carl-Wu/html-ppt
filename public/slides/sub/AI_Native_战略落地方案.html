@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>金租数据治理 & 监管报送 · AI 原生战略落地方案</title>
+<title>金融数据治理 & 监管报送 · AI 原生战略落地方案</title>
 <style>
   :root{
     --blue:#0071e3; --blue-2:#42a5f5; --purple:#7c5cff; --green:#34c759;
@@ -13,9 +13,11 @@
   *{box-sizing:border-box;margin:0;padding:0;}
   html{scroll-behavior:smooth;}
   body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue","PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;line-height:1.5;}
-  nav{position:sticky;top:0;z-index:100;backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);background:rgba(251,251,253,.8);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;gap:22px;height:48px;font-size:13px;flex-wrap:wrap;}
-  nav a{color:var(--gray);text-decoration:none;transition:.3s;font-weight:500;}
-  nav a:hover{color:var(--ink);}
+  .nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:50;
+    background:rgba(255,255,255,.6);backdrop-filter:saturate(180%) blur(20px);
+    border:1px solid var(--line);border-radius:100px;padding:8px 14px;display:flex;gap:4px;box-shadow:0 4px 24px rgba(0,0,0,.08)}
+  .nav a{font-size:12.5px;color:var(--gray);text-decoration:none;padding:6px 12px;border-radius:100px;transition:.25s}
+  .nav a:hover{color:var(--ink);background:rgba(0,0,0,.04)}
   .wrap{max-width:1140px;margin:0 auto;padding:0 24px;}
   section{padding:108px 0;border-bottom:1px solid var(--line);}
   .eyebrow{color:var(--blue);font-weight:600;font-size:15px;letter-spacing:.4px;text-transform:uppercase;margin-bottom:14px;}
@@ -89,7 +91,7 @@
 </head>
 <body>
 
-<nav>
+<nav class="nav">
   <a href="#hero">总览</a>
   <a href="#house">战略屋</a>
   <a href="#ogsm">OGSM</a>
@@ -100,7 +102,7 @@
 <header class="hero" id="hero">
   <div class="wrap">
     <div class="badge reveal">金融业务创新中心 · 战略落地方案</div>
-    <h1 class="reveal d1">金租 AI 原生<br/>数据治理与监管报送 OPP<br/>战略落地方案</h1>
+    <h1 class="reveal d1">金融 AI 原生<br/>数据治理与监管报送 OPP<br/>战略落地方案</h1>
     <p class="lead reveal d2">以「战略屋（OGSM）→ 资源需求」为主线，将 AI 原生解决方案转化为可衡量、可考核的部门执行蓝图。</p>
     <div class="scroll-hint reveal d3">向下滑动<span>⌄</span></div>
   </div>
@@ -111,29 +113,28 @@
   <div class="wrap">
     <p class="eyebrow reveal">战略屋 · Strategy House</p>
     <h2 class="reveal">一张图看懂战略全貌</h2>
-    <p class="lead reveal d1">战略屋把"愿景—目标—能力—成功要素—支柱—地基"结构化，让领导一眼看清我们靠什么赢、赢在哪、靠什么支撑。</p>
 
     <div class="house reveal d2">
-      <div class="roof"><div class="rt">愿景与战略主题<small>成为金租行业 AI 原生数据治理与监管报送的首选合作伙伴</small></div></div>
+      <div class="roof"><div class="rt">愿景与战略主题<small>成为金融行业 AI 原生数据治理与监管报送的首选合作伙伴</small></div></div>
       <div class="house-body">
         <div class="wall">
           <h4>左墙 · 核心竞争力</h4>
           <ul>
             <li>AI 专家团编排能力</li>
             <li>睿治 + 报送平台产品力</li>
-            <li>金租行业知识沉淀</li>
-            <li>OPP / FDE 交付方法论</li>
+            <li>金融行业知识沉淀</li>
+            <li>OPP /PM 交付方法论</li>
             <li>端到端一站式能力</li>
           </ul>
         </div>
         <div class="center-col">
           <div class="obj">
             <h4>战略中心目标（O）</h4>
-            <p>以 AI Native OPP 模式，规模化拓展金租数据治理与监管报送市场，实现业务高质量增长</p>
+            <p>以 AI Native OPP 模式，规模化拓展金融数据治理与监管报送市场，实现业务高质量增长</p>
           </div>
           <div class="pillars-h">
             <div class="pillar-h"><div class="n">支柱1</div><div class="t">产品力升级</div><div class="d">睿治/报送平台 AI Native 化</div></div>
-            <div class="pillar-h"><div class="n">支柱2</div><div class="t">市场拓展</div><div class="d">金租客户规模化覆盖</div></div>
+            <div class="pillar-h"><div class="n">支柱2</div><div class="t">市场拓展</div><div class="d">金融客户规模化覆盖</div></div>
             <div class="pillar-h"><div class="n">支柱3</div><div class="t">交付革命</div><div class="d">OPP / FDE 一人交付</div></div>
             <div class="pillar-h"><div class="n">支柱4</div><div class="t">资产化</div><div class="d">知识库与标准沉淀</div></div>
             <div class="pillar-h"><div class="n">支柱5</div><div class="t">组织力</div><div class="d">团队/技能/激励</div></div>
@@ -170,25 +171,26 @@
         <table>
           <thead><tr><th style="width:120px">维度</th><th>内容</th></tr></thead>
           <tbody>
-            <tr><td><b>O 战略目标</b></td><td>在金租行业确立「AI 原生数据治理 + 监管报送」差异化竞争优势，实现业务规模化、可复制、高质量增长。</td></tr>
+            <tr><td><b>O 战略目标</b></td><td>在金融行业确立「AI 原生数据治理 + 监管报送」差异化竞争优势，实现业务规模化、可复制、高质量增长。</td></tr>
             <tr><td><b>G 量化目标</b></td><td>
               G1 单项目交付周期：以数据治理项目为例，周期由6个月缩短至2个月<br/>
-              G2 客户验收满意度 ≥ 90%
+              G2 单项目现场交付人员：以数据治理项目为例，周期由3-5人减少至1人<br/>
+              G3 客户验收满意度 ≥ 90%
             </td></tr>
             <tr><td><b>S 关键策略</b></td><td>
               S1 平台 AI Native 化改造（MCP/API/NL2Action，让 Agent 可调用平台能力）<br/>
-              S2 打造标准化 OPP 交付方法论 + FDE 能力模型并跑通试点<br/>
+              S2 打造标准化 OPP 交付方法论 + PM 能力模型并跑通试点<br/>
               S3 建设金租行业知识库（监管制度 + 数据治理标准/质检/分类分级）<br/>
               S4 售前体系升级（AI 专家团对外宣讲 + 桌面 Agent 演示）<br/>
               S5 开发建设 AI 专家团（治理/报送专家能力模型，封装专家知识、技能与 Tools 工具）
             </td></tr>
             <tr><td><b>M 衡量指标</b></td><td>
               M1 平台改造完成模块数 / 上线 MCP 工具数（≥8 模块、≥40 工具）<br/>
-              M2 知识库条目：监管制度 ≥30 类、金租标准 ≥50 套、质检规则 ≥500 条<br/>
-              M3 OPP 试点项目数 / 平均交付周期 / 复用率 ≥80%<br/>
+              M2 知识库条目：监管制度 、金租标准 、质检规则 <br/>
+              M3 OPP 试点项目数 / 平均交付周期 / 现场交付人员数量 <br/>
               M4 商机数 / 转化率 / 标杆案例数<br/>
               M5 客户满意度 / 复购率 / 营收达成率<br/>
-              M6 专家团建设：治理/报送专家角色数与能力模型，封装专家知识/技能/Tools 工具数（≥2 类专家、≥20 个工具）
+              M6 专家团建设：治理/报送专家角色数与能力模型，封装专家知识/技能/Tools 工具数
             </td></tr>
           </tbody>
         </table>
@@ -207,9 +209,8 @@
     <div class="pb-grid reveal d1">
       <div class="pb"><span class="k">人力资源</span><h3>角色与编制</h3>
         <p>
-        • 平台 AI 化研发：3–4 人（前端/后端/接口/MCP）<br/>
-        • 知识库 / RAG 算法：1–2 人<br/>
-        • FDE 交付工程师：5–8 人（可复用现有交付资源）<br/>
+        • 平台 AI 化研发：3–4 人（前端/后端/接口/MCP/RAG算法）<br/>
+        • 交付工程师：5–8 人<br/>
         • 售前专家：2–3 人<br/>
         • 项目管理（PMO）：1 人<br/>
         • 产品经理（平台 AI 化）：1 人<br/>
@@ -246,8 +247,8 @@
 
 <footer>
   <div class="wrap">
-    <b>金租数据治理 &amp; 监管报送 · AI 原生战略落地方案（简化版：战略屋 · OGSM · 资源需求）</b> · 金融业务创新中心<br/>
-    北京亿信华辰软件有限责任公司
+    <b>金融数据治理 &amp; 监管报送 · AI 原生战略落地方案</b><br/> 
+   北京亿信华辰软件有限责任公司 · 金融业务创新中心 · 吴思全
   </div>
 </footer>
 
