@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>AI原生营销提升公司营销能力 · 二组课题结题报告</title>
+<style>
+:root{
+  --bg:#ffffff;
+  --bg2:#f8fbff;
+  --card-bg:rgba(255,255,255,0.92);
+  --card-border:#d6e6fb;
+  --card-border-hover:#0066FF;
+  --brand:#0066FF;
+  --brand-2:#4da3ff;
+  --brand-dim:rgba(0,102,255,0.08);
+  --brand-light:rgba(0,102,255,0.04);
+  --text:#1f2b3d;
+  --text2:#58657a;
+  --text3:#8a94a6;
+  --line:#e6effa;
+  --green:#16a34a;
+  --amber:#d97706;
+  --red:#e6455f;
+  --purple:#7C4DFF;
+  --shadow:0 2px 12px rgba(0,102,255,0.06);
+  --shadow-hover:0 6px 24px rgba(0,102,255,0.10);
+  --f1:-apple-system,BlinkMacSystemFont,'SF Pro Display','SF Pro Text','PingFang SC','Helvetica Neue',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:var(--f1);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+
+#bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:linear-gradient(110deg,#ffffff 0%,#f1f7ff 40%,#e8f3ff 66%,#e1efff 100%);
+  overflow:hidden}
+.bg-shape{position:absolute;border-radius:50%;filter:blur(60px);opacity:.4}
+.bg-shape-1{width:520px;height:520px;background:radial-gradient(circle,rgba(0,102,255,.09),transparent 70%);top:-150px;left:-120px;animation:shapeFloat 18s ease-in-out infinite}
+.bg-shape-2{width:380px;height:380px;background:radial-gradient(circle,rgba(124,77,255,.07),transparent 70%);top:60px;right:-100px;animation:shapeFloat 22s ease-in-out infinite reverse}
+.bg-shape-3{width:300px;height:300px;background:radial-gradient(circle,rgba(22,163,74,.06),transparent 70%);bottom:40px;left:160px;animation:shapeFloat 26s ease-in-out infinite}
+@keyframes shapeFloat{0%,100%{transform:translate(0,0)}33%{transform:translate(22px,-24px)}66%{transform:translate(-14px,18px)}}
+
+#deck{position:fixed;inset:0;z-index:10}
+.slide{position:absolute;inset:0;display:none;flex-direction:column}
+.slide.active{display:flex;animation:slideReveal .6s cubic-bezier(.22,.61,.36,1)}
+@keyframes slideReveal{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.slide-wrapper{position:absolute;inset:0;display:flex;flex-direction:column;z-index:1}
+.slide-inner{position:absolute;inset:0;display:flex;flex-direction:column;overflow-y:auto;padding:58px 52px 40px}
+.slide-inner::-webkit-scrollbar{width:6px}
+.slide-inner::-webkit-scrollbar-track{background:transparent}
+.slide-inner::-webkit-scrollbar-thumb{background:rgba(0,102,255,.2);border-radius:3px}
+
+/* 封面 / 结尾 */
+.slide-hero .slide-wrapper{justify-content:center;align-items:center}
+.slide-hero .slide-inner{position:relative;padding:0;width:100%;height:100%;justify-content:center;align-items:center;text-align:center;overflow:hidden}
+.cover-content{max-width:1060px;padding:52px 60px;border-radius:22px;background:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.85);box-shadow:0 20px 70px rgba(0,90,220,.10);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.cover-top{font-size:12px;letter-spacing:.42em;color:var(--brand);font-weight:700;text-transform:uppercase;margin-bottom:26px}
+.cover-title{font-size:clamp(38px,5vw,62px);font-weight:900;color:var(--text);line-height:1.12;letter-spacing:.02em}
+.cover-title em{font-style:normal;background:linear-gradient(90deg,#0066FF,#7C4DFF);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.cover-divider{width:52px;height:3px;background:linear-gradient(90deg,#0066FF,#7C4DFF);border-radius:2px;margin:26px auto}
+.cover-subtitle{font-size:clamp(19px,2.1vw,26px);font-weight:700;color:var(--text2);margin-bottom:8px}
+.cover-meta{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:22px}
+.cover-meta-item{font-size:14.5px;color:var(--text2);padding:7px 16px;border-radius:999px;background:rgba(0,102,255,.06);border:1px solid rgba(0,102,255,.16);letter-spacing:.02em}
+.cover-meta-item b{color:var(--brand);font-weight:700}
+.cover-bottom{font-size:13px;color:var(--text3);letter-spacing:.2em;margin-top:34px;text-transform:uppercase}
+
+/* 内容页通用 */
+.sec-head{flex-shrink:0}
+.sec-kicker{font-size:12px;letter-spacing:.2em;color:var(--brand);font-weight:800;text-transform:uppercase;margin-bottom:5px}
+.sec-title{font-size:clamp(22px,2.6vw,32px);font-weight:800;color:var(--text);line-height:1.2;display:flex;align-items:center;gap:12px}
+.sec-title .cn{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;padding:0 8px;border-radius:9px;background:var(--brand-dim);color:var(--brand);font-size:15px;flex:none}
+.sec-sub{font-size:16px;color:var(--text2);margin-top:7px;line-height:1.6;font-weight:500}
+.cbody{display:flex;flex-direction:column;gap:14px;flex:1;min-height:0;margin-top:16px}
+
+.card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:13px;padding:15px 18px;box-shadow:var(--shadow);transition:transform .3s,border-color .3s,box-shadow .3s;position:relative;overflow:hidden}
+.card:hover{transform:translateY(-3px);border-color:var(--card-border-hover);box-shadow:var(--shadow-hover)}
+.card .ct{font-size:17.5px;font-weight:800;color:var(--text);display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.card .ct .dot{width:8px;height:8px;border-radius:50%;flex:none;background:var(--ac,var(--brand))}
+.card p{font-size:15px;color:var(--text2);line-height:1.7}
+.card li{font-size:15.5px;color:var(--text2);line-height:1.65}
+.card ul{padding-left:1em;display:flex;flex-direction:column;gap:4px;margin-top:2px}
+
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.g5{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+
+.chip{display:inline-flex;align-items:center;gap:5px;padding:4px 11px;border-radius:999px;border:1px solid var(--card-border);background:#fff;font-size:13.5px;color:var(--text2);font-weight:600}
+.chip b{color:var(--brand)}
+
+.tag{display:inline-flex;align-items:center;padding:3px 10px;border-radius:8px;background:var(--brand-dim);color:var(--brand);font-size:12.5px;font-weight:700;letter-spacing:.04em}
+
+.hl{color:var(--brand);font-weight:700}
+.num-badge{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;padding:0 6px;border-radius:999px;background:var(--brand-dim);color:var(--brand);font-weight:800;font-size:13px;margin-right:6px}
+
+.flow{display:flex;align-items:stretch;flex-wrap:wrap;gap:6px}
+.flow .step{flex:1;min-width:120px;text-align:center;padding:12px 8px;border:1px solid var(--card-border);border-radius:10px;background:#fff;font-size:14.5px;color:var(--text);font-weight:700;line-height:1.3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.flow .step small{font-size:12.5px;color:var(--text3);font-weight:600}
+.flow .arrow{flex:none;display:flex;align-items:center;color:var(--brand);font-weight:800}
+
+.kpi-val{font-size:clamp(26px,3vw,40px);font-weight:900;color:var(--brand);font-feature-settings:"tnum";line-height:1}
+.kpi-val small{font-size:16px;color:var(--text3);font-weight:700;margin-left:3px}
+
+.notice{border-left:3px solid var(--brand);background:linear-gradient(135deg,rgba(0,102,255,.06),rgba(0,102,255,.015));border-radius:0 10px 10px 0;padding:13px 18px;font-size:15px;color:var(--text2);line-height:1.75;font-weight:500}
+.notice b{color:var(--brand)}
+
+.divider-line{height:1px;background:var(--line);margin:2px 0}
+
+/* 目录 */
+.toc-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:6px}
+.toc-card{display:flex;flex-direction:column;gap:6px;padding:15px 17px;cursor:pointer;background:var(--card-bg);border:1px solid var(--card-border);border-radius:13px;transition:all .3s;box-shadow:var(--shadow)}
+.toc-card:hover{transform:translateY(-3px);border-color:var(--brand);box-shadow:var(--shadow-hover)}
+.toc-card .toc-n{font-size:12.5px;letter-spacing:.15em;color:var(--brand);font-weight:800}
+.toc-card .toc-t{font-size:17px;font-weight:800;color:var(--text)}
+.toc-card .toc-d{font-size:13.5px;color:var(--text3);line-height:1.5}
+
+/* KPI 网格 */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.kpi-box{padding:14px 16px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:12px;box-shadow:var(--shadow)}
+.kpi-box .lb{font-size:13.5px;color:var(--text2);font-weight:600;margin-bottom:6px}
+.kpi-box .vl{font-size:clamp(23px,2.6vw,34px);font-weight:900;color:var(--brand);font-feature-settings:"tnum";line-height:1}
+.kpi-box .vl small{font-size:14px;color:var(--text3)}
+.kpi-box .ds{font-size:12.5px;color:var(--text3);margin-top:5px;line-height:1.4}
+
+/* 数字员工 服/技/知 */
+.de-stack{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.de-card{display:flex;flex-direction:column;gap:10px;padding:16px 18px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:13px;box-shadow:var(--shadow)}
+.de-head{display:flex;align-items:center;gap:9px}
+.de-num{font-size:11px;letter-spacing:.16em;color:var(--brand);font-weight:800}
+.de-name{font-size:18px;font-weight:800;color:var(--text)}
+.de-desc{font-size:14px;color:var(--text2);line-height:1.6}
+.de-sec{font-size:12px;font-weight:800;color:var(--brand);margin-bottom:5px;display:flex;align-items:center;gap:5px}
+.de-sec::before{content:'';width:3px;height:12px;border-radius:2px;background:var(--brand)}
+.de-list{display:flex;flex-direction:column;gap:4px}
+.de-list span{font-size:13.5px;color:var(--text2);line-height:1.55;padding-left:13px;position:relative}
+.de-list span::before{content:'';position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--brand-dim)}
+.de-value{font-size:13.5px;color:var(--text2);line-height:1.65}
+
+/* 表格 */
+.tbl{border-collapse:collapse;width:100%;font-size:14.5px}
+.tbl th{background:var(--brand-light);color:var(--brand);padding:9px 12px;text-align:left;font-weight:700;border-bottom:1px solid var(--line);white-space:nowrap}
+.tbl td{padding:9px 12px;border-bottom:1px solid var(--line);color:var(--text2);vertical-align:top;line-height:1.6}
+.tbl tbody tr:nth-child(even){background:rgba(0,102,255,.02)}
+.tbl strong{color:var(--brand);font-weight:700}
+
+/* 效果截图画廊 */
+.shot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:4px}
+.shot-card{cursor:pointer;border:1px solid var(--card-border);border-radius:11px;overflow:hidden;background:#fff;transition:all .3s;display:flex;flex-direction:column}
+.shot-card:hover{transform:translateY(-3px);border-color:var(--brand);box-shadow:var(--shadow-hover)}
+ .shot-card img{width:100%;height:170px;object-fit:contain;object-position:top;background:linear-gradient(180deg,#f4f9ff,#fff);display:block}
+ .shot-card .cap{padding:6px 10px;font-size:13px;color:var(--text2);font-weight:600;text-align:center;border-top:1px solid var(--line)}
+.shot-modal{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:3vh 3vw;background:rgba(5,10,25,.8)}
+.shot-modal.open{display:flex}
+.shot-modal img{max-width:96vw;max-height:94vh;object-fit:contain;border-radius:8px;background:#fff;box-shadow:0 20px 70px rgba(0,0,0,.5)}
+.shot-modal-close{position:absolute;top:16px;right:22px;background:var(--brand);color:#fff;border:none;border-radius:8px;padding:7px 18px;font-size:16px;font-weight:700;cursor:pointer}
+.shot-modal-close:hover{opacity:.88}
+
+@media(max-width:1280px){
+  .slide-inner{padding:52px 26px 32px}
+  .g5{grid-template-columns:repeat(3,1fr)}
+  .de-stack{grid-template-columns:1fr}
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+  .shot-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media print{
+  .topbar,.ftr,#prog,.nav-drop{display:none!important}
+  #bg-canvas{display:none!important}
+  .slide{position:relative;display:flex!important;page-break-after:always;animation:none!important}
+  #deck{position:relative}
+  .slide-wrapper{position:relative}
+  .slide-inner{position:relative;overflow:visible}
+}
+
+/* ===== topbar / footer / progress ===== */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:100;height:48px;display:flex;align-items:center;gap:12px;padding:0 18px;background:rgba(255,255,255,.86);border-bottom:1px solid var(--line);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.topbar-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:10px;max-width:62%}
+.nav-idx{display:flex;align-items:center;gap:5px;cursor:pointer;height:30px;padding:0 12px;border:1px solid var(--card-border);border-radius:9px;flex-shrink:0}
+.nav-idx:hover{border-color:var(--brand);background:var(--brand-light)}
+.nav-idx b{font-size:16px;color:var(--brand);font-weight:700;font-feature-settings:"tnum"}
+.nav-idx .sep{color:var(--text2);font-size:13px}
+.nav-idx .arrow{font-size:9px;color:var(--text3);transition:transform .3s;margin-left:4px}
+.nav-idx.open .arrow{transform:rotate(180deg)}
+.topbar-title{font-size:15.5px;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500;letter-spacing:.2px}
+.nav-drop{position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);width:min(760px,90vw);max-height:70vh;overflow-y:auto;z-index:101;background:#fff;border:1px solid var(--line);border-radius:13px;box-shadow:0 18px 50px rgba(0,60,180,.14);padding:12px;display:none;flex-wrap:wrap;gap:6px}
+.nav-drop.open{display:flex}
+.nav-drop::-webkit-scrollbar{width:4px}
+.nav-drop::-webkit-scrollbar-thumb{background:var(--line);border-radius:2px}
+.nd-grp{width:100%;font-size:12px;letter-spacing:.14em;color:var(--text3);font-weight:800;margin:6px 2px 2px;text-transform:uppercase}
+.nd-grp:first-child{margin-top:0}
+.nd-item{flex:0 0 calc(33.333% - 12px);display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:9px;cursor:pointer;font-size:13.5px;color:var(--text2);transition:background .15s,color .15s;box-sizing:border-box}
+.nd-item:hover{background:var(--brand-light);color:var(--brand)}
+.nd-item.active{background:var(--brand-dim);color:var(--brand);font-weight:700}
+.nd-item-num{width:20px;height:20px;border-radius:50%;background:var(--brand-light);color:var(--brand);font-size:12px;font-weight:700;display:grid;place-items:center;flex-shrink:0}
+.nd-item.active .nd-item-num{background:var(--brand)}
+.topbar-controls{display:flex}
+.topbar-controls button{background:var(--brand-light);border:1px solid var(--card-border);color:var(--brand);width:34px;height:30px;border-radius:9px;font-size:15px;cursor:pointer;transition:all .2s}
+.topbar-controls button:hover:not(:disabled){background:var(--brand-dim);border-color:var(--brand)}
+.topbar-controls button:disabled{opacity:.25;cursor:default}
+.topbar-logo{flex-shrink:0;font-size:12.5px;font-weight:800;color:var(--brand);letter-spacing:.08em;white-space:nowrap}
+#prog{position:fixed;top:48px;left:0;z-index:99;height:2.5px;background:linear-gradient(90deg,#0066FF,#7C4DFF)}
+.ftr{position:fixed;bottom:0;left:0;right:0;z-index:50;height:30px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;background:rgba(255,255,255,.72);border-top:1px solid var(--line);backdrop-filter:blur(8px)}
+.ftr-l{font-size:11.5px;color:var(--text2);letter-spacing:1.5px;font-weight:500}
+.ftr-r{display:flex;align-items:center;gap:8px}
+.ftr-r button{background:none;border:none;color:var(--text2);font-size:22px;cursor:pointer;padding:0 6px;transition:color .3s;line-height:1}
+.ftr-r button:hover:not(:disabled){color:var(--brand)}
+.ftr-r button:disabled{opacity:.25;cursor:default}
+.ftr-page{font-size:13.5px;color:var(--text);font-weight:600;min-width:42px;text-align:center;font-feature-settings:"tnum"}
+
+.animate .sec-head{animation:titleIn .6s ease both}
+.animate .sec-kicker{animation:titleIn .6s ease both}
+.animate .card{animation:moduleIn .7s cubic-bezier(.22,.61,.36,1) both}
+.animate .card:nth-child(2){animation-delay:.1s}
+.animate .card:nth-child(3){animation-delay:.2s}
+.animate .card:nth-child(4){animation-delay:.3s}
+.animate .card:nth-child(5){animation-delay:.4s}
+.animate .card:nth-child(6){animation-delay:.5s}
+.animate .notice{animation:moduleIn .8s ease both;animation-delay:.3s}
+@keyframes titleIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+@keyframes moduleIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<div id="bg-canvas">
+  <div class="bg-shape bg-shape-1"></div>
+  <div class="bg-shape bg-shape-2"></div>
+  <div class="bg-shape bg-shape-3"></div>
+</div>
+
+<div id="deck">
+
+<!-- ============ 0 封面 ============ -->
+<div class="slide slide-hero" id="slide0">
+<div class="slide-wrapper"><div class="slide-inner">
+  <div class="cover-content">
+    <div class="cover-top">AI-NATIVE MARKETING · FINAL REPORT</div>
+    <div class="cover-title">AI原生营销提升公司<em>营销能力</em></div>
+    <div class="cover-divider"></div>
+    <div class="cover-subtitle">二组课题结题报告</div>
+    <div class="cover-meta">
+      <div class="cover-meta-item">小组：<b>二组</b></div>
+      <div class="cover-meta-item">李雪 · 何罗成 · 高青 · 吴思全</div>
+    </div>
+    <div class="cover-bottom">Thunis Group · AI Native Marketing</div>
+  </div>
+</div></div>
+</div>
+
+<!-- ============ 1 目录 ============ -->
+<div class="slide slide-content" id="slide1">
+<div class="slide-wrapper"><div class="slide-inner">
+  <div class="sec-head">
+    <div class="sec-kicker">CONTENTS · 目录</div>
+    <div class="sec-title"><span class="cn">◆</span>汇报导航</div>
+    <div class="sec-sub">AI原生营销提升公司营销能力 · 二组课题结题报告，共 21 页</div>
+  </div>
+  <div class="cbody">
+    <div class="toc-grid">
+
+      <div class="toc-card" onclick="goSlide(2)"><div class="toc-n">01 · 问题洞察</div><div class="toc-t">问题洞察剖析</div><div class="toc-d">四大业务痛点 · 三大根因 · 方法论支撑</div></div>
+      <div class="toc-card" onclick="goSlide(4)"><div class="toc-n">02 · 总体方案</div><div class="toc-t">总体方案（4 个月目标）</div><div class="toc-d">TOP5 场景 · 四层支撑架构 · 落地节奏</div></div>
+      <div class="toc-card" onclick="goSlide(6)"><div class="toc-n">03 · 课题成果</div><div class="toc-t">课题研究成果</div><div class="toc-d">5 套工具 · 知识资产 · 组织方法与机制</div></div>
+      <div class="toc-card" onclick="goSlide(7)"><div class="toc-n">03.1 · 场景工具</div><div class="toc-t">5 套可落地场景工具</div><div class="toc-d">政策研判 · 需求诊断 · 方案生成 · 标书 · 客户跟进</div></div>
+      <div class="toc-card" onclick="goSlide(9)"><div class="toc-n">03.2 · 知识资产</div><div class="toc-t">标准化知识资产</div><div class="toc-d">知识库中心 · 双引擎底座 · 正向飞轮</div></div>
+      <div class="toc-card" onclick="goSlide(10)"><div class="toc-n">04 · 小组分工</div><div class="toc-t">小组分工（二组）</div><div class="toc-d">集体研讨 · 联合研发 · 属地落地</div></div>
+      <div class="toc-card" onclick="goSlide(11)"><div class="toc-n">05 · 落地华宇信息</div><div class="toc-t">数字员工落地与营销成效</div><div class="toc-d">三大数字员工 · 统一入口 · 成效数据</div></div>
+      <div class="toc-card" onclick="goSlide(13)"><div class="toc-n">05 · 落地浦东华宇</div><div class="toc-t">知识与 AI 原生营销工具落地</div><div class="toc-d">知识库 · 技能包 · AI 数字庭审·安问</div></div>
+      <div class="toc-card" onclick="goSlide(15)"><div class="toc-n">05 · 落地亿信华辰</div><div class="toc-t">知识与 AI 原生营销工具落地</div><div class="toc-d">知识体系 · EsXWork · EsXCode · Apex</div></div>
+      <div class="toc-card" onclick="goSlide(16)"><div class="toc-n">06 · 专题案例</div><div class="toc-t">投标专家 Agent</div><div class="toc-d">洞察 · 落地可行性 · 价值输出 · 效果截图</div></div>
+    </div>
+  </div>
+</div></div>
+</div>
+
+<!-- ============ 2 问题洞察·四大痛点 ============ -->
+<div class="slide slide-content" id="slide2">
+<div class="slide-wrapper"><div class="slide-inner">
+  <div class="sec-head">
+    <div class="sec-kicker">01 · PROBLEM INSIGHT</div>
+    <div class="sec-title"><span class="cn">01</span>问题洞察剖析</div>
+    <div class="sec-sub">核心判断：营销能力瓶颈不在「会不会做」，而在 <span class="hl">经验难沉淀 · 知识未资产化 · 流程难规模化</span> —— 能力被锁在个人经验里。</div>
+  </div>
+  <div class="cbody">
+    <div class="tag">重点一 · 四大业务痛点</div>
+    <div class="g4">
+      <div class="card" style="--ac:#0066FF"><div class="ct"><span class="dot"></span>01 · 政策研判响应慢</div>
+        <p>新政策解读到输出可申报机会清单耗时长；靠人工逐条盯官网，信息滞后且易漏。</p>
+        <div class="divider-line"></div>
+        <p><b class="hl">关键影响：</b>机会窗口错失 · 响应滞后</p></div>
+      <div class="card" style="--ac:#7C4DFF"><div class="ct"><span class="dot"></span>02 · 客户深层需求挖掘不足</div>
+        <p>业务流程堵点、考核压力、数据孤岛等未被揭示；方案停在功能清单，难以打动决策层。</p>
+        <div class="divider-line"></div>
+        <p><b class="hl">关键影响：</b>方案难打动决策层</p></div>
+      <div class="card" style="--ac:#16a34a"><div class="ct"><span class="dot"></span>03 · 定制化方案输出效率低</div>
+        <p>售前/投标材料重复造轮子：同类方案、标书反复手工编写，版本混乱。</p>
+        <div class="divider-line"></div>
+        <p><b class="hl">关键影响：</b>重复劳动 · 交付周期长</p></div>
+      <div class="card" style="--ac:#d97706"><div class="ct"><span class="dot"></span>04 · 全流程缺标准，难规模化复制</div>
+        <p>知识散落个人与各系统；商机识别靠个人记忆；回款风险预警滞后。</p>
+        <div class="divider-line"></div>
+        <p><b class="hl">关键影响：</b>「人走经验走」· 难复制</p></div>
+    </div>
+    <div class="notice">四类痛点贯穿 <b>宏观（政策）· 微观（客户）· 交付端（方案/投标）· 组织（全流程）</b> 四个维度，构成后续场景筛选的业务输入。</div>
+  </div>
+</div></div>
+</div>
+
+<!-- ============ 3 问题洞察·根因+方法 ============ -->
+<div class="slide slide-content" id="slide3">
+<div class="slide-wrapper"><div class="slide-inner">
+  <div class="sec-head">
+    <div class="sec-kicker">01 · PROBLEM INSIGHT</div>
+    <div class="sec-title"><span class="cn">01</span>三大根因 · 方法支撑</div>
+    <div class="sec-sub">能力瓶颈的根因是「沉淀—资产—标准」三级断层，需要用一套方法框架把它打通。</div>
+  </div>
+  <div class="cbody">
+    <div class="tag">重点二 · 三大根因</div>
+    <div class="g3">
+      <div class="card" style="--ac:#0066FF"><div class="ct"><span class="dot"></span>根因 01</div><p><b class="hl">经验沉淀断层</b></p><p>依赖专家个人人力，关键能力无法组织化传承</p></div>
+      <div class="card" style="--ac:#7C4DFF"><div class="ct"><span class="dot"></span>根因 02</div><p><b class="hl">数据分散孤岛</b></p><p>知识未资产化，跨项目/跨公司难复用</p></div>
+      <div class="card" style="--ac:#d97706"><div class="ct"><span class="dot"></span>根因 03</div><p><b class="hl">流程无标准</b></p><p>无法人机协同，智能化难以规模化落地</p></div>
+    </div>
+    <div class="tag">方法支撑（压缩呈现）</div>
+    <div class="g3">
+      <div class="card"><div class="ct">三层分析框架</div><p>宏观（政策/行业）· 微观（客户/项目）· 交付端（方案/投标/跟进）</p></div>
+      <div class="card"><div class="ct">业务全链路拆解</div><p>政策研判 → 需求诊断 → 方案生成 → 标书编制 → 客户跟进；筛选四维：<b class="hl">高频 × 标准化 × 可AI化 × 业务价值</b></p></div>
+      <div class="card"><div class="ct">多源交叉验证</div><p>一线访谈 · 历史项目/投标复盘 · 政策与竞品资料 · 试点观察</p></div>
+    </div>
+    <div class="notice"><b>结论：</b>围绕营销全链路，依托三层分析、全链路拆解、多源调研与四维打分筛选 <b>TOP5 场景</b>，基于三家公司真实业务数据完成问题洞察剖析 —— 后续用 AI 原生工具打通「沉淀—资产—标准」闭环。</div>
+  </div>
+</div></div>
+</div>
+
+<!-- ============ 4 总体方案·TOP5 ============ -->
+<div class="slide slide-content" id="slide4">
+<div class="slide-wrapper"><div class="slide-inner">
+  <div class="sec-head">
+    <div class="sec-kicker">02 · OVERALL PLAN</div>
+    <div class="sec-title"><span class="cn">02</span>总体方案（4 个月目标）</div>
+    <div class="sec-sub">总体目标：在 4 个月内完成核心营销场景工具研发、跨公司试点推广、工作机制优化，跑通「AI 原生营销」组织建设模式。</div>
+  </div>
+  <div class="cbody">
+    <div class="tag">核心落地 · TOP5 营销场景</div>
+    <div class="g5">
+      <div class="card" style="--ac:#0066FF"><div class="ct"><span class="dot"></span>SCENE 01</div><p><b class="hl">政策与市场研判</b></p><p>宏观机会捕捉</p></div>
+      <div class="card" style="--ac:#7C4DFF"><div class="ct"><span class="dot"></span>SCENE 02</div><p><b class="hl">售前需求智能诊断</b></p><p>深层需求揭示</p></div>
+      <div class="card" style="--ac:#16a34a"><div class="ct"><span class="dot"></span>SCENE 03</div><p><b class="hl">营销解决方案自动生成</b></p><p>方案快速定制</p></div>
+      <div class="card" style="--ac:#d97706"><div class="ct"><span class="dot"></span>SCENE 04</div><p><b class="hl">投标文件辅助编制</b></p><p>应标提质增效</p></div>
+      <div class="card" style="--ac:#e6455f"><div class="ct"><span class="dot"></span>SCENE 05</div><p><b class="hl">客户跟进智能赋能</b></p><p>商机与风险预警</p></div>
+    </div>
+    <div class="notice">五场景串联 → 打造 <b>端到端 AI 应用闭环</b>，覆盖「政策捕捉 → 需求诊断 → 方案生成 → 应标 → 跟进」全链路。</div>
+  </div>
+</div></div>
+</div>
+
+<!-- ============ 5 总体方案·架构与节奏 ============ -->
+<div class="slide slide-content" id="slide5">
+<div class="slide-wrapper"><div class="slide-inner">
+  <div class="sec-head">
+    <div class="sec-kicker">02 · OVERALL PLAN</div>
+    <div class="sec-title"><span class="cn">02</span>四层支撑架构 · 落地节奏</div>
+    <div class="sec-sub">以知识层为底座，AI 能力层为引擎，业务场景层为抓手，保障机制层为支撑。</div>
+  </div>
+  <div class="cbody">
+    <div class="g2">
+      <div class="card"><div class="tag" style="align-self:flex-start">四层支撑架构</div><ol style="padding-left:1.2em;display:flex;flex-direction:column;gap:6px;margin-top:6px">
+        <li><b class="hl">01 知识层</b> — 整合政策库、营销案例库、重点解决方案库等营销知识库</li>
+        <li><b class="hl">02 AI 能力层</b> — 落地 AI 核心能力引擎研发，对核心营销业务场景智能化赋能</li>
+        <li><b class="hl">03 业务场景层</b> — 以 TOP5 场景为抓手，完成工具研发与试点落地</li>
+        <li><b class="hl">04 保障机制层</b> — 营销人员 AI 赋能培训；构建「小步快跑、敏捷迭代」常态化治理机制</li>
+      </ol></div>
+      <div class="card"><div class="tag" style="align-self:flex-start">组织模式 · 4 个月节奏</div>
+        <p style="margin-top:8px"><b class="hl">组织模式：</b>集体研讨 · 联合研发 · 属地负责 · 跨公司协同共建</p>
+        <div class="divider-line" style="margin:10px 0"></div>
+        <div class="flow">
+          <div class="step">第 1 月<small>顶层设计＋数据归集</small></div>
+          <div class="arrow">→</div>
+          <div class="step">第 2 月<small>TOP5 工具 V1.0 联合研发＋知识库</small></div>
+          <div class="arrow">→</div>
+          <div class="step">第 3 月<small>试点测试＋迭代 V2.0＋AI 培训</small></div>
+          <div class="arrow">→</div>
+          <div class="step">第 4 月<small>公司推广＋机制固化＋验收</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</div>
+
+<!-- ============ 6 课题成果 ============ -->
+<div class="slide slide-content" id="slide6">
+<div class="slide-wrapper"><div class="slide-inner">
+  <div class="sec-head">
+    <div class="sec-kicker">03 · RESEARCH OUTCOMES</div>
+    <div class="sec-title"><span class="cn">03</span>课题研究成果</div>
+    <div class="sec-sub">围绕「工具—资产—方法—机制」形成五大可落地成果，支撑营销业务智能化转型。</div>
+  </div>
+  <div class="cbody">
+    <div class="g2">
+      <div class="card" style="--ac:#0066FF"><div class="ct"><span class="dot"></span>① 5 套可落地 AI 原生营销场景工具</div>
+        <p>覆盖政策研判、需求诊断、方案生成、标书辅助、客户跟进五大核心场景，为营销全流程提供标准化、智能化工具支持。</p></div>
+      <div class="card" style="--ac:#7C4DFF"><div class="ct"><span class="dot"></span>② 标准化知识资产</div>
+        <p>搭建统一的知识资产库，在释放数据价值的同时赋能营销业务。</p></div>
+      <div class="card" style="--ac:#16a34a"><div class="ct"><span class="dot"></span>③ 组织级 AI 原生重塑的设计方法</div>
+        <p>以业务流为中心，把岗位职责转化为数字员工、专家与 Skill 分层设计，形成可复用的组织重塑方法骨架。</p></div>
+      <div class="card" style="--ac:#d97706"><div class="ct"><span class="dot"></span>④ 组织级数字员工建设的技术架构和管理机制</div>
+        <p>构建「服务对象 + 五层能力 + 双底座」技术与治理架构，支撑数字员工规模化建设与安全可控运行。</p></div>
+      <div class="card" style="--ac:#e6455f;grid-column:1/-1"><div class="ct"><span class="dot"></span>⑤ AI 原生转型落地的 FDE 模式</div>
+        <p>五步渐进落地：<b class="hl">造火种 → 定基调 → 跑样板 → 传打法 → 成制度</b>，从模法团冷启动到集团级变革系统开展。</p></div>
+    </div>
+  </div>
+</div></div>
+</div>
+
+<!-- ============ 7 五套工具 ①②③ ============ -->
+<div class="slide slide-content" id="slide7">
+<div class="slide-wrapper"><div class="slide-inner">
+  <div class="sec-head">
+    <div class="sec-kicker">03.1 · SCENARIO TOOLS</div>
+    <div class="sec-title"><span class="cn">03</span>5 套可落地 AI 原生营销场景工具 · ①②③</div>
+    <div class="sec-sub">围绕营销全链路五大核心场景，提供端到端数字员工支持，实现「Agent 生成初稿 → 人审核把关」人机协同。</div>
+  </div>
+  <div class="cbody">
+    <div class="g3">
+      <div class="card" style="--ac:#0066FF"><div class="ct"><span class="dot"></span>① 政策与市场研判</div>
+        <div class="tag" style="align-self:flex-start">数字员工 · 数字品牌专员</div>
+        <p style="margin-top:6px"><b class="hl">核心能力：</b>自动扫描政策，生成可申报机会清单与研判简报</p>
+        <p><b class="hl">解决痛点：</b>人工盯官网，易漏、滞后</p>
+        <p><b class="hl">输入→输出：</b>政策文件 → 趋势摘要、机会点、风险提示</p></div>
+      <div class="card" style="--ac:#7C4DFF"><div class="ct"><span class="dot"></span>② 售前需求智能诊断</div>
+        <div class="tag" style="align-self:flex-start">数字员工 · 数字咨询师</div>
+        <p style="margin-top:6px"><b class="hl">核心能力：</b>基于客户画像与历史项目，输出需求边界与调研报告</p>
+        <p><b class="hl">解决痛点：</b>方案停在功能清单层</p>
+        <p><b class="hl">输入→输出：</b>访谈/客户资料 → 解读、需求分析、汇报方案</p></div>
+      <div class="card" style="--ac:#16a34a"><div class="ct"><span class="dot"></span>③ 营销解决方案自动生成</div>
+        <div class="tag" style="align-self:flex-start">数字员工 · 解决方案数字咨询师</div>
+        <p style="margin-top:6px"><b class="hl">核心能力：</b>按需求生成方案框架与章节，联动生成 PPT 初稿</p>
+        <p><b class="hl">解决痛点：</b>重复造轮子、版本混乱</p>
+        <p><b class="hl">输入→输出：</b>需求/产品资料 → 竞品分析、案例包装、方案组装</p></div>
+    </div>
+  </div>
+</div></div>
+</div>
+
+<!-- ============ 8 五套工具 ④⑤ + 闭环 ============ -->
+<div class="slide slide-content" id="slide8">
+<div class="slide-wrapper"><div class="slide-inner">
+  <div class="sec-head">
+    <div class="sec-kicker">03.1 · SCENARIO TOOLS</div>
+    <div class="sec-title"><span class="cn">03</span>5 套可落地 AI 原生营销场景工具 · ④⑤</div>
+    <div class="sec-sub">后两个场景聚焦「应标提效」与「跟进赋能」，与前三个场景串联成端到端闭环。</div>
+  </div>
+  <div class="cbody">
+    <div class="g2">
+      <div class="card" style="--ac:#d97706"><div class="ct"><span class="dot"></span>④ 投标文件辅助编制</div>
+        <div class="tag" style="align-self:flex-start">数字员工 · 数字投标专员</div>
+        <p style="margin-top:6px"><b class="hl">核心能力：</b>解析招标文件，自动生成技术标/商务标初稿与功能点估算</p>
+        <p><b class="hl">解决痛点：</b>耗时、口径不一、易漏项</p>
+        <p><b class="hl">输入→输出：</b>招标文件 → 解析、标书生成、合规校验</p></div>
+      <div class="card" style="--ac:#e6455f"><div class="ct"><span class="dot"></span>⑤ 客户跟进智能赋能</div>
+        <div class="tag" style="align-self:flex-start">数字员工 · 数字营销助理</div>
+        <p style="margin-top:6px"><b class="hl">核心能力：</b>整合 CRM/TIM 生成客户画像、跟进提醒与回款风险预警</p>
+        <p><b class="hl">解决痛点：</b>商机识别与风险预警滞后</p>
+        <p><b class="hl">输入→输出：</b>CRM/TIM → 经营分析、决策简报、通用分析</p></div>
+    </div>
+    <div class="notice">五场景端到端串联：<b>政策研判 → 需求诊断 → 方案生成 → 标书编制 → 客户跟进</b>，由统一知识底座与数字员工支撑。</div>
+  </div>
+</div></div>
+</div>
+
+<!-- ============ 9 知识资产 ============ -->
+<div class="slide slide-content" id="slide9">
+<div class="slide-wrapper"><div class="slide-inner">
+  <div class="sec-head">
+    <div class="sec-kicker">03.2 · KNOWLEDGE ASSETS</div>
+    <div class="sec-title"><span class="cn">03</span>标准化知识资产</div>
+    <div class="sec-sub">搭建统一知识资产中心，将散落个人和各系统的知识资产化，为全部 AI 工具提供高质量数据支撑。</div>
+  </div>
+  <div class="cbody">
+    <div class="card"><div class="ct">知识资产化流水线</div>
+      <div class="flow" style="margin-top:6px">
+        <div class="step">数据资源<small>项目/售前/产品/政策法规/行业案例/投标资料</small></div>
+        <div class="arrow">→</div>
+        <div class="step">数据治理<small>人工审核，整理入库</small></div>
+        <div class="arrow">→</div>
+        <div class="step">数据资产<small>政策库 · 营销案例库 · 解决方案库</small></div>
+        <div class="arrow">→</div>
+        <div class="step">数据服务<small>统一检索 API · 向量化支撑</small></div>
+      </div>
+    </div>
+    <div class="g2">
+      <div class="card"><div class="ct">双引擎底座</div>
+        <p>万象知识库 + 亿信知识中心<b class="hl">双引擎</b>，支撑五大工具及其数字专家调用。</p></div>
+      <div class="card"><div class="ct">业务使用闭环</div>
+        <p><b class="hl">Agent 生成初稿 → 人工审核 → 优质内容回流 → Agent 输出质量提升 → 业务使用意愿增强</b></p>
+        <div class="divider-line"></div>
+        <p>知识回流机制：审核通过的优质产出回流知识库，持续沉淀组织资产，形成<b class="hl">正向飞轮</b>。</p></div>
+    </div>
+    <div class="notice"><b>价值：</b>知识从「散落个人」变为「可检索、可复用、可审计」的组织资产，为 TOP5 工具提供统一数据底座。</div>
+  </div>
+</div></div>
+</div>
+
+
+<!-- ============ 10 小组分工 ============ -->
+<div class="slide slide-content" id="slide10">
+<div class="slide-wrapper"><div class="slide-inner">
+  <div class="sec-head">
+    <div class="sec-kicker">04 · TEAM ROLES</div>
+    <div class="sec-title"><span class="cn">04</span>小组分工（二组）</div>
+    <div class="sec-sub">核心原则：整体方案共同研讨、工具联合研发；各自负责本公司数据准备、内部推广落地。</div>
+  </div>
+  <div class="cbody">
+    <div class="g4">
+      <div class="card" style="--ac:#0066FF"><div class="ct"><span class="dot"></span>李雪</div>
+        <div class="tag" style="align-self:flex-start">华宇信息 · 组长</div>
+        <p style="margin-top:6px">统筹课题整体推进；联合研发 TOP5 工具。</p>
+        <p>负责华宇信息营销知识库建设、智能体和工具建设、内部推广与反馈收集。</p></div>
+      <div class="card" style="--ac:#7C4DFF"><div class="ct"><span class="dot"></span>何罗成</div>
+        <div class="tag" style="align-self:flex-start">亿信华辰</div>
+        <p style="margin-top:6px">全程参与需求讨论、方案设计、迭代讨论。</p>
+        <p>负责亿信华辰营销知识库建设、智能体和工具建设、内部推广与反馈收集。</p></div>
+      <div class="card" style="--ac:#16a34a"><div class="ct"><span class="dot"></span>高青</div>
+        <div class="tag" style="align-self:flex-start">浦东华宇</div>
+        <p style="margin-top:6px">全程参与需求讨论、方案设计、敏捷迭代。</p>
+        <p>负责浦东华宇营销知识库建设、智能体和工具建设、内部推广与反馈收集。</p></div>
+      <div class="card" style="--ac:#d97706"><div class="ct"><span class="dot"></span>吴思全</div>
+        <div class="tag" style="align-self:flex-start">亿信华辰</div>
+        <p style="margin-top:6px">全程参与需求讨论、方案设计、迭代讨论。</p>
+        <p>负责亿信华辰营销知识库建设、智能体和工具建设、内部推广与反馈收集。</p></div>
+    </div>
+    <div class="notice"><b>协同机制：</b>整体方案共同研讨 · 工具联合研发；三家成员企业按属地负责知识库与推广落地，实现跨公司协同共建。</div>
+  </div>
+</div></div>
+</div>
+
+<!-- ============ 11 华宇·三大数字员工 ============ -->
+<div class="slide slide-content" id="slide11">
+<div class="slide-wrapper"><div class="slide-inner">
+  <div class="sec-head">
+    <div class="sec-kicker">落地 · 01 · 华宇信息</div>
+    <div class="sec-title"><span class="cn">05</span>华宇信息 · 数字员工落地与营销成效</div>
+    <div class="sec-sub">先落地数字人能力画像，再接入营销中心统一服务入口，最后用使用数据收口成效。</div>
+  </div>
+  <div class="cbody">
+    <div class="g3 de-stack">
+      <div class="de-card" style="border-top:3px solid #0066FF">
+        <div class="de-head"><span class="de-num">DIGITAL EMPLOYEE · 01</span></div>
+        <div class="de-name">法庭数字小助理</div>
+        <div class="de-desc">面向一线销售与售前工程师 · 一切判断基于企业知识库，不凭空编造 · 核心技能 <b class="hl">7 项</b></div>
+        <div><div class="de-sec">服 · 服务对象</div><div class="de-list"><span>一线销售：客户沟通、商机推进、话术支撑</span><span>售前工程师：技术交流、参数应答、投标支撑</span></div></div>
+        <div><div class="de-sec">技 · 核心技能</div><div class="de-list"><span>产品答疑：功能·参数·场景精准应答</span><span>客户场景匹配、竞品应对、案例推荐</span><span>话术与模拟训练 / 云法庭资源规划</span></div></div>
+        <div><div class="de-sec">知 · 知识底座</div><div class="de-value">华宇售前知识库（庭审主机/系统/云法庭/终端）· 智慧庭审 V4.0 检测报告与招标参数基准 · 招投标数据、客户案例库、竞品情报</div></div>
+        <div class="notice" style="padding:10px 14px">价值：让客户现场 · 招投标 · 日常答疑更快拿到专业可落地的支撑。</div>
+      </div>
+      <div class="de-card" style="border-top:3px solid #7C4DFF">
+        <div class="de-head"><span class="de-num">DIGITAL EMPLOYEE · 02</span></div>
+        <div class="de-name">数字课题研究员</div>
+        <div class="de-desc">贯穿科研课题全生命周期的智能研究助理 · 协作式 · 可溯源 · 不编造 · 核心技能 <b class="hl">14 项</b></div>
+        <div><div class="de-sec">服 · 服务对象</div><div class="de-list"><span>科研人员与课题负责人：选题→申报→答辩→任务书</span><span>科研团队 / 企业研发 / 高校院所申报机构</span></div></div>
+        <div><div class="de-sec">技 · 核心技能</div><div class="de-list"><span>政策情报与选题（3）· 指南与预申报（2）</span><span>申报书撰写（6）· 答辩与任务书（3）</span></div></div>
+        <div><div class="de-sec">知 · 知识底座</div><div class="de-value">科研课题全流程与申报书五部分规范 · 政策与立项研判 · 七维可行性评估 · 考核指标与任务书模板</div></div>
+        <div class="notice" style="padding:10px 14px">覆盖：科研申报 · 政策研判 · 能力对标 · 申报材料一体化交付。</div>
+      </div>
+      <div class="de-card" style="border-top:3px solid #16a34a">
+        <div class="de-head"><span class="de-num">DIGITAL EMPLOYEE · 03</span></div>
+        <div class="de-name">华宇大模型销售知识与作战专家</div>
+        <div class="de-desc">产品知识 · 客户案例 · 竞品情报 · 销售话术 —— 一站式作战知识助手 · <b class="hl">7×24 在线分身</b></div>
+        <div><div class="de-sec">服 · 服务对象</div><div class="de-list"><span>一线销售 / 售前方案 / 销售管理 / 市场培训</span></div></div>
+        <div><div class="de-sec">技 · 核心技能</div><div class="de-list"><span>产品方案答疑 · 竞品对比 Battlecard（技术+业务双维）</span><span>销售话术生成 · 场景化销售训练</span></div></div>
+        <div><div class="de-sec">知 · 知识底座</div><div class="de-value">万象产品矩阵 V5.0 · 客户案例集 · 竞品情报库（通达海·讯飞等）· 法院/检察/公安/政务/企业行业 Know-how · 等保·国密·信创·公文国标</div></div>
+        <div class="notice" style="padding:10px 14px">使命：让销售在客户现场 —— 有底气 · 有口径 · 有弹药。</div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</div>
+
+<!-- ============ 12 华宇·成效数据 ============ -->
+<div class="slide slide-content" id="slide12">
+<div class="slide-wrapper"><div class="slide-inner">
+  <div class="sec-head">
+    <div class="sec-kicker">落地 · 01 · 华宇信息</div>
+    <div class="sec-title"><span class="cn">05</span>营销中心统一服务入口 · 成效数据</div>
+    <div class="sec-sub">数字专员使用 × 知识库建设 × 投标助手 × 营销弹药库 × Apex —— 用使用数据收口成效。</div>
+  </div>
+  <div class="cbody">
+    <div class="kpi-grid">
+      <div class="kpi-box"><div class="lb">数字课题研究员 · 使用次数</div><div class="vl">268<small>次</small></div><div class="ds">协助科研课题申报全流程</div></div>
+      <div class="kpi-box"><div class="lb">作战专家 · 使用次数</div><div class="vl">266<small>次</small></div><div class="ds">销售知识 / 话术 / 竞品</div></div>
+      <div class="kpi-box"><div class="lb">累计沉淀知识文档</div><div class="vl">1,200<small>+ 份</small></div><div class="ds">解决方案库覆盖率 100%</div></div>
+      <div class="kpi-box"><div class="lb">累计问答</div><div class="vl">678<small>场</small></div><div class="ds">多角色协同使用（咨询/销售/解决方案）</div></div>
+    </div>
+    <div class="g2">
+      <div class="card"><div class="ct">02 · 投标助手（6.18 – 8.10）</div>
+        <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr);gap:10px">
+          <div class="kpi-box"><div class="lb">累计使用次数</div><div class="vl">230</div><div class="ds">四模块合计</div></div>
+          <div class="kpi-box"><div class="lb">覆盖投标入口</div><div class="vl">131<small>个</small></div></div>
+          <div class="kpi-box"><div class="lb">使用人数</div><div class="vl">63<small>人</small></div></div>
+        </div>
+        <p style="margin-top:10px;font-size:13.5px;color:var(--text3)">招标解析 121 次 · 52.6%｜技术标生成 67 次 · 29.1%｜标书审查 38 次 · 16.5%｜标书查重 4 次 · 1.7%</p>
+        <p style="font-size:13.5px"><b class="hl">典型工作流：</b>招标解析 → 技术标生成 → 标书审查，形成闭环。</p></div>
+      <div class="card"><div class="ct">03 · 营销弹药库（截至 8.31）</div>
+        <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr);gap:10px">
+          <div class="kpi-box"><div class="lb">已上传解决方案</div><div class="vl">33<small>个</small></div></div>
+          <div class="kpi-box"><div class="lb">解决方案覆盖度</div><div class="vl">89<small>%</small></div></div>
+          <div class="kpi-box"><div class="lb">转发率</div><div class="vl">14.3<small>%</small></div></div>
+        </div>
+        <p style="margin-top:10px;font-size:13.5px;color:var(--text3)">多传一个方案，多一次赢单机会！</p>
+        <div class="divider-line"></div>
+        <p><b class="hl">04 · Apex 原型工具（3.1 – 8.31）：</b>整体使用率 74%（售前）· 使用人数 95/128 · 项目总数 325 · 覆盖部门 7（营销/法院/政法等）</p></div>
+    </div>
+    <div class="notice"><b>落地闭环：</b>3 个数字人能力上线 → 统一服务入口汇聚 → 知识沉淀与工具使用数据持续放大一线成效。</div>
+  </div>
+</div></div>
+</div>
+
+<!-- ============ 13 浦东·知识+技能+成效 ============ -->
+<div class="slide slide-content" id="slide13">
+<div class="slide-wrapper"><div class="slide-inner">
+  <div class="sec-head">
+    <div class="sec-kicker">落地 · 02 · 浦东华宇</div>
+    <div class="sec-title"><span class="cn">05</span>浦东华宇 · 知识与 AI 原生营销工具落地</div>
+    <div class="sec-sub">知识库建设 → 营销技能包 → 一线成效实例，并深潜 AI 数字庭审 / 安问产品。</div>
+  </div>
+  <div class="cbody">
+    <div class="g2">
+      <div class="card"><div class="ct">知识库建设 · 5 类知识库</div>
+        <div class="flow" style="flex-direction:column;align-items:stretch;gap:6px">
+          <div class="chip">政策与市场研判库</div><div class="chip">投标响应与材料库</div>
+          <div class="chip">产品解决方案库</div><div class="chip">产品参数库</div>
+          <div class="chip">客户案例与实战复盘库</div>
+        </div></div>
+      <div class="card"><div class="ct">营销技能包 · 1 套营销助手（5 项技能）</div>
+        <div class="flow" style="flex-direction:column;align-items:stretch;gap:6px">
+          <div class="chip">客户拜访准备</div><div class="chip">营销材料事实核对</div>
+          <div class="chip">客户异议答复</div><div class="chip">产品参数匹配</div>
+          <div class="chip">产品成本核算</div>
+        </div></div>
+    </div>
+    <div class="card"><div class="ct">营销成效实例 · 浙江安问（数字庭审）</div>
+      <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr);gap:10px">
+        <div class="kpi-box"><div class="lb">已开始试用法院</div><div class="vl">20<small>+ 家</small></div></div>
+        <div class="kpi-box"><div class="lb">已开通法官账号</div><div class="vl">300<small>+ 个</small></div></div>
+        <div class="kpi-box"><div class="lb">覆盖地区</div><div class="vl" style="font-size:20px;line-height:1.2">杭州 · 温州 · 湖州<br>绍兴 · 丽水</div></div>
+      </div>
+      <p style="margin-top:10px"><b class="hl">使用团队：</b>浙江销售团队 · 浙江咨询团队 · 3 家法院 FDE · 安问产品团队，并推动高院客户规划全省落地。</p></div>
+  </div>
+</div></div>
+</div>
+
+<!-- ============ 14 浦东·安问深潜 ============ -->
+<div class="slide slide-content" id="slide14">
+<div class="slide-wrapper"><div class="slide-inner">
+  <div class="sec-head">
+    <div class="sec-kicker">落地 · 02 · 浦东华宇 · 产品深潜</div>
+    <div class="sec-title"><span class="cn">05</span>AI 数字庭审 / 安问 · 从「功能集合」走向「可经营的产品体系」</div>
+    <div class="sec-sub">面向法院办案全流程的 AI 原生庭审产品：统一 Web 入口承载技能、对话与文件；双环境交付（萧山版「数字庭审」+ 政法云版「安问」）。</div>
+  </div>
+  <div class="cbody">
+    <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr)">
+      <div class="kpi-box"><div class="lb">功能已上线</div><div class="vl">72<small>项</small></div><div class="ds">上线率 76.6%</div></div>
+      <div class="kpi-box"><div class="lb">产品能力基线</div><div class="vl">94<small>项</small></div><div class="ds">一张表管理</div></div>
+      <div class="kpi-box"><div class="lb">萧山版 · 数字庭审</div><div class="vl">24<small>院 / 272 人</small></div><div class="ds">集中算力底座</div></div>
+      <div class="kpi-box"><div class="lb">政法云版 · 安问</div><div class="vl">7<small>院 / 137 人</small></div><div class="ds">法院侧轻量入口</div></div>
+    </div>
+    <div class="g4">
+      <div class="card" style="--ac:#0066FF"><div class="ct"><span class="dot"></span>服 · 服务对象</div>
+        <p>法院用户：法官、书记员、管理员；双线开通；营销与交付联动使用知识库与技能包拓客落地。</p></div>
+      <div class="card" style="--ac:#7C4DFF"><div class="ct"><span class="dot"></span>服 · 服务内容</div>
+        <p>统一能力入口 · 办案场景包（道交/合同/金融/离婚/刑事量刑/问数）· 核心技能（案情分析·赔偿计算·文书生成等）· 庭审智能化 · 结果溯源一键穿透 · 技能广场/MCP · 文书管家</p></div>
+      <div class="card" style="--ac:#16a34a"><div class="ct"><span class="dot"></span>思 · 设计思路</div>
+        <p>品牌锚点「安问」统一命名 · 四个 Pod 一条价值链 · 经营闭环（线索→交付→验收）· 从入口到审计的完整 Agent 栈 · 萧山集中算力底座 ↔ 政法云法院侧轻量入口</p></div>
+      <div class="card" style="--ac:#d97706"><div class="ct"><span class="dot"></span>亮 · 亮点创新</div>
+        <p>可经营的 Agent 产品体系 · 场景×技能组合按案由装配 · 回答可溯源「一键穿透」卷宗 · 全栈治理（多租户·RBAC·配额·审计）· 软硬一体可选（约 11.5 万/院·年）</p></div>
+    </div>
+  </div>
+</div></div>
+</div>
+
+<!-- ============ 15 亿信华辰 ============ -->
+<div class="slide slide-content" id="slide15">
+<div class="slide-wrapper"><div class="slide-inner">
+  <div class="sec-head">
+    <div class="sec-kicker">落地 · 03 · 亿信华辰</div>
+    <div class="sec-title"><span class="cn">05</span>亿信华辰 · 知识与 AI 原生营销工具落地</div>
+    <div class="sec-sub">知识体系已完成划定并分配责任人，将基于 EsXWork 落地；EsXWork、EsXCode 完成第一版上线，Apex 完成本地化部署。</div>
+  </div>
+  <div class="cbody">
+    <div class="g2">
+      <div class="card" style="--ac:#0066FF"><div class="ct"><span class="dot"></span>01 · 外部知识</div>
+        <p>项目专业书籍、公众号信息、展会报告、直播内容、高校教材及知识库、大模型萃取、国家标准、专业期刊</p></div>
+      <div class="card" style="--ac:#7C4DFF"><div class="ct"><span class="dot"></span>02 · 内部知识</div>
+        <p>项目资料、售前资源、产品知识、行业知识、岗位技能</p></div>
+    </div>
+    <div class="g3">
+      <div class="card"><div class="ct">03 · EsXWork</div>
+        <p>公司办公类 AI 平台，已在公司内部小范围试用，持续优化并增强业务功能。</p></div>
+      <div class="card"><div class="ct">04 · EsXCode</div>
+        <p>贴合亿信产品研发流程的 AI 研发平台，覆盖需求-原型-设计-编码-测试全流程管控。</p></div>
+      <div class="card"><div class="ct">05 · Apex</div>
+        <p>定位于售前和交付团队，用于项目阶段定制需求管理与代码原型生成，快速生成需求和原型与客户确认。</p></div>
+    </div>
+    <div class="notice"><b>算力基座：</b>EsXWork 部署于华为云服务器，EsXCode、Apex 采用本地部署；模型提供商火山云（deepseek-V4-flash、doubao-seed-2.0、glm-5.2），支持员工接入集团模型。</div>
+  </div>
+</div></div>
+</div>
+
+<!-- ============ 16 投标Agent·洞察 ============ -->
+<div class="slide slide-content" id="slide16">
+<div class="slide-wrapper"><div class="slide-inner">
+  <div class="sec-head">
+    <div class="sec-kicker">案例 · 投标专家 AGENT</div>
+    <div class="sec-title"><span class="cn">06</span>投标专家 Agent · 问题洞察剖析</div>
+    <div class="sec-sub">不是没有能力，而是能力被锁在个人经验里 —— 没体系化、没工具化。</div>
+  </div>
+  <div class="cbody">
+    <div class="tag">① 痛点挖掘（五维）</div>
+    <div class="g5">
+      <div class="card" style="--ac:#e6455f"><div class="ct"><span class="dot"></span>高压</div><p>招标上百页、评分办法/废标条款交织，人工拆解易漏项误判</p></div>
+      <div class="card" style="--ac:#e6455f"><div class="ct"><span class="dot"></span>极高</div><p>实质性条款、资格/响应性合格项「一票否决」，漏一项即废标</p></div>
+      <div class="card" style="--ac:#d97706"><div class="ct"><span class="dot"></span>高依赖</div><p>质量取决于专家个人经验，「人走经验走」，不可复制</p></div>
+      <div class="card" style="--ac:#d97706"><div class="ct"><span class="dot"></span>重复</div><p>同类方案与应标点反复重写，历史标书散落在个人电脑</p></div>
+      <div class="card" style="--ac:#0066FF"><div class="ct"><span class="dot"></span>周期紧</div><p>开标窗口短，越是大单越紧张，靠加班堆人力</p></div>
+    </div>
+    <div class="g2">
+      <div class="card"><div class="ct">② 根因剖析 · 3 Why</div>
+        <ul><li><b>为什么①</b> 知识没资产化 —— 产品线投标/产品知识无统一承载</li>
+        <li><b>为什么②</b> 流程没标准化 —— 投标 9 步未固化，质量不可控</li>
+        <li><b>为什么③</b> 工具没智能化 —— 缺 AI 编排，重复劳动无法交给机器</li></ul></div>
+      <div class="card"><div class="ct">③ 方法与框架</div>
+        <p>3 Why 根因分析 · 价值链分析 · 精益创新 · MVP · 客户思维（以评标委员会评分逻辑倒排拆解）</p>
+        <div class="divider-line"></div>
+        <p><b class="hl">一句话定位：</b>「投标专家 Agent」把招标解析、评分拆解、投标文件编制、偏离表核对，升级为「知识资产化＋流程标准化＋AI 编排」的智能流水线。</p></div>
+    </div>
+  </div>
+</div></div>
+</div>
+
+<!-- ============ 17 投标Agent·落地 ============ -->
+<div class="slide slide-content" id="slide17">
+<div class="slide-wrapper"><div class="slide-inner">
+  <div class="sec-head">
+    <div class="sec-kicker">案例 · 投标专家 AGENT</div>
+    <div class="sec-title"><span class="cn">06</span>方案落地可行性</div>
+    <div class="sec-sub">总体架构：<b class="hl">1 底座 ＋ 3 层知识 ＋ 1 条流水线</b>，知识存向量库、结论绑定 raw/ 可溯源、可 git 版本管理。</div>
+  </div>
+  <div class="cbody">
+    <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="kpi-box"><div class="lb">产品知识库文件</div><div class="vl">333</div><div class="ds">睿码/睿治/亿信ABI/i@Report：介绍·功能·操作·部署·架构</div></div>
+      <div class="kpi-box"><div class="lb">投标知识库 · 项目</div><div class="vl">10</div><div class="ds">历史项目图谱·34应标点·10行业·20模块·13场景·资质归档</div></div>
+      <div class="kpi-box"><div class="lb">项目工作区流程</div><div class="vl">9<small>步</small></div><div class="ds">标准目录＋进度看板，边投标边沉淀</div></div>
+    </div>
+    <div class="g3">
+      <div class="card"><div class="ct">① 标准工作流</div><p>招标输入 → 评分拆解 → 提纲 → 偏离表 → 定稿（Agent 编排）</p></div>
+      <div class="card"><div class="ct">② 三层知识资产</div><p>产品知识库 ＋ 投标知识库 ＋ 项目工作区（纯 Markdown）</p></div>
+      <div class="card"><div class="ct">③ 标准与模板</div><p>应标点/产品/行业/项目/模块模板 · 9 步目录 · 质量门禁</p></div>
+    </div>
+    <div class="card"><div class="ct">④ 工具与技能 · 5 步流水线</div>
+      <div class="flow" style="margin-top:4px">
+        <div class="step">1 · Ingest<small>摄入</small></div><div class="arrow">→</div>
+        <div class="step">2 · Compile<small>拆解</small></div><div class="arrow">→</div>
+        <div class="step">3 · 评分拆解应答<small>评标逻辑</small></div><div class="arrow">→</div>
+        <div class="step">4 · Generate<small>生成</small></div><div class="arrow">→</div>
+        <div class="step">5 · Q&A 复核<small>校验</small></div>
+      </div>
+      <p style="margin-top:8px"><b class="hl">验证：</b>四川 17 标段（43 项高风险）· 惠州城运（37 项高风险）· 徽银理财数据治理项目</p></div>
+  </div>
+</div></div>
+</div>
+
+<!-- ============ 18 投标Agent·价值 ============ -->
+<div class="slide slide-content" id="slide18">
+<div class="slide-wrapper"><div class="slide-inner">
+  <div class="sec-head">
+    <div class="sec-kicker">案例 · 投标专家 AGENT</div>
+    <div class="sec-title"><span class="cn">06</span>项目价值输出</div>
+    <div class="sec-sub">守住废标底线 · 经验变资产 · 提效降本 · 服务集团战略。</div>
+  </div>
+  <div class="cbody">
+    <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="kpi-box"><div class="lb">漏项 / 误判</div><div class="vl">0<small>漏项 · 0 误判</small></div><div class="ds">决定性命点结构化、清单化</div></div>
+      <div class="kpi-box"><div class="lb">招标解读＋评分拆解</div><div class="vl">2–3天 → 1h</div><div class="ds">解析与编制压缩到小时级</div></div>
+      <div class="kpi-box"><div class="lb">推广计划</div><div class="vl" style="font-size:20px;line-height:1.25">2026 Q4<br>试点 → 全公司</div><div class="ds">跨团队适用，2 小时培训上手</div></div>
+    </div>
+    <div class="g3">
+      <div class="card"><div class="ct">守住「废标」底线</div><p>★条款、资格/响应性合格项、超限价等决定性风险结构化、清单化，不漏项不误判。</p></div>
+      <div class="card"><div class="ct">经验变资产</div><p>项目投标经验从「人传人」变可检索、可复用、可审计的组织知识库。</p></div>
+      <div class="card"><div class="ct">提效降本</div><p>同类方案与应标点一次沉淀多次复用，解析与编制从「数天」级压缩到「小时」级。</p></div>
+      <div class="card"><div class="ct">服务集团战略</div><p>与集团「AI 提效、创新突破」必赢战役同向，是「AI＋营销」闭环关键一环。</p></div>
+      <div class="card"><div class="ct">可授权复用</div><p>统一 schema，任何售前/咨询/交付团队拿到即可检索复用。</p></div>
+      <div class="card"><div class="ct">跨团队适用</div><p>模板不绑定个人，可推广到集团成员企业，2 小时培训上手。</p></div>
+    </div>
+    <div class="notice"><b>价值可检验：</b>质量/效率/复用/风险/推广/经营六维建台账月度跟踪；试点项目中标率与回款挂钩复盘。</div>
+  </div>
+</div></div>
+</div>
+
+<!-- ============ 19 投标Agent·效果截图 ============ -->
+<div class="slide slide-content" id="slide19">
+<div class="slide-wrapper"><div class="slide-inner">
+  <div class="sec-head">
+    <div class="sec-kicker">案例 · 投标专家 AGENT</div>
+    <div class="sec-title"><span class="cn">06</span>效果截图 · 投标专家 Agent 实际运行界面</div>
+    <div class="sec-sub">点击任意截图可放大查看实际运行界面。</div>
+  </div>
+  <div class="cbody">
+    <div class="shot-grid">
+      <div class="shot-card" onclick="openShot('bid-agent-shots/img1.png')"><img src="bid-agent-shots/img1.png" alt="效果截图 1"><div class="cap">截图 1</div></div>
+      <div class="shot-card" onclick="openShot('bid-agent-shots/img2.png')"><img src="bid-agent-shots/img2.png" alt="效果截图 2"><div class="cap">截图 2</div></div>
+      <div class="shot-card" onclick="openShot('bid-agent-shots/img3.png')"><img src="bid-agent-shots/img3.png" alt="效果截图 3"><div class="cap">截图 3</div></div>
+      <div class="shot-card" onclick="openShot('bid-agent-shots/img4.png')"><img src="bid-agent-shots/img4.png" alt="效果截图 4"><div class="cap">截图 4</div></div>
+      <div class="shot-card" onclick="openShot('bid-agent-shots/img5.png')"><img src="bid-agent-shots/img5.png" alt="效果截图 5"><div class="cap">截图 5</div></div>
+      <div class="shot-card" onclick="openShot('bid-agent-shots/img6.png')"><img src="bid-agent-shots/img6.png" alt="效果截图 6"><div class="cap">截图 6</div></div>
+      <div class="shot-card" onclick="openShot('bid-agent-shots/img7.png')"><img src="bid-agent-shots/img7.png" alt="效果截图 7"><div class="cap">截图 7</div></div>
+      <div class="shot-card" onclick="openShot('bid-agent-shots/img8.png')"><img src="bid-agent-shots/img8.png" alt="效果截图 8"><div class="cap">截图 8</div></div>
+      <div class="shot-card" onclick="openShot('bid-agent-shots/img9.png')"><img src="bid-agent-shots/img9.png" alt="效果截图 9"><div class="cap">截图 9</div></div>
+    </div>
+  </div>
+</div></div>
+</div>
+
+<!-- ============ 20 结尾 ============ -->
+<div class="slide slide-hero" id="slide20">
+<div class="slide-wrapper"><div class="slide-inner">
+  <div class="cover-content">
+    <div class="cover-top">AI-NATIVE MARKETING · FINAL REPORT</div>
+    <div class="cover-title">不要让人<em>回到过去</em></div>
+    <div class="cover-divider"></div>
+    <div class="cover-subtitle">AI原生营销提升公司营销能力 · 二组课题结题报告</div>
+    <div class="cover-meta">
+      <div class="cover-meta-item">李雪 · 何罗成 · 高青 · 吴思全</div>
+    </div>
+    <div class="cover-bottom">Thunis Group · 感谢聆听</div>
+  </div>
+</div></div>
+</div>
+
+
+</div><!-- /deck -->
+
+<!-- 效果截图弹窗 -->
+<div class="shot-modal" id="shotModal">
+<div class="shot-modal-close" onclick="closeShot()">✕ 关闭</div>
+<img id="shotModalImg" src="" alt="">
+</div>
+
+<div class="topbar">
+<div class="topbar-center">
+<div class="nav-idx" id="navIdx" onclick="toggleNav()"><b id="navCurr">1</b><span class="sep">/</span><span style="font-size:11px;color:#8a94a6;font-weight:400" id="navTotal">21</span><span class="arrow">▼</span></div>
+<div class="topbar-title" id="topbarTitle">封面</div>
+<div class="nav-drop" id="navDrop"></div>
+</div>
+<div class="topbar-controls"><button id="prevBtn" onclick="goSlide(cur-1)" disabled>◀</button><button id="nextBtn" onclick="goSlide(cur+1)">▶</button></div>
+<div class="topbar-logo">AI 原生营销 · 二组结题报告</div>
+</div>
+<div id="prog"></div>
+<div class="ftr">
+<div class="ftr-l">AI原生营销提升公司营销能力 · 二组课题结题报告</div>
+<div class="ftr-r"><button onclick="goSlide(cur-1)" id="prevBtn2" disabled>‹</button><span class="ftr-page"><span id="ftrCurr">1</span> / 21</span><button onclick="goSlide(cur+1)" id="nextBtn2">›</button></div>
+</div>
+
+<script>
+var total=21;
+var cur=0;
+var navTitles=["封面","目录 · 汇报导航","问题洞察剖析 · 四大业务痛点","问题洞察剖析 · 三大根因与方法","总体方案 · TOP5 场景","总体方案 · 四层架构与节奏","课题研究成果","5 套工具 · ①②③","5 套工具 · ④⑤与闭环","标准化知识资产","小组分工（二组）","落地 · 华宇信息：三大数字员工","落地 · 华宇信息：成效数据","落地 · 浦东华宇：知识与技能包","落地 · 浦东华宇：数字庭审·安问","落地 · 亿信华辰","案例 · 投标专家 Agent：洞察","案例 · 投标专家 Agent：落地可行性","案例 · 投标专家 Agent：价值输出","案例 · 投标专家 Agent：效果截图","结束 · 不要让人回到过去"];
+var groups=[["封面",0,0],["目录",1,1],["一 · 问题洞察",2,3],["二 · 总体方案",4,5],["三 · 课题成果",6,9],["四 · 小组分工",10,10],["五 · 落地成果",11,18],["结束",19,20]];
+
+function buildNav(){
+  var d=document.getElementById('navDrop');var html='';
+  groups.forEach(function(g){
+    html+='<div class="nd-grp">'+g[0]+'</div>';
+    for(var i=g[1];i<=g[2];i++){
+      html+='<div class="nd-item" data-idx="'+i+'" onclick="goSlide('+i+')"><span class="nd-item-num">'+(i+1)+'</span><span class="nd-item-label">'+navTitles[i]+'</span></div>';
+    }
+  });
+  d.innerHTML=html;
+}
+
+function goSlide(n){if(n<0||n>=total)return;
+  var oldSlide=document.getElementById("slide"+cur);
+  if(oldSlide)oldSlide.classList.remove("active");
+  var ns=document.getElementById("slide"+n);ns.classList.add("active");cur=n;
+  document.getElementById("navCurr").textContent=n+1;
+  document.getElementById("ftrCurr").textContent=n+1;
+  document.getElementById("topbarTitle").textContent=navTitles[n];
+  document.getElementById("prog").style.width=((n+1)/total*100)+"%";
+  document.getElementById("prevBtn").disabled=(n===0);
+  document.getElementById("nextBtn").disabled=(n===total-1);
+  document.getElementById("prevBtn2").disabled=(n===0);
+  document.getElementById("nextBtn2").disabled=(n===total-1);
+  document.querySelectorAll(".nd-item").forEach(function(el){el.classList.toggle("active",parseInt(el.dataset.idx)===n)});
+  var si=ns.querySelector(".slide-inner");if(si)si.scrollTop=0;
+  closeNav();
+}
+function toggleNav(){document.getElementById("navDrop").classList.toggle("open");document.getElementById("navIdx").classList.toggle("open");}
+function closeNav(){document.getElementById("navDrop").classList.remove("open");document.getElementById("navIdx").classList.remove("open");}
+document.addEventListener("click",function(e){if(!e.target.closest(".nav-idx")&&!e.target.closest(".nav-drop"))closeNav();});
+document.addEventListener("keydown",function(e){
+  if(e.key==="ArrowRight"||e.key==="ArrowDown"||e.key===" ")e.preventDefault(),goSlide(cur+1);
+  if(e.key==="ArrowLeft"||e.key==="ArrowUp")e.preventDefault(),goSlide(cur-1);
+  if(e.key==="Escape")closeShot();
+});
+function openShot(src){document.getElementById("shotModalImg").src=src;document.getElementById("shotModal").classList.add("open");}
+function closeShot(){document.getElementById("shotModal").classList.remove("open");}
+buildNav();
+var qn=parseInt((location.search.match(/[?&]n=(\d+)/)||[])[1],10);
+var hsi=parseInt((location.hash||"#0").replace("#",""),10);
+var start=0;
+if(!isNaN(qn)&&qn>=0&&qn<total){start=qn;}else if(!isNaN(hsi)&&hsi>=0&&hsi<total){start=hsi;}
+goSlide(start);
+</script>
+
+
+</body>
+</html>
